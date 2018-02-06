@@ -1,4 +1,18 @@
 .main_color {
     background-color: #ea0530;
+    border-color: #ccc;
+    color: white;
+}
+
+.nav>li>a {
+    color: white;
+}
+
+.nav>li>a:hover {
+    color: black;
+}
+
+.navbar-brand, 
+.navbar-brand:hover  {
     color: white;
 }
