@@ -42,7 +42,14 @@
           <div class="col-lg-4">
               <div class="panel">
                   <div class="panel-body text-center">
-                      컴퓨터과학
+                      <div id="majorTree">
+                        <!-- <select>
+                          <option value="total">MAJOR1</option>
+                          <option value="building">MAJOR2</option>
+                          <option value="ground">MAJOR3</option>
+                          <option value="cash">MAJOR4</option>
+                        </select> -->
+                      </div>
                   </div>
                   <div class="contentSubject panel-footer">
                       MAJOR
@@ -93,7 +100,7 @@
           <div class="col-lg-4">
               <div class="panel">
                   <div class="panel-body text-center">
-                      패기
+                      <svg id="characterWordCloud"></svg>
                   </div>
                   <div class="contentSubject panel-footer">
                       CHARACTER
@@ -116,12 +123,13 @@
   </body>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap_3.3.2/js/bootstrap.min.js"></script>
 
     <!-- d3 JS -->
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="js/gradientPie.js"></script>
+    <script src="vendor/d3/d3.min.js"></script>
+    <script src="vendor/d3/gradientPie.js"></script>
+    <script src="vendor/d3/d3cloud.js"></script>
 
     <script src="js/index.js?ver=1"></script>
     <script src="js/test.js"></script>
