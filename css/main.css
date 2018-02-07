@@ -1,7 +1,23 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html {
+    font-size: 20px;
+}
+
+body {
+    margin-top: 70px;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
 .main_color {
     background-color: #ea0530;
     border-color: #ccc;
     color: white;
+}
+
+.sub_color {
+    background-color: white;
+    color: #ea0530;
 }
 
 .nav>li>a {
