@@ -2,6 +2,8 @@ INDEX = {
 	init: function() {
 		this.makeGender();
 		this.makeAge();
+		this.makeMajor();
+		this.makeCharacter();
 	},
 
 	// GENDER
@@ -127,6 +129,187 @@ INDEX = {
 			})
 			.attr('fill', '#fff')
 			.attr('text-anchor', 'middle');
+	},
+
+	makeMajor: function() {
+		//BackEnd 에서 받을 데이터
+		/*
+			[{
+				'major': 컴퓨터과학
+				'cnt': 13	
+			},{
+				'major': 소프트웨어학과
+				'cnt': 11
+			},{
+				'major': 경영학과
+				'cnt': 7
+			}]
+		*/
+
+		majorInfo = [{'name': '컴퓨터과학','size': 13},
+		{'name': '소프트웨어학과','size': 11},
+		{'name': '경영학과','size': 7},
+		{'name': 'IT공학과','size': 19},
+		{'name': '경제학과','size': 3},
+		{'name': '전기전자컴퓨터공학부','size': 5},
+		{'name': '국어국문학과','size': 2},
+		{'name': '산업공학과','size': 8}];
+
+
+		var majorData = {
+			"name":"major",
+			"children": [{
+				"name":"이과",
+				"children":[]
+				}, {
+				"name":"문과",
+				"children":[]
+				}]
+		};
+
+		var maj1 = ['국어국문학과', '중어중문학과', '영어영문학과', '독어독문학과', '사학과', '철학과', '정치외교학과', '행정학과', '사회학과', '관광학부', '법학과', '동양학과', '서양학과', '산업디자인학과', '산업디자인', '공예학과', '조소과', '성악과', '작곡과', '피아노학과', '관현악과', '국악과', '경영학과', '경제금융학과', '정책학과', '정치학과', '경제학과'];
+		var maj2 = ['수학과', '화학과', '물리학과', '생명과학과', '생명공학과', '생명과학부', '생명공학부', '의류학과', '사회복지학과', '스포츠레저학과', '생활문화학과', '식품영양학과', '디자인학과', '건충공학부', '건축공학과', '건설공학부', '건설공학과', '도시공학부', '도시공학과', '컴퓨터공학부', '컴퓨터공학', '컴퓨터공학과', '컴퓨터과학부', '컴퓨터과학', '컴퓨터과학과', '화학공학과', '화학공학부', '생명공학과', '생명공학부', '기계공학과', '기계공학부', '응용시스템공학부', '응용시스템공학과', '미래자동차공학과', '융합전자공학과', '융합전자공학부', 'IT공학', '소프트웨어학과', '소프트웨어응용학과', '전기전자컴퓨터공학부', '전기전자컴퓨터공학과'];
+
+		for(var i = 0; i < majorInfo.length; i++) {
+			var target = majorInfo[i];
+			if(maj1.indexOf(target.name) > -1) {
+				majorData.children[0].children.push(target);
+			} else {
+				majorData.children[1].children.push(target);
+			}
+		}
+
+		var tree = majorData;
+
+		var width = 320,
+		    height = 220,
+		    color = d3.scale.category20c(),
+		    div = d3.select("#majorTree").append("div")
+		       .style("position", "relative")
+		       .style("margin-left", "25px");
+
+		var treemap = d3.layout.treemap()
+		    .size([width, height])
+		    .sticky(true)
+		    .value(function(d) { return d.size; });
+		 
+		var node = div.datum(tree).selectAll(".node")
+		      .data(treemap.nodes)
+		    .enter().append("div")
+		      .attr("class", "node")
+		      .call(position)
+		      .style("background-color", function(d) {
+		          return d.name == 'tree' ? '#fff' : color(d.name); })
+		      .append('div')
+		      .style("font-size", function(d) {
+		          return Math.min(20, 0.18*Math.sqrt(d.area))+'px'; })
+		      .text(function(d) { return d.children ? null : d.name; });
+		 
+		function position() {
+		  this.style("left", function(d) { return d.x + "px"; })
+		      .style("top", function(d) { return d.y + "px"; })
+		      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+		      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+		}
+	},
+
+	makeCharacter: function() {
+        var data = [{
+        	"category": 'aaa',
+        	"size": 80
+        }, {
+        	"category": 'bbb',
+        	"size": 30
+        }, {
+        	"category": 'ccc',
+        	"size": 25
+        }, {
+        	"category": 'ddd',
+        	"size": 75
+        }, {
+        	"category": 'eee',
+        	"size": 45
+        }, {
+        	"category": 'fff',
+        	"size": 20
+        }, {
+        	"category": 'ggg',
+        	"size": 65
+        }, {
+        	"category": 'hhh',
+        	"size": 11
+        }, {
+        	"category": 'iii',
+        	"size": 91
+        }, {
+        	"category": 'jjj',
+        	"size": 60
+        }];
+
+        var margin = {top: 20, right: 20, bottom: 40, left: 20},
+		    width = 300 - margin.left - margin.right,
+		    height = 200 - margin.top - margin.bottom;
+
+		  var categories = d3.keys(d3.nest().key(function(d) { 
+		  	return d.category; }).map(data));
+		  var color = d3.scale.ordinal().range(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"]);
+		  var fontSize = d3.scale.pow().exponent(5).domain([0,1]).range([10,80]);
+
+		  var layout = d3.layout.cloud()
+		      .timeInterval(10)
+		      .size([width, height])
+		      .words(data)
+		      .rotate(function(d) { return 0; })
+		      .font('monospace')
+		      .fontSize(function(d,i) {return fontSize(Math.random()); })
+		      .text(function(d) {return d.password; })
+		      .spiral("archimedean")
+		      .on("end", draw)
+		      .start();
+
+		  var svg = d3.select('#characterWordCloud')
+		      .attr("width", width + margin.left + margin.right)
+		      .attr("height", height + margin.top + margin.bottom)
+		      .append("g")
+		      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		  var wordcloud = svg.append("g")
+		      .attr('class','wordcloud')
+		      .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+
+		  var x0 = d3.scale.ordinal()
+		      .rangeRoundBands([0, width], .1)
+		      .domain(categories);
+
+		  var xAxis = d3.svg.axis()
+		      .scale(x0)
+		      .orient("bottom");
+
+		  svg.append("g")
+		      .attr("class", "x axis")
+		      .attr("transform", "translate(0," + height + ")")
+		      .call(xAxis)
+		    .selectAll('text')
+		      .style('font-size','20px')
+		      .style('fill',function(d) { return color(d); })
+		      .style('font','sans-serif');
+
+		  function draw(words) {
+		    wordcloud.selectAll("text")
+		        .data(words)
+		      .enter().append("text")
+		        .attr('class','word')
+		        .style("font-size", function(d) { return d.size + "px"; })
+		        .style("font-family", function(d) { return d.font; })
+		        .style("fill", function(d) { 
+		            var paringObject = data.filter(function(obj) { return obj.password === d.text});
+		            return color(paringObject[0].category); 
+		        })
+		        .attr("text-anchor", "middle")
+		        .attr("transform", function(d) { console.log("d: ", d);return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
+		        .text(function(d) { return d.text; });
+		  };
+
 	}
 };
 
