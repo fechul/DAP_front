@@ -1,0 +1,38 @@
+body {
+	padding: 30px;
+}
+
+/*
+	red: #ea002c
+	orange: #ff7a00
+*/
+
+.mainSection {
+    margin: 0 auto;
+    position: relative;
+    background-color: #333;
+    /*background-color: #ff7a00;*/
+  
+    width: 95%;
+}
+
+.contentBoxRow {
+	position: relative;
+	padding: 20px 10px;
+}
+
+.panel {
+	margin-bottom: 0px !important;
+	border: 0px !important;
+}
+
+.panel-body {
+	height: 250px;
+}
+
+.contentSubject {
+	text-align: center;
+	font-weight: bold;
+	/*background-color: #ea002c;*/
+	/*color: #fff;*/
+}
