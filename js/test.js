@@ -14,11 +14,12 @@ var TEST = {
 		}
 
 		var states = ['started', 'inProgress', 'completed'];
-		var currentState = 'started';
+		var currentState = 'started' , 
+		    endState = 'inProgress';
 
-		var GradeData = [{
-			"avgGrade": "30"
-		}]
+		var GradeData = {
+			"avgGrade": "3.2"
+		}
 		;
 
 		var svg = d3.select('#gradeChart')
@@ -63,11 +64,14 @@ var TEST = {
 							;
 		
 		progress.transition()
-				.duration(1000)
-				.attr('width', function() {
-					return info.segmentWidth * states.length - info.padding * 2;
+				.duration(2000)
+				.attr('fill', function() {
+					return colorScale(endState);
 				})
-				;
+				.attr('width', function() {
+					return (GradeData.avgGrade/4.5) * info.segmentWidth * states.length - info.padding * 2;
+				})
+		;
 
 
 		svg.append('text')
@@ -88,33 +92,44 @@ var TEST = {
 			.text('4.5')
 		;
 
+		svg.append('text')
+			.attr('class', 'progress_text_avg')
+			.attr('text-anchor', 'left')
+			.attr('tranform', 'translate(15' + ', ' + '15)')
+			.attr('x', function() {
+				return (GradeData.avgGrade/4.5) * info.segmentWidth * states.length - info.padding * 2;;
+			})
+			.attr('y', info.padding * 2 + info.segmentHeight + 18)
+			.text(GradeData.avgGrade)
+		;
 
-		var moveProgressBar = function(state) {
-			progress.transition()
-					.duration(2000)
-					.attr('fill', function() {
-						return colorScale(state);
-					})
-					.attr('width', function() {
-						var index = states.indexOf(state);
-						return (index + 1) * info.segmentWidth - info.padding * 2;
-					})
-			;
 
-			svg.append('text')
-				.attr('class', 'progress_text_avg')
-				.attr('text-anchor', 'left')
-				.attr('tranform', 'translate(15' + ', ' + '15)')
-				.attr('x', function() {
-					var index = states.indexOf(state);
-					return (index + 1) * info.segmentWidth - info.padding * 2;
-				})
-				.attr('y', info.padding * 2 + info.segmentHeight + 18)
-				.text('2.8')
-			;
-		}
+		// var moveProgressBar = function(state) {
+		// 	progress.transition()
+		// 			.duration(2000)
+		// 			.attr('fill', function() {
+		// 				return colorScale(state);
+		// 			})
+		// 			.attr('width', function() {
+		// 				var index = states.indexOf(state);
+		// 				return (index + 1) * info.segmentWidth - info.padding * 2;
+		// 			})
+		// 	;
 
-		moveProgressBar("inProgress");
+		// 	svg.append('text')
+		// 		.attr('class', 'progress_text_avg')
+		// 		.attr('text-anchor', 'left')
+		// 		.attr('tranform', 'translate(15' + ', ' + '15)')
+		// 		.attr('x', function() {
+		// 			var index = states.indexOf(state);
+		// 			return (index + 1) * info.segmentWidth - info.padding * 2;
+		// 		})
+		// 		.attr('y', info.padding * 2 + info.segmentHeight + 18)
+		// 		.text(GradeData.avgGrade)
+		// 	;
+		// }
+
+		//moveProgressBar("inProgress");
 
 	},
 
