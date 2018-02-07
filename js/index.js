@@ -214,41 +214,25 @@ INDEX = {
 	},
 
 	makeCharacter: function() {
-        var data = [{
-        	"category": 'aaa',
-        	"size": 80
-        }, {
-        	"category": 'bbb',
-        	"size": 30
-        }, {
-        	"category": 'ccc',
-        	"size": 25
-        }, {
-        	"category": 'ddd',
-        	"size": 75
-        }, {
-        	"category": 'eee',
-        	"size": 45
-        }, {
-        	"category": 'fff',
-        	"size": 20
-        }, {
-        	"category": 'ggg',
-        	"size": 65
-        }, {
-        	"category": 'hhh',
-        	"size": 11
-        }, {
-        	"category": 'iii',
-        	"size": 91
-        }, {
-        	"category": 'jjj',
-        	"size": 60
-        }];
+        var data = [{"category": '1',"password": '패기'}, 
+        {"category": '2',"password": '열정'},
+        {"category": '3',"password": '친화력'}, 
+        {"category": '4',"password": '짜증'}, 
+        {"category": '5',"password": '밝음'}, 
+        {"category": '6',"password": '조용함'}, 
+        {"category": '7',"password": '모험'}, 
+        {"category": '8',"password": '열정'}, 
+        {"category": '9',"password": '패기'}, 
+        {"category": '10',"password": '패기'},
+        {"category": '11',"password": 'SUPEX'},
+        {"category": '12',"password": '패기'},
+        {"category": '13',"password": 'SUPEX'},
+        {"category": '14',"password": '밝음'},
+        {"category": '15',"password": '열정'}];
 
         var margin = {top: 20, right: 20, bottom: 40, left: 20},
 		    width = 300 - margin.left - margin.right,
-		    height = 200 - margin.top - margin.bottom;
+		    height = 250 - margin.top - margin.bottom;
 
 		  var categories = d3.keys(d3.nest().key(function(d) { 
 		  	return d.category; }).map(data));

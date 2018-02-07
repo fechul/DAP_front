@@ -65,7 +65,7 @@ body {
 
 
 /* Character */
-.x.axis path {
+.x.axis {
   display: none;
 }
 
