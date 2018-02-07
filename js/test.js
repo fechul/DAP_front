@@ -1,16 +1,17 @@
 var TEST = {
 	init: function() {
 		this.makeGrade();
+		this.makeAbility();
 	},
 
 	// 학점 차트 생성
 	makeGrade: function() {
 		var info = {
-			"width": 200,
-			"height": 200,
-			"segmentWidth": 100,
-			"segmentHeight": 100,
-			"padding": 12
+			'width': 200,
+			'height': 200,
+			'segmentWidth': 100,
+			'segmentHeight': 100,
+			'padding': 12
 		}
 
 		var states = ['started', 'inProgress', 'completed'];
@@ -19,13 +20,12 @@ var TEST = {
 
 		var GradeData = {
 			"avgGrade": "3.2"
-		}
-		;
+		};
 
 		var svg = d3.select('#gradeChart')
 					.attr('weigth', info.width + info.padding * 2)
 					.attr('height', info.height + info.padding * 2)
-					.style('margin-top', '40px')
+					.style('margin-top', '45px')
 					;
 		
 		var colorScale = d3.scale.ordinal()
@@ -135,6 +135,113 @@ var TEST = {
 
 	//  IT 역량 차트 생성
 	makeAbility: function() {
+		var info = {
+			'width': 220,
+			'height': 220,
+			'radius': 0,
+			'innerRadius': 0,
+			'padding': 5
+		}
+
+		info.radius = Math.min(info.width, info.height) / 2;
+		info.innerRadius = 0.3 * info.radius;
+
+		var AbilityData = [
+			{"label": "JAVA", "value": 12},
+			{"label": "C", "value": 10},
+			{"label": "R", "value": 2},
+			{"label": "C++", "value": 1},
+			{"label": "C#", "value": 5},
+			{"label": "Python", "value": 20}
+		];
+
+		var max = 0;
+		for(var i = 0; i < AbilityData.length; i++) {
+			if(max <= AbilityData[i].value)
+				max = AbilityData[i].value;
+		}
+
+		var colorScale = d3.scale.category20b();
+
+		var pie = d3.layout.pie()
+							.sort(function(a, b) {
+								return d3.descending(a.value, b.value);
+							})
+							.value(function(d) {
+								return d.value;
+							})
+		;
+
+		// var tip = d3.tip()
+		// 			.attr('class', 'd3-tip')
+		// 			.offset([0, 0])
+		// 			.html(function(d) {
+		// 				return d.data.label
+		// 			});
+
+		var arc = d3.svg.arc()
+						.innerRadius(info.innerRadius - info.padding * 2)
+						.outerRadius(function(d) {
+							return ((info.radius - info.innerRadius) * (d.data.value / max) + info.innerRadius) - info.padding * 2;
+						})
+		;
+
+		var outlineArc = d3.svg.arc()
+							   .innerRadius(info.innerRadius - info.padding * 2)
+							   .outerRadius(info.radius - info.padding * 2)
+		;
+
+		var svg = d3.select('#abilityChart')
+					.attr('width', info.width)
+					.attr('height', info.height)
+						.append('g')
+						.attr('transform', 'translate(' + info.width / 2 + ', ' + info.height / 2 + ')')
+		;
+
+		// svg.call(tip);
+
+		var path = svg.selectAll('.solidArc')
+					  .data(pie(AbilityData))
+						.enter().append('path')
+							.attr('fill', function(d, i) {
+								return colorScale(i);
+							})
+							.attr('class', 'solidArc')
+							.attr('stroke', 'black')
+							.attr('stroke-width', '3')
+							.attr('d', arc)
+							// .on('mouseover', tip.show)
+							// .on('mouseout', tip.hide)
+		;
+
+		var outerPath = svg.selectAll('.outlineArc')
+						 .data(pie(AbilityData))
+							.enter().append('path')
+								.attr('fill', 'none')
+								.attr('stroke', 'black')
+								.attr('stroke-width', '3')
+								.attr('class', 'outlineArc')
+								.attr('d', outlineArc)
+		;
+
+		svg.selectAll('.solidArc_text')
+			.data(pie(AbilityData))
+				.enter().append('text')
+					.attr('class', 'ability_text')
+					.attr("transform", function(d) { 
+						return "translate(" + arc.centroid(d) + ")"; 
+					})
+					.attr('x', function(d) { 
+						return arc.centroid(d)[0]; 
+					})
+					.attr('y', function(d) { 
+						return arc.centroid(d)[1]; 
+					})
+					.text(function(d) { return d.data.label; })
+		;
+
+
+
 
 	},
 
