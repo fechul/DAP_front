@@ -13,53 +13,28 @@ INDEX = {
 		// BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
 			"label": "남자",
-			"value": 37
+			"value": 37,
+			"color": "#1882dc"
 		}, {
 			"label": "여자",
-			"value": 22
+			"value": 22,
+			"color": "#dc183c"
 		}];
 
-		// var color = d3.scale.category20c();
-		var color = d3.scale.ordinal().range(["#1882dc", "#dc183c"]);
+		var svg = d3.select("#genderChart").attr("width", w).attr("height", h);
+		svg.append("g").attr("id","genderpie");
+		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, 100);
 
-		var vis = d3.select("#genderChart")
-		    		.data([genderData])
-		        	.attr("width", w)
-		        	.attr("height", h)
-		    		.append("svg:g")
-		        	.attr("transform", "translate(" + r + "," + r + ")")
-
-		var arc = d3.svg.arc().outerRadius(r);
-
-		var pie = d3.layout.pie().value(function(d) { 
-			return d.value; 
-		});
-
-		var arcs = vis.selectAll("g.slice")
-		   			  .data(pie)
-		    		  .enter()
-		        	  .append("svg:g")
-		              .attr("class", "slice");
-
-		arcs.append("svg:path").attr("fill", function(d, i) {
-			return color(i);
-		}).attr("d", arc);
-
-		arcs.append("svg:text").attr("transform", function(d) {
-		    d.innerRadius = 0;
-		    d.outerRadius = r;
-		    return "translate(" + arc.centroid(d) + ")";
-		}).attr("text-anchor", "middle").text(function(d, i) { 
-			return genderData[i].label; 
-		});
+		gradPie.transition("genderpie", genderData, 100);
 	},
 
 	//AGE
 	makeAge: function() {
+
 		var width = 300,		// 차트 너비
 			height = 200,		// 차트 높이
 			padding = 5,		// 바 사이 간격
-			division = 0.15,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
+			division = 0.10,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
 			duration = 10;		// 바 생성할 때 transition delay 값
 
 		var ageData = [{
@@ -92,9 +67,7 @@ INDEX = {
 		}];
 		
 
-		var svg = window.svg = d3.select('#ageChart').append('svg')
-									 				 .attr('width', width)
-									 				 .attr('height', height);
+		var svg = window.svg = d3.select('#ageChart').attr('width', width).attr('height', height);
 							
 		// 바 만들기
 		svg.selectAll('rect')
@@ -120,7 +93,7 @@ INDEX = {
 				return 'rgb(0, 0, ' + parseInt(d.value / division, 10) + ')';
 			});
 				
-		// 바 위에 인구수 표시
+		// 바 위에 수치 표시
 		svg.selectAll('g')
 			.data(ageData)
 			.enter()
@@ -136,7 +109,7 @@ INDEX = {
 			.attr('fill', 'blue')
 			.attr('text-anchor', 'middle');
 				
-		// 바 아래에 지역 표시
+		// 바 아래에 라벨 표시
 		svg.selectAll('g')
 			.data(ageData)
 			.enter()
