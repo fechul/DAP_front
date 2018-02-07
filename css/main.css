@@ -10,14 +10,14 @@ body {
 }
 
 .main_color {
-    background-color: #ea0530;
+    background-color: #d43f3a;
     border-color: #ccc;
     color: white;
 }
 
 .sub_color {
     background-color: white;
-    color: #ea0530;
+    color: #d43f3a;
 }
 
 .nav>li>a {
@@ -31,4 +31,8 @@ body {
 .navbar-brand, 
 .navbar-brand:hover  {
     color: white;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: white;
 }

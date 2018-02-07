@@ -9,7 +9,7 @@
     <link href="vendor/bootstrap_3.3.2/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/main.css?ver=1" rel="stylesheet">
     <link href="css/fileUpload.css" rel="stylesheet">
 
     <title>Name</title>
@@ -18,14 +18,21 @@
     <nav class="navbar navbar-fixed-top main_color">
       <div class="container-fluid">
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+          </button>
           <a class="navbar-brand" href="#">Name</a>
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
-        </ul>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
     
@@ -40,8 +47,24 @@
         
       </div>
       <div class="form-group col-lg-offset-3 col-lg-6">
+        <small id="fileUploadHelp" class="form-text text-muted">csv는 아래와 같이 정해진 열 순서대로 입력된 파일이어야 합니다.</small>
+        <div class="row block_row">
+          <table class="table table-bordered block_row">
+            <thead>
+              <tr>
+                <th class="block_col">성별</th>
+                <th class="block_col">나이</th>
+                <th class="block_col">전공</th>
+                <th class="block_col">지역</th>
+                <th class="block_col">학점</th>
+                <th class="block_col">IT역량</th>
+                <th class="block_col">성향</th>
+                <th class="block_col">커리어</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
         <input type="file" accept=".csv" aria-describedby="fileUploadHelp" name="fileSelect" id= "fileSelect" class="form-control" required>
-        <small id="fileUploadHelp" class="form-text text-muted">csv는 정해진 열 순서대로 입력된 파일이어야 합니다.</small>
       </div>
       <div class="form-group col-lg-offset-3 col-lg-6">
         <button type="submit" class="btn btn-secondary btn-lg btn-block col-lg-12 button_submit">분석하기</button>
