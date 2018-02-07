@@ -225,19 +225,23 @@ var TEST = {
 		;
 
 		svg.selectAll('.solidArc_text')
-			.data(pie(AbilityData))
+			.data (pie (AbilityData.sort(function(a, b) { return d3.descending(a.value, b.value); })))
 				.enter().append('text')
 					.attr('class', 'ability_text')
-					.attr("transform", function(d) { 
-						return "translate(" + arc.centroid(d) + ")"; 
-					})
+					// .attr("transform", function(d) { 
+					// 	return "translate(" + arc.centroid(d) + ")"; 
+					// })
 					.attr('x', function(d) { 
-						return arc.centroid(d)[0]; 
+						return (outlineArc.centroid(d)[0] + arc.centroid(d)[0]) / 2; 
 					})
 					.attr('y', function(d) { 
-						return arc.centroid(d)[1]; 
+						return (outlineArc.centroid(d)[1] + arc.centroid(d)[1]) / 2; 
 					})
-					.text(function(d) { return d.data.label; })
+					.attr("text-anchor", "middle")
+					.text(function(d, i) { 
+						if( i < 3 ) return d.data.label; 
+						else return '';
+					})
 		;
 
 
