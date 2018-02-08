@@ -60,7 +60,7 @@
 } 
 
 .ability_text {
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     font-size: 16px;
     stroke: black;
 }
