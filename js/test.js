@@ -3,6 +3,7 @@ var TEST = {
 		this.makeGrade();
 		this.makeAbility();
 		this.makeArea.start();
+		this.makeCareer();
 	},
 
 	// 지역 차트 생성
@@ -75,7 +76,7 @@ var TEST = {
 			var svg = this.svg;
 			var distance = this.calculateDistance(originGeo[1], originGeo[0], destinationGeo[1], destinationGeo[0]);
 			var duration = this.calculateDuration(distance);
-			var arc = svg
+			var arc = svg;
 			
 			var drawCircle = function() {
 				svg.append('circle')
@@ -252,7 +253,7 @@ var TEST = {
 
 	// 학점 차트 생성
 	makeGrade: function() {
-		var info = {
+		var config = {
 			'width': 200,
 			'height': 200,
 			'segmentWidth': 100,
@@ -269,8 +270,8 @@ var TEST = {
 		};
 
 		var svg = d3.select('#gradeChart')
-					.attr('weigth', info.width + info.padding * 2)
-					.attr('height', info.height + info.padding * 2)
+					.attr('weigth', config.width + config.padding * 2)
+					.attr('height', config.height + config.padding * 2)
 					.style('margin-top', '45px')
 					;
 		
@@ -286,12 +287,12 @@ var TEST = {
 			.attr('fill', 'gray')
 			.attr('stroke', 'black')
 			.attr('stroke-width', '3')
-			.attr('height', info.segmentHeight)
+			.attr('height', config.segmentHeight)
 			.attr('width', function() {
-				return info.segmentWidth * states.length - info.padding * 2;
+				return config.segmentWidth * states.length - config.padding * 2;
 			})
-			.attr('x', info.padding)
-			.attr('y', info.padding * 2)
+			.attr('x', config.padding)
+			.attr('y', config.padding * 2)
 			;
 
 		var progress = svg.append('rect')
@@ -302,11 +303,11 @@ var TEST = {
 							.attr('stroke', 'black')
 							.attr('stroke-width', '3')
 							.attr('width', 0)
-							.attr('height', info.segmentHeight)
+							.attr('height', config.segmentHeight)
 							.attr('rx', 10)
 							.attr('ry', 10)
-							.attr('x', info.padding)
-							.attr('y', info.padding * 2)
+							.attr('x', config.padding)
+							.attr('y', config.padding * 2)
 							;
 		
 		progress.transition()
@@ -315,7 +316,7 @@ var TEST = {
 					return colorScale(endState);
 				})
 				.attr('width', function() {
-					return (GradeData.avgGrade/4.5) * info.segmentWidth * states.length - info.padding * 2;
+					return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;
 				})
 		;
 
@@ -324,8 +325,8 @@ var TEST = {
 				.attr('class', 'progress_text')
 				.attr('text-anchor', 'left')
 				.attr('tranform', 'translate(15' + ', ' + '15)')
-				.attr('x', info.padding)
-				.attr('y', info.padding * 2 - 3)
+				.attr('x', config.padding)
+				.attr('y', config.padding * 2 - 3)
 			.text('0')
 		;
 
@@ -333,8 +334,8 @@ var TEST = {
 				.attr('class', 'progress_text')
 				.attr('text-anchor', 'left')
 				.attr('tranform', 'translate(15' + ', ' + '15)')
-				.attr('x', info.segmentWidth * states.length - info.padding * 2)
-				.attr('y', info.padding * 2 - 3)
+				.attr('x', config.segmentWidth * states.length - config.padding * 2)
+				.attr('y', config.padding * 2 - 3)
 			.text('4.5')
 		;
 
@@ -343,9 +344,9 @@ var TEST = {
 			.attr('text-anchor', 'left')
 			.attr('tranform', 'translate(15' + ', ' + '15)')
 			.attr('x', function() {
-				return (GradeData.avgGrade/4.5) * info.segmentWidth * states.length - info.padding * 2;;
+				return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;;
 			})
-			.attr('y', info.padding * 2 + info.segmentHeight + 18)
+			.attr('y', config.padding * 2 + config.segmentHeight + 18)
 			.text(GradeData.avgGrade)
 		;
 
@@ -358,7 +359,7 @@ var TEST = {
 		// 			})
 		// 			.attr('width', function() {
 		// 				var index = states.indexOf(state);
-		// 				return (index + 1) * info.segmentWidth - info.padding * 2;
+		// 				return (index + 1) * config.segmentWidth - config.padding * 2;
 		// 			})
 		// 	;
 
@@ -368,9 +369,9 @@ var TEST = {
 		// 		.attr('tranform', 'translate(15' + ', ' + '15)')
 		// 		.attr('x', function() {
 		// 			var index = states.indexOf(state);
-		// 			return (index + 1) * info.segmentWidth - info.padding * 2;
+		// 			return (index + 1) * config.segmentWidth - config.padding * 2;
 		// 		})
-		// 		.attr('y', info.padding * 2 + info.segmentHeight + 18)
+		// 		.attr('y', config.padding * 2 + config.segmentHeight + 18)
 		// 		.text(GradeData.avgGrade)
 		// 	;
 		// }
@@ -381,7 +382,7 @@ var TEST = {
 
 	//  IT 역량 차트 생성
 	makeAbility: function() {
-		var info = {
+		var config = {
 			'width': 220,
 			'height': 220,
 			'radius': 0,
@@ -389,8 +390,8 @@ var TEST = {
 			'padding': 5
 		}
 
-		info.radius = Math.min(info.width, info.height) / 2;
-		info.innerRadius = 0.3 * info.radius;
+		config.radius = Math.min(config.width, config.height) / 2;
+		config.innerRadius = 0.3 * config.radius;
 
 		var AbilityData = [
 			{"label": "JAVA", "value": 12},
@@ -426,22 +427,22 @@ var TEST = {
 		// 			});
 
 		var arc = d3.svg.arc()
-						.innerRadius(info.innerRadius - info.padding * 2)
+						.innerRadius(config.innerRadius - config.padding * 2)
 						.outerRadius(function(d) {
-							return ((info.radius - info.innerRadius) * (d.data.value / max) + info.innerRadius) - info.padding * 2;
+							return ((config.radius - config.innerRadius) * (d.data.value / max) + config.innerRadius) - config.padding * 2;
 						})
 		;
 
 		var outlineArc = d3.svg.arc()
-							   .innerRadius(info.innerRadius - info.padding * 2)
-							   .outerRadius(info.radius - info.padding * 2)
+							   .innerRadius(config.innerRadius - config.padding * 2)
+							   .outerRadius(config.radius - config.padding * 2)
 		;
 
 		var svg = d3.select('#abilityChart')
-					.attr('width', info.width)
-					.attr('height', info.height)
+					.attr('width', config.width)
+					.attr('height', config.height)
 						.append('g')
-						.attr('transform', 'translate(' + info.width / 2 + ', ' + info.height / 2 + ')')
+						.attr('transform', 'translate(' + config.width / 2 + ', ' + config.height / 2 + ')')
 		;
 
 		// svg.call(tip);
@@ -495,8 +496,64 @@ var TEST = {
 
 	},
 
-	// 성향 차트 생성
-	makeCharcter: function() {
+	// 커리어 path 차트 생성
+	makeCareer: function() {
+		var config = {
+			width: 250,
+			height: 250
+		}
 
+		var careerData = [
+			{axis: "Axis1", value: 13}, 
+   			{axis: "Axis2", value: 1}, 
+   			{axis: "Axis3", value: 8},  
+   			{axis: "Axis4", value: 4},  
+   			{axis: "Axis5", value: 9},
+			{axis: "Axis6", value: 9}
+		]
+
+		var legendOption = ['Career Path'];
+		RadarChart.draw('#careerChart', careerData, config);
+		
+		var svg = d3.select('#careerChart')
+						.append('svg')
+							.attr('width', config.width + 100)
+							.attr('height', config.height)
+		;
+		var text = svg.append('text')
+						.attr('class', 'radarChart_title')
+						.attr('transform', 'translate(90, 0)')
+						.attr('x', w - 70)
+						.attr('y', 10)
+						.attr('font-size', '12px')
+						.attr('fill', '#404040')
+						.text('범례')
+		;
+		var legend = svg.append('g')
+							.attr('class', 'legend')
+							.attr('height', 100)
+							.attr('width', 200)
+							.attr('transform', 'translate(90, 20)')
+		;
+		legend.selectAll('rect')
+				.data(legendOption)
+				.enter()
+				.append('rect')
+					.attr('x', w - 65)
+					.attr('y', function(d, i) { return i * 20 })
+					.attr('width', 10)
+					.attr('height', 10)
+					.style('fill', 'red')
+		;
+		legend.selectAll('text')
+				.data(legendOption)
+				.enter()
+					.append('text')
+					.attr('x', w - 52)
+					.attr('y', function(d, i) { return i * 20 + 9 })
+					.attr('font-size', '11px')
+					.attr('fill', '#737373')
+					.text(function(d) { return d; })
+		;
 	}
 };

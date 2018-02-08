@@ -11,7 +11,9 @@ body {
 
 .main_color {
     background-color: #d43f3a;
-    border-color: #ccc;
+    /* border-color: #ccc; */
+    border-color: #a53531;
+    border-bottom-width: 2.2px;
     color: white;
 }
 
