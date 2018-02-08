@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="vendor/bootstrap_3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap_3.3.2/css/bootstrap.animate.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/index.css" rel="stylesheet">
@@ -19,7 +20,10 @@
     <section class="mainSection container">
       <div class="contentBoxRow row">
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="gender">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                       <svg id="genderChart"></svg>
                   </div>
@@ -30,7 +34,10 @@
           </div>
 
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="age">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                       <svg id="ageChart" width="300" height="200"></svg>
                   </div>
@@ -41,7 +48,10 @@
           </div>
 
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="major">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                       <div id="majorTree">
                         <!-- <select>
@@ -61,7 +71,10 @@
 
       <div class="contentBoxRow row">
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="area">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                       ~~~~
                   </div>
@@ -75,7 +88,10 @@
           </div>
 
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="grade">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                     <svg id = "gradeChart">
                   </div>
@@ -88,7 +104,10 @@
 
       <div class="contentBoxRow row">
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="ability">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                       <svg id = "abilityChart">
                   </div>
@@ -99,9 +118,12 @@
           </div>
 
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="character">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
-                      <svg id="characterWordCloud"></svg>
+                    <svg id="characterWordCloud"></svg>
                   </div>
                   <div class="contentSubject panel-footer">
                       CHARACTER
@@ -110,7 +132,10 @@
           </div>
 
           <div class="col-lg-4">
-              <div class="panel">
+              <div class="contentBox panel" type="career">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
                   <div class="panel-body text-center">
                       AI 전문가
                   </div>
@@ -122,6 +147,33 @@
       </div>
     </section>
   </body>
+
+  <div id="detailModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><span id="detailModalTitle">분석 결과</span></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span class="moveType left glyphicon glyphicon-menu-left"></span>
+          <div class="modalContentArea left">
+            asdfadsfsdf
+          </div>
+          <div class="modalContentArea right">
+            fff
+            fff
+            fff
+          </div>
+          <span class="moveType right glyphicon glyphicon-menu-right"></span>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="vendor/jquery/jquery.min.js"></script>

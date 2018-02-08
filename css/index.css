@@ -14,11 +14,20 @@ body {
     /*background-color: #ff7a00;*/
   
     width: 95%;
+    padding: 10px;
+}
+
+/*.contentBox {
+    cursor: pointer;
+}*/
+
+.fullscreen {
+    float: right;
 }
 
 .contentBoxRow {
 	position: relative;
-	padding: 20px 10px;
+	padding: 20px;
 }
 
 .panel {
@@ -68,4 +77,68 @@ body {
 .x.axis {
   display: none;
 }
+
+
+
+
+/* modal */
+#detailModal .modal-header {
+    background-color: #333;
+    color: #fff;
+}
+
+#detailModal .modal-title {
+    display: inline-block;
+}
+
+#detailModal .modal-dialog {
+    width: 85%;
+}
+
+#detailModal button.close{
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    opacity: .5;
+    color: #fff;
+}
+
+.modal-body {
+    overflow: scroll;
+    height: 650px;
+}
+
+.modalContentArea {
+    display: inline-block;
+    /*border: 1px solid #ccc;*/
+    padding: 15px;
+    height: 100%;
+}
+
+.modalContentArea.left {
+    width: 64%;
+    border-right: 1px solid #ccc;
+}
+
+.modalContentArea.right {
+    width: 34%;
+}
+
+.moveType {
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+.modal.fade{
+  opacity:1;
+}
+.modal.fade .modal-dialog {
+   -webkit-transform: translate(0);
+   -moz-transform: translate(0);
+   transform: translate(0);
+}
+
+
 
