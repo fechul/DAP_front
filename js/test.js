@@ -45,8 +45,8 @@ var TEST = {
 		projection: null,
 		speed: 2800,//km/sec
 		tooltip: d3.select('#areaChart').append('div')	
-			.attr('class', 'tooltipDestination')				
-			.style('opacity', 0),
+					.attr('class', 'tooltipDestination')				
+					.style('opacity', 0),
 		getArc: function(d, s) {
 			var dx = d.destination.x - d.origin.x;
 			var dy = d.destination.y - d.origin.y;
@@ -65,10 +65,8 @@ var TEST = {
 		},
 		drawConnection: function(index) {
 			var self = this;
-
 			var destination = this.destinations[index];
 			var originPos = this.projection(this.originGeo);
-			
 			var destinationPos = this.projection(destination.coord);
 			var connection = [ originPos, destinationPos ];
 			var destinationName = destination.name;
@@ -78,108 +76,106 @@ var TEST = {
 			var distance = this.calculateDistance(originGeo[1], originGeo[0], destinationGeo[1], destinationGeo[0]);
 			var duration = this.calculateDuration(distance);
 			var arc = svg
-				.append('path')
-				.datum(connection)
-				.attr('class', 'arc' + index)
-				.attr('d', function(coordinates) {
-					var d = {
-						origin: { x: coordinates[0][0], y: coordinates[0][1]},
-						destination: { x: coordinates[1][0], y: coordinates[1][1]}
-					};
-					var s = false;
-					if (d.destination.x > d.origin.x) {
-						s = true;
-					}
-					return (self.getArc(d, s));
-				}) 
-				.style('stroke', 'steelblue')
-				.style('stroke-width', 2)
-				.style('fill', 'none')
-				.transition()
-				.duration(duration)
-				.attrTween('stroke-dasharray', function() {
-					var len = this.getTotalLength();
-					return function(t) {
-					return (d3.interpolate('0,' + len, len + ',0'))(t)
-					};
-				})
-				.each('end', function(d) {
-					var c = connection[1];
-					console.log(c);
-					svg.append('circle')
-						.attr('cx', c[0])
-						.attr('cy', c[1])
-						.attr('r', 0)
-						.attr('class', 'destCircleInner')
-						.style('fill', 'steelblue')
-						.style('fill-opacity', '1')
-						.transition()
-						.duration(300)
-						.attr('r', '3px');
-					svg.append('circle')
-						.attr('cx', c[0])
-						.attr('cy', c[1])
+			
+			var drawCircle = function() {
+				svg.append('circle')
+					.datum(connection)
+					.attr('cx', connection[1][0])
+					.attr('cy', connection[1][1])
+					.attr('r', 0)
+					.attr('class', 'destCircleInner')
+					.style('fill', 'steelblue')
+					.style('fill-opacity', '1')
+					.transition()
+					.duration(300) //300
+					.attr('r', '5px')
+				;
+				svg.append('circle')
+						.datum(connection)
+						.attr('cx', connection[1][0])
+						.attr('cy', connection[1][1])
 						.attr('r', 0)
 						.attr('class', 'destCircleOuter')
 						.style('fill', 'black')
 						.style('fill-opacity', '0.05')
 						.transition()
-						.duration(300)
-						.attr('r', '10px');
-					svg.append('circle')
-						.datum(c)
-						.attr('cx', c[0])
-						.attr('cy', c[1])
-						.attr('r', 0)
-						.style('class', 'destCircleMouse')
-						.style('fill', 'steelblue')
-						.style('fill-opacity', '1')
-						.on('mouseover', function (d) {
-							tooltip.html('<span style="color:white">' + destinationName + '</span>')
-							.attr('class', 'tooltipDestination')
-							.style('left', d[0] + 12 + 'px')
-							.style('top', d[1] - 20 + 'px')
+						.duration(300) //300
+						.attr('r', '12px')
+				;
+				svg.append('circle')
+					.datum(connection)
+					.attr('cx', connection[1][0])
+					.attr('cy', connection[1][1])
+					.attr('r', 0)
+					.style('class', 'destCircleMouse')
+					.style('fill', 'steelblue')
+					.style('fill-opacity', '1')
+					.transition()
+					.duration(300) //300
+					.attr('r', '5px')
+					.each('end', function(d) {
+						d3.select(this)
 							.transition()
-							.duration(700)
-							.style('opacity', 1)
-						}) 
-						.on('mouseout', function (d) {
-							tooltip.transition()
-							.duration(700)
-							.style('opacity', 0)
-						})
-						.transition()
-						.duration(300)
-						.attr('r', '3px')
-						.each('end', function(d) {
-							d3.select(this)
-								.transition()
-								.duration(2000)
-								.attr('r', 20)
-								.style('fill-opacity', '0');
-							d3.select('.arc' + index)
-								.transition()
-								.duration(2000)
-								.style('stroke-opacity', '0')
-								.style('stroke-width', '1')
-								.each('end', function (d) {
-									if (index === self.destinations.length - 1) {
-										svg.selectAll('.destCircleInner').remove();
-										svg.selectAll('.destCircleOuter').remove();
-										svg.selectAll('.destCircleMouse').remove();
-									for (i = 0; i < self.destinations.length; i++) { 
-										svg.selectAll('.arc' + i).remove();
-									}
-									}
-									var nextIndex = index + 1;
-									if (nextIndex < self.destinations.length) {
-										self.drawConnection(nextIndex);
-									} else {
-										self.drawConnection(0);
-									}
-								});
-						});
-				});
+							.duration(2000) //2000
+							.attr('r', 20)
+							.style('fill-opacity', '0')
+						;
+						svg.append('path')
+							.datum(connection)
+							.attr('class', 'arc' + index)
+							.attr('d', function(coordinates) {
+								var d = {
+									origin: { x: coordinates[0][0], y: coordinates[0][1]},
+									destination: { x: coordinates[1][0], y: coordinates[1][1]}
+								};
+								var s = false;
+								if (d.destination.x > d.origin.x) {
+									s = true;
+								}
+								return (self.getArc(d, s));
+							}) 
+							.style('stroke', 'steelblue')
+							.style('stroke-width', '2.5')
+							.style('fill', 'none')
+							.transition()
+							.duration(duration) //duration
+							.attrTween('stroke-dasharray', function() {
+								var len = this.getTotalLength();
+								return function(t) {
+									return (d3.interpolate('0,' + len, len + ',0'))(t)
+								};
+							})
+							.each('end', function(d) {
+								var c = connection[1];
+								
+							})
+						;
+						d3.select('.arc' + index)
+							.transition()
+							.duration(2000) //2000
+							.style('stroke-opacity', '1') // style('stroke-opacity', '0') 
+							.style('stroke-width', '2')
+							.each('end', function (d) {
+								if (index === self.destinations.length - 1) {
+									svg.selectAll('.destCircleInner').remove();
+									svg.selectAll('.destCircleOuter').remove();
+									svg.selectAll('.destCircleMouse').remove();
+								for (i = 0; i < self.destinations.length; i++) { 
+									svg.selectAll('.arc' + i).remove();
+								}
+								}
+								var nextIndex = index + 1;
+								if (nextIndex < self.destinations.length) {
+									self.drawConnection(nextIndex);
+								} else {
+									self.drawConnection(0);
+								}
+							})
+						;
+					})
+				;
+			};
+			drawCircle();
 		},
 		drawConnections: function () {
 			this.drawConnection(0);
@@ -187,8 +183,8 @@ var TEST = {
 		
 		drawMap: function (originName, originGeo, destinations) {
 			var countries, height, path, projection, scale, svg, width;
-			var width = 230;
-			var height = 230;
+			var width = 390;
+			var height = 210;
 			var center = [4, 68.6];
 			var scale = 200;
 			projection = d3.geo.mercator().scale(scale).translate([width / 2, 0]).center(center);
@@ -196,15 +192,19 @@ var TEST = {
 			svg = d3.select('#areaChart').append('svg')
 				.attr('height', height)
 				.attr('width', width)
-				.style('background', '#C1E1EC');
+				.style('background', 'white') // #C1E1EC:
+				// .style('border', 'black solid 3px')
+				// .style('border-radius', '11.5px')
+			;
 			countries = svg.append("g");
 			d3.json('europe.json', function(data) {
 				countries.selectAll('.country')
-				.data(topojson.feature(data, data.objects.europe).features)
-				.enter()
-				.append('path')
-				.attr('class', 'country')
-				.attr('d', path)  
+							.data(topojson.feature(data, data.objects.europe).features)
+							.enter()
+							.append('path')
+							.attr('class', 'country')
+							.attr('d', path)
+				;
 				return;
 			});
 			var source = svg.selectAll('circleOrigin');
@@ -212,15 +212,16 @@ var TEST = {
 						.append('circle')
 						.attr('cx', function (d) { return projection(d)[0]; })
 						.attr('cy', function (d) { return projection(d)[1]; })
-						.attr('r', '3px')
+						.attr('r', '5px')
 						.style('opacity', 1)
-						.attr('fill', 'green')
+						.attr('fill', '#d43f3a')
 						.attr('class', 'circleOrigin')
+				;
 				source.data([originGeo]).enter()
 						.append('circle')
 						.attr('cx', function (d) { return projection(d)[0]; })
 						.attr('cy', function (d) { return projection(d)[1]; })
-						.attr('r', '10px')
+						.attr('r', '12px')
 						.style('opacity', 0.05)
 						.attr('fill', 'black')
 						.attr('class', 'circleOrigin')
@@ -230,14 +231,15 @@ var TEST = {
 									.style('left', projection(d)[0] + 12 + 'px')
 									.style('top', projection(d)[1] - 20 + 'px')
 									.transition()
-									.duration(700)
+									.duration(700) //700
 									.style('opacity', 1)
 						})
 				.on('mouseout', function (d) {
 					tooltip.transition()
-							.duration(700)
+							.duration(700) //700
 							.style('opacity', 0)
-				});
+				})
+				;
 			this.svg = svg;
 			this.projection = projection;
 			this.drawConnections();
