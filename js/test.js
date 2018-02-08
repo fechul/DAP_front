@@ -105,7 +105,6 @@ var TEST = {
 				})
 				.each('end', function(d) {
 					var c = connection[1];
-					console.log(c);
 					svg.append('circle')
 						.attr('cx', c[0])
 						.attr('cy', c[1])

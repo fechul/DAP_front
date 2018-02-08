@@ -16,9 +16,8 @@ INDEX = {
 		var self = this;
 
 		$('.contentBox .fullscreen').click(function() {
-			self.direction = 0;
 			var type = $(this).parent('.contentBox').attr('type');
-			self.setModalContent(type, null);
+			self.setModalContent(type);
 		});
 
 		$('.moveType').click(function() {
@@ -26,18 +25,8 @@ INDEX = {
 			var direction = $(this).hasClass('left') ? 1 : 2;
 			self.direction = direction;
 
-			self.detailBox.modal('hide');
-		});
+			// self.detailBox.modal('hide');
 
-		self.detailBox.on('show.bs.modal', function(e) {
-			$('.modal-dialog').attr('class', 'modal-dialog  ' + (self.direction==0 ? 'bounceIn' : (self.direction==1 ? 'fadeInLeft' : 'fadeInRight')) + '  animated');
-		});
-
-		self.detailBox.on('hide.bs.modal', function(e) {
-			$('.modal-dialog').attr('class', 'modal-dialog  ' + (self.direction==0 ? 'bounceOut' : (self.direction==1 ? 'fadeOutRight' : 'fadeOutLeft')) + '  animated');
-		});
-
-		self.detailBox.on('hidden.bs.modal', function(e) {
 			var type = '';
 
 			if(self.direction == 1) {
@@ -51,11 +40,30 @@ INDEX = {
 				else
 					type = self.analystType[self.currentTypeIdx+1];
 			}
+
+			self.setModalContent(type);
 		});
-	},
 
-	modalAnimate: function() {
+		$('#detailModal .close').click(function() {
+			self.direction = 0;
+			self.detailBox.modal('hide');
+		});
 
+		self.detailBox.on('show.bs.modal', function(e) {
+			$('.modal-dialog').attr('class', 'modal-dialog  ' + (self.direction==0 ? 'fadeIn' : (self.direction==1 ? 'fadeInLeft' : 'fadeInRight')) + '  animated');
+		});
+
+		// self.detailBox.on('shown.bs.modal', function(e) {
+		// 	$('.modal-dialog').removeClass('fadeInLeft').removeClass('fadeInRight').removeClass('animated');
+		// });
+
+		self.detailBox.on('hide.bs.modal', function(e) {
+			$('.modal-dialog').attr('class', 'modal-dialog  ' + (self.direction==0 ? 'fadeOut' : (self.direction==1 ? 'fadeOutRight' : 'fadeOutLeft')) + '  animated');
+		});
+
+		// self.detailBox.on('hidden.bs.modal', function(e) {
+		// 	$('.modal-dialog').removeClass('animated');
+		// });
 	},
 
 	// Modal Resize
@@ -67,8 +75,47 @@ INDEX = {
 
 	// GENDER
 	makeGender: function() {
-		var h = 200;
-		var w = 200;
+		// // BackEnd에서 이 형식으로 Data를 받아야함
+		var genderData = [{
+			"label": "남자",
+			"value": 37,
+			"color": "#1882dc"
+		}, {
+			"label": "여자",
+			"value": 22,
+			"color": "#dc183c"
+		}];
+
+	    // var vis = d3.select("#genderChart")
+	    //     		.data([genderData])
+	    //         	.attr("width", w)
+	    //         	.attr("height", h)
+	    //         	.append("svg:g")           
+	    //         	.attr("transform", "translate(" + r + "," + r + ")");
+	    // var arc = d3.svg.arc().outerRadius(r);
+	    // var pie = d3.layout.pie().value(function(d) { return d.value; });
+	    // var arcs = vis.selectAll("g.slice")
+	    //     		  .data(pie)
+	    //     		  .enter()                       
+	    //         	  .append("svg:g")
+	    //         	  .attr("id","genderpie") 
+	    //               .attr("class", "slice");
+	    //     arcs.append("svg:path")
+	    //             .attr("fill", function(d, i) {return d.data.color; } )
+	    //             .attr("d", arc)
+	    //             .attr('stroke', 'black')
+					// .attr('stroke-width', '3');                                   
+	    //     arcs.append("svg:text").attr("transform", function(d) {                   
+     //            d.innerRadius = 0;
+     //            d.outerRadius = r;
+     //            return "translate(" + arc.centroid(d) + ")";       
+     //        }).attr("text-anchor", "middle")                         
+	    //       .text(function(d, i) { return genderData[i].label; });
+
+
+
+		var h = 220;
+		var w = 220;
 		var r = 100;
 
 		// BackEnd에서 이 형식으로 Data를 받아야함
@@ -83,21 +130,17 @@ INDEX = {
 		}];
 
 		var svg = d3.select("#genderChart").attr("width", w).attr("height", h);
-		svg.append("g").attr("id","genderpie");
+		svg.append("g").attr("id","genderpie").attr("stroke", "black").attr("stroke-width", "3");
+		svg.append
+
 		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, 100);
 
 		gradPie.transition("genderpie", genderData, 100);
+
 	},
 
 	//AGE
 	makeAge: function() {
-
-		var width = 300,		// 차트 너비
-			height = 200,		// 차트 높이
-			padding = 5,		// 바 사이 간격
-			division = 0.10,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
-			duration = 10;		// 바 생성할 때 transition delay 값
-
 		var ageData = [{
 			"label": "23",
 			"value": 2
@@ -126,7 +169,12 @@ INDEX = {
 			"label": "31",
 			"value": 1
 		}];
-		
+
+		var width = 300,		// 차트 너비
+			height = 200,		// 차트 높이
+			padding = 5,		// 바 사이 간격
+			division = 0.10,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
+			duration = 10;		// 바 생성할 때 transition delay 값
 
 		var svg = window.svg = d3.select('#ageChart').attr('width', width).attr('height', height);
 							
@@ -144,15 +192,16 @@ INDEX = {
 			})
 			.attr('y', function (d) {
 				return height - parseInt(d.value / division, 10);
-					// 인구수는 천만, 몇백만 하는 큰 수이므로 화면에 적당한 픽셀로 표시하기 위해 적당한 division 값으로 나눠줌
 			})
 			.attr('width', width / ageData.length - padding)
 			.attr('height', function (d) {
 				return parseInt(d.value / division, 10);
 			})
 			.attr('fill', function (d) {
-				return 'rgb(0, 0, ' + parseInt(d.value / division, 10) + ')';
-			});
+				return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
+			})
+			.attr('stroke', 'black')
+			.attr('stroke-width', '3');
 				
 		// 바 위에 수치 표시
 		svg.selectAll('g')
@@ -254,7 +303,7 @@ INDEX = {
 		 
 		var node = div.datum(tree).selectAll(".node")
 		      .data(treemap.nodes)
-		    .enter().append("div")
+		      .enter().append("div")
 		      .attr("class", "node")
 		      .call(position)
 		      .style("background-color", function(d) {
@@ -340,9 +389,11 @@ INDEX = {
 		  function draw(words) {
 		    wordcloud.selectAll("text")
 		        .data(words)
-		      .enter().append("text")
+		        .enter().append("text")
 		        .attr('class','word')
-		        .style("font-size", function(d) { return d.size + "px"; })
+		        .transition()
+                .duration(600)
+		        .style("font-size", function(d) { return (d.size+10) + "px"; })
 		        .style("font-family", function(d) { return d.font; })
 		        .style("fill", function(d) { 
 		        	d.rotate = Math.floor(Math.random() * 60);
@@ -355,7 +406,7 @@ INDEX = {
 		  };
 	},
 
-	setModalContent: function(type, dir) {
+	setModalContent: function(type) {
 		var self = this;
 
 		$('#detailModalTitle').text(type.toUpperCase());
@@ -388,7 +439,9 @@ INDEX = {
 		// this.modalResize();
 		self.currentTypeIdx = self.analystType.indexOf(type);
 
+		self.detailBox.modal('hide');
 		self.detailBox.modal('show');
+		self.direction = 0;
 	}
 };
 

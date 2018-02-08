@@ -54,12 +54,13 @@ body {
     line-height: 0.95;
     overflow: hidden;
     position: absolute;
-    /*border-radius: 6px;*/
-    background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+    border: 3px solid #333;
+    border-radius: 5px;
+    /*background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:      -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
-    background-image:         linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0)); 
+    background-image:         linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0)); */
     text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
         -1px -1px 2px hsla(0,0%,100%,0.25),
         -1px 1px 2px hsla(0,0%,100%,0.25),
@@ -70,6 +71,10 @@ body {
 
 .node div {
    padding: 6px 4%;
+}
+
+#genderChart {
+    padding: 10px;
 }
 
 
@@ -128,8 +133,12 @@ body {
     top: 50%;
     cursor: pointer;
     font-size: 18px;
+    font-weight: bold;
 }
 
+.moveType:hover {
+    color: green;
+}
 
 .modal.fade{
   opacity:1;
