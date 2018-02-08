@@ -7,17 +7,17 @@ var TEST = {
 
 	// 지역 차트 생성
 	makeArea: {
-		originGeo: [16.8286, 52.4200],
+		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
 		originName: 'POZ',
 		destinations: [
-			{'coord': [20.9679, 52.1672], 'name': 'WAW'},
-			{'coord': [23.9569, 49.8134], 'name': 'LWO'},
-			{'coord': [30.4433, 50.4120], 'name': 'IEV'},
-			{'coord': [13.3724, 55.5355], 'name': 'MMX'},
-			{'coord': [12.6508, 55.6180], 'name': 'CPH'},
-			{'coord': [16.9154, 58.7890], 'name': 'NYO'},
-			{'coord': [10.2569, 59.1824], 'name': 'TRF'},
-			{'coord': [9.1526, 55.7408], 'name': 'BLL'},
+			{'coord': [127.104456, 37.513931], 'name': '고성군'},
+			// {'coord': [23.9569, 49.8134], 'name': 'LWO'},
+			// {'coord': [30.4433, 50.4120], 'name': 'IEV'},
+			// {'coord': [13.3724, 55.5355], 'name': 'MMX'},
+			// {'coord': [12.6508, 55.6180], 'name': 'CPH'},
+			// {'coord': [16.9154, 58.7890], 'name': 'NYO'},
+			// {'coord': [10.2569, 59.1824], 'name': 'TRF'},
+			// {'coord': [9.1526, 55.7408], 'name': 'BLL'},
 			// {'coord': [8.5622, 50.0379], 'name': 'FRA'},
 			// {'coord': [11.7750, 48.3537], 'name': 'MUC'},
 			// {'coord': [5.3921, 51.4584], 'name': 'EIN'},
@@ -37,9 +37,9 @@ var TEST = {
 			// {'coord': [2.766066, 41.898201], 'name': 'GRO'},
 			// {'coord': [14.483279, 35.854114], 'name': 'MLA'},     
 			// {'coord': [23.9484, 37.9356467], 'name': 'ATH'},   
-			// {'coord': [19.914486, 39.607645], 'name': 'CFU'},
-			{'coord': [34.9362, 29.9511], 'name': 'VDA'},
-			{'coord': [34.8854, 32.0055], 'name': 'TLV'}
+			// // {'coord': [19.914486, 39.607645], 'name': 'CFU'},
+			// {'coord': [34.9362, 29.9511], 'name': 'VDA'},
+			{'coord': [129.163984, 35.165740], 'name': '밀양시'}
 		],
 		svg: null,
 		projection: null,
@@ -185,9 +185,9 @@ var TEST = {
 			var countries, height, path, projection, scale, svg, width;
 			var width = 390;
 			var height = 210;
-			var center = [4, 68.6];
-			var scale = 200;
-			projection = d3.geo.mercator().scale(scale).translate([width / 2, 0]).center(center);
+			var center = [127.106678, 37.366402] //[128, 36]; //[4, 68.6];
+			var scale = 2200; //200
+			projection = d3.geo.mercator().scale(scale).translate([width / 2.2, height / 3.8]).center(center);
 			path = d3.geo.path().projection(projection);
 			svg = d3.select('#areaChart').append('svg')
 				.attr('height', height)
@@ -197,9 +197,9 @@ var TEST = {
 				// .style('border-radius', '11.5px')
 			;
 			countries = svg.append("g");
-			d3.json('europe.json', function(data) {
+			d3.json('skorea_municipalities_topo_simple.json', function(data) { //europe.json
 				countries.selectAll('.country')
-							.data(topojson.feature(data, data.objects.europe).features)
+							.data(topojson.feature(data, data.objects.skorea_municipalities_geo).features) //europe
 							.enter()
 							.append('path')
 							.attr('class', 'country')
