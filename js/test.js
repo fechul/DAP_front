@@ -7,17 +7,17 @@ var TEST = {
 
 	// 지역 차트 생성
 	makeArea: {
-		originGeo: [16.8286, 52.4200],
+		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
 		originName: 'POZ',
 		destinations: [
-			{'coord': [20.9679, 52.1672], 'name': 'WAW'},
-			{'coord': [23.9569, 49.8134], 'name': 'LWO'},
-			{'coord': [30.4433, 50.4120], 'name': 'IEV'},
-			{'coord': [13.3724, 55.5355], 'name': 'MMX'},
-			{'coord': [12.6508, 55.6180], 'name': 'CPH'},
-			{'coord': [16.9154, 58.7890], 'name': 'NYO'},
-			{'coord': [10.2569, 59.1824], 'name': 'TRF'},
-			{'coord': [9.1526, 55.7408], 'name': 'BLL'},
+			{'coord': [127.104456, 37.513931], 'name': '고성군'},
+			// {'coord': [23.9569, 49.8134], 'name': 'LWO'},
+			// {'coord': [30.4433, 50.4120], 'name': 'IEV'},
+			// {'coord': [13.3724, 55.5355], 'name': 'MMX'},
+			// {'coord': [12.6508, 55.6180], 'name': 'CPH'},
+			// {'coord': [16.9154, 58.7890], 'name': 'NYO'},
+			// {'coord': [10.2569, 59.1824], 'name': 'TRF'},
+			// {'coord': [9.1526, 55.7408], 'name': 'BLL'},
 			// {'coord': [8.5622, 50.0379], 'name': 'FRA'},
 			// {'coord': [11.7750, 48.3537], 'name': 'MUC'},
 			// {'coord': [5.3921, 51.4584], 'name': 'EIN'},
@@ -37,16 +37,16 @@ var TEST = {
 			// {'coord': [2.766066, 41.898201], 'name': 'GRO'},
 			// {'coord': [14.483279, 35.854114], 'name': 'MLA'},     
 			// {'coord': [23.9484, 37.9356467], 'name': 'ATH'},   
-			// {'coord': [19.914486, 39.607645], 'name': 'CFU'},
-			{'coord': [34.9362, 29.9511], 'name': 'VDA'},
-			{'coord': [34.8854, 32.0055], 'name': 'TLV'}
+			// // {'coord': [19.914486, 39.607645], 'name': 'CFU'},
+			// {'coord': [34.9362, 29.9511], 'name': 'VDA'},
+			{'coord': [129.163984, 35.165740], 'name': '밀양시'}
 		],
 		svg: null,
 		projection: null,
 		speed: 2800,//km/sec
 		tooltip: d3.select('#areaChart').append('div')	
-			.attr('class', 'tooltipDestination')				
-			.style('opacity', 0),
+					.attr('class', 'tooltipDestination')				
+					.style('opacity', 0),
 		getArc: function(d, s) {
 			var dx = d.destination.x - d.origin.x;
 			var dy = d.destination.y - d.origin.y;
@@ -65,10 +65,8 @@ var TEST = {
 		},
 		drawConnection: function(index) {
 			var self = this;
-
 			var destination = this.destinations[index];
 			var originPos = this.projection(this.originGeo);
-			
 			var destinationPos = this.projection(destination.coord);
 			var connection = [ originPos, destinationPos ];
 			var destinationName = destination.name;
@@ -78,107 +76,106 @@ var TEST = {
 			var distance = this.calculateDistance(originGeo[1], originGeo[0], destinationGeo[1], destinationGeo[0]);
 			var duration = this.calculateDuration(distance);
 			var arc = svg
-				.append('path')
-				.datum(connection)
-				.attr('class', 'arc' + index)
-				.attr('d', function(coordinates) {
-					var d = {
-						origin: { x: coordinates[0][0], y: coordinates[0][1]},
-						destination: { x: coordinates[1][0], y: coordinates[1][1]}
-					};
-					var s = false;
-					if (d.destination.x > d.origin.x) {
-						s = true;
-					}
-					return (self.getArc(d, s));
-				}) 
-				.style('stroke', 'steelblue')
-				.style('stroke-width', 2)
-				.style('fill', 'none')
-				.transition()
-				.duration(duration)
-				.attrTween('stroke-dasharray', function() {
-					var len = this.getTotalLength();
-					return function(t) {
-					return (d3.interpolate('0,' + len, len + ',0'))(t)
-					};
-				})
-				.each('end', function(d) {
-					var c = connection[1];
-					svg.append('circle')
-						.attr('cx', c[0])
-						.attr('cy', c[1])
-						.attr('r', 0)
-						.attr('class', 'destCircleInner')
-						.style('fill', 'steelblue')
-						.style('fill-opacity', '1')
-						.transition()
-						.duration(300)
-						.attr('r', '3px');
-					svg.append('circle')
-						.attr('cx', c[0])
-						.attr('cy', c[1])
+			
+			var drawCircle = function() {
+				svg.append('circle')
+					.datum(connection)
+					.attr('cx', connection[1][0])
+					.attr('cy', connection[1][1])
+					.attr('r', 0)
+					.attr('class', 'destCircleInner')
+					.style('fill', 'steelblue')
+					.style('fill-opacity', '1')
+					.transition()
+					.duration(300) //300
+					.attr('r', '5px')
+				;
+				svg.append('circle')
+						.datum(connection)
+						.attr('cx', connection[1][0])
+						.attr('cy', connection[1][1])
 						.attr('r', 0)
 						.attr('class', 'destCircleOuter')
 						.style('fill', 'black')
 						.style('fill-opacity', '0.05')
 						.transition()
-						.duration(300)
-						.attr('r', '10px');
-					svg.append('circle')
-						.datum(c)
-						.attr('cx', c[0])
-						.attr('cy', c[1])
-						.attr('r', 0)
-						.style('class', 'destCircleMouse')
-						.style('fill', 'steelblue')
-						.style('fill-opacity', '1')
-						.on('mouseover', function (d) {
-							tooltip.html('<span style="color:white">' + destinationName + '</span>')
-							.attr('class', 'tooltipDestination')
-							.style('left', d[0] + 12 + 'px')
-							.style('top', d[1] - 20 + 'px')
+						.duration(300) //300
+						.attr('r', '12px')
+				;
+				svg.append('circle')
+					.datum(connection)
+					.attr('cx', connection[1][0])
+					.attr('cy', connection[1][1])
+					.attr('r', 0)
+					.style('class', 'destCircleMouse')
+					.style('fill', 'steelblue')
+					.style('fill-opacity', '1')
+					.transition()
+					.duration(300) //300
+					.attr('r', '5px')
+					.each('end', function(d) {
+						d3.select(this)
 							.transition()
-							.duration(700)
-							.style('opacity', 1)
-						}) 
-						.on('mouseout', function (d) {
-							tooltip.transition()
-							.duration(700)
-							.style('opacity', 0)
-						})
-						.transition()
-						.duration(300)
-						.attr('r', '3px')
-						.each('end', function(d) {
-							d3.select(this)
-								.transition()
-								.duration(2000)
-								.attr('r', 20)
-								.style('fill-opacity', '0');
-							d3.select('.arc' + index)
-								.transition()
-								.duration(2000)
-								.style('stroke-opacity', '0')
-								.style('stroke-width', '1')
-								.each('end', function (d) {
-									if (index === self.destinations.length - 1) {
-										svg.selectAll('.destCircleInner').remove();
-										svg.selectAll('.destCircleOuter').remove();
-										svg.selectAll('.destCircleMouse').remove();
-									for (i = 0; i < self.destinations.length; i++) { 
-										svg.selectAll('.arc' + i).remove();
-									}
-									}
-									var nextIndex = index + 1;
-									if (nextIndex < self.destinations.length) {
-										self.drawConnection(nextIndex);
-									} else {
-										self.drawConnection(0);
-									}
-								});
-						});
-				});
+							.duration(2000) //2000
+							.attr('r', 20)
+							.style('fill-opacity', '0')
+						;
+						svg.append('path')
+							.datum(connection)
+							.attr('class', 'arc' + index)
+							.attr('d', function(coordinates) {
+								var d = {
+									origin: { x: coordinates[0][0], y: coordinates[0][1]},
+									destination: { x: coordinates[1][0], y: coordinates[1][1]}
+								};
+								var s = false;
+								if (d.destination.x > d.origin.x) {
+									s = true;
+								}
+								return (self.getArc(d, s));
+							}) 
+							.style('stroke', 'steelblue')
+							.style('stroke-width', '2.5')
+							.style('fill', 'none')
+							.transition()
+							.duration(duration) //duration
+							.attrTween('stroke-dasharray', function() {
+								var len = this.getTotalLength();
+								return function(t) {
+									return (d3.interpolate('0,' + len, len + ',0'))(t)
+								};
+							})
+							.each('end', function(d) {
+								var c = connection[1];
+								
+							})
+						;
+						d3.select('.arc' + index)
+							.transition()
+							.duration(2000) //2000
+							.style('stroke-opacity', '1') // style('stroke-opacity', '0') 
+							.style('stroke-width', '2')
+							.each('end', function (d) {
+								if (index === self.destinations.length - 1) {
+									svg.selectAll('.destCircleInner').remove();
+									svg.selectAll('.destCircleOuter').remove();
+									svg.selectAll('.destCircleMouse').remove();
+								for (i = 0; i < self.destinations.length; i++) { 
+									svg.selectAll('.arc' + i).remove();
+								}
+								}
+								var nextIndex = index + 1;
+								if (nextIndex < self.destinations.length) {
+									self.drawConnection(nextIndex);
+								} else {
+									self.drawConnection(0);
+								}
+							})
+						;
+					})
+				;
+			};
+			drawCircle();
 		},
 		drawConnections: function () {
 			this.drawConnection(0);
@@ -186,24 +183,28 @@ var TEST = {
 		
 		drawMap: function (originName, originGeo, destinations) {
 			var countries, height, path, projection, scale, svg, width;
-			var width = 230;
-			var height = 230;
-			var center = [4, 68.6];
-			var scale = 200;
-			projection = d3.geo.mercator().scale(scale).translate([width / 2, 0]).center(center);
+			var width = 390;
+			var height = 210;
+			var center = [127.106678, 37.366402] //[128, 36]; //[4, 68.6];
+			var scale = 2200; //200
+			projection = d3.geo.mercator().scale(scale).translate([width / 2.2, height / 3.8]).center(center);
 			path = d3.geo.path().projection(projection);
 			svg = d3.select('#areaChart').append('svg')
 				.attr('height', height)
 				.attr('width', width)
-				.style('background', '#C1E1EC');
+				.style('background', 'white') // #C1E1EC:
+				// .style('border', 'black solid 3px')
+				// .style('border-radius', '11.5px')
+			;
 			countries = svg.append("g");
-			d3.json('europe.json', function(data) {
+			d3.json('skorea_municipalities_topo_simple.json', function(data) { //europe.json
 				countries.selectAll('.country')
-				.data(topojson.feature(data, data.objects.europe).features)
-				.enter()
-				.append('path')
-				.attr('class', 'country')
-				.attr('d', path)  
+							.data(topojson.feature(data, data.objects.skorea_municipalities_geo).features) //europe
+							.enter()
+							.append('path')
+							.attr('class', 'country')
+							.attr('d', path)
+				;
 				return;
 			});
 			var source = svg.selectAll('circleOrigin');
@@ -211,15 +212,16 @@ var TEST = {
 						.append('circle')
 						.attr('cx', function (d) { return projection(d)[0]; })
 						.attr('cy', function (d) { return projection(d)[1]; })
-						.attr('r', '3px')
+						.attr('r', '5px')
 						.style('opacity', 1)
-						.attr('fill', 'green')
+						.attr('fill', '#d43f3a')
 						.attr('class', 'circleOrigin')
+				;
 				source.data([originGeo]).enter()
 						.append('circle')
 						.attr('cx', function (d) { return projection(d)[0]; })
 						.attr('cy', function (d) { return projection(d)[1]; })
-						.attr('r', '10px')
+						.attr('r', '12px')
 						.style('opacity', 0.05)
 						.attr('fill', 'black')
 						.attr('class', 'circleOrigin')
@@ -229,14 +231,15 @@ var TEST = {
 									.style('left', projection(d)[0] + 12 + 'px')
 									.style('top', projection(d)[1] - 20 + 'px')
 									.transition()
-									.duration(700)
+									.duration(700) //700
 									.style('opacity', 1)
 						})
 				.on('mouseout', function (d) {
 					tooltip.transition()
-							.duration(700)
+							.duration(700) //700
 							.style('opacity', 0)
-				});
+				})
+				;
 			this.svg = svg;
 			this.projection = projection;
 			this.drawConnections();
