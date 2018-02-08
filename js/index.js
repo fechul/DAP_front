@@ -131,7 +131,6 @@ INDEX = {
 
 		var svg = d3.select("#genderChart").attr("width", w).attr("height", h);
 		svg.append("g").attr("id","genderpie").attr("stroke", "black").attr("stroke-width", "3");
-		svg.append
 
 		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, 100);
 
