@@ -75,7 +75,7 @@ var TEST = {
 			var svg = this.svg;
 			var distance = this.calculateDistance(originGeo[1], originGeo[0], destinationGeo[1], destinationGeo[0]);
 			var duration = this.calculateDuration(distance);
-			var arc = svg
+			var arc = svg;
 			
 			var drawCircle = function() {
 				svg.append('circle')
