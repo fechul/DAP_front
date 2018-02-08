@@ -1,10 +1,69 @@
 INDEX = {
 	init: function() {
+		this.analystType = ['gender', 'age', 'major', 'area', 'grade', 'ability', 'character', 'career'];
+		this.currentTypeIdx = null;
+		this.direction = 0;
+		this.detailBox = $('#detailModal');
+
+		this.initEvents();
 		this.makeGender();
 		this.makeAge();
 		this.makeMajor();
 		this.makeCharacter();
 	},
+
+	initEvents: function() {
+		var self = this;
+
+		$('.contentBox .fullscreen').click(function() {
+			self.direction = 0;
+			var type = $(this).parent('.contentBox').attr('type');
+			self.setModalContent(type, null);
+		});
+
+		$('.moveType').click(function() {
+			// left: 1, right: 2
+			var direction = $(this).hasClass('left') ? 1 : 2;
+			self.direction = direction;
+
+			self.detailBox.modal('hide');
+		});
+
+		self.detailBox.on('show.bs.modal', function(e) {
+			$('.modal-dialog').attr('class', 'modal-dialog  ' + (self.direction==0 ? 'bounceIn' : (self.direction==1 ? 'fadeInLeft' : 'fadeInRight')) + '  animated');
+		});
+
+		self.detailBox.on('hide.bs.modal', function(e) {
+			$('.modal-dialog').attr('class', 'modal-dialog  ' + (self.direction==0 ? 'bounceOut' : (self.direction==1 ? 'fadeOutRight' : 'fadeOutLeft')) + '  animated');
+		});
+
+		self.detailBox.on('hidden.bs.modal', function(e) {
+			var type = '';
+
+			if(self.direction == 1) {
+				if(self.currentTypeIdx == 0)
+					type = self.analystType[self.analystType.length-1];
+				else
+					type = self.analystType[self.currentTypeIdx - 1];
+			} else {
+				if(self.currentTypeIdx == self.analystType.length-1)
+					type = self.analystType[0];
+				else
+					type = self.analystType[self.currentTypeIdx+1];
+			}
+		});
+	},
+
+	modalAnimate: function() {
+
+	},
+
+	// Modal Resize
+	// modalResize: function() {
+	// 	var windowHeight = $(window).height();
+	// 	var modalHeight = windowHeight*0.9;
+	// 	$('#detailModal .modal-content').css('height', modalHeight);
+	// },
 
 	// GENDER
 	makeGender: function() {
@@ -286,14 +345,50 @@ INDEX = {
 		        .style("font-size", function(d) { return d.size + "px"; })
 		        .style("font-family", function(d) { return d.font; })
 		        .style("fill", function(d) { 
+		        	d.rotate = Math.floor(Math.random() * 60);
 		            var paringObject = data.filter(function(obj) { return obj.password === d.text});
 		            return color(paringObject[0].category); 
 		        })
 		        .attr("text-anchor", "middle")
-		        .attr("transform", function(d) { console.log("d: ", d);return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
+		        .attr("transform", function(d) {return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
 		        .text(function(d) { return d.text; });
 		  };
+	},
 
+	setModalContent: function(type, dir) {
+		var self = this;
+
+		$('#detailModalTitle').text(type.toUpperCase());
+		switch(type) {
+			case 'gender':
+				
+				break;
+			case 'age':
+				
+				break;
+			case 'major':
+				
+				break;
+			case 'area':
+				
+				break;
+			case 'grade':
+				
+				break;
+			case 'ability':
+				
+				break;
+			case 'character':
+				
+				break;
+			case 'career':
+				
+				break;
+		}
+		// this.modalResize();
+		self.currentTypeIdx = self.analystType.indexOf(type);
+
+		self.detailBox.modal('show');
 	}
 };
 
