@@ -580,6 +580,101 @@ var TEST = {
 
 	// 커리어 path 차트 생성
 	makeCareer: function() {
+		var width = 340,
+			height = 220;
+			
+		var careerData = {
+			"nodes": [
+				{ "name": "빅데이터", "group": 1, "value": 2 },
+				{ "name": "처리", "group": 2, "value": 20 },
+				{ "name": "분석", "group": 2, "value": 5 },
+				{ "name": "데이터", "group": 2, "value": 10},
+				{ "name": "AI", "group": 3, "value": 8 },
+				{ "name": "IoT", "group": 3, "value": 2 },
+				{ "name": "엔지니어", "group": 2, "value": 3 },
+				{ "name": "제조", "group": 4, "value": 5 },
+				{ "name": "인프라", "group": 4, "value": 9 },
+				{ "name": "IoT 전문가", "group": 4, "value": 33 }
 
+
+			],
+			"links": [
+				{ "source": 0, "target": 1, "value": 1 },
+				{ "source": 0, "target": 2, "value": 1 },
+				{ "source": 0, "target": 3, "value": 1 },
+				{ "source": 0, "target": 6, "value": 1 },
+				{ "source": 4, "target": 5, "value": 2 },
+				{ "source": 4, "target": 0, "value": 3 },
+				{ "source": 5, "target": 0, "value": 3 },
+				{ "source": 5, "target": 7, "value": 4 },
+				{ "source": 5, "target": 8, "value": 4 },
+				{ "source": 5, "target": 9, "value": 4 },
+				{ "source": 8, "target": 9, "value": 2 }
+			
+
+			]
+		}
+
+        var colorNode = d3.scale.category20(),
+			colorLink = d3.scale.category10();
+			
+		var rScale = d3.scale.linear().domain([0, 100]).range([10, 35]);
+
+        var force = d3.layout.force()
+							.charge(-120)
+							.linkDistance(75)
+							.size([width, height]);
+
+		var svg = d3.select('#careerChart')
+					.append('svg')
+						.attr('width', width)
+						.attr('height', height);
+			
+		force.nodes(careerData.nodes)
+				.links(careerData.links)
+				.start();
+
+		var link = svg.selectAll('.link')
+						.data(careerData.links)
+						.enter()
+						.append('line')
+							.attr('class', 'link')
+							.style('stroke-width', 2)
+							.style('stroke', function(d) { return colorLink(d.value); });
+
+		var node = svg.selectAll('.node')
+						.data(careerData.nodes)
+						.enter()
+						.append('circle')
+							.attr('class', 'node')
+							.attr('r', function(d) { return rScale(d.value) }) //18
+							.style('fill', function(d) { return colorNode(d.group); })
+							.call(force.drag);
+
+		node.append('title')
+				.text(function(d) { return d.name; });
+
+		var nodelabels = svg.selectAll('.nodelabel') 
+							.data(careerData.nodes)
+							.enter()
+								.append('text')
+								.attr({'x': function(d){ return d.x; },
+										'y': function(d){ return d.y; },
+										'class': 'nodelabel',
+										'stroke': '#404040'})
+								.text(function(d){return d.name;});
+
+		force.on("tick", function() {
+			link.attr("x1", function(d) { return d.source.x; })
+				.attr("y1", function(d) { return d.source.y; })
+				.attr("x2", function(d) { return d.target.x; })
+				.attr("y2", function(d) { return d.target.y; });
+
+			node.attr("cx", function(d) { return d.x; })
+				.attr("cy", function(d) { return d.y; });
+
+			nodelabels.attr("x", function(d) { return d.x; }) 
+					  .attr("y", function(d) { return d.y; });
+		});
 	}
 };
