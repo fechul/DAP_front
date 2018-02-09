@@ -186,14 +186,56 @@
         </div>
         <div class="modal-body">
           <span class="moveType left glyphicon glyphicon-menu-left"></span>
+
+          <!--LEFT-->
           <div class="modalContentArea left">
-            asdfadsfsdf
+
+            <!--GENDER DETAIL-->
+            <div class="genderDetailContainer detailContainer">
+              <svg id="genderDetailChart"></svg>
+              <div class="genderRectPart">
+                <div id="genderManRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">남자</span>
+                <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
+              </div>
+            </div>
+
+            <!--AGE DETAIL-->
+            <div class="ageDetailContainer detailContainer">
+                  <svg id="ageDetailChart"></svg>
+                
+            </div>
+
           </div>
+          <!--RIGHT-->
           <div class="modalContentArea right">
-            fff
-            fff
-            fff
+
+            <!--GENDER DETAIL-->
+            <div class="genderDetailContainer detailContainer">
+              <div class="genderDetailPart detailPart">
+                <label>남자</label>
+                <div id="genderDetailCntMan">-</div>
+                <br><br><br>
+                <label>여자</label>
+                <div id="genderDetailCntWoman">-</div>
+              </div>
+            </div>
+
+            <!--AGE DETAIL-->
+            <div class="ageDetailContainer detailContainer">
+              <div class="ageDetailPart detailPart">
+                <label>평균 나이</label>
+                <div id="ageAverage" class="ageInfos">-</div>
+                <br><br><br>
+                <label>최고 나이</label>
+                <div id="ageOldest" class="ageInfos">-</div>
+                <br><br><br>
+                <label>최소 나이</label>
+                <div id="ageYoung" class="ageInfos">-</div>
+              </div>
+            </div>
+
           </div>
+
           <span class="moveType right glyphicon glyphicon-menu-right"></span>
           <div></div>
         </div>

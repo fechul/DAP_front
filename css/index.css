@@ -158,11 +158,13 @@ body {
     /*border: 1px solid #ccc;*/
     padding: 15px;
     height: 100%;
+    text-align: center;
 }
 
 .modalContentArea.left {
     width: 64%;
     border-right: 1px solid #ccc;
+    float: left;
 }
 
 .modalContentArea.right {
@@ -175,6 +177,14 @@ body {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
+}
+
+.moveType.left {
+    left: 10px;
+}
+
+.moveType.right {
+    right: 10px;
 }
 
 .moveType:hover {
@@ -196,3 +206,67 @@ body {
   position: absolute;
   padding: 0px 20px;
 }   
+
+/* DETAIL */
+.detailContainer {
+    display: none;
+}
+
+
+/* GENDER DETAIL */
+
+#genderDetailChart {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.genderDetailPart {
+    margin-top: 100px;
+}
+
+.detailPart label {
+    font-size: 24px;
+}
+
+#genderDetailCntMan {
+    color: #1882dc;
+    font-weight: bold;
+}
+
+#genderDetailCntWoman {
+    color: #dc183c;
+    font-weight: bold;
+}
+
+.genderRect {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: -4px;
+}
+
+#genderManRect {
+    background-color: #1882dc;
+}
+
+#genderWomanRect {
+    background-color: #dc183c;
+}
+
+.genderRectText {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* AGE DETAIL */
+.ageInfos {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.ageDetailContainer, .ageDetailPart {
+    margin-top: 30px;
+}
+

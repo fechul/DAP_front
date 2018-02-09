@@ -6,10 +6,13 @@ INDEX = {
 		this.detailBox = $('#detailModal');
 
 		this.initEvents();
-		this.makeGender();
+		this.makeGender('#genderChart', 220, 220, 100);
 		this.makeAge();
 		this.makeMajor();
 		this.makeCharacter();
+
+		this.makeGenderDetail();
+		this.makeAgeDetail();
 	},
 
 	initEvents: function() {
@@ -74,7 +77,7 @@ INDEX = {
 	// },
 
 	// GENDER
-	makeGender: function() {
+	makeGender: function(target, h, w, r, attrID) {
 		// // BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
 			"label": "남자",
@@ -112,12 +115,6 @@ INDEX = {
      //        }).attr("text-anchor", "middle")                         
 	    //       .text(function(d, i) { return genderData[i].label; });
 
-
-
-		var h = 220;
-		var w = 220;
-		var r = 100;
-
 		// BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
 			"label": "남자",
@@ -129,13 +126,11 @@ INDEX = {
 			"color": "#dc183c"
 		}];
 
-		var svg = d3.select("#genderChart").attr("width", w).attr("height", h);
-		svg.append("g").attr("id","genderpie").attr("stroke", "black").attr("stroke-width", "3");
+		var svg = d3.select(target).attr("width", w).attr("height", h);
+		svg.append("g").attr("id", "genderpie").attr("stroke", "black").attr("stroke-width", "3");
 
-		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, 100);
-
+		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, r);
 		gradPie.transition("genderpie", genderData, 100);
-
 	},
 
 	//AGE
@@ -409,12 +404,13 @@ INDEX = {
 		var self = this;
 
 		$('#detailModalTitle').text(type.toUpperCase());
+		$('.detailContainer').hide();
 		switch(type) {
 			case 'gender':
-				
+				$('.genderDetailContainer').show();
 				break;
 			case 'age':
-				
+				$('.ageDetailContainer').show();
 				break;
 			case 'major':
 				
@@ -441,6 +437,242 @@ INDEX = {
 		self.detailBox.modal('hide');
 		self.detailBox.modal('show');
 		self.direction = 0;
+	},
+
+	makeGenderDetail: function() {
+		// Left
+		var genderData = [{
+			"label": "남자",
+			"value": 37,
+			"color": "#1882dc"
+		}, {
+			"label": "여자",
+			"value": 22,
+			"color": "#dc183c"
+		}];
+
+		if(genderData[0].value == genderData[1].value) {
+			$('#genderDetailCntMan').css('font-size', '60px');
+			$('#genderDetailCntWoman').css('font-size', '60px');
+		} else {
+			if(genderData[0].label == '남자') {
+				$('#genderDetailCntMan').text(genderData[0].value);
+				$('#genderDetailCntWoman').text(genderData[1].value);
+				$('#genderManRectText').text(genderData[0].label);
+				$('#genderDetailCntWomanText').text(genderData[1].label);
+				if(genderData[0].value > genderData[1].value) {
+					$('#genderDetailCntMan').css('font-size', '72px');
+					$('#genderDetailCntWoman').css('font-size', '48px');
+				} else {
+					$('#genderDetailCntMan').css('font-size', '48px');
+					$('#genderDetailCntWoman').css('font-size', '72px');
+				}
+			} else {
+				$('#genderDetailCntMan').text(genderData[1].value);
+				$('#genderDetailCntWoman').text(genderData[0].value);
+				$('#genderManRectText').text(genderData[1].label);
+				$('#genderDetailCntWomanText').text(genderData[0].label);
+				if(genderData[0].value > genderData[1].value) {
+					$('#genderDetailCntMan').css('font-size', '48px');
+					$('#genderDetailCntWoman').css('font-size', '72px');
+				} else {
+					$('#genderDetailCntMan').css('font-size', '72px');
+					$('#genderDetailCntWoman').css('font-size', '48px');
+				}
+			}
+		}
+
+        var width = 500;
+        var height = 500;
+        var radius = Math.min(width, height) / 2;
+        var donutWidth = 150;
+        var legendRectSize = 18;
+        var legendSpacing = 4;
+
+        var color = d3.scale.category20b();
+
+        var svg = d3.select('#genderDetailChart')
+          .attr('width', width)
+          .attr('height', height)
+          .append('g')
+          .attr('transform', 'translate(' + (width / 2) + 
+            ',' + (height / 2) + ')');
+
+        var arc = d3.svg.arc()
+          .innerRadius(radius - donutWidth)
+          .outerRadius(radius);
+
+        var pie = d3.layout.pie()
+          .value(function(d) { return d.value; })
+          .sort(null);
+
+        var tooltip = d3.select('#genderDetailChart')                              
+          .append('div')                                               
+          .attr('class', 'tooltip');                                   
+                      
+        tooltip.append('div')                                          
+          .attr('class', 'label');                                     
+             
+        tooltip.append('div')                                          
+          .attr('class', 'count');                                     
+
+        tooltip.append('div')                                          
+          .attr('class', 'percent');                                   
+
+	      genderData.forEach(function(d) {
+		      d.value = +d.value;
+
+	      var path = svg.selectAll('path')
+	        .data(pie(genderData))
+	        .enter()
+	        .append('path')
+	        .attr('d', arc)
+	        .attr('fill', function(d, i) { 
+	          // return color(d.data.label);
+	          return d.data.color;
+	        });
+
+	      path.on('mouseover', function(d) {
+	        var total = d3.sum(genderData.map(function(d) {            
+	          return d.value;
+	        }));                                          
+
+	        var percent = Math.round(1000 * d.data.value / total) / 10;
+	        tooltip.select('.label').html(d.data.label);               
+	        tooltip.select('.count').html(d.data.value);               
+	        tooltip.select('.percent').html(percent + '%');
+	        tooltip.style('display', 'block');                  
+	      });                                                          
+	      
+	      path.on('mouseout', function() {                             
+	        tooltip.style('display', 'none');                          
+	      });                                                          
+	    });
+	},
+
+	makeAgeDetail: function() {
+		var h = 500;
+		var w = 500;
+
+		var ageData = [{
+			"label": "23",
+			"value": 2
+		},{
+			"label": "24",
+			"value": 4
+		},{
+			"label": "25",
+			"value": 9
+		},{
+			"label": "26",
+			"value": 8
+		},{
+			"label": "27",
+			"value": 17
+		},{
+			"label": "28",
+			"value": 13
+		},{
+			"label": "29",
+			"value": 3
+		},{
+			"label": "30",
+			"value": 2
+		},{
+			"label": "31",
+			"value": 1
+		}];
+
+		var maxAge = 0;
+		var minAge = 100;
+		var sumAge = 0;
+		var pNum = 0;
+		var avgAge = 0;
+
+		for(var i = 0; i < ageData.length; i++) {
+			var ageVal = parseInt(ageData[i].label);
+			if(ageVal > maxAge) {
+				maxAge = ageData[i].label;
+			}
+
+			if(ageVal < minAge) {
+				minAge = ageData[i].label;
+			}
+
+			sumAge += ageVal*ageData[i].value;
+			pNum += ageData[i].value;
+		}
+
+		avgAge = (sumAge/pNum).toFixed(1);
+
+		$('#ageAverage').text(avgAge);
+		$('#ageOldest').text(maxAge);
+		$('#ageYoung').text(minAge);
+
+		var margin = {top: 20, right: 20, bottom: 70, left: 40},
+		    width = w - margin.left - margin.right,
+		    height = h - margin.top - margin.bottom;
+
+		var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+		var y = d3.scale.linear().range([height, 0]);
+
+		var xAxis = d3.svg.axis()
+		    .scale(x)
+		    .orient("bottom");
+
+		var yAxis = d3.svg.axis()
+		    .scale(y)
+		    .orient("left")
+		    .ticks(10);
+
+		var svg = d3.select("#ageDetailChart")
+		    .attr("width", width + margin.left + margin.right)
+		    .attr("height", height + margin.top + margin.bottom)
+		 	.append("g")
+		    .attr("transform", 
+		          "translate(" + margin.left + "," + margin.top + ")");
+
+		// d3.csv("bar-data.csv", function(error, data) {
+
+		    ageData.forEach(function(d) {
+		        d.label = d.label;
+		        d.value = +d.value;
+		    });
+			
+		  x.domain(ageData.map(function(d) { return d.label; }));
+		  y.domain([0, d3.max(ageData, function(d) { return d.value; })]);
+
+		  svg.append("g")
+		      .attr("class", "x axis")
+		      .attr("transform", "translate(0," + height + ")")
+		      .call(xAxis)
+		    .selectAll("text")
+		      .style("text-anchor", "end")
+		      .attr("dx", "-.8em")
+		      .attr("dy", "-.55em")
+		      .attr("transform", "rotate(-90)" );
+
+		  svg.append("g")
+		      .attr("class", "y axis")
+		      .call(yAxis)
+		    .append("text")
+		      .attr("transform", "rotate(-90)")
+		      .attr("y", 6)
+		      .attr("dy", ".71em")
+		      .style("text-anchor", "end")
+		      .text("Count (명)");
+
+		  svg.selectAll("bar")
+		      .data(ageData)
+		    .enter().append("rect")
+		      .style("fill", "steelblue")
+		      .attr("x", function(d) { return x(d.label); })
+		      .attr("width", x.rangeBand())
+		      .attr("y", function(d) { return y(d.value); })
+		      .attr("height", function(d) { return height - y(d.value); });
+
+		// });
 	}
 };
 
