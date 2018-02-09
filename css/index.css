@@ -59,11 +59,22 @@ body {
 
 .contentBox {
     background-color: #fff;
-    border: 6px solid #333 !important;
+    /* border: 6px solid #333 !important; */
+    border: 1.2px solid #ccc;
+    border-radius: 6.5px;
+    padding-right: 0.2px;
 }
 
 .fullscreen {
     float: right;
+    margin-top: 9px;
+    margin-right: 8px;
+    border: 1.2px solid #ccc;
+}
+
+.fullscreen_icon {
+    color: #404040;
+    font-weight: bold;
 }
 
 .contentBoxRow {
@@ -80,11 +91,22 @@ body {
 	height: 250px;
 }
 
+.panel-footer {
+    border-top: 2px solid #ddd;
+    border-bottom-right-radius: 6.5px;
+    border-bottom-left-radius: 6.5px;
+}
+
 .contentSubject {
 	text-align: center;
 	font-weight: bold;
 	/*background-color: #ea002c;*/
 	/*color: #fff;*/
+}
+
+.panel_subtitle {
+    color: #404040;
+    font-weight: bolder;
 }
 
 
@@ -199,7 +221,6 @@ body {
    -moz-transform: translate(0);
    transform: translate(0);
 }
-
 
 /* Career */
 #careerChart {

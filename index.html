@@ -11,11 +11,12 @@
 
     <!-- Custom CSS -->
     <link href="css/main.css?ver=2" rel="stylesheet"> 
-    <link href="css/index.css?ver=5" rel="stylesheet">
+    <link href="css/index.css?ver=7" rel="stylesheet">
     <link href="css/gradeChart.css?ver=5" rel="stylesheet">
     <link href="css/abilityChart.css?ver=5" rel="stylesheet">
     <link href="css/areaChart.css?ver=5" rel="stylesheet">
-
+    <link href="css/careerChart.css?ver=1" rel="stylesheet">
+    
     <title>MosaicUs</title>
   </head>
   <body class="container-fluid">
@@ -43,13 +44,13 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="gender">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                       <svg id="genderChart"></svg>
                   </div>
                   <div class="contentSubject panel-footer">
-                      GENDER
+                      <span class="panel_subtitle">GENDER</span>
                   </div>
               </div>
           </div>
@@ -57,13 +58,13 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="age">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                       <svg id="ageChart" width="300" height="200"></svg>
                   </div>
                   <div class="contentSubject panel-footer">
-                      AGE
+                      <span class="panel_subtitle">AGE</span>
                   </div>
               </div>
           </div>
@@ -71,7 +72,7 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="major">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                       <div id="majorTree">
@@ -84,7 +85,7 @@
                       </div>
                   </div>
                   <div class="contentSubject panel-footer">
-                      MAJOR
+                      <span class="panel_subtitle">MAJOR</span>
                   </div>
               </div>
           </div>
@@ -94,13 +95,13 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="area">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                       <div id="areaChart"></div>
                   </div>
                   <div class="contentSubject panel-footer">
-                      AREA
+                      <span class="panel_subtitle">AREA</span>
                   </div>
               </div>
           </div>
@@ -117,13 +118,13 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="grade">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                     <svg id = "gradeChart">
                   </div>
                   <div class="contentSubject panel-footer">
-                      GRADE
+                      <span class="panel_subtitle">GRADE</span>
                   </div>
               </div>
           </div>
@@ -133,13 +134,14 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="ability">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
-                      <svg id = "abilityChart">
+                      <!-- <svg id = "abilityChart"> -->
+                      <div id="abilityChart"></div>
                   </div>
                   <div class=" contentSubject panel-footer">
-                      ABILITY
+                      <span class="panel_subtitle">ABILITY</span>
                   </div>
               </div>
           </div>
@@ -147,13 +149,13 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="character">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                     <svg id="characterWordCloud"></svg>
                   </div>
                   <div class="contentSubject panel-footer">
-                      CHARACTER
+                      <span class="panel_subtitle">CHARACTER</span>
                   </div>
               </div>
           </div>
@@ -161,13 +163,13 @@
           <div class="col-lg-4">
               <div class="contentBox panel" type="career">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
                 </button>
                   <div class="panel-body text-center">
                       <div id="careerChart"></div>
                   </div>
                   <div class="contentSubject panel-footer">
-                      CAREER
+                      <span class="panel_subtitle">CAREER</span>
                   </div>
               </div>
           </div>
@@ -255,7 +257,7 @@
     <script src="vendor/d3/d3cloud.js"></script> 
     <script src="vendor/d3/radarChart.js"></script> 
 
-    <scirpt src="vendor/d3/radarChart.js"></scirpt>
+    <scirpt src="vendor/d3/radarChart.js?ver=1"></scirpt>
 
     <!-- <script src="http://d3js.org/d3.v4.min.js"></script> -->
     <!-- <script src="https://d3js.org/d3-array.v1.min.js"></script> -->
@@ -271,8 +273,8 @@
     <!-- <script src="http://d3js.org/d3.v4.min.js"></script> -->
 
     <!-- Custom JS -->
-    <script src="js/index.js?ver=4"></script>
-    <script src="js/test.js?ver=1"></script>
+    <script src="js/index.js?ver=5"></script>
+    <script src="js/test.js?ver=4"></script>
 
     <script>
       INDEX.init();

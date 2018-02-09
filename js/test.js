@@ -380,8 +380,90 @@ var TEST = {
 
 	},
 
-	//  IT 역량 차트 생성
+	// IT 역량 차트 생성
 	makeAbility: function() {
+		var w = 150,
+			h = 150;
+
+		var colorscale = d3.scale.category10();
+
+		//Legend titles
+		var LegendOptions = ['Ability'];
+
+		//Data
+		var d = [
+			[
+			{axis:"Java", value:0.59},
+			{axis:"Python", value:0.56},
+			{axis:"C", value:0.42},
+			{axis:"Javascript", value:0.34},
+			{axis:"C++", value:0.48},
+			{axis:"Go", value:0.14}
+			]
+		];
+
+		//Options for the Radar chart, other than default
+		var mycfg = {
+			w: w,
+			h: h,
+			maxValue: 0.6,
+			levels: 6,
+			ExtraWidthX: 200
+		}
+
+		//Call function to draw the Radar chart
+		//Will expect that data is in %'s
+		RadarChart.draw("#abilityChart", d, mycfg);
+
+		var svg = d3.select('#abilityChart')
+						.selectAll('svg')
+						.append('svg')
+						.attr("width", w + 300)
+						.attr("height", h)
+
+		//Create the title for the legend
+		// var text = svg.append("text")
+		// 	.attr("class", "title")
+		// 	.attr('transform', 'translate(90,0)') 
+		// 	.attr("x", w - 70)
+		// 	.attr("y", 10)
+		// 	.attr("font-size", "12px")
+		// 	.attr("fill", "#404040")
+		// 	.text("What % of owners use a specific service in a week");
+				
+		//Initiate Legend	
+		// var legend = svg.append("g")
+		// 	.attr("class", "legend")
+		// 	.attr("height", 100)
+		// 	.attr("width", 200)
+		// 	.attr('transform', 'translate(90,20)') 
+		// 	;
+		// 	//Create colour squares
+		// 	legend.selectAll('rect')
+		// 	  .data(LegendOptions)
+		// 	  .enter()
+		// 	  .append("rect")
+		// 	  .attr("x", w - 65)
+		// 	  .attr("y", function(d, i){ return i * 20;})
+		// 	  .attr("width", 10)
+		// 	  .attr("height", 10)
+		// 	  .style("fill", function(d, i){ return colorscale(i);})
+		// 	  ;
+		// 	//Create text next to squares
+		// 	legend.selectAll('text')
+		// 	  .data(LegendOptions)
+		// 	  .enter()
+		// 	  .append("text")
+		// 	  .attr("x", w - 52)
+		// 	  .attr("y", function(d, i){ return i * 20 + 9;})
+		// 	  .attr("font-size", "11px")
+		// 	  .attr("fill", "#737373")
+		// 	  .text(function(d) { return d; })
+		// 	  ;
+	},
+
+	// IT 역량 차트 생성, 후보
+	makeAbility2: function() {
 		var config = {
 			'width': 220,
 			'height': 220,
@@ -498,87 +580,105 @@ var TEST = {
 
 	// 커리어 path 차트 생성
 	makeCareer: function() {
-		var w = 150,
-			h = 150;
+		var width = 340,
+			height = 220;
+			
+		var careerData = {
+			"nodes": [
+				{ "name": "빅데이터", "group": 1, "value": 2 },
+				{ "name": "처리", "group": 2, "value": 20 },
+				{ "name": "분석", "group": 2, "value": 5 },
+				{ "name": "데이터", "group": 2, "value": 10},
+				{ "name": "AI", "group": 3, "value": 8 },
+				{ "name": "IoT", "group": 3, "value": 2 },
+				{ "name": "엔지니어", "group": 2, "value": 3 },
+				{ "name": "제조", "group": 4, "value": 5 },
+				{ "name": "인프라", "group": 4, "value": 9 },
+				{ "name": "IoT 전문가", "group": 4, "value": 33 }
 
-		var colorscale = d3.scale.category10();
 
-		//Legend titles
-		var LegendOptions = ['Ability'];
+			],
+			"links": [
+				{ "source": 0, "target": 1, "value": 1 },
+				{ "source": 0, "target": 2, "value": 1 },
+				{ "source": 0, "target": 3, "value": 1 },
+				{ "source": 0, "target": 6, "value": 1 },
+				{ "source": 4, "target": 5, "value": 2 },
+				{ "source": 4, "target": 0, "value": 3 },
+				{ "source": 5, "target": 0, "value": 3 },
+				{ "source": 5, "target": 7, "value": 4 },
+				{ "source": 5, "target": 8, "value": 4 },
+				{ "source": 5, "target": 9, "value": 4 },
+				{ "source": 8, "target": 9, "value": 2 }
+			
 
-		//Data
-		var d = [
-				  [
-					{axis:"Java",value:0.59},
-					{axis:"Python",value:0.56},
-					{axis:"C",value:0.42},
-					{axis:"Javascript",value:0.34},
-					{axis:"C++",value:0.48},
-					{axis:"Go",value:0.14}
-				  ]
-				];
-
-		//Options for the Radar chart, other than default
-		var mycfg = {
-		  w: w,
-		  h: h,
-		  maxValue: 0.6,
-		  levels: 6,
-		  ExtraWidthX: 300
+			]
 		}
 
-		//Call function to draw the Radar chart
-		//Will expect that data is in %'s
-		RadarChart.draw("#careerChart", d, mycfg);
+        var colorNode = d3.scale.category20(),
+			colorLink = d3.scale.category10();
+			
+		var rScale = d3.scale.linear().domain([0, 100]).range([10, 35]);
 
-		////////////////////////////////////////////
-		/////////// Initiate legend ////////////////
-		////////////////////////////////////////////
+        var force = d3.layout.force()
+							.charge(-120)
+							.linkDistance(75)
+							.size([width, height]);
 
 		var svg = d3.select('#careerChart')
-			.selectAll('svg')
-			.append('svg')
-			.attr("width", w+300)
-			.attr("height", h)
+					.append('svg')
+						.attr('width', width)
+						.attr('height', height);
+			
+		force.nodes(careerData.nodes)
+				.links(careerData.links)
+				.start();
 
-		//Create the title for the legend
-		// var text = svg.append("text")
-		// 	.attr("class", "title")
-		// 	.attr('transform', 'translate(90,0)') 
-		// 	.attr("x", w - 70)
-		// 	.attr("y", 10)
-		// 	.attr("font-size", "12px")
-		// 	.attr("fill", "#404040")
-		// 	.text("What % of owners use a specific service in a week");
-				
-		//Initiate Legend	
-		// var legend = svg.append("g")
-		// 	.attr("class", "legend")
-		// 	.attr("height", 100)
-		// 	.attr("width", 200)
-		// 	.attr('transform', 'translate(90,20)') 
-		// 	;
-		// 	//Create colour squares
-		// 	legend.selectAll('rect')
-		// 	  .data(LegendOptions)
-		// 	  .enter()
-		// 	  .append("rect")
-		// 	  .attr("x", w - 65)
-		// 	  .attr("y", function(d, i){ return i * 20;})
-		// 	  .attr("width", 10)
-		// 	  .attr("height", 10)
-		// 	  .style("fill", function(d, i){ return colorscale(i);})
-		// 	  ;
-		// 	//Create text next to squares
-		// 	legend.selectAll('text')
-		// 	  .data(LegendOptions)
-		// 	  .enter()
-		// 	  .append("text")
-		// 	  .attr("x", w - 52)
-		// 	  .attr("y", function(d, i){ return i * 20 + 9;})
-		// 	  .attr("font-size", "11px")
-		// 	  .attr("fill", "#737373")
-		// 	  .text(function(d) { return d; })
-		// 	  ;	
+		var link = svg.selectAll('.link')
+						.data(careerData.links)
+						.enter()
+						.append('line')
+							.attr('class', 'link')
+							.style('stroke-width', 2)
+							.style('stroke', function(d) { return colorLink(d.value); });
+
+		var node = svg.selectAll('.node')
+						.data(careerData.nodes)
+						.enter()
+						.append('circle')
+							.attr('class', 'node')
+							.attr('r', function(d) { return rScale(d.value) }) //18
+							.style('fill-opacity', '0.85')
+							.style('fill', function(d) { return colorNode(d.group); })
+							.style('stroke-opacity','1.0')
+							.style('stroke', function(d) { return colorNode(d.group); })
+							.style('stroke-width', '2px')
+							.call(force.drag);
+
+		node.append('title')
+				.text(function(d) { return d.name; });
+
+		var nodelabels = svg.selectAll('.nodelabel') 
+							.data(careerData.nodes)
+							.enter()
+								.append('text')
+								.attr({ 'x': function(d){ return d.x; },
+										'y': function(d){ return d.y; },
+										'class': 'nodelabel',
+										'stroke': '#404040'})
+								.text(function(d){return d.name;});
+
+		force.on("tick", function() {
+			link.attr("x1", function(d) { return d.source.x; })
+				.attr("y1", function(d) { return d.source.y; })
+				.attr("x2", function(d) { return d.target.x; })
+				.attr("y2", function(d) { return d.target.y; });
+
+			node.attr("cx", function(d) { return d.x; })
+				.attr("cy", function(d) { return d.y; });
+
+			nodelabels.attr("x", function(d) { return d.x; }) 
+					  .attr("y", function(d) { return d.y; });
+		});
 	}
 };

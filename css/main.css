@@ -24,6 +24,7 @@ body {
 
 .nav>li>a {
     color: white;
+    font-weight: bold;
 }
 
 .nav>li>a:hover {
@@ -33,6 +34,7 @@ body {
 .navbar-brand, 
 .navbar-brand:hover  {
     color: white;
+    text-shadow: 0.7px 0.7px 0.7px #808080;
 }
 
 .navbar-toggle .icon-bar {
@@ -41,7 +43,8 @@ body {
 
 .mainLogo {
     font-weight: bold;
-    border: 2px solid #b51919;
+    background-color: #b51919
+    /* border: 2px solid #b51919; */
 }
 
 /*.headerBtn:not(.last) {

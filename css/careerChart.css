@@ -1,0 +1,15 @@
+/* Career */
+#careerChart {
+    position: absolute;
+    padding: 0px 20px;
+    position: inherit;
+}   
+
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.link {
+    stroke-opacity: .6;
+}
