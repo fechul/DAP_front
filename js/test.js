@@ -7,6 +7,8 @@ var TEST = {
 
 		this.makeGradeDetail();
 		this.makeCareerDetail();
+
+		this.makeAreaDetail.start();
 	},
 
 	// 지역 차트 생성
@@ -679,8 +681,216 @@ var TEST = {
 		});
 	},
 
-	makeAreaDetail: function() {
-
+	makeAreaDetail: {
+		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
+		originName: 'POZ',
+		destinations: [
+			{'coord': [127.104456, 37.513931], 'name': '고성군'},
+			{'coord': [129.163984, 35.165740], 'name': '밀양시'}
+		],
+		svg: null,
+		projection: null,
+		speed: 2800,//km/sec
+		tooltip: d3.select('#areaDetailChart').append('div')	
+					.attr('class', 'tooltipDestinationDetail')				
+					.style('opacity', 0),
+		getArc: function(d, s) {
+			var dx = d.destination.x - d.origin.x;
+			var dy = d.destination.y - d.origin.y;
+			var dr = Math.sqrt(dx * dx + dy * dy);
+			var spath = s == false ? ' 0 0,0 ' : ' 0 0,1 ';
+			return 'M' + d.origin.x + ',' + d.origin.y + 'A' + dr + ',' + dr + spath + d.destination.x + ',' + d.destination.y;
+		},
+		calculateDistance: function(lat1, lon1, lat2, lon2) {
+			var p = 0.017453292519943295;
+			var c = Math.cos;
+			var a = 0.5 - c((lat2 - lat1) * p)/2 + c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))/2;
+			return 12742 * Math.asin(Math.sqrt(a));
+		},
+		calculateDuration: function(distance) {
+			return (distance / this.speed) * 1000;
+		},
+		drawConnection: function(index) {
+			var self = this;
+			var destination = this.destinations[index];
+			var originPos = this.projection(this.originGeo);
+			var destinationPos = this.projection(destination.coord);
+			var connection = [ originPos, destinationPos ];
+			var destinationName = destination.name;
+			var originGeo = this.originGeo;
+			var destinationGeo = destination.coord;
+			var svg = this.svg;
+			var distance = this.calculateDistance(originGeo[1], originGeo[0], destinationGeo[1], destinationGeo[0]);
+			var duration = this.calculateDuration(distance);
+			var arc = svg;
+			
+			var drawCircle = function() {
+				svg.append('circle')
+					.datum(connection)
+					.attr('cx', connection[1][0])
+					.attr('cy', connection[1][1])
+					.attr('r', 0)
+					.attr('class', 'destCircleInnerDetail')
+					.style('fill', 'steelblue')
+					.style('fill-opacity', '1')
+					.transition()
+					.duration(300) //300
+					.attr('r', '5px')
+				;
+				svg.append('circle')
+						.datum(connection)
+						.attr('cx', connection[1][0])
+						.attr('cy', connection[1][1])
+						.attr('r', 0)
+						.attr('class', 'destCircleOuterDetail')
+						.style('fill', 'black')
+						.style('fill-opacity', '0.05')
+						.transition()
+						.duration(300) //300
+						.attr('r', '12px')
+				;
+				svg.append('circle')
+					.datum(connection)
+					.attr('cx', connection[1][0])
+					.attr('cy', connection[1][1])
+					.attr('r', 0)
+					.style('class', 'destCircleMouseDetail')
+					.style('fill', 'steelblue')
+					.style('fill-opacity', '1')
+					.transition()
+					.duration(300) //300
+					.attr('r', '5px')
+					.each('end', function(d) {
+						d3.select(this)
+							.transition()
+							.duration(2000) //2000
+							.attr('r', 20)
+							.style('fill-opacity', '0')
+						;
+						svg.append('path')
+							.datum(connection)
+							.attr('class', 'arcDetail' + index)
+							.attr('d', function(coordinates) {
+								var d = {
+									origin: { x: coordinates[0][0], y: coordinates[0][1]},
+									destination: { x: coordinates[1][0], y: coordinates[1][1]}
+								};
+								var s = false;
+								if (d.destination.x > d.origin.x) {
+									s = true;
+								}
+								return (self.getArc(d, s));
+							}) 
+							.style('stroke', 'steelblue')
+							.style('stroke-width', '2.5')
+							.style('fill', 'none')
+							.transition()
+							.duration(duration) //duration
+							.attrTween('stroke-dasharray', function() {
+								var len = this.getTotalLength();
+								return function(t) {
+									return (d3.interpolate('0,' + len, len + ',0'))(t)
+								};
+							})
+							.each('end', function(d) {
+								var c = connection[1];
+								
+							})
+						;
+						d3.select('.arcDetail' + index)
+							.transition()
+							.duration(2000) //2000
+							.style('stroke-opacity', '1') // style('stroke-opacity', '0') 
+							.style('stroke-width', '2')
+							.each('end', function (d) {
+								if (index === self.destinations.length - 1) {
+									svg.selectAll('.destCircleInnerDetail').remove();
+									svg.selectAll('.destCircleOuterDetail').remove();
+									svg.selectAll('.destCircleMouseDetail').remove();
+								for (i = 0; i < self.destinations.length; i++) { 
+									svg.selectAll('.arcDetail' + i).remove();
+								}
+								}
+								var nextIndex = index + 1;
+								if (nextIndex < self.destinations.length) {
+									self.drawConnection(nextIndex);
+								} else {
+									self.drawConnection(0);
+								}
+							})
+						;
+					})
+				;
+			};
+			drawCircle();
+		},
+		drawConnections: function () {
+			this.drawConnection(0);
+		},
+		drawMap: function (originName, originGeo, destinations) {
+			var countries, height, path, projection, scale, svg, width;
+			var width = 680;
+			var height = 580;
+			var center = [127.106678, 37.366402] //[128, 36]; //[4, 68.6];
+			var scale = 5500; //200
+			projection = d3.geo.mercator().scale(scale).translate([width / 2.5, height / 3.2]).center(center);
+			path = d3.geo.path().projection(projection);
+			svg = d3.select('#areaDetailChart').append('svg')
+				.attr('height', height)
+				.attr('width', width)
+				.style('background', 'white') // #C1E1EC:
+			;
+			countries = svg.append("g");
+			d3.json('skorea_municipalities_topo_simple.json', function(data) { //europe.json
+				countries.selectAll('.countryDetail')
+							.data(topojson.feature(data, data.objects.skorea_municipalities_geo).features) //europe
+							.enter()
+							.append('path')
+							.attr('class', 'countryDetail')
+							.attr('d', path)
+				;
+				return;
+			});
+			var source = svg.selectAll('circleOriginDetail');
+				source.data([originGeo]).enter()
+						.append('circle')
+						.attr('cx', function (d) { return projection(d)[0]; })
+						.attr('cy', function (d) { return projection(d)[1]; })
+						.attr('r', '5px')
+						.style('opacity', 1)
+						.attr('fill', '#d43f3a')
+						.attr('class', 'circleOriginDetail')
+				;
+				source.data([originGeo]).enter()
+						.append('circle')
+						.attr('cx', function (d) { return projection(d)[0]; })
+						.attr('cy', function (d) { return projection(d)[1]; })
+						.attr('r', '12px')
+						.style('opacity', 0.05)
+						.attr('fill', 'black')
+						.attr('class', 'circleOriginDetail')
+						.on('mouseover', function (d) {
+							tooltip.html('<span style="color:white">' + originName + '</span>')
+									.attr('class', 'tooltipOriginDetail')
+									.style('left', projection(d)[0] + 12 + 'px')
+									.style('top', projection(d)[1] - 20 + 'px')
+									.transition()
+									.duration(700) //700
+									.style('opacity', 1)
+						})
+				.on('mouseout', function (d) {
+					tooltip.transition()
+							.duration(700) //700
+							.style('opacity', 0)
+				})
+				;
+			this.svg = svg;
+			this.projection = projection;
+			this.drawConnections();
+		},
+		start: function() {
+			this.drawMap(this.originName, this.originGeo, this.destinations);
+		}
 	},
 
 	makeGradeDetail: function() {
@@ -790,17 +1000,17 @@ var TEST = {
 			
 		var careerData = {
 			"nodes": [
-				{ "name": "빅데이터", "group": 1, "value": 2 },
-				{ "name": "처리", "group": 2, "value": 20 },
+				{ "name": "빅데이터", "group": 1, "value": 17 },
+				{ "name": "처리", "group": 2, "value": 2 },
 				{ "name": "분석", "group": 2, "value": 5 },
 				{ "name": "데이터", "group": 2, "value": 10},
-				{ "name": "AI", "group": 3, "value": 8 },
-				{ "name": "IoT", "group": 3, "value": 2 },
+				{ "name": "AI", "group": 3, "value":22 },
+				{ "name": "IoT", "group": 3, "value": 20 },
 				{ "name": "엔지니어", "group": 2, "value": 3 },
 				{ "name": "제조", "group": 4, "value": 5 },
 				{ "name": "인프라", "group": 4, "value": 9 },
-				{ "name": "IoT 전문가", "group": 4, "value": 33 }
-
+				{ "name": "IoT 전문가", "group": 4, "value": 3 },
+				{ "name": "ML", "group": 3, "value": 22 }
 
 			],
 			"links": [
@@ -814,40 +1024,50 @@ var TEST = {
 				{ "source": 5, "target": 7, "value": 4 },
 				{ "source": 5, "target": 8, "value": 4 },
 				{ "source": 5, "target": 9, "value": 4 },
-				{ "source": 8, "target": 9, "value": 2 }
+				{ "source": 4, "target": 10, "value": 2 }
+				// ,
+				// { "source": 8, "target": 9, "value": 2 }
 			
 
 			],
  			"category": [{
 				"label": "빅데이터", 
 				"subCategory": [{
-								 "label": "엔지니어1",
+								 "label": "데이터",
 								 "value": 12
 								}, 
 								{
-								 "label": "분석1",
+								 "label": "엔지니어",
+								 "value": 3
+								}, 
+								{
+								 "label": "처리",
 								 "value": 20
+								}, 
+								{
+								 "label": "분석",
+								 "value": 8
 								}]
 			},
 			{
 				"label": "AI", 
 				"subCategory": [{
-								 "label": "엔지니어2",
+								 "label": "ML",
 								 "value": 22
-								}, 
-								{
-								 "label": "분석2",
-								 "value": 30
 								}]
 			},
   			{
     			"label": "인공지능", 
     			"subCategory": [{
-								 "label": "엔지니어3",
+								 "label": "IoT 전문가",
 								 "value": 32
 								}, 
 								{
-								 "label": "분석3",
+								 "label": "제조",
+								 "value": 40
+								}, 
+								{
+								 "label": "인프라",
 								 "value": 40
 								}]
 			}]
@@ -943,7 +1163,7 @@ var TEST = {
 
         var force = d3.layout.force()
 							.charge(-1000)
-							.linkDistance(200)
+							.linkDistance(120)
 							.size([width, height]);
 
 		var svg = d3.select('#careerDetailChart')

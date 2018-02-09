@@ -416,7 +416,7 @@ INDEX = {
 				
 				break;
 			case 'area':
-				
+				$('.areaDetailContainer').show();
 				break;
 			case 'grade':
 				$('.gradeDetailContainer').show();
