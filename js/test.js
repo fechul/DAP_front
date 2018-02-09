@@ -4,6 +4,9 @@ var TEST = {
 		this.makeAbility();
 		this.makeArea.start();
 		this.makeCareer();
+
+		this.makeGradeDetail();
+		this.makeCareerDetail();
 	},
 
 	// 지역 차트 생성
@@ -181,7 +184,6 @@ var TEST = {
 		drawConnections: function () {
 			this.drawConnection(0);
 		},
-		
 		drawMap: function (originName, originGeo, destinations) {
 			var countries, height, path, projection, scale, svg, width;
 			var width = 390;
@@ -273,13 +275,11 @@ var TEST = {
 					.attr('weigth', config.width + config.padding * 2)
 					.attr('height', config.height + config.padding * 2)
 					.style('margin-top', '45px')
-					;
-		
+		;
 		var colorScale = d3.scale.ordinal()
 								 .domain(states)
 								 .range(['orange', 'green', 'green'])
-								 ;
-
+		;
 		svg.append('rect')
 			.attr('class', 'bg-rect')
 			.attr('rx', 10)
@@ -293,8 +293,7 @@ var TEST = {
 			})
 			.attr('x', config.padding)
 			.attr('y', config.padding * 2)
-			;
-
+		;
 		var progress = svg.append('rect')
 							.attr('class', 'progress-rect')
 						  	.attr('fill', function() {
@@ -308,8 +307,7 @@ var TEST = {
 							.attr('ry', 10)
 							.attr('x', config.padding)
 							.attr('y', config.padding * 2)
-							;
-		
+		;
 		progress.transition()
 				.duration(2000)
 				.attr('fill', function() {
@@ -319,8 +317,6 @@ var TEST = {
 					return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;
 				})
 		;
-
-
 		svg.append('text')
 				.attr('class', 'progress_text')
 				.attr('text-anchor', 'left')
@@ -621,7 +617,7 @@ var TEST = {
 		var rScale = d3.scale.linear().domain([0, 100]).range([10, 35]);
 
         var force = d3.layout.force()
-							.charge(-120)
+							.charge(-250)
 							.linkDistance(75)
 							.size([width, height]);
 
@@ -680,5 +676,331 @@ var TEST = {
 			nodelabels.attr("x", function(d) { return d.x; }) 
 					  .attr("y", function(d) { return d.y; });
 		});
+	},
+
+	makeAreaDetail: function() {
+
+	},
+
+	makeGradeDetail: function() {
+		var config = {
+			'width': 700,
+			'height': 500,
+			'segmentWidth': 150,
+			'segmentHeight': 100,
+			'padding': 12
+		}
+
+		var states = ['started', 'inProgress', 'completed'];
+		var currentState = 'started' , 
+		    endState = 'inProgress';
+
+		var GradeData = {
+			"avgGrade": 3.2,
+			"gradeA": 13,
+			"gradeB": 3,
+			"gradeC": 3
+		}
+		;
+		var svg = d3.select('#gradeDetailChart')
+					.attr('weigth', config.width + config.padding * 2)
+					.attr('height', config.height + config.padding * 2)
+					.style('margin-top', '45px')
+		;
+		var colorScale = d3.scale.ordinal()
+								 .domain(states)
+								 .range(['orange', 'green', 'green'])
+		;
+		svg.append('rect')
+			.attr('class', 'bg-rect')
+			.attr('rx', 10)
+			.attr('ry', 10)
+			.attr('fill', 'gray')
+			.attr('stroke', 'black')
+			.attr('stroke-width', '3')
+			.attr('height', config.segmentHeight)
+			.attr('width', function() {
+				return config.segmentWidth * states.length - config.padding * 2;
+			})
+			.attr('x', config.padding)
+			.attr('y', config.padding * 2)
+		;
+		var progress = svg.append('rect')
+							.attr('class', 'progress-rect')
+						  	.attr('fill', function() {
+								  return colorScale(currentState);
+							})				
+							.attr('stroke', 'black')
+							.attr('stroke-width', '3')
+							.attr('width', 0)
+							.attr('height', config.segmentHeight)
+							.attr('rx', 10)
+							.attr('ry', 10)
+							.attr('x', config.padding)
+							.attr('y', config.padding * 2)
+		;
+		progress.transition()
+				.duration(2000)
+				.attr('fill', function() {
+					return colorScale(endState);
+				})
+				.attr('width', function() {
+					return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;
+				})
+		;
+		svg.append('text')
+				.attr('class', 'progress_text')
+				.attr('text-anchor', 'left')
+				.attr('tranform', 'translate(15' + ', ' + '15)')
+				.attr('x', config.padding)
+				.attr('y', config.padding * 2 - 3)
+			.text('0')
+		;
+
+		svg.append('text')
+				.attr('class', 'progress_text')
+				.attr('text-anchor', 'left')
+				.attr('tranform', 'translate(15' + ', ' + '15)')
+				.attr('x', config.segmentWidth * states.length - config.padding * 2)
+				.attr('y', config.padding * 2 - 3)
+			.text('4.5')
+		;
+
+		svg.append('text')
+			.attr('class', 'progress_text_avg')
+			.attr('text-anchor', 'left')
+			.attr('tranform', 'translate(15' + ', ' + '15)')
+			.attr('x', function() {
+				return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;;
+			})
+			.attr('y', config.padding * 2 + config.segmentHeight + 18)
+			.text(GradeData.avgGrade)
+		;
+	},
+
+	makeAbilityDetail: function() {
+
+	},
+
+	makeCareerDetail: function() {
+		var width = 700,
+			height = 580;
+			
+		var careerData = {
+			"nodes": [
+				{ "name": "빅데이터", "group": 1, "value": 2 },
+				{ "name": "처리", "group": 2, "value": 20 },
+				{ "name": "분석", "group": 2, "value": 5 },
+				{ "name": "데이터", "group": 2, "value": 10},
+				{ "name": "AI", "group": 3, "value": 8 },
+				{ "name": "IoT", "group": 3, "value": 2 },
+				{ "name": "엔지니어", "group": 2, "value": 3 },
+				{ "name": "제조", "group": 4, "value": 5 },
+				{ "name": "인프라", "group": 4, "value": 9 },
+				{ "name": "IoT 전문가", "group": 4, "value": 33 }
+
+
+			],
+			"links": [
+				{ "source": 0, "target": 1, "value": 1 },
+				{ "source": 0, "target": 2, "value": 1 },
+				{ "source": 0, "target": 3, "value": 1 },
+				{ "source": 0, "target": 6, "value": 1 },
+				{ "source": 4, "target": 5, "value": 2 },
+				{ "source": 4, "target": 0, "value": 3 },
+				{ "source": 5, "target": 0, "value": 3 },
+				{ "source": 5, "target": 7, "value": 4 },
+				{ "source": 5, "target": 8, "value": 4 },
+				{ "source": 5, "target": 9, "value": 4 },
+				{ "source": 8, "target": 9, "value": 2 }
+			
+
+			],
+ 			"category": [{
+				"label": "빅데이터", 
+				"subCategory": [{
+								 "label": "엔지니어1",
+								 "value": 12
+								}, 
+								{
+								 "label": "분석1",
+								 "value": 20
+								}]
+			},
+			{
+				"label": "AI", 
+				"subCategory": [{
+								 "label": "엔지니어2",
+								 "value": 22
+								}, 
+								{
+								 "label": "분석2",
+								 "value": 30
+								}]
+			},
+  			{
+    			"label": "인공지능", 
+    			"subCategory": [{
+								 "label": "엔지니어3",
+								 "value": 32
+								}, 
+								{
+								 "label": "분석3",
+								 "value": 40
+								}]
+			}]
+		}
+
+		// 카테고리 분류
+		var careerDataCategory = careerData.category;
+		var categoryFirst = [];
+		var categorySecond = [];
+		var categoryFirstValue = [];
+		$.each(careerDataCategory, function(index, value) {
+			// console.log(index+','+value);
+			// console.log(careerDataCategory[index].label);
+			categoryFirst.push(careerDataCategory[index].label)
+			$.each(value, function(k, v) {
+				//console.log(k+','+v);
+				if(k === 'subCategory') categorySecond.push(value[k]); //console.log(value[k]);
+			})
+		})
+
+		// console.log(categoryFirst);
+		// console.log(categorySecond);
+		// console.log(categoryFirst.indexOf('AI'));
+
+		var findSecondCategory = function(keyword) {
+			return categorySecond[categoryFirst.indexOf(keyword)];
+		}
+
+		// console.log(findSecondCategory('AI'));
+		for(i in categoryFirst) {
+			$('#careerCategoryFirst').append('<div id=category_' + i + '>' + categoryFirst[i] + '<span></span></div>');
+		}
+		
+		for(var j = 0; j<categoryFirst.length; j++) {
+			var index_categorySecond = findSecondCategory(categoryFirst[j]);
+			// $('#careerCategorySecond').append('<div id=category_' + i + '>' + index_categorySecond + '</div>');
+			// console.log(index_categorySecond);
+			for(i in index_categorySecond) {
+				var html = '<div class=subcategory_' + j + '><span>' + index_categorySecond[i].label + '</span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>'
+				$('#careerCategorySecond').append(html);
+			}
+		}
+
+		var hideSubcategoryAll = function() {
+			for(i in categoryFirst) {
+				$('.subcategory_' + i).hide();
+			}
+		}
+
+		var initShowSubcategory = function() {
+			$('.subcategory_0').show();
+		}
+
+		var clickShowSubcategory = function(index) {
+			$('.subcategory_' + index).show();
+		}
+		
+		// dafault 리스트 설정
+		hideSubcategoryAll();
+		initShowSubcategory();
+
+		// 분류 클릭 이벤트 등록
+		var clickCategory = function() {
+			for(var i = 0; i<categoryFirst.length; i++) {
+				(function(m) {
+					
+					$('#category_' + m).on('click', function() { 
+						hideSubcategoryAll();
+						clickShowSubcategory(m); 
+					});
+				})(i);
+				
+			}
+		}
+		clickCategory();
+			
+		// $('#category_0').on('click', function() { clickShowSubcategory(0) } );
+		// $('#category_1').on('click', function() { clickShowSubcategory(1) } );
+		// $('#category_2').on('click', function() { clickShowSubcategory(2) } );
+
+		
+
+		
+
+		// 그래프 그리기			
+        var colorNode = d3.scale.category20(),
+			colorLink = d3.scale.category10();
+			
+		var rScale = d3.scale.linear().domain([0, 100]).range([10, 100]);
+
+        var force = d3.layout.force()
+							.charge(-1000)
+							.linkDistance(200)
+							.size([width, height]);
+
+		var svg = d3.select('#careerDetailChart')
+					.append('svg')
+						.attr('width', width)
+						.attr('height', height);
+			
+		force.nodes(careerData.nodes)
+				.links(careerData.links)
+				.start();
+
+		var link = svg.selectAll('.link')
+						.data(careerData.links)
+						.enter()
+						.append('line')
+							.attr('class', 'link')
+							.style('stroke-width', 3)
+							.style('stroke', function(d) { return colorLink(d.value); });
+
+		var node = svg.selectAll('.node')
+						.data(careerData.nodes)
+						.enter()
+						.append('circle')
+							.attr('class', 'node')
+							.attr('r', function(d) { return rScale(d.value) }) //18
+							.style('fill-opacity', '0.85')
+							.style('fill', function(d) { return colorNode(d.group); })
+							.style('stroke-opacity','1.0')
+							.style('stroke', function(d) { return colorNode(d.group); })
+							.style('stroke-width', '3px')
+							.call(force.drag);
+
+		node.append('title')
+				.text(function(d) { return d.name; });
+
+		var nodelabels = svg.selectAll('.nodelabel') 
+							.data(careerData.nodes)
+							.enter()
+								.append('text')
+								.attr({ 'x': function(d){ return d.x; },
+										'y': function(d){ return d.y; },
+										'class': 'nodelabel',
+										'stroke': '#404040',
+										'font-size': '20px'})
+								.text(function(d){return d.name;});
+
+		force.on("tick", function() {
+			link.attr("x1", function(d) { return d.source.x; })
+				.attr("y1", function(d) { return d.source.y; })
+				.attr("x2", function(d) { return d.target.x; })
+				.attr("y2", function(d) { return d.target.y; });
+
+			node.attr("cx", function(d) { return d.x; })
+				.attr("cy", function(d) { return d.y; });
+
+			nodelabels.attr("x", function(d) { return d.x; }) 
+					  .attr("y", function(d) { return d.y; });
+		});
+
+		// 대분류, 소분류 
+		var html = '';
+
+		$('#careerCategoryFirst').append();
 	}
 };

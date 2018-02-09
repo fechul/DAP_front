@@ -419,7 +419,7 @@ INDEX = {
 				
 				break;
 			case 'grade':
-				
+				$('.gradeDetailContainer').show();
 				break;
 			case 'ability':
 				
@@ -428,7 +428,7 @@ INDEX = {
 				
 				break;
 			case 'career':
-				
+				$('.careerDetailContainer').show();
 				break;
 		}
 		// this.modalResize();
