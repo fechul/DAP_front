@@ -93,6 +93,8 @@ body {
 
 .panel-footer {
     border-top: 2px solid #ddd;
+    border-bottom-right-radius: 6.5px;
+    border-bottom-left-radius: 6.5px;
 }
 
 .contentSubject {
