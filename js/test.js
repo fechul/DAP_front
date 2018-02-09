@@ -648,7 +648,11 @@ var TEST = {
 						.append('circle')
 							.attr('class', 'node')
 							.attr('r', function(d) { return rScale(d.value) }) //18
+							.style('fill-opacity', '0.85')
 							.style('fill', function(d) { return colorNode(d.group); })
+							.style('stroke-opacity','1.0')
+							.style('stroke', function(d) { return colorNode(d.group); })
+							.style('stroke-width', '2px')
 							.call(force.drag);
 
 		node.append('title')
@@ -658,7 +662,7 @@ var TEST = {
 							.data(careerData.nodes)
 							.enter()
 								.append('text')
-								.attr({'x': function(d){ return d.x; },
+								.attr({ 'x': function(d){ return d.x; },
 										'y': function(d){ return d.y; },
 										'class': 'nodelabel',
 										'stroke': '#404040'})
