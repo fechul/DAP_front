@@ -11,11 +11,12 @@
 
     <!-- Custom CSS -->
     <link href="css/main.css?ver=2" rel="stylesheet"> 
-    <link href="css/index.css?ver=7" rel="stylesheet">
+    <link href="css/index.css?ver=9" rel="stylesheet">
     <link href="css/gradeChart.css?ver=5" rel="stylesheet">
     <link href="css/abilityChart.css?ver=5" rel="stylesheet">
     <link href="css/areaChart.css?ver=5" rel="stylesheet">
     <link href="css/careerChart.css?ver=1" rel="stylesheet">
+    <link href="css/careerDetailChart.css?ver=1" rel="stylesheet">
     
     <title>MosaicUs</title>
   </head>
@@ -203,14 +204,45 @@
 
             <!--AGE DETAIL-->
             <div class="ageDetailContainer detailContainer">
-                  <svg id="ageDetailChart"></svg>
+              <svg id="ageDetailChart"></svg>
             </div>
 
             <!-- left, makeAreaDetail -->
+            <div class="gradeDetailContainer detailContainer">
+              <div id="areaDetailChart"></div>
+            </div>
 
             <!-- left, makeGradeDetail -->
             <div class="gradeDetailContainer detailContainer">
-              <svg id = "gradeDetailChart">
+              <svg id = "gradeDetailChart"></svg>
+              <div id = "detailGrade" class = "row" style = "margin-left: 0px; margin-right:0px;text-align: -webkit-center;">
+                <table class = "table table-bordered block_row" style = "width: 576px;">
+                  <thead>
+                    <tr>
+                      <th class="text-center" style="font-weight: 900;">학점 범위</th>
+                      <th class="text-center" style="font-weight: 900;">수 (명)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="hscore">A 학점</td>
+                      <td>12</td>
+                    </tr>
+                    <tr>
+                      <td class="hscore">B 학점</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td class="hscore">C 학점</td>
+                      <td>5</td>
+                    </tr>
+                    <tr>
+                      <td class="hscore">D 학점</td>
+                      <td>20</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <!-- left, makeAbilityDetail -->
@@ -252,16 +284,22 @@
             <!-- right, makeGradeDetail -->
             <div class="gradeDetailContainer detailContainer">
               <div class="gradeDetailPart detailPart">
-               
+                <br><br><br><br><br><br><br>
+                <label>작년 평균</label>
+                <div id="gradeAvg" class="gradeInfos">3.5</div>
+                <br><br><br><br><br>
+                <label>작년 대비 증감률</label>
+                <div id="gradePerChange" class="gradeInfos">+5%</div>
               </div>
             </div>
             <!-- right, makeAbilityDetail -->
             <!-- right, makeCareerDetail -->
             <div class="careerDetailContainer detailContainer">
               <div class="careerDetailPart detailPart">
-                <label>대분류</label>
+                <label class="careerCategoryLabel">대분류</label>
                 <div id="careerCategoryFirst"></div>
-                <label>소분류</label>
+                <br><br><br>
+                <label class="careerCategoryLabel">소분류</label>
                 <div id="careerCategorySecond"></div>
               </div>
             </div>
@@ -304,7 +342,7 @@
 
     <!-- Custom JS -->
     <script src="js/index.js?ver=6"></script>
-    <script src="js/test.js?ver=4"></script>
+    <script src="js/test.js?ver=5"></script>
 
     <script>
       INDEX.init();

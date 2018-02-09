@@ -256,8 +256,8 @@ var TEST = {
 	// 학점 차트 생성
 	makeGrade: function() {
 		var config = {
-			'width': 200,
-			'height': 200,
+			'width': 360,
+			'height': 150,
 			'segmentWidth': 100,
 			'segmentHeight': 100,
 			'padding': 12
@@ -272,9 +272,10 @@ var TEST = {
 		};
 
 		var svg = d3.select('#gradeChart')
-					.attr('weigth', config.width + config.padding * 2)
+					.attr('width', config.width + config.padding * 2)
 					.attr('height', config.height + config.padding * 2)
-					.style('margin-top', '45px')
+					.style('margin-top', '22px')
+					.style('margin-left', '54px')
 		;
 		var colorScale = d3.scale.ordinal()
 								 .domain(states)
@@ -684,10 +685,10 @@ var TEST = {
 
 	makeGradeDetail: function() {
 		var config = {
-			'width': 700,
-			'height': 500,
-			'segmentWidth': 150,
-			'segmentHeight': 100,
+			'width': 650,
+			'height': 250,
+			'segmentWidth': 200,
+			'segmentHeight': 200,
 			'padding': 12
 		}
 
@@ -703,9 +704,10 @@ var TEST = {
 		}
 		;
 		var svg = d3.select('#gradeDetailChart')
-					.attr('weigth', config.width + config.padding * 2)
+					.attr('width', config.width + config.padding * 2)
 					.attr('height', config.height + config.padding * 2)
 					.style('margin-top', '45px')
+					.style('margin-left', '79px')
 		;
 		var colorScale = d3.scale.ordinal()
 								 .domain(states)
@@ -883,10 +885,13 @@ var TEST = {
 			var index_categorySecond = findSecondCategory(categoryFirst[j]);
 			// $('#careerCategorySecond').append('<div id=category_' + i + '>' + index_categorySecond + '</div>');
 			// console.log(index_categorySecond);
+			var sum = 0;
 			for(i in index_categorySecond) {
 				var html = '<div class=subcategory_' + j + '><span>' + index_categorySecond[i].label + '</span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>'
 				$('#careerCategorySecond').append(html);
+				sum += index_categorySecond[i].value;
 			}
+			categoryFirstValue.push(sum);
 		}
 
 		var hideSubcategoryAll = function() {
