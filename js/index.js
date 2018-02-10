@@ -812,6 +812,7 @@ INDEX = {
 		// {'name': '국어국문학과','size': 2}];
 
 		var color = ["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		//var color = d3.scale.category20();
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {

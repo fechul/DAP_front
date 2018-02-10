@@ -442,7 +442,9 @@ var TEST = {
 		// 	"avgGrade": "3.2"
 		// };
 		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+		
 
+		// 차트 그리기
 		var svg = d3.select('#gradeChart')
 					.attr('width', config.width + config.padding * 2)
 					.attr('height', config.height + config.padding * 2)
@@ -789,127 +791,173 @@ var TEST = {
 		// }
 		var careerData = {
 			"nodes": [
-				{ "name": "Big Data Engineer", "group": 1, "value": 1 },
-				{ "name": "Connectivity 전문가", "group": 1, "value": 1 },
-				{ "name": "Data Analyst", "group": 1, "value": 1 },
-				{ "name": "Data Scientist", "group": 1, "value": 2 },
-				{ "name": "DBA", "group": 1, "value": 2 },
-				{ "name": "Deep learning 전문가", "group": 1, "value": 1 },
-				{ "name": "DT 전문가", "group": 1, "value": 2 },
-				{ "name": "HR 팀장", "group": 1, "value": 1 },
-				{ "name": "ICT 기술 전문가", "group": 1, "value": 1 },
-				{ "name": "Smart Factory 전문가", "group": 1, "value": 1 },
-				{ "name": "Solution 개발자", "group": 1, "value": 1 },
-				{ "name": "공정 자동화", "group": 1, "value": 1 },
-				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 },
-				{ "name": "금융산업의 DT 전문가", "group": 1, "value": 1 },
-				{ "name": "데이터 분석 전문가", "group": 1, "value": 1 },
-				{ "name": "데이터 아키텍쳐", "group": 1, "value": 1 },
-				{ "name": "데이터 전문가", "group": 1, "value": 1 },
-				{ "name": "데이터 컨설턴트", "group": 1, "value": 1 },
-				{ "name": "딥러닝 전문가", "group": 1, "value": 1 },
-				{ "name": "블록체인 전문가", "group": 1, "value": 1 },
-				{ "name": "빅데이터 전문가", "group": 1, "value": 4 },
-				{ "name": "앱 개발자", "group": 1, "value": 1 },
-				{ "name": "아키텍터", "group": 1, "value": 1 },
-				{ "name": "어플리케이션 전문가", "group": 1, "value": 3 },
-				{ "name": "웹 개발자", "group": 1, "value": 1 },
-				{ "name": "인공지능 전문가", "group": 1, "value": 10 },
-				{ "name": "인공지능, 앱 전문가", "group": 1, "value": 1 },
-				{ "name": "인프라 전문가", "group": 1, "value": 2 },
-				{ "name": "좋은 아빠", "group": 1, "value": 1 },
-				{ "name": "클라우드 PaaS 전문가", "group": 1, "value": 1 },
-				{ "name": "클라우드 전문가", "group": 1, "value": 1 },
-				{ "name": "통신 전문가", "group": 1, "value": 1 },
-				{ "name": "평생개발", "group": 1, "value": 1 },
-				{ "name": "풀스택 Developer/PL/PM", "group": 1, "value": 3 },
-				{ "name": "풀스택개발자", "group": 1, "value": 1 },
-				{ "name": "플랫폼 개발 전문가", "group": 1, "value": 1 },
-				{ "name": "플랫폼 전문가", "group": 1, "value": 1 },
-				{ "name": "SK㈜C&C 임원", "group": 1, "value": 1 },
-				{ "name": "SK㈜C&C 전무", "group": 1, "value": 1 },
-				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 }
+				{ "name": "Data", "group": 1, "value": 9 }, //0
+				{ "name": "DT", "group": 1, "value": 23 }, //1
+				{ "name": "ICT", "group": 1, "value": 16 }, //2
+				{ "name": "ITS", "group": 1, "value": 6 }, //3
+				{ "name": "기타", "group": 1, "value": 5 }, //4
+
+				{ "name": "Big Data Engineer", "group": 3, "value": 1 }, //5
+				{ "name": "Connectivity 전문가", "group": 4, "value": 1 }, //6
+				{ "name": "Data Analyst", "group": 2, "value": 1 }, //7
+				{ "name": "Data Scientist", "group": 2, "value": 2 }, //8
+				{ "name": "DBA", "group": 2, "value": 2 }, //9
+				{ "name": "Deep learning 전문가", "group": 3, "value": 1 }, //10
+				{ "name": "DT 전문가", "group": 3, "value": 2 }, //11
+				{ "name": "HR 팀장", "group": 6, "value": 1 }, //12
+				{ "name": "ICT 기술 전문가", "group": 4, "value": 1 }, //13
+				{ "name": "Smart Factory 전문가", "group": 5, "value": 1 }, //14
+				{ "name": "Solution 개발자", "group": 5, "value": 1 }, //15
+				{ "name": "공정 자동화", "group": 5, "value": 1 }, //16
+				{ "name": "글로벌 IT 컨설턴트", "group": 5, "value": 1 }, //17
+				{ "name": "금융산업의 DT 전문가", "group": 5, "value": 1 }, //18
+				{ "name": "데이터 분석 전문가", "group": 2, "value": 1 }, //19
+				{ "name": "데이터 아키텍쳐", "group": 2, "value": 1 }, //20
+				{ "name": "데이터 전문가", "group": 2, "value": 1 }, //21
+				{ "name": "데이터 컨설턴트", "group": 2, "value": 1 }, //22
+				{ "name": "딥러닝 전문가", "group": 3, "value": 1 }, //23
+				{ "name": "블록체인 전문가", "group": 3, "value": 1 }, //24
+				{ "name": "빅데이터 전문가", "group": 3, "value": 4 }, //25
+				{ "name": "앱 개발자", "group": 4, "value": 1 }, //26
+				{ "name": "아키텍터", "group": 4, "value": 1 }, //27
+				{ "name": "어플리케이션 전문가", "group": 4, "value": 3 }, //28
+				{ "name": "웹 개발자", "group": 4, "value": 1 }, //29
+				{ "name": "인공지능 전문가", "group": 3, "value": 10 }, //30
+				{ "name": "인공지능, 앱 전문가", "group": 3, "value": 1 }, //31
+				{ "name": "인프라 전문가", "group": 4, "value": 2 }, //32
+				{ "name": "좋은 아빠", "group": 6, "value": 1 }, //33
+				{ "name": "클라우드 PaaS 전문가", "group": 3, "value": 1 }, //34
+				{ "name": "클라우드 전문가", "group": 3, "value": 1 }, //35
+				{ "name": "통신 전문가", "group": 5, "value": 1 }, //36
+				{ "name": "평생개발", "group": 6, "value": 1 }, //37
+				{ "name": "풀스택 Developer/PL/PM", "group": 4, "value": 3 }, //38
+				{ "name": "풀스택개발자", "group": 4, "value": 1 }, //39
+				{ "name": "플랫폼 개발 전문가", "group": 4, "value": 1 }, //40
+				{ "name": "플랫폼 전문가", "group": 4, "value": 1 }, //41
+				{ "name": "SK㈜C&C 임원", "group": 6, "value": 1 }, //42
+				{ "name": "SK㈜C&C 전무", "group": 6, "value": 1 } //43
+				// { "name": "글로벌 IT 컨설턴트", "group": 2, "value": 1 } //44
 			],
 			"links": [
-				{ "source": 0, "target": 1, "value": 1 },
-				{ "source": 0, "target": 2, "value": 1 },
-				{ "source": 0, "target": 3, "value": 1 },
-				{ "source": 0, "target": 6, "value": 1 },
-				{ "source": 4, "target": 5, "value": 2 },
-				{ "source": 4, "target": 0, "value": 3 },
-				{ "source": 5, "target": 0, "value": 3 },
-				{ "source": 5, "target": 7, "value": 4 },
-				{ "source": 5, "target": 8, "value": 4 },
-				{ "source": 5, "target": 9, "value": 4 },
-				{ "source": 4, "target": 10, "value": 2 }
+				{ "source": 0, "target": 7, "value": 1 },
+				{ "source": 0, "target": 8, "value": 1 },
+				{ "source": 0, "target": 9, "value": 1 },
+				{ "source": 0, "target": 20, "value": 1 },
+				{ "source": 0, "target": 19, "value": 1 },
+				{ "source": 0, "target": 21, "value": 1 },
+				{ "source": 0, "target": 22, "value": 1 },
+
+
+				{ "source": 1, "target": 5, "value": 2 },
+				{ "source": 1, "target": 10, "value": 2 },
+				{ "source": 1, "target": 11, "value": 2 },
+				{ "source": 1, "target": 23, "value": 2 },
+				{ "source": 1, "target": 24, "value": 2 },
+				{ "source": 1, "target": 25, "value": 2 },
+				{ "source": 1, "target": 30, "value": 2 },
+				{ "source": 1, "target": 31, "value": 2 },
+				{ "source": 1, "target": 34, "value": 2 },
+				{ "source": 1, "target": 35, "value": 2 },
+
+				{ "source": 2, "target": 6, "value": 3 },
+				{ "source": 2, "target": 13, "value": 3 },
+				{ "source": 2, "target": 27, "value": 3 },
+				{ "source": 2, "target": 26, "value": 3 },
+				{ "source": 2, "target": 28, "value": 3 },
+				{ "source": 2, "target": 29, "value": 3 },
+				{ "source": 2, "target": 32, "value": 3 },
+				{ "source": 2, "target": 38, "value": 3 },
+				{ "source": 2, "target": 39, "value": 3 },
+				{ "source": 2, "target": 40, "value": 3 },
+				{ "source": 2, "target": 41, "value": 3 },
+
+				{ "source": 3, "target": 17, "value": 4 },
+				{ "source": 3, "target": 18, "value": 4 },
+				{ "source": 3, "target": 36, "value": 4 },
+				{ "source": 3, "target": 14, "value": 4 },
+				{ "source": 3, "target": 16, "value": 4 },
+				{ "source": 3, "target": 15, "value": 4 },
+
+				{ "source": 4, "target": 42, "value": 5 },
+				{ "source": 4, "target": 43, "value": 5 },
+				{ "source": 4, "target": 33, "value": 5 },
+				{ "source": 4, "target": 37, "value": 5 },
+				{ "source": 4, "target": 12, "value": 5 },
+
+				{ "source": 0, "target": 1, "value": 6 },
+				{ "source": 1, "target": 2, "value": 6 },
+				{ "source": 2, "target": 3, "value": 6 },
+				{ "source": 3, "target": 4, "value": 6 },
+				{ "source": 4, "target": 0, "value": 6 }
+				
 				// ,
 				// { "source": 8, "target": 9, "value": 2 }
 			],
  			"category": [{			 
     			"label": "Data", 
     			"subCategory": [
-					{ "Data Analyst": 1 },
-					{ "Data scientist": 2 },
-					{ "DBA": 2 },
-					{ "데이터 아키텍쳐": 1 },
-					{ "데이터 분석 전문가": 1 },
-					{ "데이터 전문가": 1 },
-					{ "데이터 컨설턴트": 1 }
+					{ "label": "Data Analyst", "value": 1 },
+					{ "label": "Data scientist", "value": 2 },
+					{ "label": "DBA", "value": 2 },
+					{ "label": "데이터 아키텍쳐", "value": 1 },
+					{ "label": "데이터 분석 전문가", "value": 1 },
+					{ "label": "데이터 전문가", "value": 1 },
+					{ "label": "데이터 컨설턴트", "value": 1 }
 				]
 			 },
   			{
     			"label": "DT", 
     			"subCategory": [
-     				{ "Big Data Engineer": 1 },
-     				{ "Deep learning 전문가": 1 },
-    				{ "DT 전문가": 2 },
-    			 	{ "딥러닝 전문가": 1 },
-     				{ "블록체인 전문가": 1 },
-     				{ "빅데이터 전문가": 4 },
-     				{ "인공지능 전문가": 10 },
-     				{ "인공지능, 앱 전문가": 1 },
-     				{ "클라우드 PaaS 전문가": 1 },
-     				{ "클라우드 전문가": 1 }  
+     				{ "label": "Big Data Engineer", "value": 1 },
+     				{ "label": "Deep learning 전문가", "value": 1 },
+    				{ "label": "DT 전문가", "value": 2 },
+    			 	{ "label": "딥러닝 전문가", "value": 1 },
+     				{ "label": "블록체인 전문가", "value": 1 },
+     				{ "label": "빅데이터 전문가", "value": 4 },
+     				{ "label": "인공지능 전문가", "value": 10 },
+     				{ "label": "인공지능, 앱 전문가", "value": 1 },
+     				{ "label": "클라우드 PaaS 전문가", "value": 1 },
+     				{ "label": "클라우드 전문가", "value": 1 }  
 				  ]
 			},
   			{
     			"label": "ICT", 
     			"subCategory": [
-     				{ "Connectivity 전문가": 1 },
-     				{ "ICT 기술 전문가": 1 },
-     				{ "아키텍터": 1 },
-     				{ "앱 개발자": 1 },
-     				{ "어플리케이션 전문가": 3 },
-     				{ "웹 개발자": 1 },
-     				{ "인프라 전문가": 2 },
-     				{ "풀스택 Developer/PL/PM": 3 },
-     				{ "풀스택개발자": 1 },
-     				{ "플랫폼 개발 전문가": 1 },
-     				{ "플랫폼 전문가": 1 }  
+     				{ "label": "Connectivity 전문가", "value": 1 },
+     				{ "label": "ICT 기술 전문가", "value": 1 },
+     				{ "label": "아키텍터", "value": 1 },
+     				{ "label": "앱 개발자", "value": 1 },
+     				{ "label": "어플리케이션 전문가", "value": 3 },
+     				{ "label": "웹 개발자", "value": 1 },
+     				{ "label": "인프라 전문가", "value": 2 },
+     				{ "label": "풀스택 Developer/PL/PM", "value": 3 },
+     				{ "label": "풀스택개발자", "value": 1 },
+     				{ "label": "플랫폼 개발 전문가", "value": 1 },
+     				{ "label": "플랫폼 전문가", "value": 1 }  
 				  ]
 			},
   			{
     			"label": "ITS", 
     			"subCategory": [
-     				{ "글로벌 IT 컨설턴트": 1 },
-     				{ "금융산업의 DT 전문가": 1 },
-     				{ "통신 전문가": 1 },
-     				{ "Smart Factory 전문가": 1 },
-     				{ "공정 자동화": 1 },
-     				{ "Solution 개발자": 1 }  
+     				{ "label": "글로벌 IT 컨설턴트", "value": 1 },
+     				{ "label": "금융산업의 DT 전문가", "value": 1 },
+     				{ "label": "통신 전문가", "value": 1 },
+     				{ "label": "Smart Factory 전문가", "value": 1 },
+     				{ "label": "공정 자동화", "value": 1 },
+     				{ "label": "Solution 개발자", "value": 1 }  
 				  ]
 			},
  			{
    				"label": "기타", 
     			"subCategory": [
-     				{ "SK㈜C&C 임원": 1 },
-     				{ "SK㈜C&C 전무": 1 },
-     				{ "좋은 아빠": 1 },
-     				{ "평생개발": 1 },
-     				{ "HR 팀장": 1 }  
+     				{ "label": "SK㈜C&C 임원", "value": 1 },
+     				{ "label": "SK㈜C&C 전무", "value": 1 },
+     				{ "label": "좋은 아빠", "value": 1 },
+     				{ "label": "평생개발", "value": 1 },
+     				{ "label": "HR 팀장", "value": 1 }  
 				  ]
 			}]
-		}
+		}		
 
         var colorNode = d3.scale.category20(),
 			colorLink = d3.scale.category10();
@@ -1200,10 +1248,10 @@ var TEST = {
 								}
 								var nextIndex = index + 1;
 								if (nextIndex < self.destinations.length) {
-									console.log('1'+nextIndex);
+									// console.log('1'+nextIndex);
 									self.drawConnection(nextIndex);
 								} else {
-									console.log('2'+nextIndex);
+									// console.log('2'+nextIndex);
 									// d3.selectAll('.tooltipOriginDetail').data([originGeo]).enter().select('#areaDetailChart').append('div')
 									// 	.html('<span style="color:white">' + this.originName + '</span>')
 									// 	.attr('class', 'tooltipOriginDetail')
@@ -1281,7 +1329,7 @@ var TEST = {
 									.duration(500) //700
 									.style('opacity', 1)
 							;
-							console.log( projection(d)[0]);
+							//console.log( projection(d)[0]);
 						})
 						.on('mouseout', function (d) {
 							d3.selectAll('.tooltipOriginDetail').transition()
@@ -1325,11 +1373,18 @@ var TEST = {
 		// };
 		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
 
+		// A, B, C 학점 수
+		$('#gradeLabelA').html(GradeData.gradea);
+		$('#gradeLabelB').html(GradeData.gradeb);
+		$('#gradeLabelC').html(GradeData.gradec);
+
+
 		var svg = d3.select('#gradeDetailChart')
 					.attr('width', config.width + config.padding * 2)
 					.attr('height', config.height + config.padding * 2)
 					.style('margin-top', '45px')
 					.style('margin-left', '79px')
+					.style('margin-bottom', '45px')
 		;
 		var colorScale = d3.scale.ordinal()
 								 .domain(states)
@@ -1347,7 +1402,7 @@ var TEST = {
 				return config.segmentWidth * states.length - config.padding * 2;
 			})
 			.attr('x', config.padding)
-			.attr('y', config.padding * 2)
+			.attr('y', config.padding * 2.3)
 		;
 		var progress = svg.append('rect')
 							.attr('class', 'progress-rect')
@@ -1361,7 +1416,7 @@ var TEST = {
 							.attr('rx', 10)
 							.attr('ry', 10)
 							.attr('x', config.padding)
-							.attr('y', config.padding * 2)
+							.attr('y', config.padding * 2.3)
 		;
 		progress.transition()
 				.duration(2000)
@@ -1375,29 +1430,37 @@ var TEST = {
 		svg.append('text')
 				.attr('class', 'progress_text')
 				.attr('text-anchor', 'left')
+				.style('font-size', '30px')
+				.style('fill', 'black')
+				.style('stroke', 'none')
 				.attr('tranform', 'translate(15' + ', ' + '15)')
-				.attr('x', config.padding)
-				.attr('y', config.padding * 2 - 3)
+				.attr('x', config.padding - 10)
+				.attr('y', config.padding * 2.3 - 5)
 			.text('0')
 		;
 
 		svg.append('text')
 				.attr('class', 'progress_text')
 				.attr('text-anchor', 'left')
+				.style('font-size', '30px')
+				.style('fill', 'black')
+				.style('stroke', 'none')
 				.attr('tranform', 'translate(15' + ', ' + '15)')
-				.attr('x', config.segmentWidth * states.length - config.padding * 2)
-				.attr('y', config.padding * 2 - 3)
+				.attr('x', config.segmentWidth * states.length - config.padding * 2 - 10)
+				.attr('y', config.padding * 2.3 - 5)
 			.text('4.5')
 		;
 
 		svg.append('text')
 			.attr('class', 'progress_text_avg')
-			.attr('text-anchor', 'left')
+			.attr('text-anchor', 'left')			
+			.style('font-size', '48px')
+			.style('fill', 'black')
 			.attr('tranform', 'translate(15' + ', ' + '15)')
 			.attr('x', function() {
-				return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;;
+				return (GradeData.avgGrade/4.5) * config.segmentWidth * states.length - config.padding * 2;
 			})
-			.attr('y', config.padding * 2 + config.segmentHeight + 18)
+			.attr('y', config.padding * 2.3 + config.segmentHeight + 18 + 24)
 			.text(GradeData.avgGrade)
 		;
 	},
@@ -1572,59 +1635,105 @@ var TEST = {
 		
 		var careerData = {
 			"nodes": [
-				{ "name": "Big Data Engineer", "group": 1, "value": 1 },
-				{ "name": "Connectivity 전문가", "group": 1, "value": 1 },
-				{ "name": "Data Analyst", "group": 1, "value": 1 },
-				{ "name": "Data Scientist", "group": 1, "value": 2 },
-				{ "name": "DBA", "group": 1, "value": 2 },
-				{ "name": "Deep learning 전문가", "group": 1, "value": 1 },
-				{ "name": "DT 전문가", "group": 1, "value": 2 },
-				{ "name": "HR 팀장", "group": 1, "value": 1 },
-				{ "name": "ICT 기술 전문가", "group": 1, "value": 1 },
-				{ "name": "Smart Factory 전문가", "group": 1, "value": 1 },
-				{ "name": "Solution 개발자", "group": 1, "value": 1 },
-				{ "name": "공정 자동화", "group": 1, "value": 1 },
-				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 },
-				{ "name": "금융산업의 DT 전문가", "group": 1, "value": 1 },
-				{ "name": "데이터 분석 전문가", "group": 1, "value": 1 },
-				{ "name": "데이터 아키텍쳐", "group": 1, "value": 1 },
-				{ "name": "데이터 전문가", "group": 1, "value": 1 },
-				{ "name": "데이터 컨설턴트", "group": 1, "value": 1 },
-				{ "name": "딥러닝 전문가", "group": 1, "value": 1 },
-				{ "name": "블록체인 전문가", "group": 1, "value": 1 },
-				{ "name": "빅데이터 전문가", "group": 1, "value": 4 },
-				{ "name": "앱 개발자", "group": 1, "value": 1 },
-				{ "name": "아키텍터", "group": 1, "value": 1 },
-				{ "name": "어플리케이션 전문가", "group": 1, "value": 3 },
-				{ "name": "웹 개발자", "group": 1, "value": 1 },
-				{ "name": "인공지능 전문가", "group": 1, "value": 10 },
-				{ "name": "인공지능, 앱 전문가", "group": 1, "value": 1 },
-				{ "name": "인프라 전문가", "group": 1, "value": 2 },
-				{ "name": "좋은 아빠", "group": 1, "value": 1 },
-				{ "name": "클라우드 PaaS 전문가", "group": 1, "value": 1 },
-				{ "name": "클라우드 전문가", "group": 1, "value": 1 },
-				{ "name": "통신 전문가", "group": 1, "value": 1 },
-				{ "name": "평생개발", "group": 1, "value": 1 },
-				{ "name": "풀스택 Developer/PL/PM", "group": 1, "value": 3 },
-				{ "name": "풀스택개발자", "group": 1, "value": 1 },
-				{ "name": "플랫폼 개발 전문가", "group": 1, "value": 1 },
-				{ "name": "플랫폼 전문가", "group": 1, "value": 1 },
-				{ "name": "SK㈜C&C 임원", "group": 1, "value": 1 },
-				{ "name": "SK㈜C&C 전무", "group": 1, "value": 1 },
-				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 }
+				{ "name": "Data", "group": 1, "value": 9 }, //0
+				{ "name": "DT", "group": 1, "value": 23 }, //1
+				{ "name": "ICT", "group": 1, "value": 16 }, //2
+				{ "name": "ITS", "group": 1, "value": 6 }, //3
+				{ "name": "기타", "group": 1, "value": 5 }, //4
+
+				{ "name": "Big Data Engineer", "group": 3, "value": 1 }, //5
+				{ "name": "Connectivity 전문가", "group": 4, "value": 1 }, //6
+				{ "name": "Data Analyst", "group": 2, "value": 1 }, //7
+				{ "name": "Data Scientist", "group": 2, "value": 2 }, //8
+				{ "name": "DBA", "group": 2, "value": 2 }, //9
+				{ "name": "Deep learning 전문가", "group": 3, "value": 1 }, //10
+				{ "name": "DT 전문가", "group": 3, "value": 2 }, //11
+				{ "name": "HR 팀장", "group": 6, "value": 1 }, //12
+				{ "name": "ICT 기술 전문가", "group": 4, "value": 1 }, //13
+				{ "name": "Smart Factory 전문가", "group": 5, "value": 1 }, //14
+				{ "name": "Solution 개발자", "group": 5, "value": 1 }, //15
+				{ "name": "공정 자동화", "group": 5, "value": 1 }, //16
+				{ "name": "글로벌 IT 컨설턴트", "group": 5, "value": 1 }, //17
+				{ "name": "금융산업의 DT 전문가", "group": 5, "value": 1 }, //18
+				{ "name": "데이터 분석 전문가", "group": 2, "value": 1 }, //19
+				{ "name": "데이터 아키텍쳐", "group": 2, "value": 1 }, //20
+				{ "name": "데이터 전문가", "group": 2, "value": 1 }, //21
+				{ "name": "데이터 컨설턴트", "group": 2, "value": 1 }, //22
+				{ "name": "딥러닝 전문가", "group": 3, "value": 1 }, //23
+				{ "name": "블록체인 전문가", "group": 3, "value": 1 }, //24
+				{ "name": "빅데이터 전문가", "group": 3, "value": 4 }, //25
+				{ "name": "앱 개발자", "group": 4, "value": 1 }, //26
+				{ "name": "아키텍터", "group": 4, "value": 1 }, //27
+				{ "name": "어플리케이션 전문가", "group": 4, "value": 3 }, //28
+				{ "name": "웹 개발자", "group": 4, "value": 1 }, //29
+				{ "name": "인공지능 전문가", "group": 3, "value": 10 }, //30
+				{ "name": "인공지능, 앱 전문가", "group": 3, "value": 1 }, //31
+				{ "name": "인프라 전문가", "group": 4, "value": 2 }, //32
+				{ "name": "좋은 아빠", "group": 6, "value": 1 }, //33
+				{ "name": "클라우드 PaaS 전문가", "group": 3, "value": 1 }, //34
+				{ "name": "클라우드 전문가", "group": 3, "value": 1 }, //35
+				{ "name": "통신 전문가", "group": 5, "value": 1 }, //36
+				{ "name": "평생개발", "group": 6, "value": 1 }, //37
+				{ "name": "풀스택 Developer/PL/PM", "group": 4, "value": 3 }, //38
+				{ "name": "풀스택개발자", "group": 4, "value": 1 }, //39
+				{ "name": "플랫폼 개발 전문가", "group": 4, "value": 1 }, //40
+				{ "name": "플랫폼 전문가", "group": 4, "value": 1 }, //41
+				{ "name": "SK㈜C&C 임원", "group": 6, "value": 1 }, //42
+				{ "name": "SK㈜C&C 전무", "group": 6, "value": 1 } //43
+				// { "name": "글로벌 IT 컨설턴트", "group": 2, "value": 1 } //44
 			],
 			"links": [
-				{ "source": 0, "target": 1, "value": 1 },
-				{ "source": 0, "target": 2, "value": 1 },
-				{ "source": 0, "target": 3, "value": 1 },
-				{ "source": 0, "target": 6, "value": 1 },
-				{ "source": 4, "target": 5, "value": 2 },
-				{ "source": 4, "target": 0, "value": 3 },
-				{ "source": 5, "target": 0, "value": 3 },
-				{ "source": 5, "target": 7, "value": 4 },
-				{ "source": 5, "target": 8, "value": 4 },
-				{ "source": 5, "target": 9, "value": 4 },
-				{ "source": 4, "target": 10, "value": 2 }
+				{ "source": 0, "target": 7, "value": 1 },
+				{ "source": 0, "target": 8, "value": 1 },
+				{ "source": 0, "target": 9, "value": 1 },
+				{ "source": 0, "target": 20, "value": 1 },
+				{ "source": 0, "target": 19, "value": 1 },
+				{ "source": 0, "target": 21, "value": 1 },
+				{ "source": 0, "target": 22, "value": 1 },
+
+
+				{ "source": 1, "target": 5, "value": 2 },
+				{ "source": 1, "target": 10, "value": 2 },
+				{ "source": 1, "target": 11, "value": 2 },
+				{ "source": 1, "target": 23, "value": 2 },
+				{ "source": 1, "target": 24, "value": 2 },
+				{ "source": 1, "target": 25, "value": 2 },
+				{ "source": 1, "target": 30, "value": 2 },
+				{ "source": 1, "target": 31, "value": 2 },
+				{ "source": 1, "target": 34, "value": 2 },
+				{ "source": 1, "target": 35, "value": 2 },
+
+				{ "source": 2, "target": 6, "value": 3 },
+				{ "source": 2, "target": 13, "value": 3 },
+				{ "source": 2, "target": 27, "value": 3 },
+				{ "source": 2, "target": 26, "value": 3 },
+				{ "source": 2, "target": 28, "value": 3 },
+				{ "source": 2, "target": 29, "value": 3 },
+				{ "source": 2, "target": 32, "value": 3 },
+				{ "source": 2, "target": 38, "value": 3 },
+				{ "source": 2, "target": 39, "value": 3 },
+				{ "source": 2, "target": 40, "value": 3 },
+				{ "source": 2, "target": 41, "value": 3 },
+
+				{ "source": 3, "target": 17, "value": 4 },
+				{ "source": 3, "target": 18, "value": 4 },
+				{ "source": 3, "target": 36, "value": 4 },
+				{ "source": 3, "target": 14, "value": 4 },
+				{ "source": 3, "target": 16, "value": 4 },
+				{ "source": 3, "target": 15, "value": 4 },
+
+				{ "source": 4, "target": 42, "value": 5 },
+				{ "source": 4, "target": 43, "value": 5 },
+				{ "source": 4, "target": 33, "value": 5 },
+				{ "source": 4, "target": 37, "value": 5 },
+				{ "source": 4, "target": 12, "value": 5 },
+
+				{ "source": 0, "target": 1, "value": 6 },
+				{ "source": 1, "target": 2, "value": 6 },
+				{ "source": 2, "target": 3, "value": 6 },
+				{ "source": 3, "target": 4, "value": 6 },
+				{ "source": 4, "target": 0, "value": 6 }
+				
 				// ,
 				// { "source": 8, "target": 9, "value": 2 }
 			],
@@ -1854,8 +1963,8 @@ var TEST = {
 		var rScale = d3.scale.linear().domain([0, 100]).range([10, 100]);
 
         var force = d3.layout.force()
-							.charge(-1000)
-							.linkDistance(120)
+							.charge(-950)
+							.linkDistance(80)
 							.size([width, height]);
 
 		var svg = d3.select('#careerDetailChart')
@@ -1899,7 +2008,7 @@ var TEST = {
 										'y': function(d){ return d.y; },
 										'class': 'nodelabel',
 										'stroke': '#404040',
-										'font-size': '20px'})
+										'font-size': '15px'})
 								.text(function(d){return d.name;});
 
 		force.on("tick", function() {
