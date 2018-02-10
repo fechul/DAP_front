@@ -686,7 +686,9 @@ var TEST = {
 		originName: 'POZ',
 		destinations: [
 			{'coord': [127.104456, 37.513931], 'name': '고성군'},
-			{'coord': [129.163984, 35.165740], 'name': '밀양시'}
+			{'coord': [129.163984, 35.165740], 'name': '밀양시'},
+			{'coord': [126.964713, 37.546671], 'name': '여기'},
+			{'coord': [126.924436, 37.557687], 'name': '홍대'}
 		],
 		svg: null,
 		projection: null,
