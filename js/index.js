@@ -798,17 +798,21 @@ INDEX = {
 	},
 
 	makeMajorDetail: function() {
-		var majorInfo = [{'name': '컴퓨터과학','size': 13},
+		var majorInfo = [{'name': 'IT공학과','size': 19},
+		{'name': '컴퓨터과학','size': 13},
 		{'name': '소프트웨어학과','size': 11},
+		{'name': '산업공학과','size': 8},
 		{'name': '경영학과','size': 7},
-		{'name': 'IT공학과','size': 19},
-		{'name': '경제학과','size': 3},
 		{'name': '전기전자컴퓨터공학부','size': 5},
-		{'name': '국어국문학과','size': 2},
-		{'name': '산업공학과','size': 8}];
+		{'name': '경제학과','size': 3},
+		{'name': '국어국문학과','size': 2}];
+
+		var color = ["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {
+			// majorInfo[i].color = color[i%color.length];
+			
 			totalSize += majorInfo[i].size;
 		}
 
@@ -869,40 +873,43 @@ INDEX = {
 			return a.size > b.size ? -1 : a.size < b.size ? 1 : 0;  
 		});
 
-		var majorText = '';
-
 		for(var i = 0; i < majorInfo.length; i++) {
 			var target = majorInfo[i];
 			if(maj1.indexOf(target.name) > -1) {
 				majorData.children[0].children[0].children.push(target);
 				target.category = '공학계열';
+				target.color = color[0];
 			} else if(maj2.indexOf(target.name) > -1){
 				majorData.children[0].children[1].children.push(target);
 				target.category = '자연계열';
+				target.color = color[1];
 			} else if(maj3.indexOf(target.name) > -1) {
 				majorData.children[0].children[2].children.push(target);
 				target.category = '의약계열';
+				target.color = color[2];
 			} else if(maj4.indexOf(target.name) > -1) {
 				majorData.children[1].children[0].children.push(target);
 				target.category = '인문계열';
+				target.color = color[3];
 			} else if(maj5.indexOf(target.name) > -1) {
 				majorData.children[1].children[1].children.push(target);
 				target.category = '사회계열';
+				target.color = color[4];
 			} else if(maj6.indexOf(target.name) > -1) {
 				majorData.children[1].children[2].children.push(target);
 				target.category = '교육계열';
+				target.color = color[5];
 			} else if(maj7.indexOf(target.name) > -1) {
 				majorData.children[2].children.push(target);
 				target.category = '예체능계열';
+				target.color = color[6];
 			} else {
 				majorData.children[3].children.push(target);
 				target.category = '기타';
+				target.color = color[7];
 			}
-
-			majorText += '<div class="majorListText"><div class="majorTitleList">' + target.name + ': </div>' + target.size + ' (' + ((target.size/totalSize)*100).toFixed(2) + '%)</div>';
 		}
 
-		$('.majorDetailPart').append(majorText);
 
 		var root = majorData;
 
@@ -950,7 +957,10 @@ INDEX = {
             .style("top", function (d) { return d.y + "px"; })
             .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
             .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
-            .style("background", function (d) { return d.children ? color(d.name) : null; })
+            .style("background", function (d) {
+            	// return d.children ? color(d.name) : null;
+            	return d.color;
+            })
             .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
             .on("mousemove", function (d) {
                 tool.style("left", d3.event.pageX + 10 + "px")
@@ -960,6 +970,12 @@ INDEX = {
             }).on("mouseout", function (d) {
                 tool.style("display", "none");
             });
+
+        var majorDetailText = '';
+		for(var i = 0; i < 5; i++) {
+			majorDetailText += "<li style='color:" + majorInfo[i].color + "'>" + majorInfo[i].name + "<span class='majorCategorySublabel'>(" + majorInfo[i].size + ")</span></li>"
+		}
+		$('#majorRankList').append(majorDetailText);
 	},
 
 	makeCharacterDetail: function() {
