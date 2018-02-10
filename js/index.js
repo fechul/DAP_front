@@ -9,7 +9,7 @@ INDEX = {
 		this.makeGender('#genderChart', 220, 220, 100);
 		this.makeAge();
 		this.makeMajor();
-		this.makeCharacter();
+		// this.makeCharacter();
 
 		this.makeGenderDetail();
 		this.makeAgeDetail();
