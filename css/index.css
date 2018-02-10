@@ -151,7 +151,7 @@ body {
 
 /* modal */
 #detailModal .modal-header {
-    background-color: #333;
+    background-color: #d43f3a;//#333;
     color: #fff;
 }
 
@@ -325,3 +325,16 @@ body {
     font-size: 48px;
     font-weight: bold;
 }
+
+
+/* abilityDetailChart */
+.abilityDetailContainer {
+    display: block;
+    text-align: -webkit-center;
+    margin-left: 40px;
+}
+
+.abilityDetailPart {
+    width: fit-content;
+}
+

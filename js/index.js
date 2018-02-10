@@ -413,7 +413,7 @@ INDEX = {
 				$('.ageDetailContainer').show();
 				break;
 			case 'major':
-				
+				$('.majorDetailContainer').show();
 				break;
 			case 'area':
 				$('.areaDetailContainer').show();
@@ -422,10 +422,10 @@ INDEX = {
 				$('.gradeDetailContainer').show();
 				break;
 			case 'ability':
-				
+				$('.abilityDetailContainer').show();
 				break;
 			case 'character':
-				
+				$('.characterDetailContainer').show();
 				break;
 			case 'career':
 				$('.careerDetailContainer').show();

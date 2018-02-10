@@ -14,6 +14,7 @@
     <link href="css/index.css?ver=9" rel="stylesheet">
     <link href="css/gradeChart.css?ver=5" rel="stylesheet">
     <link href="css/abilityChart.css?ver=5" rel="stylesheet">
+    <link href="css/abilityDetailChart.css?ver=5" rel="stylesheet">
     <link href="css/areaChart.css?ver=5" rel="stylesheet">
     <link href="css/areaDetailChart.css?ver=1" rel="stylesheet">
     <link href="css/careerChart.css?ver=1" rel="stylesheet">
@@ -196,7 +197,6 @@
 
           <!--LEFT-->
           <div class="modalContentArea left">
-
             <!--GENDER DETAIL-->
             <div class="genderDetailContainer detailContainer">
               <svg id="genderDetailChart"></svg>
@@ -205,17 +205,14 @@
                 <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
               </div>
             </div>
-
             <!--AGE DETAIL-->
             <div class="ageDetailContainer detailContainer">
               <svg id="ageDetailChart"></svg>
             </div>
-
             <!-- left, makeAreaDetail -->
             <div class="areaDetailContainer detailContainer">
               <div id="areaDetailChart"></div>
             </div>
-
             <!-- left, makeGradeDetail -->
             <div class="gradeDetailContainer detailContainer">
               <svg id = "gradeDetailChart"></svg>
@@ -248,17 +245,22 @@
                 </table>
               </div>
             </div>
-
             <!-- left, makeAbilityDetail -->
+            <div class="abilityDetailContainer detailContainer">
+              <div id="abilityDetailChart"></div>
+            </div>
+            <!-- left, makeCharacterDetail -->
+            <div class="characterDetailContainer detailContainer">
+              <svg id="characterWordCloudDetail"></svg>
+            </div>
             <!-- left, makeCareerDetail -->
             <div class="careerDetailContainer detailContainer">
               <div id="careerDetailChart"></div>
             </div>
-
           </div>
+
           <!--RIGHT-->
           <div class="modalContentArea right">
-
             <!--GENDER DETAIL-->
             <div class="genderDetailContainer detailContainer">
               <div class="genderDetailPart detailPart">
@@ -269,7 +271,6 @@
                 <div id="genderDetailCntWoman">-</div>
               </div>
             </div>
-
             <!--AGE DETAIL-->
             <div class="ageDetailContainer detailContainer">
               <div class="ageDetailPart detailPart">
@@ -283,8 +284,15 @@
                 <div id="ageYoung" class="ageInfos">-</div>
               </div>
             </div>
-
             <!-- right, makeAreaDetail -->
+            <div class="areaDetailContainer detailContainer">
+              <div class="areaDetailPart detailPart">
+                <br><br><br>
+                <label>서울</label>
+                <br><br><br>
+                <label>인천</label>
+              </div>
+            </div>
             <!-- right, makeGradeDetail -->
             <div class="gradeDetailContainer detailContainer">
               <div class="gradeDetailPart detailPart">
@@ -297,12 +305,28 @@
               </div>
             </div>
             <!-- right, makeAbilityDetail -->
+            <div class="abilityDetailContainer detailContainer">
+              <div class="abilityDetailPart detailPart">
+                <br><br><br>
+                <label class="abilityCategoryLabel">IT역량 랭킹</label>
+                <ol id="abilityRankList">
+                </ol>
+              </div>
+            </div>
+            <!-- right, makeCharacterDetail -->
+            <div class="characterDetailContainer detailContainer">
+              <div class="characterDetailPart detailPart">
+                <br><br><br>
+                <label>랭킹</label>
+                <div id="characterRankList"></div>
+              </div>
+            </div>
             <!-- right, makeCareerDetail -->
             <div class="careerDetailContainer detailContainer">
               <div class="careerDetailPart detailPart">
                 <label class="careerCategoryLabel">대분류</label>
                 <div id="careerCategoryFirst"></div>
-                <br><br><br>
+                <br><br>
                 <label class="careerCategoryLabel">소분류</label>
                 <div id="careerCategorySecond"></div>
               </div>

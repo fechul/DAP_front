@@ -1,13 +1,13 @@
 var TEST = {
 	init: function() {
+		this.makeArea.start();
 		this.makeGrade();
 		this.makeAbility();
-		this.makeArea.start();
 		this.makeCareer();
 
 		this.makeGradeDetail();
 		this.makeCareerDetail();
-
+		this.makeAbilityDetail();
 		this.makeAreaDetail.start();
 	},
 
@@ -390,16 +390,59 @@ var TEST = {
 		var LegendOptions = ['Ability'];
 
 		//Data
+		// var d = [
+		// 	[
+		// 	{axis:"Java", value:0.59},
+		// 	{axis:"Python", value:0.56},
+		// 	{axis:"C", value:0.42},
+		// 	{axis:"Javascript", value:0.34},
+		// 	{axis:"C++", value:0.48},
+		// 	{axis:"Go", value:0.14}
+		// 	]
+		// ];
+
 		var d = [
 			[
-			{axis:"Java", value:0.59},
-			{axis:"Python", value:0.56},
-			{axis:"C", value:0.42},
-			{axis:"Javascript", value:0.34},
-			{axis:"C++", value:0.48},
-			{axis:"Go", value:0.14}
+				{axis:"Java", value:10},
+				{axis:"Python", value:5},
+				{axis:"C", value:7},
+				{axis:"Javascript", value:20},
+				{axis:"C++", value:9},
+				{axis:"Go", value:12}
 			]
 		];
+
+		var sum = 0;
+		$.each(d[0], function(index, value) {
+			// console.log(index+','+value);
+			$.each(value, function(k, v) {
+				// console.log(k+','+v);
+				if(k === 'value') sum += v;
+			})
+		})
+		// console.log(sum);
+
+		var precisionRound = function(number, precision) {
+  			var factor = Math.pow(10, precision);
+  			return Math.round(number * factor) / factor;
+		}
+
+		var copy = function(arr1, arr2) {
+			for(var i=0; i<arr1.length; i++) {
+				arr2[i] = arr1[i];
+			}
+		}
+		var abilityDetailChartData = [];
+		for(var i=0; i<10; i++) abilityDetailChartData[i] = i;
+
+		var abilityDetailChartData = $.extend(true, {}, d);
+		abilityDetailChartData = Object.values(abilityDetailChartData);
+		$.each(abilityDetailChartData, function(index, value) {
+			$.each(value, function(k, v) {
+				// console.log(k + ', ' + v.value / sum);
+				v.value = precisionRound(v.value / sum, 4);
+			})
+		})
 
 		//Options for the Radar chart, other than default
 		var mycfg = {
@@ -412,53 +455,14 @@ var TEST = {
 
 		//Call function to draw the Radar chart
 		//Will expect that data is in %'s
-		RadarChart.draw("#abilityChart", d, mycfg);
+		RadarChart.draw("#abilityChart", abilityDetailChartData, mycfg);
 
 		var svg = d3.select('#abilityChart')
 						.selectAll('svg')
 						.append('svg')
 						.attr("width", w + 300)
 						.attr("height", h)
-
-		//Create the title for the legend
-		// var text = svg.append("text")
-		// 	.attr("class", "title")
-		// 	.attr('transform', 'translate(90,0)') 
-		// 	.attr("x", w - 70)
-		// 	.attr("y", 10)
-		// 	.attr("font-size", "12px")
-		// 	.attr("fill", "#404040")
-		// 	.text("What % of owners use a specific service in a week");
-				
-		//Initiate Legend	
-		// var legend = svg.append("g")
-		// 	.attr("class", "legend")
-		// 	.attr("height", 100)
-		// 	.attr("width", 200)
-		// 	.attr('transform', 'translate(90,20)') 
-		// 	;
-		// 	//Create colour squares
-		// 	legend.selectAll('rect')
-		// 	  .data(LegendOptions)
-		// 	  .enter()
-		// 	  .append("rect")
-		// 	  .attr("x", w - 65)
-		// 	  .attr("y", function(d, i){ return i * 20;})
-		// 	  .attr("width", 10)
-		// 	  .attr("height", 10)
-		// 	  .style("fill", function(d, i){ return colorscale(i);})
-		// 	  ;
-		// 	//Create text next to squares
-		// 	legend.selectAll('text')
-		// 	  .data(LegendOptions)
-		// 	  .enter()
-		// 	  .append("text")
-		// 	  .attr("x", w - 52)
-		// 	  .attr("y", function(d, i){ return i * 20 + 9;})
-		// 	  .attr("font-size", "11px")
-		// 	  .attr("fill", "#737373")
-		// 	  .text(function(d) { return d; })
-		// 	  ;
+		;
 	},
 
 	// IT 역량 차트 생성, 후보
@@ -993,7 +997,166 @@ var TEST = {
 	},
 
 	makeAbilityDetail: function() {
+		var w = 490,
+			h = 480;
 
+		var colorscale = d3.scale.category10();
+
+		//Legend titles
+		var LegendOptions = ['Ability'];
+
+		//Data
+		// var d = [
+		// 	[
+		// 		{axis:"Java", value:0.59},
+		// 		{axis:"Python", value:0.56},
+		// 		{axis:"C", value:0.42},
+		// 		{axis:"Javascript", value:0.34},
+		// 		{axis:"C++", value:0.48},
+		// 		{axis:"Go", value:0.14}
+		// 	]
+		// ];
+
+		var d = [
+			[
+				{axis:"Java", value:10},
+				{axis:"Python", value:5},
+				{axis:"C", value:7},
+				{axis:"Javascript", value:20},
+				{axis:"C++", value:9},
+				{axis:"Go", value:12}
+			]
+		];
+
+		var sum = 0;
+		$.each(d[0], function(index, value) {
+			// console.log(index+','+value);
+			$.each(value, function(k, v) {
+				// console.log(k+','+v);
+				if(k === 'value') sum += v;
+			})
+		})
+		// console.log(sum);
+
+		var precisionRound = function(number, precision) {
+  			var factor = Math.pow(10, precision);
+  			return Math.round(number * factor) / factor;
+		}
+
+		var copy = function(arr1, arr2) {
+			for(var i=0; i<arr1.length; i++) {
+				arr2[i] = arr1[i];
+			}
+		}
+		var abilityDetailChartData = [];
+		for(var i=0; i<10; i++) abilityDetailChartData[i] = i;
+		
+		// var abilityDetailChartData = jQuery.extend(true, {}, d);
+		// var abilityDetailChartData = d;
+		var abilityDetailChartData = $.extend(true, {}, d);
+		abilityDetailChartData = Object.values(abilityDetailChartData);
+		$.each(abilityDetailChartData, function(index, value) {
+			$.each(value, function(k, v) {
+				// console.log(k + ', ' + v.value / sum);
+				v.value = precisionRound(v.value / sum, 4);
+			})
+		})
+
+		// console.log(abilityDetailChartData);
+		// console.log(d);
+		// console.log(abilityDetailChartData);
+		
+
+		// 그래프 그리기
+		//Options for the Radar chart, other than default
+		var mycfg = {
+			w: w,
+			h: h,
+			maxValue: 0.6,
+			levels: 6,
+			ExtraWidthX: 200
+		}
+
+		//Call function to draw the Radar chart
+		//Will expect that data is in %'s
+		RadarChart.draw("#abilityDetailChart", abilityDetailChartData, mycfg);
+
+		var svg = d3.select('#abilityDetailChart')
+						.selectAll('svg')
+						.append('svg')
+						.attr("width", w + 300)
+						.attr("height", h)
+		;
+
+		//Create the title for the legend
+		// var text = svg.append("text")
+		// 	.attr("class", "title")
+		// 	.attr('transform', 'translate(90,20)') 
+		// 	.attr("x", w - 70)
+		// 	.attr("y", 10)
+		// 	.attr("font-size", "18px")
+		// 	.attr("fill", "#404040")
+		// 	.text("IT 역량");
+				
+		//Initiate Legend	
+		// var legend = svg.append("g")
+		// 	.attr("class", "legend")
+		// 	.attr("height", 100)
+		// 	.attr("width", 200)
+		// 	.attr('transform', 'translate(90,20)') 
+		// 	;
+		// 	//Create colour squares
+		// 	legend.selectAll('rect')
+		// 	  .data(LegendOptions)
+		// 	  .enter()
+		// 	  .append("rect")
+		// 	  .attr("x", w - 65)
+		// 	  .attr("y", function(d, i){ return i * 20;})
+		// 	  .attr("width", 20)
+		// 	  .attr("height", 20)
+		// 	  .attr('transform', 'translate(-6, 20)') 
+		// 	  .style("fill", function(d, i){ return colorscale(i);})
+		// 	  ;
+		// 	//Create text next to squares
+		// 	legend.selectAll('text')
+		// 	  .data(LegendOptions)
+		// 	  .enter()
+		// 	  .append("text")
+		// 	  .attr("x", w - 52)
+		// 	  .attr("y", function(d, i){ return i * 20 + 9;})
+		// 	  .attr("font-size", "15px")
+		// 	  .attr("fill", "#737373")
+		// 	  .attr('transform', 'translate(0,20)') 
+		// 	  .text(function(d) { return d; })
+		// 	  ;
+		
+		// 랭킹 구하기
+		var appendRanking = function() {
+			// var html = '<li></li>'
+			//console.log(d[0]);
+			//console.log(d[0].sort(function(a, b) {  return d3.descending(a.value, b.value); }));
+			var sortedData = d[0].sort(function(a, b) {  return d3.descending(a.value, b.value); });
+			var rankData = sortedData.slice(0, 5);
+			for(var i = 0; i<rankData.length; i++) {
+				// console.log(i);
+				$('#abilityRankList').append("<li>" + rankData[i].axis + "<span class='abilityCategorySublabel'>(" + rankData[i].value + ")</span></li>");
+			}
+		}
+
+		var clickCategory = function() {
+			for(var i = 0; i<categoryFirst.length; i++) {
+				(function(m) {
+					
+					$('#category_' + m).on('click', function() { 
+						hideSubcategoryAll();
+						clickShowSubcategory(m); 
+					});
+				})(i);
+				
+			}
+		}
+
+		appendRanking();
 	},
 
 	makeCareerDetail: function() {
@@ -1153,9 +1316,6 @@ var TEST = {
 		// $('#category_1').on('click', function() { clickShowSubcategory(1) } );
 		// $('#category_2').on('click', function() { clickShowSubcategory(2) } );
 
-		
-
-		
 
 		// 그래프 그리기			
         var colorNode = d3.scale.category20(),
@@ -1224,9 +1384,6 @@ var TEST = {
 			nodelabels.attr("x", function(d) { return d.x; }) 
 					  .attr("y", function(d) { return d.y; });
 		});
-
-		// 대분류, 소분류 
-		var html = '';
 
 		$('#careerCategoryFirst').append();
 	}
