@@ -13,6 +13,7 @@ INDEX = {
 
 		this.makeGenderDetail();
 		this.makeAgeDetail();
+		this.makeMajorDetail();
 	},
 
 	initEvents: function() {
@@ -67,6 +68,14 @@ INDEX = {
 		// self.detailBox.on('hidden.bs.modal', function(e) {
 		// 	$('.modal-dialog').removeClass('animated');
 		// });
+
+		$(document).on('keydown', function(e) {
+			if(e.keyCode == 37) {	// LEFT
+				$('.moveType.left').click();
+			} else if(e.keyCode == 39) {	// RIGHT
+				$('.moveType.right').click();
+			}
+		});
 	},
 
 	// Modal Resize
@@ -283,7 +292,7 @@ INDEX = {
 
 		var tree = majorData;
 
-		var width = 320,
+		var width = 290,
 		    height = 220,
 		    color = d3.scale.category20c(),
 		    div = d3.select("#majorTree").append("div")
@@ -413,7 +422,7 @@ INDEX = {
 				$('.ageDetailContainer').show();
 				break;
 			case 'major':
-				
+				$('.majorDetailContainer').show();
 				break;
 			case 'area':
 				
@@ -456,7 +465,7 @@ INDEX = {
 			$('#genderDetailCntWoman').css('font-size', '60px');
 		} else {
 			if(genderData[0].label == '남자') {
-				$('#genderDetailCntMan').text(genderData[0].value);
+				// $('#genderDetailCntMan').text(genderData[0].value + ' (' + );
 				$('#genderDetailCntWoman').text(genderData[1].value);
 				$('#genderManRectText').text(genderData[0].label);
 				$('#genderDetailCntWomanText').text(genderData[1].label);
@@ -673,6 +682,171 @@ INDEX = {
 		      .attr("height", function(d) { return height - y(d.value); });
 
 		// });
+	},
+
+	makeMajorDetail: function() {
+		var majorInfo = [{'name': '컴퓨터과학','size': 13},
+		{'name': '소프트웨어학과','size': 11},
+		{'name': '경영학과','size': 7},
+		{'name': 'IT공학과','size': 19},
+		{'name': '경제학과','size': 3},
+		{'name': '전기전자컴퓨터공학부','size': 5},
+		{'name': '국어국문학과','size': 2},
+		{'name': '산업공학과','size': 8}];
+
+		var totalSize = 0;
+		for(var i = 0; i < majorInfo.length; i++) {
+			totalSize += majorInfo[i].size;
+		}
+
+		var majorData = {
+			"name":"major",
+			"children": [{
+				"name":"이과",
+				"children":[{
+					"name": "공학계열",
+					"children": []
+				},{
+					"name": "자연계열",
+					"children": []
+				},{
+					"name": "의약계열",
+					"children": []
+				}]
+			}, {
+				"name":"문과",
+				"children":[{
+					"name": "인문계열",
+					"children": []
+				},{
+					"name": "사회계열",
+					"children": []
+				},{
+					"name": "교육계열",
+					"children": []
+				}]
+			}, {
+				"name": "예체능계열",
+				"children": []
+			}, {
+				"name": "기타",
+				"children": []
+			}]
+		};
+
+		// var maj1 = ['국어국문학과', '중어중문학과', '영어영문학과', '독어독문학과', '사학과', '철학과', '정치외교학과', '행정학과', '사회학과', '관광학부', '법학과', '동양학과', '서양학과', '산업디자인학과', '산업디자인', '공예학과', '조소과', '성악과', '작곡과', '피아노학과', '관현악과', '국악과', '경영학과', '경제금융학과', '정책학과', '정치학과', '경제학과'];
+		// var maj2 = ['수학과', '화학과', '물리학과', '생명과학과', '생명공학과', '생명과학부', '생명공학부', '의류학과', '사회복지학과', '스포츠레저학과', '생활문화학과', '식품영양학과', '디자인학과', '건충공학부', '건축공학과', '건설공학부', '건설공학과', '도시공학부', '도시공학과', '컴퓨터공학부', '컴퓨터공학', '컴퓨터공학과', '컴퓨터과학부', '컴퓨터과학', '컴퓨터과학과', '화학공학과', '화학공학부', '생명공학과', '생명공학부', '기계공학과', '기계공학부', '응용시스템공학부', '응용시스템공학과', '미래자동차공학과', '융합전자공학과', '융합전자공학부', 'IT공학', '소프트웨어학과', '소프트웨어응용학과', '전기전자컴퓨터공학부', '전기전자컴퓨터공학과'];
+
+		// 공학계열
+		var maj1 = ['건축공학과','건축학과','게임공학과','고분자공학과','공업화학과','공업화학학과','광학공학과','교양공학부','교통공학과','국방기술학과','금속공학과','기계공학과','기계설계공학과','냉동공조공학과','디지털콘텐츠학과','멀티미디어학과','메카트로닉스공학과','모바일시스템공학과','물류시스템공학과','미디어학과','반도체학과','사이버국방학과','산업공학과','섬유공학과','세라믹공학과','소방방재학과','소프트웨어공학과','시스템경영공학과','시스템공학과','신소재공학과','안전공학과','에너지자원공학과','원자력공학과','응용공학과','응용소프트웨어공학과','인쇄정보공학과','인터넷정보학과','자동차공학과','재료공학과','전기공학과','전기전자공학과','전기제어공학과','전자공학과','전파공학과','정밀화학과','정보통신공학과','제어계측공학과','제어로봇학과','제지공학과','조경학과','조선공학과','컴퓨터공학과','컴퓨터과학과','토목공학과','항공우주공학과','항공운항학과','항해학과','해양공학과','해양시스템학과','화장품과학과','화학공학과','컴퓨터공함','컴퓨터과학', '소프트웨어학과', 'IT공학과', '전기전자컴퓨터공학부', '전기전자컴퓨터공학과', 'IT공학부'];
+		// 자연계열
+		var maj2 = ['가정학과','교양생활과학부','교양자연과학부','나노공학과','농공학과','농생물학과','대기과학과','동물자원학과','말특수동물학과','물리학과','산림자원학과','생명공학과','생명과학과','생명자원학과','생물산업기계공학과','생물학과','생화학과','수의학과','수학과','식물자원학과','식품공학과','식품영양학과','우주과학과','원예학과','유전공학과','의류학과','의상학과','임산공학과','임학과','제약공학과','조리과학과','지구물리학과','지구정보공학과','지구해양과학과','지리학과','지적학과','지질학과','천문학과','축산학과','통계학과','한방학과','해양생명과학과','해양자원학과','화학과','환경공학과','환경과학과'];
+		// 의약계열
+		var maj3 = ['간호학과','공중보건학과','물리치료학과','방사선학과','보건관리학과','약학부','예술치료학과','응급구조학과','의료정보공학과','의예과','의용공학과','임상병리학과','작업치료학과','재활학과','치기공학과','치위생학과','치의예과','한약학과','한의예과','환경보건학과'];
+		// 인문계열
+		var maj4 = ['고고학과','교양인문학부','국어국문학과','기독교학과','독어독문학과','독일학과','러시아어문학과','러시아학과','문예창작학과','문헌정보학과', '문화재보존학과','문화콘텐츠학과','미국학과','민속학과','북한학과','불교학과','불어불문학과','사학과','선교학과','스토리텔링학과','스페인어학과','신학과','심리학과','아랍어학과','아시아어학과','아프리카어학과','언어과학과','영어영문학과','영어학과','외국어학부','유럽학과','윤리학과','이탈리아어학과','인도어학과','인류학과','인문학부','일본학과','일어일문학과','자율전공학부','종교학과','중국학과','중어중문학과','지역학과','철학과','태국어학과','터키어학과','통번역학과','포르투갈어학과','폴란드어학과','프랑스학과','한국어학과','한문학과','헝가리어학과'];
+		// 사회계열
+		var maj5 = ['e-비즈니스학과','경영정보학과','경영학과','경제학과','경찰행정학과','관광경영학과','광고홍보학과','교양경상학부','교양사회과학부','국제경영 및 통상학과','국제관계학과','국제문화정보학과','국제법무학과','국제학과','군사학과','금융보험학과','노인복지학과','농업경제학과','도시계획학과','도시공학과','무역학과','법학과','벤처창업학과','병원관리학과','보건행정학과','부동산학과','비서행정학과','사회복지학과','사회학과','산업경영학과','세무학과','세무회계학과','스포츠마케팅학과','신문방송학과','아동복지학과','아동학과','언론홍보학과','외식산업학과','유통학과','전자상거래학과','정보보호학과','정치외교학과','증권금융과','지역개발학과','청소년지도학과','항공서비스학과','해양경찰학과','행정학과','호텔경영학과','회계학과'];
+		// 교육계열
+		var maj6 = ['가정교육과','과학교육과','교육공학과','교육심리학과','교육학과','국어교육과','기술교육과','농업교육과','독일어교육과','물리교육과','미술교육과','불어교육과','사회교육학과','생물교육과','수학교육과','수해양산업교육과','언어치료학과','역사교육과','영어교육과','유아교육학과','윤리교육과','음악교육과','일반사회교육과','일어교육과','전기공학교육과','종교교육과','지구과학교육과','지리교육과','체육교육과','초등교육과','컴퓨터교육과','특수교육학과','한문교육과','화학교육과','환경교육과'];
+		//예체능계열
+		var maj7 = ['건강관리학과','경호학과','공업디자인학과','공예디자인학과','공예학과','관현악과','광고디자인학과','국악학과','금속공예학과','기악과','도자기공예학과','동양화과','디자인학과','디지털디자인학과','레저스포츠학과','만화애니메이션학과','목조형가구학과','무도학과','무용학과','미술학과','뷰티미용학과','사진영상학과','사회체육학과','산업디자인학과','서양화과','섬유디자인학과','성악과','스포츠의학과','스포츠지도학과','시각디자인학과','실내디자인학과','실용음악학과','연극영화학과','연극학과','영상미술학과','예술학과','음악학과','의상디자인학과','작곡과','조소학과','조형디자인학과','체육학과','커뮤니케이션디자인학과','컴퓨터디자인학과','코미디연기학과','판화과','패션디자인학과','피아노학과','한국음악과','해양스포츠학과','환경디자인학과','환경조각학과','회화학과'];
+
+		majorInfo.sort(function (a, b) { 
+			return a.size > b.size ? -1 : a.size < b.size ? 1 : 0;  
+		});
+
+		var majorText = '';
+
+		for(var i = 0; i < majorInfo.length; i++) {
+			var target = majorInfo[i];
+			if(maj1.indexOf(target.name) > -1) {
+				majorData.children[0].children[0].children.push(target);
+				target.category = '공학계열';
+			} else if(maj2.indexOf(target.name) > -1){
+				majorData.children[0].children[1].children.push(target);
+				target.category = '자연계열';
+			} else if(maj3.indexOf(target.name) > -1) {
+				majorData.children[0].children[2].children.push(target);
+				target.category = '의약계열';
+			} else if(maj4.indexOf(target.name) > -1) {
+				majorData.children[1].children[0].children.push(target);
+				target.category = '인문계열';
+			} else if(maj5.indexOf(target.name) > -1) {
+				majorData.children[1].children[1].children.push(target);
+				target.category = '사회계열';
+			} else if(maj6.indexOf(target.name) > -1) {
+				majorData.children[1].children[2].children.push(target);
+				target.category = '교육계열';
+			} else if(maj7.indexOf(target.name) > -1) {
+				majorData.children[2].children.push(target);
+				target.category = '예체능계열';
+			} else {
+				majorData.children[3].children.push(target);
+				target.category = '기타';
+			}
+
+			majorText += '<div class="majorListText"><div class="majorTitleList">' + target.name + ': </div>' + target.size + ' (' + ((target.size/totalSize)*100).toFixed(2) + '%)</div>';
+		}
+
+		$('.majorDetailPart').append(majorText);
+
+		var root = majorData;
+
+		var width = 500,
+            height = 500;
+
+        var color = d3.scale.ordinal()
+            .range(["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"])
+            
+        var treemap = d3.layout.treemap()
+            .size([width, height])
+            .padding(.25) //I like the thin interal lines, the group seporations are set in the CSS
+            .value(function (d) { return d.size; });
+
+        var div = d3.select("#majorList").append("div")
+            .attr("class","treemap")
+            .style("position", "relative")
+            .style("width", width + "px")
+            .style("height", height + "px");
+
+        var ledg = d3.select("body").append("div")
+            .style("position", "relative")
+            .style("width", width + "px")
+            .style("height", 300 + "px");
+
+        var tool = d3.select("body").append("div").attr("class", "toolTip");
+
+        d3.select(self.frameElement).style("height", height + 300 + "px");
+        d3.select(self.frameElement).style("width", width+20 + "px");
+
+        function formatMoney(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        };
+
+        function roundToTwo(num) {
+            return +(Math.round(num + "e+2") + "e-2");
+        };
+
+
+        div.selectAll(".node")
+            .data(treemap.nodes(root))
+          .enter().append("div")
+            .attr("class", "node")
+            .style("left", function (d) { return d.x + "px"; })
+            .style("top", function (d) { return d.y + "px"; })
+            .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
+            .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
+            .style("background", function (d) { return d.children ? color(d.name) : null; })
+            .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
+            .on("mousemove", function (d) {
+                tool.style("left", d3.event.pageX + 10 + "px")
+                tool.style("top", d3.event.pageY - 20 + "px")
+                tool.style("display", "inline-block");
+                tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / totalSize) * 100) + '%');
+            }).on("mouseout", function (d) {
+                tool.style("display", "none");
+            });
 	}
 };
 

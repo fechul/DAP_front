@@ -171,7 +171,6 @@ body {
 }
 
 .modal-body {
-    overflow: scroll;
     height: 650px;
 }
 
@@ -191,6 +190,7 @@ body {
 
 .modalContentArea.right {
     width: 34%;
+    overflow: scroll;
 }
 
 .moveType {
@@ -289,5 +289,63 @@ body {
 
 .ageDetailContainer, .ageDetailPart {
     margin-top: 30px;
+}
+
+
+/* MAJOR DETAIL */
+
+.ledg{
+    font: .8em sans-serif;
+    position: absolute;
+    text-indent: 5px;
+}
+
+.toolTip {
+    position: absolute;
+    display: none;
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: black;
+    font: 12px sans-serif;
+    padding: 5px;
+    text-align: center;
+}
+
+#majorList {
+    margin: 20px;
+}
+
+#majorList .treemap {
+    margin: 0 auto;
+}
+
+#majorList .node {
+    border: solid 1px white;
+    font: 0.625em sans-serif;
+    line-height: 12px;
+    overflow: hidden;
+    position: absolute;
+    text-indent: 2px;
+    cursor: default;
+    font-size: 20px;
+    /*padding: 15px;*/
+    line-height: 1em;
+}
+
+.majorListText {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.majorDetailContainer {
+    margin-top: 30px;
+}
+
+.majorTitleList {
+    width: 100px;
 }
 
