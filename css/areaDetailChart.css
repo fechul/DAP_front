@@ -12,10 +12,10 @@ div.tooltipDestinationDetail {
     position: absolute;
     text-align: center;
     width: 60px;
-    height: 16px;
+    height: 24px;
     padding: 2px;
     font: 12px sans-serif;
-    background: red;
+    background: green;
     border: 0px;
     border-radius: 0px;
     pointer-events: none;
@@ -24,11 +24,11 @@ div.tooltipDestinationDetail {
 div.tooltipOriginDetail {
     position: absolute;
     text-align: center;
-    width: 60px;
-    height: 16px;
+    width: 130px;
+    height: 34px;
     padding: 2px;
-    font: 12px sans-serif;
-    background: green;
+    font: 18px sans-serif;
+    background: red;
     border: 0px;
     border-radius: 0px;
     pointer-events: none;
