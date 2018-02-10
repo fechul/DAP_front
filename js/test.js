@@ -116,9 +116,70 @@ var TEST = {
 	// 지역 차트 생성
 	makeArea: {
 		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
-		originName: 'POZ',
+		originName: 'SK(주)C&C',
 		destinations: [
-			{'coord': [127.104456, 37.513931], 'name': '고성군'},
+			{'coord': [126.782, 37.505], 'name': '경기도 부천시'},
+			{'coord': [127.113, 37.37], 'name': '경기도 성남시'},
+			{'coord': [126.939, 37.399], 'name': '경기도 안양시'},
+			{'coord': [126.907, 37.405], 'name': '경기도 안양시'},
+			{'coord': [129.399, 36.988], 'name': '경상북도 울진군'},
+			{'coord': [127.066, 37.637], 'name': '서울특별시 노원구'},
+			{'coord': [126.955, 37.235], 'name': '경기도 화성시'},
+			{'coord': [127.012, 37.612], 'name': '서울특별시 성북구'},
+			{'coord': [127.138, 37.371], 'name': '경기도 성남시'},
+			{'coord': [129.059, 35.14], 'name': '부산광역시 동구'},
+			{'coord': [126.961, 37.562], 'name': '서울특별시 서대문구'},
+			{'coord': [127.044, 37.307], 'name': '경기도 수원시'},
+			{'coord': [126.981783, 37.38544], 'name': '경기도 의왕시'},
+			{'coord': [127.062111, 37.500733], 'name': '서울특별시 강남구'},
+			{'coord': [127.133428, 37.514078], 'name': '서울특별시 송파구'},
+			{'coord': [126.717106, 37.460384], 'name': '인천광역시 남동구'},
+			{'coord': [128.435188, 36.090831], 'name': '경상북도 구미시'},
+			{'coord': [126.936089, 37.517971], 'name': '서울특별시 영등포구'},
+			{'coord': [126.936428, 37.588674], 'name': '서울특별시 서대문구'},
+			{'coord': [127.394479, 36.321067], 'name': '대전광역시 중구'},
+			{'coord': [127.035, 37.286098], 'name': '경기도 수원시'},
+			{'coord': [129.016393, 35.153772], 'name': '부산광역시 사상구'},
+			{'coord': [128.549181, 35.928274], 'name': '대구광역시 북구'},
+			{'coord': [127.503723, 36.612542], 'name': '충청북도 청주시'},
+			{'coord': [128.695853, 35.838525], 'name': '대구광역시 수성구'},
+			{'coord': [127.05916, 37.247775], 'name': '경기도 수원시'},
+			{'coord': [129.114292, 37.524719], 'name': '강원도 동해시'},
+			{'coord': [126.945021, 37.507494], 'name': '서울특별시 동작구'},
+			{'coord': [127.03014, 37.249787], 'name': '경기도 수원시'},
+			{'coord': [36.333589, 36.333589], 'name': '대전광역시 중구'},
+			{'coord': [129.424018, 35.486247], 'name': '울산광역시 동구'},
+			{'coord': [127.949535, 37.321936], 'name': '강원도 원주시'},
+			{'coord': [128.113843, 35.203828], 'name': '경상남도 진주시'},
+			{'coord': [128.376261, 36.640251], 'name': '경상북도 예천군'},
+			{'coord': [126.797403, 37.441768], 'name': '경기도 시흥시'},
+			{'coord': [126.847919, 37.544049], 'name': '서울특별시 강서구'},
+			{'coord': [129.090057, 35.243748], 'name': '서울특별시 관악구'},
+			{'coord': [126.929255, 37.480433], 'name': '서울특별시 송파구'},
+			{'coord': [127.119464, 37.510683], 'name': '경기도 고양시'},
+			{'coord': [126.815149, 37.679601], 'name': '전라북도 전주시'},
+			{'coord': [127.062113, 35.832944], 'name': '경기도 용인시'},
+			{'coord': [127.076572, 37.3127], 'name': '울산광역시 남구'},
+			{'coord': [129.33183, 35.544405], 'name': '경기도 양주시'},
+			{'coord': [127.06911, 37.843319], 'name': '경기도 성남시'},
+			{'coord': [127.138484, 37.471674], 'name': '경기도 의왕시'},
+			{'coord': [126.972836, 37.375725], 'name': '경기도 용인시'},
+			{'coord': [127.125768, 37.328539], 'name': '경기도 하남시'},
+			{'coord': [127.214769, 37.542722], 'name': '경기도 부천시'},
+			{'coord': [126.800212, 37.477209], 'name': '경기도 부천시'},
+			{'coord': [127.070949, 37.656217], 'name': '서울특별시 노원구'},
+			{'coord': [128.548636, 35.820141], 'name': '대구광역시 달서구'},
+			{'coord': [126.76029, 37.507457], 'name': '경기도 부천시'},
+			{'coord': [128.528228, 35.858157], 'name': '대구광역시 달서구'},
+			{'coord': [128.360322, 36.101793], 'name': '경상북도 구미시'},
+			{'coord': [126.706846, 37.498095], 'name': '인천광역시 부평구'},
+			{'coord': [127.055865, 37.546097], 'name': '서울특별시 성동구'},
+			{'coord': [126.976231, 37.377447], 'name': '경기도 의왕시'},
+			{'coord': [127.315403, 36.385909], 'name': '대전광역시 유성구'},
+			{'coord': [126.689914, 37.444009], 'name': '인천광역시 남구'}
+		],
+		// destinations: [
+		// 	{'coord': [127.104456, 37.513931], 'name': '고성군'},
 			// {'coord': [23.9569, 49.8134], 'name': 'LWO'},
 			// {'coord': [30.4433, 50.4120], 'name': 'IEV'},
 			// {'coord': [13.3724, 55.5355], 'name': 'MMX'},
@@ -147,8 +208,8 @@ var TEST = {
 			// {'coord': [23.9484, 37.9356467], 'name': 'ATH'},   
 			// // {'coord': [19.914486, 39.607645], 'name': 'CFU'},
 			// {'coord': [34.9362, 29.9511], 'name': 'VDA'},
-			{'coord': [129.163984, 35.165740], 'name': '밀양시'}
-		],
+			// {'coord': [129.163984, 35.165740], 'name': '밀양시'}
+		// ],
 		svg: null,
 		projection: null,
 		speed: 2800,//km/sec
@@ -377,9 +438,10 @@ var TEST = {
 		var currentState = 'started' , 
 		    endState = 'inProgress';
 
-		var GradeData = {
-			"avgGrade": "3.2"
-		};
+		// var GradeData = {
+		// 	"avgGrade": "3.2"
+		// };
+		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
 
 		var svg = d3.select('#gradeChart')
 					.attr('width', config.width + config.padding * 2)
@@ -509,16 +571,18 @@ var TEST = {
 		// 	]
 		// ];
 
-		var d = [
-			[
-				{axis:"Java", value:10},
-				{axis:"Python", value:5},
-				{axis:"C", value:7},
-				{axis:"Javascript", value:20},
-				{axis:"C++", value:9},
-				{axis:"Go", value:12}
-			]
-		];
+		// var d = [
+		// 	[
+		// 		{axis:"Java", value:10},
+		// 		{axis:"Python", value:5},
+		// 		{axis:"C", value:7},
+		// 		{axis:"Javascript", value:20},
+		// 		{axis:"C++", value:9},
+		// 		{axis:"Go", value:12}
+		// 	]
+		// ];
+		
+		var d = [[{"axis":"C","value":35},{"axis":" JAVA","value":31},{"axis":" C++","value":29},{"axis":" MySQL","value":27},{"axis":" Python","value":24},{"axis":" Javascript","value":21}]];
 
 		var sum = 0;
 		$.each(d[0], function(index, value) {
@@ -694,20 +758,77 @@ var TEST = {
 		var width = 340,
 			height = 220;
 			
+		// var careerData = {
+		// 	"nodes": [
+		// 		{ "name": "빅데이터", "group": 1, "value": 2 },
+		// 		{ "name": "처리", "group": 2, "value": 20 },
+		// 		{ "name": "분석", "group": 2, "value": 5 },
+		// 		{ "name": "데이터", "group": 2, "value": 10},
+		// 		{ "name": "AI", "group": 3, "value": 8 },
+		// 		{ "name": "IoT", "group": 3, "value": 2 },
+		// 		{ "name": "엔지니어", "group": 2, "value": 3 },
+		// 		{ "name": "제조", "group": 4, "value": 5 },
+		// 		{ "name": "인프라", "group": 4, "value": 9 },
+		// 		{ "name": "IoT 전문가", "group": 4, "value": 33 }
+
+
+		// 	],
+		// 	"links": [
+		// 		{ "source": 0, "target": 1, "value": 1 },
+		// 		{ "source": 0, "target": 2, "value": 1 },
+		// 		{ "source": 0, "target": 3, "value": 1 },
+		// 		{ "source": 0, "target": 6, "value": 1 },
+		// 		{ "source": 4, "target": 5, "value": 2 },
+		// 		{ "source": 4, "target": 0, "value": 3 },
+		// 		{ "source": 5, "target": 0, "value": 3 },
+		// 		{ "source": 5, "target": 7, "value": 4 },
+		// 		{ "source": 5, "target": 8, "value": 4 },
+		// 		{ "source": 5, "target": 9, "value": 4 },
+		// 		{ "source": 8, "target": 9, "value": 2 }
+		// 	]
+		// }
 		var careerData = {
 			"nodes": [
-				{ "name": "빅데이터", "group": 1, "value": 2 },
-				{ "name": "처리", "group": 2, "value": 20 },
-				{ "name": "분석", "group": 2, "value": 5 },
-				{ "name": "데이터", "group": 2, "value": 10},
-				{ "name": "AI", "group": 3, "value": 8 },
-				{ "name": "IoT", "group": 3, "value": 2 },
-				{ "name": "엔지니어", "group": 2, "value": 3 },
-				{ "name": "제조", "group": 4, "value": 5 },
-				{ "name": "인프라", "group": 4, "value": 9 },
-				{ "name": "IoT 전문가", "group": 4, "value": 33 }
-
-
+				{ "name": "Big Data Engineer", "group": 1, "value": 1 },
+				{ "name": "Connectivity 전문가", "group": 1, "value": 1 },
+				{ "name": "Data Analyst", "group": 1, "value": 1 },
+				{ "name": "Data Scientist", "group": 1, "value": 2 },
+				{ "name": "DBA", "group": 1, "value": 2 },
+				{ "name": "Deep learning 전문가", "group": 1, "value": 1 },
+				{ "name": "DT 전문가", "group": 1, "value": 2 },
+				{ "name": "HR 팀장", "group": 1, "value": 1 },
+				{ "name": "ICT 기술 전문가", "group": 1, "value": 1 },
+				{ "name": "Smart Factory 전문가", "group": 1, "value": 1 },
+				{ "name": "Solution 개발자", "group": 1, "value": 1 },
+				{ "name": "공정 자동화", "group": 1, "value": 1 },
+				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 },
+				{ "name": "금융산업의 DT 전문가", "group": 1, "value": 1 },
+				{ "name": "데이터 분석 전문가", "group": 1, "value": 1 },
+				{ "name": "데이터 아키텍쳐", "group": 1, "value": 1 },
+				{ "name": "데이터 전문가", "group": 1, "value": 1 },
+				{ "name": "데이터 컨설턴트", "group": 1, "value": 1 },
+				{ "name": "딥러닝 전문가", "group": 1, "value": 1 },
+				{ "name": "블록체인 전문가", "group": 1, "value": 1 },
+				{ "name": "빅데이터 전문가", "group": 1, "value": 4 },
+				{ "name": "앱 개발자", "group": 1, "value": 1 },
+				{ "name": "아키텍터", "group": 1, "value": 1 },
+				{ "name": "어플리케이션 전문가", "group": 1, "value": 3 },
+				{ "name": "웹 개발자", "group": 1, "value": 1 },
+				{ "name": "인공지능 전문가", "group": 1, "value": 10 },
+				{ "name": "인공지능, 앱 전문가", "group": 1, "value": 1 },
+				{ "name": "인프라 전문가", "group": 1, "value": 2 },
+				{ "name": "좋은 아빠", "group": 1, "value": 1 },
+				{ "name": "클라우드 PaaS 전문가", "group": 1, "value": 1 },
+				{ "name": "클라우드 전문가", "group": 1, "value": 1 },
+				{ "name": "통신 전문가", "group": 1, "value": 1 },
+				{ "name": "평생개발", "group": 1, "value": 1 },
+				{ "name": "풀스택 Developer/PL/PM", "group": 1, "value": 3 },
+				{ "name": "풀스택개발자", "group": 1, "value": 1 },
+				{ "name": "플랫폼 개발 전문가", "group": 1, "value": 1 },
+				{ "name": "플랫폼 전문가", "group": 1, "value": 1 },
+				{ "name": "SK㈜C&C 임원", "group": 1, "value": 1 },
+				{ "name": "SK㈜C&C 전무", "group": 1, "value": 1 },
+				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 }
 			],
 			"links": [
 				{ "source": 0, "target": 1, "value": 1 },
@@ -720,10 +841,74 @@ var TEST = {
 				{ "source": 5, "target": 7, "value": 4 },
 				{ "source": 5, "target": 8, "value": 4 },
 				{ "source": 5, "target": 9, "value": 4 },
-				{ "source": 8, "target": 9, "value": 2 }
-			
-
-			]
+				{ "source": 4, "target": 10, "value": 2 }
+				// ,
+				// { "source": 8, "target": 9, "value": 2 }
+			],
+ 			"category": [{			 
+    			"label": "Data", 
+    			"subCategory": [
+					{ "Data Analyst": 1 },
+					{ "Data scientist": 2 },
+					{ "DBA": 2 },
+					{ "데이터 아키텍쳐": 1 },
+					{ "데이터 분석 전문가": 1 },
+					{ "데이터 전문가": 1 },
+					{ "데이터 컨설턴트": 1 }
+				]
+			 },
+  			{
+    			"label": "DT", 
+    			"subCategory": [
+     				{ "Big Data Engineer": 1 },
+     				{ "Deep learning 전문가": 1 },
+    				{ "DT 전문가": 2 },
+    			 	{ "딥러닝 전문가": 1 },
+     				{ "블록체인 전문가": 1 },
+     				{ "빅데이터 전문가": 4 },
+     				{ "인공지능 전문가": 10 },
+     				{ "인공지능, 앱 전문가": 1 },
+     				{ "클라우드 PaaS 전문가": 1 },
+     				{ "클라우드 전문가": 1 }  
+				  ]
+			},
+  			{
+    			"label": "ICT", 
+    			"subCategory": [
+     				{ "Connectivity 전문가": 1 },
+     				{ "ICT 기술 전문가": 1 },
+     				{ "아키텍터": 1 },
+     				{ "앱 개발자": 1 },
+     				{ "어플리케이션 전문가": 3 },
+     				{ "웹 개발자": 1 },
+     				{ "인프라 전문가": 2 },
+     				{ "풀스택 Developer/PL/PM": 3 },
+     				{ "풀스택개발자": 1 },
+     				{ "플랫폼 개발 전문가": 1 },
+     				{ "플랫폼 전문가": 1 }  
+				  ]
+			},
+  			{
+    			"label": "ITS", 
+    			"subCategory": [
+     				{ "글로벌 IT 컨설턴트": 1 },
+     				{ "금융산업의 DT 전문가": 1 },
+     				{ "통신 전문가": 1 },
+     				{ "Smart Factory 전문가": 1 },
+     				{ "공정 자동화": 1 },
+     				{ "Solution 개발자": 1 }  
+				  ]
+			},
+ 			{
+   				"label": "기타", 
+    			"subCategory": [
+     				{ "SK㈜C&C 임원": 1 },
+     				{ "SK㈜C&C 전무": 1 },
+     				{ "좋은 아빠": 1 },
+     				{ "평생개발": 1 },
+     				{ "HR 팀장": 1 }  
+				  ]
+			}]
 		}
 
         var colorNode = d3.scale.category20(),
@@ -797,11 +982,72 @@ var TEST = {
 		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
 		originName: 'SK(주)C&C',
 		destinations: [
-			{'coord': [127.104456, 37.513931], 'name': '고성군'},
-			// {'coord': [129.163984, 35.165740], 'name': '밀양시'},
-			// {'coord': [126.964713, 37.546671], 'name': '여기'},
-			{'coord': [126.924436, 37.557687], 'name': '홍대'}
+			{'coord': [126.782, 37.505], 'name': '경기도 부천시'},
+			{'coord': [127.113, 37.37], 'name': '경기도 성남시'},
+			{'coord': [126.939, 37.399], 'name': '경기도 안양시'},
+			{'coord': [126.907, 37.405], 'name': '경기도 안양시'},
+			{'coord': [129.399, 36.988], 'name': '경상북도 울진군'},
+			{'coord': [127.066, 37.637], 'name': '서울특별시 노원구'},
+			{'coord': [126.955, 37.235], 'name': '경기도 화성시'},
+			{'coord': [127.012, 37.612], 'name': '서울특별시 성북구'},
+			{'coord': [127.138, 37.371], 'name': '경기도 성남시'},
+			{'coord': [129.059, 35.14], 'name': '부산광역시 동구'},
+			{'coord': [126.961, 37.562], 'name': '서울특별시 서대문구'},
+			{'coord': [127.044, 37.307], 'name': '경기도 수원시'},
+			{'coord': [126.981783, 37.38544], 'name': '경기도 의왕시'},
+			{'coord': [127.062111, 37.500733], 'name': '서울특별시 강남구'},
+			{'coord': [127.133428, 37.514078], 'name': '서울특별시 송파구'},
+			{'coord': [126.717106, 37.460384], 'name': '인천광역시 남동구'},
+			{'coord': [128.435188, 36.090831], 'name': '경상북도 구미시'},
+			{'coord': [126.936089, 37.517971], 'name': '서울특별시 영등포구'},
+			{'coord': [126.936428, 37.588674], 'name': '서울특별시 서대문구'},
+			{'coord': [127.394479, 36.321067], 'name': '대전광역시 중구'},
+			{'coord': [127.035, 37.286098], 'name': '경기도 수원시'},
+			{'coord': [129.016393, 35.153772], 'name': '부산광역시 사상구'},
+			{'coord': [128.549181, 35.928274], 'name': '대구광역시 북구'},
+			{'coord': [127.503723, 36.612542], 'name': '충청북도 청주시'},
+			{'coord': [128.695853, 35.838525], 'name': '대구광역시 수성구'},
+			{'coord': [127.05916, 37.247775], 'name': '경기도 수원시'},
+			{'coord': [129.114292, 37.524719], 'name': '강원도 동해시'},
+			{'coord': [126.945021, 37.507494], 'name': '서울특별시 동작구'},
+			{'coord': [127.03014, 37.249787], 'name': '경기도 수원시'},
+			{'coord': [36.333589, 36.333589], 'name': '대전광역시 중구'},
+			{'coord': [129.424018, 35.486247], 'name': '울산광역시 동구'},
+			{'coord': [127.949535, 37.321936], 'name': '강원도 원주시'},
+			{'coord': [128.113843, 35.203828], 'name': '경상남도 진주시'},
+			{'coord': [128.376261, 36.640251], 'name': '경상북도 예천군'},
+			{'coord': [126.797403, 37.441768], 'name': '경기도 시흥시'},
+			{'coord': [126.847919, 37.544049], 'name': '서울특별시 강서구'},
+			{'coord': [129.090057, 35.243748], 'name': '서울특별시 관악구'},
+			{'coord': [126.929255, 37.480433], 'name': '서울특별시 송파구'},
+			{'coord': [127.119464, 37.510683], 'name': '경기도 고양시'},
+			{'coord': [126.815149, 37.679601], 'name': '전라북도 전주시'},
+			{'coord': [127.062113, 35.832944], 'name': '경기도 용인시'},
+			{'coord': [127.076572, 37.3127], 'name': '울산광역시 남구'},
+			{'coord': [129.33183, 35.544405], 'name': '경기도 양주시'},
+			{'coord': [127.06911, 37.843319], 'name': '경기도 성남시'},
+			{'coord': [127.138484, 37.471674], 'name': '경기도 의왕시'},
+			{'coord': [126.972836, 37.375725], 'name': '경기도 용인시'},
+			{'coord': [127.125768, 37.328539], 'name': '경기도 하남시'},
+			{'coord': [127.214769, 37.542722], 'name': '경기도 부천시'},
+			{'coord': [126.800212, 37.477209], 'name': '경기도 부천시'},
+			{'coord': [127.070949, 37.656217], 'name': '서울특별시 노원구'},
+			{'coord': [128.548636, 35.820141], 'name': '대구광역시 달서구'},
+			{'coord': [126.76029, 37.507457], 'name': '경기도 부천시'},
+			{'coord': [128.528228, 35.858157], 'name': '대구광역시 달서구'},
+			{'coord': [128.360322, 36.101793], 'name': '경상북도 구미시'},
+			{'coord': [126.706846, 37.498095], 'name': '인천광역시 부평구'},
+			{'coord': [127.055865, 37.546097], 'name': '서울특별시 성동구'},
+			{'coord': [126.976231, 37.377447], 'name': '경기도 의왕시'},
+			{'coord': [127.315403, 36.385909], 'name': '대전광역시 유성구'},
+			{'coord': [126.689914, 37.444009], 'name': '인천광역시 남구'}
 		],
+		// destinations: [
+		// 	{'coord': [127.104456, 37.513931], 'name': '고성군'},
+		// 	// {'coord': [129.163984, 35.165740], 'name': '밀양시'},
+		// 	// {'coord': [126.964713, 37.546671], 'name': '여기'},
+		// 	{'coord': [126.924436, 37.557687], 'name': '홍대'}
+		// ],
 		svg: null,
 		projection: null,
 		speed: 2800,//km/sec
@@ -1071,13 +1317,14 @@ var TEST = {
 		var currentState = 'started' , 
 		    endState = 'inProgress';
 
-		var GradeData = {
-			"avgGrade": 3.2,
-			"gradeA": 13,
-			"gradeB": 3,
-			"gradeC": 3
-		}
-		;
+		// var GradeData = {
+		// 	"avgGrade": 3.2,
+		// 	"gradeA": 13,
+		// 	"gradeB": 3,
+		// 	"gradeC": 3
+		// };
+		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+
 		var svg = d3.select('#gradeDetailChart')
 					.attr('width', config.width + config.padding * 2)
 					.attr('height', config.height + config.padding * 2)
@@ -1176,16 +1423,17 @@ var TEST = {
 		// 	]
 		// ];
 
-		var d = [
-			[
-				{axis:"Java", value:10},
-				{axis:"Python", value:5},
-				{axis:"C", value:7},
-				{axis:"Javascript", value:20},
-				{axis:"C++", value:9},
-				{axis:"Go", value:12}
-			]
-		];
+		// var d = [
+		// 	[
+		// 		{axis:"Java", value:10},
+		// 		{axis:"Python", value:5},
+		// 		{axis:"C", value:7},
+		// 		{axis:"Javascript", value:20},
+		// 		{axis:"C++", value:9},
+		// 		{axis:"Go", value:12}
+		// 	]
+		// ];
+		var d = [[{"axis":"C","value":35},{"axis":" JAVA","value":31},{"axis":" C++","value":29},{"axis":" MySQL","value":27},{"axis":" Python","value":24},{"axis":" Javascript","value":21}]];
 
 		var sum = 0;
 		$.each(d[0], function(index, value) {
@@ -1321,21 +1569,49 @@ var TEST = {
 	makeCareerDetail: function() {
 		var width = 700,
 			height = 580;
-			
+		
 		var careerData = {
 			"nodes": [
-				{ "name": "빅데이터", "group": 1, "value": 17 },
-				{ "name": "처리", "group": 2, "value": 2 },
-				{ "name": "분석", "group": 2, "value": 5 },
-				{ "name": "데이터", "group": 2, "value": 10},
-				{ "name": "AI", "group": 3, "value":22 },
-				{ "name": "IoT", "group": 3, "value": 20 },
-				{ "name": "엔지니어", "group": 2, "value": 3 },
-				{ "name": "제조", "group": 4, "value": 5 },
-				{ "name": "인프라", "group": 4, "value": 9 },
-				{ "name": "IoT 전문가", "group": 4, "value": 3 },
-				{ "name": "ML", "group": 3, "value": 22 }
-
+				{ "name": "Big Data Engineer", "group": 1, "value": 1 },
+				{ "name": "Connectivity 전문가", "group": 1, "value": 1 },
+				{ "name": "Data Analyst", "group": 1, "value": 1 },
+				{ "name": "Data Scientist", "group": 1, "value": 2 },
+				{ "name": "DBA", "group": 1, "value": 2 },
+				{ "name": "Deep learning 전문가", "group": 1, "value": 1 },
+				{ "name": "DT 전문가", "group": 1, "value": 2 },
+				{ "name": "HR 팀장", "group": 1, "value": 1 },
+				{ "name": "ICT 기술 전문가", "group": 1, "value": 1 },
+				{ "name": "Smart Factory 전문가", "group": 1, "value": 1 },
+				{ "name": "Solution 개발자", "group": 1, "value": 1 },
+				{ "name": "공정 자동화", "group": 1, "value": 1 },
+				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 },
+				{ "name": "금융산업의 DT 전문가", "group": 1, "value": 1 },
+				{ "name": "데이터 분석 전문가", "group": 1, "value": 1 },
+				{ "name": "데이터 아키텍쳐", "group": 1, "value": 1 },
+				{ "name": "데이터 전문가", "group": 1, "value": 1 },
+				{ "name": "데이터 컨설턴트", "group": 1, "value": 1 },
+				{ "name": "딥러닝 전문가", "group": 1, "value": 1 },
+				{ "name": "블록체인 전문가", "group": 1, "value": 1 },
+				{ "name": "빅데이터 전문가", "group": 1, "value": 4 },
+				{ "name": "앱 개발자", "group": 1, "value": 1 },
+				{ "name": "아키텍터", "group": 1, "value": 1 },
+				{ "name": "어플리케이션 전문가", "group": 1, "value": 3 },
+				{ "name": "웹 개발자", "group": 1, "value": 1 },
+				{ "name": "인공지능 전문가", "group": 1, "value": 10 },
+				{ "name": "인공지능, 앱 전문가", "group": 1, "value": 1 },
+				{ "name": "인프라 전문가", "group": 1, "value": 2 },
+				{ "name": "좋은 아빠", "group": 1, "value": 1 },
+				{ "name": "클라우드 PaaS 전문가", "group": 1, "value": 1 },
+				{ "name": "클라우드 전문가", "group": 1, "value": 1 },
+				{ "name": "통신 전문가", "group": 1, "value": 1 },
+				{ "name": "평생개발", "group": 1, "value": 1 },
+				{ "name": "풀스택 Developer/PL/PM", "group": 1, "value": 3 },
+				{ "name": "풀스택개발자", "group": 1, "value": 1 },
+				{ "name": "플랫폼 개발 전문가", "group": 1, "value": 1 },
+				{ "name": "플랫폼 전문가", "group": 1, "value": 1 },
+				{ "name": "SK㈜C&C 임원", "group": 1, "value": 1 },
+				{ "name": "SK㈜C&C 전무", "group": 1, "value": 1 },
+				{ "name": "글로벌 IT 컨설턴트", "group": 1, "value": 1 }
 			],
 			"links": [
 				{ "source": 0, "target": 1, "value": 1 },
@@ -1351,51 +1627,146 @@ var TEST = {
 				{ "source": 4, "target": 10, "value": 2 }
 				// ,
 				// { "source": 8, "target": 9, "value": 2 }
-			
-
 			],
- 			"category": [{
-				"label": "빅데이터", 
-				"subCategory": [{
-								 "label": "데이터",
-								 "value": 12
-								}, 
-								{
-								 "label": "엔지니어",
-								 "value": 3
-								}, 
-								{
-								 "label": "처리",
-								 "value": 20
-								}, 
-								{
-								 "label": "분석",
-								 "value": 8
-								}]
-			},
-			{
-				"label": "AI", 
-				"subCategory": [{
-								 "label": "ML",
-								 "value": 22
-								}]
+ 			"category": [{			 
+    			"label": "Data", 
+    			"subCategory": [
+					{ "label": "Data Analyst", "value": 1 },
+					{ "label": "Data scientist", "value": 2 },
+					{ "label": "DBA", "value": 2 },
+					{ "label": "데이터 아키텍쳐", "value": 1 },
+					{ "label": "데이터 분석 전문가", "value": 1 },
+					{ "label": "데이터 전문가", "value": 1 },
+					{ "label": "데이터 컨설턴트", "value": 1 }
+				]
+			 },
+  			{
+    			"label": "DT", 
+    			"subCategory": [
+     				{ "label": "Big Data Engineer", "value": 1 },
+     				{ "label": "Deep learning 전문가", "value": 1 },
+    				{ "label": "DT 전문가", "value": 2 },
+    			 	{ "label": "딥러닝 전문가", "value": 1 },
+     				{ "label": "블록체인 전문가", "value": 1 },
+     				{ "label": "빅데이터 전문가", "value": 4 },
+     				{ "label": "인공지능 전문가", "value": 10 },
+     				{ "label": "인공지능, 앱 전문가", "value": 1 },
+     				{ "label": "클라우드 PaaS 전문가", "value": 1 },
+     				{ "label": "클라우드 전문가", "value": 1 }  
+				  ]
 			},
   			{
-    			"label": "인공지능", 
-    			"subCategory": [{
-								 "label": "IoT 전문가",
-								 "value": 32
-								}, 
-								{
-								 "label": "제조",
-								 "value": 40
-								}, 
-								{
-								 "label": "인프라",
-								 "value": 40
-								}]
+    			"label": "ICT", 
+    			"subCategory": [
+     				{ "label": "Connectivity 전문가", "value": 1 },
+     				{ "label": "ICT 기술 전문가", "value": 1 },
+     				{ "label": "아키텍터", "value": 1 },
+     				{ "label": "앱 개발자", "value": 1 },
+     				{ "label": "어플리케이션 전문가", "value": 3 },
+     				{ "label": "웹 개발자", "value": 1 },
+     				{ "label": "인프라 전문가", "value": 2 },
+     				{ "label": "풀스택 Developer/PL/PM", "value": 3 },
+     				{ "label": "풀스택개발자", "value": 1 },
+     				{ "label": "플랫폼 개발 전문가", "value": 1 },
+     				{ "label": "플랫폼 전문가", "value": 1 }  
+				  ]
+			},
+  			{
+    			"label": "ITS", 
+    			"subCategory": [
+     				{ "label": "글로벌 IT 컨설턴트", "value": 1 },
+     				{ "label": "금융산업의 DT 전문가", "value": 1 },
+     				{ "label": "통신 전문가", "value": 1 },
+     				{ "label": "Smart Factory 전문가", "value": 1 },
+     				{ "label": "공정 자동화", "value": 1 },
+     				{ "label": "Solution 개발자", "value": 1 }  
+				  ]
+			},
+ 			{
+   				"label": "기타", 
+    			"subCategory": [
+     				{ "label": "SK㈜C&C 임원", "value": 1 },
+     				{ "label": "SK㈜C&C 전무", "value": 1 },
+     				{ "label": "좋은 아빠", "value": 1 },
+     				{ "label": "평생개발", "value": 1 },
+     				{ "label": "HR 팀장", "value": 1 }  
+				  ]
 			}]
-		}
+		}	
+		// var careerData = {
+		// 	"nodes": [
+		// 		{ "name": "빅데이터", "group": 1, "value": 17 },
+		// 		{ "name": "처리", "group": 2, "value": 2 },
+		// 		{ "name": "분석", "group": 2, "value": 5 },
+		// 		{ "name": "데이터", "group": 2, "value": 10},
+		// 		{ "name": "AI", "group": 3, "value":22 },
+		// 		{ "name": "IoT", "group": 3, "value": 20 },
+		// 		{ "name": "엔지니어", "group": 2, "value": 3 },
+		// 		{ "name": "제조", "group": 4, "value": 5 },
+		// 		{ "name": "인프라", "group": 4, "value": 9 },
+		// 		{ "name": "IoT 전문가", "group": 4, "value": 3 },
+		// 		{ "name": "ML", "group": 3, "value": 22 }
+
+		// 	],
+		// 	"links": [
+		// 		{ "source": 0, "target": 1, "value": 1 },
+		// 		{ "source": 0, "target": 2, "value": 1 },
+		// 		{ "source": 0, "target": 3, "value": 1 },
+		// 		{ "source": 0, "target": 6, "value": 1 },
+		// 		{ "source": 4, "target": 5, "value": 2 },
+		// 		{ "source": 4, "target": 0, "value": 3 },
+		// 		{ "source": 5, "target": 0, "value": 3 },
+		// 		{ "source": 5, "target": 7, "value": 4 },
+		// 		{ "source": 5, "target": 8, "value": 4 },
+		// 		{ "source": 5, "target": 9, "value": 4 },
+		// 		{ "source": 4, "target": 10, "value": 2 }
+		// 		// ,
+		// 		// { "source": 8, "target": 9, "value": 2 }
+			
+
+		// 	],
+ 		// 	"category": [{
+		// 		"label": "빅데이터", 
+		// 		"subCategory": [{
+		// 						 "label": "데이터",
+		// 						 "value": 12
+		// 						}, 
+		// 						{
+		// 						 "label": "엔지니어",
+		// 						 "value": 3
+		// 						}, 
+		// 						{
+		// 						 "label": "처리",
+		// 						 "value": 20
+		// 						}, 
+		// 						{
+		// 						 "label": "분석",
+		// 						 "value": 8
+		// 						}]
+		// 	},
+		// 	{
+		// 		"label": "AI", 
+		// 		"subCategory": [{
+		// 						 "label": "ML",
+		// 						 "value": 22
+		// 						}]
+		// 	},
+  		// 	{
+    	// 		"label": "인공지능", 
+    	// 		"subCategory": [{
+		// 						 "label": "IoT 전문가",
+		// 						 "value": 32
+		// 						}, 
+		// 						{
+		// 						 "label": "제조",
+		// 						 "value": 40
+		// 						}, 
+		// 						{
+		// 						 "label": "인프라",
+		// 						 "value": 40
+		// 						}]
+		// 	}]
+		// }
 
 		// 카테고리 분류
 		var careerDataCategory = careerData.category;

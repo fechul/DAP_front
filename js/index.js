@@ -89,15 +89,15 @@ INDEX = {
 	// GENDER
 	makeGender: function(target, h, w, r, attrID) {
 		// // BackEnd에서 이 형식으로 Data를 받아야함
-		var genderData = [{
-			"label": "남자",
-			"value": 37,
-			"color": "#1882dc"
-		}, {
-			"label": "여자",
-			"value": 22,
-			"color": "#dc183c"
-		}];
+		// var genderData = [{
+		// 	"label": "남자",
+		// 	"value": 37,
+		// 	"color": "#1882dc"
+		// }, {
+		// 	"label": "여자",
+		// 	"value": 22,
+		// 	"color": "#dc183c"
+		// }];
 
 	    // var vis = d3.select("#genderChart")
 	    //     		.data([genderData])
@@ -145,34 +145,35 @@ INDEX = {
 
 	//AGE
 	makeAge: function() {
-		var ageData = [{
-			"label": "23",
-			"value": 2
-		},{
-			"label": "24",
-			"value": 4
-		},{
-			"label": "25",
-			"value": 9
-		},{
-			"label": "26",
-			"value": 8
-		},{
-			"label": "27",
-			"value": 17
-		},{
-			"label": "28",
-			"value": 13
-		},{
-			"label": "29",
-			"value": 3
-		},{
-			"label": "30",
-			"value": 2
-		},{
-			"label": "31",
-			"value": 1
-		}];
+		// var ageData = [{
+		// 	"label": "23",
+		// 	"value": 2
+		// },{
+		// 	"label": "24",
+		// 	"value": 4
+		// },{
+		// 	"label": "25",
+		// 	"value": 9
+		// },{
+		// 	"label": "26",
+		// 	"value": 8
+		// },{
+		// 	"label": "27",
+		// 	"value": 17
+		// },{
+		// 	"label": "28",
+		// 	"value": 13
+		// },{
+		// 	"label": "29",
+		// 	"value": 3
+		// },{
+		// 	"label": "30",
+		// 	"value": 2
+		// },{
+		// 	"label": "31",
+		// 	"value": 1
+		// }];
+		var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}];
 
 		var width = 300,		// 차트 너비
 			height = 200,		// 차트 높이
@@ -258,14 +259,15 @@ INDEX = {
 			}]
 		*/
 
-		majorInfo = [{'name': '컴퓨터과학','size': 13},
-		{'name': '소프트웨어학과','size': 11},
-		{'name': '경영학과','size': 7},
-		{'name': 'IT공학과','size': 19},
-		{'name': '경제학과','size': 3},
-		{'name': '전기전자컴퓨터공학부','size': 5},
-		{'name': '국어국문학과','size': 2},
-		{'name': '산업공학과','size': 8}];
+		// majorInfo = [{'name': '컴퓨터과학','size': 13},
+		// {'name': '소프트웨어학과','size': 11},
+		// {'name': '경영학과','size': 7},
+		// {'name': 'IT공학과','size': 19},
+		// {'name': '경제학과','size': 3},
+		// {'name': '전기전자컴퓨터공학부','size': 5},
+		// {'name': '국어국문학과','size': 2},
+		// {'name': '산업공학과','size': 8}];
+		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
 
 
 		var majorData = {
@@ -676,34 +678,35 @@ INDEX = {
 		var h = 500;
 		var w = 500;
 
-		var ageData = [{
-			"label": "23",
-			"value": 2
-		},{
-			"label": "24",
-			"value": 4
-		},{
-			"label": "25",
-			"value": 9
-		},{
-			"label": "26",
-			"value": 8
-		},{
-			"label": "27",
-			"value": 17
-		},{
-			"label": "28",
-			"value": 13
-		},{
-			"label": "29",
-			"value": 3
-		},{
-			"label": "30",
-			"value": 2
-		},{
-			"label": "31",
-			"value": 1
-		}];
+		 var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}]
+		// var ageData = [{
+		// 	"label": "23",
+		// 	"value": 2
+		// },{
+		// 	"label": "24",
+		// 	"value": 4
+		// },{
+		// 	"label": "25",
+		// 	"value": 9
+		// },{
+		// 	"label": "26",
+		// 	"value": 8
+		// },{
+		// 	"label": "27",
+		// 	"value": 17
+		// },{
+		// 	"label": "28",
+		// 	"value": 13
+		// },{
+		// 	"label": "29",
+		// 	"value": 3
+		// },{
+		// 	"label": "30",
+		// 	"value": 2
+		// },{
+		// 	"label": "31",
+		// 	"value": 1
+		// }];
 
 		var maxAge = 0;
 		var minAge = 100;
@@ -798,14 +801,15 @@ INDEX = {
 	},
 
 	makeMajorDetail: function() {
-		var majorInfo = [{'name': 'IT공학과','size': 19},
-		{'name': '컴퓨터과학','size': 13},
-		{'name': '소프트웨어학과','size': 11},
-		{'name': '산업공학과','size': 8},
-		{'name': '경영학과','size': 7},
-		{'name': '전기전자컴퓨터공학부','size': 5},
-		{'name': '경제학과','size': 3},
-		{'name': '국어국문학과','size': 2}];
+		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		// var majorInfo = [{'name': 'IT공학과','size': 19},
+		// {'name': '컴퓨터과학','size': 13},
+		// {'name': '소프트웨어학과','size': 11},
+		// {'name': '산업공학과','size': 8},
+		// {'name': '경영학과','size': 7},
+		// {'name': '전기전자컴퓨터공학부','size': 5},
+		// {'name': '경제학과','size': 3},
+		// {'name': '국어국문학과','size': 2}];
 
 		var color = ["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
 
