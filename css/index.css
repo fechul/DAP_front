@@ -137,16 +137,13 @@ body {
 }
 
 #genderChart {
-    padding: 10px;
+    padding-left: 16px;
 }
-
 
 /* Character */
 .x.axis {
   display: none;
 }
-
-
 
 
 /* modal */

@@ -6,7 +6,8 @@ INDEX = {
 		this.detailBox = $('#detailModal');
 
 		this.initEvents();
-		this.makeGender('#genderChart', 220, 220, 100);
+		// this.makeGender('#genderChart', 220, 220, 100);
+		this.makeGender();
 		this.makeAge();
 		this.makeMajor();
 		this.makeCharacter();
@@ -87,7 +88,7 @@ INDEX = {
 	// },
 
 	// GENDER
-	makeGender: function(target, h, w, r, attrID) {
+	makeGender: function() {//function(target, h, w, r, attrID) {
 		// // BackEnd에서 이 형식으로 Data를 받아야함
 		// var genderData = [{
 		// 	"label": "남자",
@@ -128,19 +129,78 @@ INDEX = {
 		// BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
 			"label": "남자",
-			"value": 37,
-			"color": "#1882dc"
+			"value": 37
 		}, {
 			"label": "여자",
-			"value": 22,
-			"color": "#dc183c"
+			"value": 22
 		}];
 
-		var svg = d3.select(target).attr("width", w).attr("height", h);
-		svg.append("g").attr("id", "genderpie").attr("stroke", "black").attr("stroke-width", "3");
+		// var svg = d3.select(target).attr("width", w).attr("height", h);
+		// svg.append("g").attr("id", "genderpie").attr("stroke", "black").attr("stroke-width", "3");
 
-		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, r);
-		gradPie.transition("genderpie", genderData, 100);
+		// gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, r);
+		// gradPie.transition("genderpie", genderData, 100);
+
+		var width = 230,
+			height = 230,
+			radius = Math.min(width, height) / 2 - 20;
+			
+		// var color = d3.scale.category20();
+		// console.log(color.this);
+		var color = ['#1f77b4', '#dc5156'];
+
+		var arc = d3.svg.arc()
+						.outerRadius(radius)
+		;
+		var pie = d3.layout.pie();
+		pie.value(function(d) {
+			return d.value;
+		});
+		var svg = d3.select("#genderChart")
+					.datum(genderData, function(d) { return d.value; })
+					.attr("width", width)
+					.attr("height", height)
+					.append("g")
+						.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+		;
+		var arcs = svg.selectAll("g.arc")
+						.data(pie)
+						.enter()
+						.append("g")
+						.attr("class", "arc");
+
+		arcs.append("path")
+				.attr("fill", function(d, i) { return color[i]; })
+				.attr('stroke', 'black')
+				.attr('stroke-width', '3px')
+				.transition()
+					.ease("bounce")
+					.duration(1500)
+					.attrTween("d", tweenPie)
+				.transition()
+					.ease("elastic")
+					.delay(function(d, i) { return 1000 + i * 50; })
+					.duration(750)
+					.attrTween("d", tweenDonut)
+				.each('end', function() {
+					svg.append('text')
+						.style('font-size', '32px')
+						.style('fonct-weight', 'bold')
+						.attr('text-anchor', 'middle')
+						.attr("transform", "translate(0, 8)")
+						.text('4:6');
+				})
+		;
+		function tweenPie(b) {
+			b.innerRadius = 0;
+			var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
+			return function(t) { return arc(i(t)); };
+		}
+		function tweenDonut(b) {
+			b.innerRadius = radius * .6;
+			var i = d3.interpolate({innerRadius: 0}, b);
+			return function(t) { return arc(i(t)); };
+		}
 	},
 
 	//AGE
@@ -616,32 +676,31 @@ INDEX = {
         var color = d3.scale.category20b();
 
         var svg = d3.select('#genderDetailChart')
-          .attr('width', width)
-          .attr('height', height)
-          .append('g')
-          .attr('transform', 'translate(' + (width / 2) + 
-            ',' + (height / 2) + ')');
+          				.attr('width', width)
+          				.attr('height', height)
+          				.append('g')
+          				.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
 
         var arc = d3.svg.arc()
-          .innerRadius(radius - donutWidth)
-          .outerRadius(radius);
+          				.innerRadius(radius - donutWidth)
+          				.outerRadius(radius);
 
         var pie = d3.layout.pie()
-          .value(function(d) { return d.value; })
-          .sort(null);
+          			.value(function(d) { return d.value; })
+          			.sort(null);
 
         var tooltip = d3.select('#genderDetailChart')                              
-          .append('div')                                               
-          .attr('class', 'tooltip');                                   
+          					.append('div')                                               
+          					.attr('class', 'tooltip');                                   
                       
         tooltip.append('div')                                          
-          .attr('class', 'label');                                     
+          		.attr('class', 'label');                                     
              
         tooltip.append('div')                                          
-          .attr('class', 'count');                                     
+          		.attr('class', 'count');                                     
 
         tooltip.append('div')                                          
-          .attr('class', 'percent');                                   
+          		.attr('class', 'percent');                                   
 
 	      genderData.forEach(function(d) {
 		      d.value = +d.value;
