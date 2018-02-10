@@ -1,0 +1,24 @@
+#abilityRankList {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.abilityCategoryLabel {    
+    font-weight: bolder;
+    margin-bottom: 6px;
+    margin-top: 35px;
+    color: #797979;
+    text-shadow: 0.7px 0.7px 0.7px #808080;
+}
+
+.abilityCategorySublabel {
+    font-size: 25px;
+    color: #797979;
+    font-weight: bolder;
+    margin-left: 16px;
+}
+
+#abilityRankList > li {
+    margin-top: 12px;
+    margin-bottom: 10px;
+}

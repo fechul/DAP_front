@@ -9,7 +9,7 @@ INDEX = {
 		this.makeGender('#genderChart', 220, 220, 100);
 		this.makeAge();
 		this.makeMajor();
-		this.makeCharacter();
+		// this.makeCharacter();
 
 		this.makeGenderDetail();
 		this.makeAgeDetail();
@@ -425,19 +425,19 @@ INDEX = {
 				$('.majorDetailContainer').show();
 				break;
 			case 'area':
-				
+				$('.areaDetailContainer').show();
 				break;
 			case 'grade':
-				
+				$('.gradeDetailContainer').show();
 				break;
 			case 'ability':
-				
+				$('.abilityDetailContainer').show();
 				break;
 			case 'character':
-				
+				$('.characterDetailContainer').show();
 				break;
 			case 'career':
-				
+				$('.careerDetailContainer').show();
 				break;
 		}
 		// this.modalResize();

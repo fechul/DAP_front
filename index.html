@@ -11,11 +11,14 @@
 
     <!-- Custom CSS -->
     <link href="css/main.css?ver=2" rel="stylesheet"> 
-    <link href="css/index.css?ver=7" rel="stylesheet">
+    <link href="css/index.css?ver=9" rel="stylesheet">
     <link href="css/gradeChart.css?ver=5" rel="stylesheet">
     <link href="css/abilityChart.css?ver=5" rel="stylesheet">
+    <link href="css/abilityDetailChart.css?ver=5" rel="stylesheet">
     <link href="css/areaChart.css?ver=5" rel="stylesheet">
+    <link href="css/areaDetailChart.css?ver=1" rel="stylesheet">
     <link href="css/careerChart.css?ver=1" rel="stylesheet">
+    <link href="css/careerDetailChart.css?ver=1" rel="stylesheet">
     
     <title>MosaicUs</title>
   </head>
@@ -70,6 +73,47 @@
           </div>
 
           <div class="col-lg-4">
+              <div class="contentBox panel" type="area">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
+                </button>
+                  <div class="panel-body text-center">
+                      <div id="areaChart"></div>
+                  </div>
+                  <div class="contentSubject panel-footer">
+                      <span class="panel_subtitle">AREA</span>
+                  </div>
+              </div>
+          </div>
+
+          
+      </div>
+
+      <div class="contentBoxRow row">
+          <div class="col-lg-4">
+              <div class="contentBox panel" type="grade">
+                <button type="button" class="fullscreen btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
+                </button>
+                  <div class="panel-body text-center">
+                    <svg id = "gradeChart">
+                  </div>
+                  <div class="contentSubject panel-footer">
+                      <span class="panel_subtitle">GRADE</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="imgDiv">
+              <img id="resultPerson" src="img/man.png"></img>
+            </div>
+            <div id="personComment">
+              <p>그게 바로 접니다.<br>안녕하세요?</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
               <div class="contentBox panel" type="major">
                 <button type="button" class="fullscreen btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
@@ -89,45 +133,7 @@
                   </div>
               </div>
           </div>
-      </div>
-
-      <div class="contentBoxRow row">
-          <div class="col-lg-4">
-              <div class="contentBox panel" type="area">
-                <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
-                </button>
-                  <div class="panel-body text-center">
-                      <div id="areaChart"></div>
-                  </div>
-                  <div class="contentSubject panel-footer">
-                      <span class="panel_subtitle">AREA</span>
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="imgDiv">
-              <img id="resultPerson" src="img/man.png"></img>
-            </div>
-            <div id="personComment">
-              <p>그게 바로 접니다.<br>안녕하세요?</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-              <div class="contentBox panel" type="grade">
-                <button type="button" class="fullscreen btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fullscreen fullscreen_icon"></span>
-                </button>
-                  <div class="panel-body text-center">
-                    <svg id = "gradeChart">
-                  </div>
-                  <div class="contentSubject panel-footer">
-                      <span class="panel_subtitle">GRADE</span>
-                  </div>
-              </div>
-          </div>
+          
       </div>
 
       <div class="contentBoxRow row">
@@ -192,7 +198,6 @@
 
           <!--LEFT-->
           <div class="modalContentArea left">
-
             <!--GENDER DETAIL-->
             <div class="genderDetailContainer detailContainer">
               <svg id="genderDetailChart"></svg>
@@ -201,7 +206,6 @@
                 <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
               </div>
             </div>
-
             <!--AGE DETAIL-->
             <div class="ageDetailContainer detailContainer">
                   <svg id="ageDetailChart"></svg>
@@ -211,11 +215,59 @@
             <div class="majorDetailContainer detailContainer">
                   <div id="majorList"></div>
             </div>
-
+            <!-- left, makeAreaDetail -->
+            <div class="areaDetailContainer detailContainer">
+              <div id="areaDetailChart"></div>
+            </div>
+            <!-- left, makeGradeDetail -->
+            <div class="gradeDetailContainer detailContainer">
+              <svg id = "gradeDetailChart"></svg>
+              <div id = "detailGrade" class = "row" style = "margin-left: 0px; margin-right:0px;text-align: -webkit-center;">
+                <table class = "table table-bordered block_row" style = "width: 576px;">
+                  <thead>
+                    <tr>
+                      <th class="text-center" style="font-weight: 900;">학점 범위</th>
+                      <th class="text-center" style="font-weight: 900;">수 (명)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="hscore">A 학점</td>
+                      <td>12</td>
+                    </tr>
+                    <tr>
+                      <td class="hscore">B 학점</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td class="hscore">C 학점</td>
+                      <td>5</td>
+                    </tr>
+                    <tr>
+                      <td class="hscore">D 학점</td>
+                      <td>20</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- left, makeAbilityDetail -->
+            <div class="abilityDetailContainer detailContainer">
+              <div id="abilityDetailChart"></div>
+            </div>
+            <!-- left, makeCharacterDetail -->
+            <div class="characterDetailContainer detailContainer">
+              <svg id="characterWordCloudDetail"></svg>
+            </div>
+            <!-- left, makeCareerDetail -->
+            <div class="careerDetailContainer detailContainer">
+              <div id="careerDetailChart"></div>
+>>>>>>> 3dc27a944a595f1042634853616466d1fc189f86
+            </div>
           </div>
+
           <!--RIGHT-->
           <div class="modalContentArea right">
-
             <!--GENDER DETAIL-->
             <div class="genderDetailContainer detailContainer">
               <div class="genderDetailPart detailPart">
@@ -226,7 +278,6 @@
                 <div id="genderDetailCntWoman">-</div>
               </div>
             </div>
-
             <!--AGE DETAIL-->
             <div class="ageDetailContainer detailContainer">
               <div class="ageDetailPart detailPart">
@@ -238,6 +289,53 @@
                 <br><br><br>
                 <label>최소 나이</label>
                 <div id="ageYoung" class="ageInfos">-</div>
+              </div>
+            </div>
+            <!-- right, makeAreaDetail -->
+            <div class="areaDetailContainer detailContainer">
+              <div class="areaDetailPart detailPart">
+                <br><br><br>
+                <label>서울</label>
+                <br><br><br>
+                <label>인천</label>
+              </div>
+            </div>
+            <!-- right, makeGradeDetail -->
+            <div class="gradeDetailContainer detailContainer">
+              <div class="gradeDetailPart detailPart">
+                <br><br><br><br><br><br><br>
+                <label>작년 평균</label>
+                <div id="gradeAvg" class="gradeInfos">3.5</div>
+                <br><br><br><br><br>
+                <label>작년 대비 증감률</label>
+                <div id="gradePerChange" class="gradeInfos">+5%</div>
+              </div>
+            </div>
+            <!-- right, makeAbilityDetail -->
+            <div class="abilityDetailContainer detailContainer">
+              <div class="abilityDetailPart detailPart">
+                <br><br><br>
+                <label class="abilityCategoryLabel">IT역량 랭킹</label>
+                <ol id="abilityRankList">
+                </ol>
+              </div>
+            </div>
+            <!-- right, makeCharacterDetail -->
+            <div class="characterDetailContainer detailContainer">
+              <div class="characterDetailPart detailPart">
+                <br><br><br>
+                <label>랭킹</label>
+                <div id="characterRankList"></div>
+              </div>
+            </div>
+            <!-- right, makeCareerDetail -->
+            <div class="careerDetailContainer detailContainer">
+              <div class="careerDetailPart detailPart">
+                <label class="careerCategoryLabel">대분류</label>
+                <div id="careerCategoryFirst"></div>
+                <br><br>
+                <label class="careerCategoryLabel">소분류</label>
+                <div id="careerCategorySecond"></div>
               </div>
             </div>
 
@@ -263,6 +361,7 @@
     <script src="vendor/bootstrap_3.3.2/js/bootstrap.min.js"></script>
 
     <!-- d3 JS -->
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
     <script src="vendor/d3/d3.min.js"></script> 
     <script src="vendor/d3/topojson.v1.min.js"></script>
     <script src="vendor/d3/gradientPie.js"></script> 
@@ -283,8 +382,8 @@
     <!-- <script src="http://d3js.org/d3.v4.min.js"></script> -->
 
     <!-- Custom JS -->
-    <script src="js/index.js?ver=5"></script>
-    <script src="js/test.js?ver=4"></script>
+    <script src="js/index.js?ver=8"></script>
+    <script src="js/test.js?ver=6"></script>
 
     <script>
       INDEX.init();
