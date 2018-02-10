@@ -1902,8 +1902,13 @@ var TEST = {
 
 		// console.log(findSecondCategory('AI'));
 		for(i in categoryFirst) {
-			$('#careerCategoryFirst').append('<div id=category_' + i + '>' + categoryFirst[i] + '<span></span></div>');
+			var html = '<button type="button" class="btn btn-secondary" id=category_' + i  +'>';
+			html += categoryFirst[i];
+			html += '</button>';
+			$('#careerCategoryFirst').append(html);
+			// $('#careerCategoryFirst').append('<div id=category_' + i + '>' +  + '<span></span></div>');
 		}
+
 		
 		for(var j = 0; j<categoryFirst.length; j++) {
 			var index_categorySecond = findSecondCategory(categoryFirst[j]);
@@ -1911,12 +1916,21 @@ var TEST = {
 			// console.log(index_categorySecond);
 			var sum = 0;
 			for(i in index_categorySecond) {
-				var html = '<div class=subcategory_' + j + '><span>' + index_categorySecond[i].label + '</span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>'
+				var html = '<div class=subcategory_' + j + '><span>' 
+				html += index_categorySecond[i].label + '</span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>'
 				$('#careerCategorySecond').append(html);
 				sum += index_categorySecond[i].value;
 			}
 			categoryFirstValue.push(sum);
 		}
+
+		for(i in categoryFirstValue) {
+			var html = '<span class="badge badge-light">';
+			html += categoryFirstValue[i];
+			html += '</span>';
+			$('#category_' + i).append(html);
+		}
+		// console.log('대분류 합:' + categoryFirstValue);
 
 		var hideSubcategoryAll = function() {
 			for(i in categoryFirst) {

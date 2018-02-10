@@ -1,17 +1,26 @@
 #careerCategoryFirst {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
 }
 
 #careerCategorySecond {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
 }
 
 .careerCategoryLabel {    
     font-weight: bolder;
     margin-bottom: 6px;
-    margin-top: 35px;
+    margin-top: 30px;
     color: #797979;
     text-shadow: 0.7px 0.7px 0.7px #808080;
+}
+
+div#careerCategoryFirst .btn {
+    padding: 4px;
+    font-size: 18px;
+    font-weight: bold!important;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: 2px solid #ccc!important;
 }
