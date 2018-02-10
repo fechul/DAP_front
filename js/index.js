@@ -257,7 +257,7 @@ INDEX = {
 			.append('rect')
 			.transition()
 			.delay(function (d, i) {
-				return i / ageData.length * 1000;
+				return i / ageData.length * 1500;
 			})
 			.attr('x', function (d, i) {
 				return i * ((width + padding) / ageData.length);
