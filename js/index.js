@@ -185,7 +185,7 @@ INDEX = {
 				.each('end', function() {
 					svg.append('text')
 						.style('font-size', '32px')
-						.style('fonct-weight', 'bold')
+						.style('font-weight', 'bold')
 						.attr('text-anchor', 'middle')
 						.attr("transform", "translate(0, 8)")
 						.text('4:6');
@@ -235,13 +235,20 @@ INDEX = {
 		// }];
 		var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}];
 
-		var width = 300,		// 차트 너비
+		var width = 340,		// 차트 너비
 			height = 200,		// 차트 높이
 			padding = 5,		// 바 사이 간격
 			division = 0.10,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
 			duration = 10;		// 바 생성할 때 transition delay 값
 
-		var svg = window.svg = d3.select('#ageChart').attr('width', width).attr('height', height);
+		var svg = d3.select('#ageChart')
+					.attr('width', width)
+					.attr('height', height)	
+					.style('margin-left', '30px')
+					.style('margin-top', '10px')
+		;
+
+		var color = d3.scale.category20b();
 							
 		// 바 만들기
 		svg.selectAll('rect')
@@ -256,52 +263,56 @@ INDEX = {
 				return i * ((width + padding) / ageData.length);
 			})
 			.attr('y', function (d) {
-				return height - parseInt(d.value / division, 10);
+				return height - parseInt(d.value / division, 10) + 9;
 			})
 			.attr('width', width / ageData.length - padding)
 			.attr('height', function (d) {
-				return parseInt(d.value / division, 10);
+				return parseInt(d.value / division, 10) - 12;
 			})
-			.attr('fill', function (d) {
-				return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
+			.attr('fill', function (d, i) {
+				//return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
+				return color(i);
 			})
 			.attr('stroke', 'black')
-			.attr('stroke-width', '3');
+			.attr('stroke-width', '3px')
+			;
 				
-		// 바 위에 수치 표시
-		svg.selectAll('g')
-			.data(ageData)
-			.enter()
-			.append('text')
-			.transition()
-			.delay(duration * 1.2)
-			.attr('x', function (d, i) {
-				return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
-			})
-			.attr('y', function (d) {
-				return height - parseInt(d.value /division, 10) - 5;
-			})
-			.attr('fill', 'blue')
-			.attr('text-anchor', 'middle');
+		// // 바 위에 수치 표시
+		// svg.selectAll('g')
+		// 	.data(ageData)
+		// 	.enter()
+		// 	.append('text')
+		// 	.transition()
+		// 	.delay(duration * 1.2)
+		// 	.attr('x', function (d, i) {
+		// 		return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
+		// 	})
+		// 	.attr('y', function (d) {
+		// 		return height - parseInt(d.value /division, 10) + 5;
+		// 	})
+		// 	.style('font-weight', 'bold')
+		// 	.attr('fill', 'blue')
+		// 	.attr('text-anchor', 'middle');
 				
 		// 바 아래에 라벨 표시
 		svg.selectAll('g')
 			.data(ageData)
 			.enter()
 			.append('text')
-			.transition()
-			.delay(duration * 1.2)
-			.text(function (d) {
-				return d.label;
-			})
-			.attr('x', function (d, i) {
-				return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
-			})
-			.attr('y', function (d) {
-				return height;
-			})
-			.attr('fill', '#fff')
-			.attr('text-anchor', 'middle');
+				.transition()
+				.delay(duration * 1.2)
+				.text(function (d) {
+					return d.label;
+				})
+				.attr('x', function (d, i) {
+					return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
+				})
+				.attr('y', function (d) {
+					return height - parseInt(d.value /division, 10);
+				})
+				.style('font-weight', 'bold')
+				.attr('fill', 'black')
+				.attr('text-anchor', 'middle');
 	},
 
 	makeMajor: function() {
