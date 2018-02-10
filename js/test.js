@@ -332,20 +332,26 @@ var TEST = {
 						.style('opacity', 0.05)
 						.attr('fill', 'black')
 						.attr('class', 'circleOrigin')
-						.on('mouseover', function (d) {
-							tooltip.html('<span style="color:white">' + originName + '</span>')
-									.attr('class', 'tooltipOrigin')
-									.style('left', projection(d)[0] + 12 + 'px')
-									.style('top', projection(d)[1] - 20 + 'px')
-									.transition()
-									.duration(700) //700
-									.style('opacity', 1)
-						})
-				.on('mouseout', function (d) {
-					tooltip.transition()
-							.duration(700) //700
-							.style('opacity', 0)
-				})
+						// .on('mouseover', function (d) {
+						// 	d3.select('#areaChart').append('div')	
+						// 			.attr('class', 'tooltipDestination')				
+						// 			.style('opacity', 0).html('<span style="color:white">' + originName + '</span>')
+						// 			.attr('class', 'tooltipOrigin')
+						// 			.style('left', projection(d)[0] + 12 + 'px')
+						// 			.style('top', projection(d)[1] - 20 + 'px')
+						// 			.transition()
+						// 			.duration(700) //700
+						// 			.style('opacity', 1)
+						// 	;
+						// })
+						// .on('mouseout', function (d) {
+						// 	d3.select('#areaChart').append('div')	
+						// 		.attr('class', 'tooltipDestination')				
+						// 		.style('opacity', 0).transition()
+						// 		.duration(700) //700
+						// 		.style('opacity', 0)
+						// 	;		
+						// })
 				;
 			this.svg = svg;
 			this.projection = projection;
@@ -789,7 +795,7 @@ var TEST = {
 
 	makeAreaDetail: {
 		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
-		originName: 'POZ',
+		originName: 'SK(주)C&C',
 		destinations: [
 			{'coord': [127.104456, 37.513931], 'name': '고성군'},
 			{'coord': [129.163984, 35.165740], 'name': '밀양시'},
@@ -843,7 +849,7 @@ var TEST = {
 					.style('fill-opacity', '1')
 					.transition()
 					.duration(300) //300
-					.attr('r', '5px')
+					.attr('r', '8px')
 				;
 				svg.append('circle')
 						.datum(connection)
@@ -855,7 +861,7 @@ var TEST = {
 						.style('fill-opacity', '0.05')
 						.transition()
 						.duration(300) //300
-						.attr('r', '12px')
+						.attr('r', '14px')
 				;
 				svg.append('circle')
 					.datum(connection)
@@ -865,14 +871,37 @@ var TEST = {
 					.style('class', 'destCircleMouseDetail')
 					.style('fill', 'steelblue')
 					.style('fill-opacity', '1')
+					// .on('mouseover', function (d) {
+					// 	d3.select('#areaDetailChart').append('div')	
+					// 		.attr('class', 'tooltipDestinationDetail')				
+					// 		.style('opacity', 0).html('<span style="color:white">' + destinationName + '</span>')
+					// 		.attr('class', 'tooltipDestinationDetail')
+					// 		.style('left', d[0] + 12 + 'px')
+					// 		.style('top', d[1] - 20 + 'px')
+					// 		.transition()
+					// 		.duration(500)
+					// 		.style('opacity', 1)
+					// }) 
+					// .on('mouseout', function (d) {
+					// 	console.log('bye');
+					// 	d3.selectAll('.tooltipDestinationDetail').transition()
+                  	// 		.duration(500)
+					// 		  .remove()
+					// 	;
+					// // 	d3.select('#areaDetailChart')//.append('div')	
+					// // .attr('class', 'tooltipDestinationDetail')				
+					// // .style('opacity', 0).transition()
+					// // 	.duration(700)
+					// // 	.style('opacity', 0)
+					// })
 					.transition()
 					.duration(300) //300
-					.attr('r', '5px')
+					.attr('r', '8px')
 					.each('end', function(d) {
 						d3.select(this)
 							.transition()
 							.duration(2000) //2000
-							.attr('r', 20)
+							.attr('r', 14)
 							.style('fill-opacity', '0')
 						;
 						svg.append('path')
@@ -902,7 +931,6 @@ var TEST = {
 							})
 							.each('end', function(d) {
 								var c = connection[1];
-								
 							})
 						;
 						d3.select('.arcDetail' + index)
@@ -964,33 +992,44 @@ var TEST = {
 						.append('circle')
 						.attr('cx', function (d) { return projection(d)[0]; })
 						.attr('cy', function (d) { return projection(d)[1]; })
-						.attr('r', '5px')
+						.attr('r', '8px')
 						.style('opacity', 1)
 						.attr('fill', '#d43f3a')
 						.attr('class', 'circleOriginDetail')
 				;
+
+				
 				source.data([originGeo]).enter()
 						.append('circle')
 						.attr('cx', function (d) { return projection(d)[0]; })
 						.attr('cy', function (d) { return projection(d)[1]; })
-						.attr('r', '12px')
+						.attr('r', '14px')
 						.style('opacity', 0.05)
 						.attr('fill', 'black')
 						.attr('class', 'circleOriginDetail')
 						.on('mouseover', function (d) {
-							tooltip.html('<span style="color:white">' + originName + '</span>')
+							d3.select('#areaDetailChart').append('div')	
+									.attr('class', 'tooltipOriginDetail')				
+									.style('opacity', 0)
+									.html('<span style="color:white">' + originName + '</span>')
 									.attr('class', 'tooltipOriginDetail')
-									.style('left', projection(d)[0] + 12 + 'px')
-									.style('top', projection(d)[1] - 20 + 'px')
+									.style('left', projection(d)[0] + 50 + 'px')
+									.style('top', projection(d)[1] - 0 + 'px')
 									.transition()
-									.duration(700) //700
+									.duration(500) //700
 									.style('opacity', 1)
 						})
-				.on('mouseout', function (d) {
-					tooltip.transition()
-							.duration(700) //700
-							.style('opacity', 0)
-				})
+						.on('mouseout', function (d) {
+							d3.selectAll('.tooltipOriginDetail').transition()
+                  				.duration(500)
+								.remove()
+							;
+					// d3.select('#areaDetailChart').append('div')	
+					// .attr('class', 'tooltipDestinationDetail')				
+					// .style('opacity', 0).transition()
+					// 		.duration(700) //700
+					// 		.style('opacity', 0)
+						})
 				;
 			this.svg = svg;
 			this.projection = projection;
