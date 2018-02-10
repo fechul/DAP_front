@@ -9,11 +9,12 @@ INDEX = {
 		this.makeGender('#genderChart', 220, 220, 100);
 		this.makeAge();
 		this.makeMajor();
-		// this.makeCharacter();
+		this.makeCharacter();
 
 		this.makeGenderDetail();
 		this.makeAgeDetail();
 		this.makeMajorDetail();
+		this.makeCharacterDetail();
 	},
 
 	initEvents: function() {
@@ -325,88 +326,200 @@ INDEX = {
 	},
 
 	makeCharacter: function() {
-        var data = [{"category": '1',"password": '패기'}, 
-        {"category": '2',"password": '열정'},
-        {"category": '3',"password": '친화력'}, 
-        {"category": '4',"password": '짜증'}, 
-        {"category": '5',"password": '밝음'}, 
-        {"category": '6',"password": '조용함'}, 
-        {"category": '7',"password": '모험'}, 
-        {"category": '8',"password": '열정'}, 
-        {"category": '9',"password": '패기'}, 
-        {"category": '10',"password": '패기'},
-        {"category": '11',"password": 'SUPEX'},
-        {"category": '12',"password": '패기'},
-        {"category": '13',"password": 'SUPEX'},
-        {"category": '14',"password": '밝음'},
-        {"category": '15',"password": '열정'}];
+		var words = [{"cnt": '12',"text": '패기'}, 
+		    {"cnt": '4',"text": '열정'},
+		    {"cnt": '6',"text": '친화력'}, 
+		    {"cnt": '1',"text": '짜증'}, 
+		    {"cnt": '5',"text": '밝음'}, 
+		    {"cnt": '2',"text": '조용함'}, 
+		    {"cnt": '4',"text": '모험'},
+		    {"cnt": '17',"text": 'SUPEX'},
+		    {"cnt": '3',"text": '강인함'},
+		    {"cnt": '4',"text": '노력'},
+		    {"cnt": '7',"text": '부지런'},
+		    {"cnt": '9',"text": '끈기'}];
 
-        var margin = {top: 20, right: 20, bottom: 40, left: 20},
-		    width = 300 - margin.left - margin.right,
-		    height = 250 - margin.top - margin.bottom;
+		var wordCloud = function(selector) {
 
-		  var categories = d3.keys(d3.nest().key(function(d) { 
-		  	return d.category; }).map(data));
-		  var color = d3.scale.ordinal().range(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"]);
-		  var fontSize = d3.scale.pow().exponent(5).domain([0,1]).range([10,80]);
+			var fill = d3.scale.category20();
 
-		  var layout = d3.layout.cloud()
-		      .timeInterval(10)
-		      .size([width, height])
-		      .words(data)
-		      .rotate(function(d) { return 0; })
-		      .font('monospace')
-		      .fontSize(function(d,i) {return fontSize(Math.random()); })
-		      .text(function(d) {return d.password; })
-		      .spiral("archimedean")
-		      .on("end", draw)
-		      .start();
+			//Construct the word cloud's SVG element
+			var svg = d3.select("#characterWordCloud")
+				.attr("width", 320)
+				.attr("height", 220)
+				.append("g")
+				.attr("transform", "translate(150,120)");
 
-		  var svg = d3.select('#characterWordCloud')
-		      .attr("width", width + margin.left + margin.right)
-		      .attr("height", height + margin.top + margin.bottom)
-		      .append("g")
-		      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		  var wordcloud = svg.append("g")
-		      .attr('class','wordcloud')
-		      .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+			//Draw the word cloud
+			function draw(words) {
+				var cloud = svg.selectAll("g text")
+								.data(words, function(d) { return d.text; })
 
-		  var x0 = d3.scale.ordinal()
-		      .rangeRoundBands([0, width], .1)
-		      .domain(categories);
+				//Entering words
+				cloud.enter()
+					.append("text")
+					.style("font-family", "Impact")
+					.style("fill", function(d, i) { return fill(i); })
+					.attr("text-anchor", "middle")
+					.attr('font-size', 1)
+					.text(function(d) { return d.text; });
 
-		  var xAxis = d3.svg.axis()
-		      .scale(x0)
-		      .orient("bottom");
+				//Entering and existing words
+				cloud
+					.transition()
+						.duration(600)
+						.style("font-size", function(d) { return d.size + "px"; })
+						.attr("transform", function(d) {
+							return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+						})
+						.style("fill-opacity", 1);
 
-		  svg.append("g")
-		      .attr("class", "x axis")
-		      .attr("transform", "translate(0," + height + ")")
-		      .call(xAxis)
-		    .selectAll('text')
-		      .style('font-size','20px')
-		      .style('fill',function(d) { return color(d); })
-		      .style('font','sans-serif');
+				//Exiting words
+				cloud.exit()
+					.transition()
+						.duration(200)
+						.style('fill-opacity', 1e-6)
+						.attr('font-size', 1)
+						.remove();
+			}
 
-		  function draw(words) {
-		    wordcloud.selectAll("text")
-		        .data(words)
-		        .enter().append("text")
-		        .attr('class','word')
-		        .transition()
-                .duration(600)
-		        .style("font-size", function(d) { return (d.size+10) + "px"; })
-		        .style("font-family", function(d) { return d.font; })
-		        .style("fill", function(d) { 
-		        	d.rotate = Math.floor(Math.random() * 60);
-		            var paringObject = data.filter(function(obj) { return obj.password === d.text});
-		            return color(paringObject[0].category); 
-		        })
-		        .attr("text-anchor", "middle")
-		        .attr("transform", function(d) {return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
-		        .text(function(d) { return d.text; });
-		  };
+			//Use the module pattern to encapsulate the visualisation code. We'll
+			// expose only the parts that need to be public.
+			return {
+
+				//Recompute the word cloud for a new set of words. This method will
+				// asycnhronously call draw when the layout has been computed.
+				//The outside world will need to call this function, so make it part
+				// of the wordCloud return value.
+				update: function(words) {
+					d3.layout.cloud().size([320, 220])
+						.words(words)
+						.padding(5)
+						.rotate(function() { return ~~(Math.random() * 2) * 90; })
+						.font("Impact")
+						.fontSize(function(d) { return d.size; })
+						.on("end", draw)
+						.start();
+				}
+			}
+
+		}
+
+		//Prepare one of the sample sentences by removing punctuation,
+		// creating an array of words and computing a random size attribute.
+		function getWords(i) {
+			var wordsCnt = words.length;
+			var totalWordsCnt = 0;
+			for(var j = 0; j < words.length; j++) {
+				totalWordsCnt += parseInt(words[j].cnt, 10);
+			}
+
+			for(var j = 0; j < words.length; j++) {
+				words[j].size = 10 + (words[j].cnt/totalWordsCnt)*60*3.5;
+			}
+
+			return words;
+		}
+
+		//This method tells the word cloud to redraw with a new set of words.
+		//In reality the new words would probably come from a server request,
+		// user input or some other source.
+		function showNewWords(vis, i) {
+			i = i || 0;
+
+			vis.update(getWords(i ++ % words.length))
+			setTimeout(function() { showNewWords(vis, i + 1)}, 2000)
+		}
+
+		//Create a new instance of the word cloud visualisation.
+		var myWordCloud = wordCloud('body');
+
+		//Start cycling through the demo data
+		showNewWords(myWordCloud);
+
+    //     var data = [{"category": '1',"password": '패기'}, 
+    //     {"category": '2',"password": '열정'},
+    //     {"category": '3',"password": '친화력'}, 
+    //     {"category": '4',"password": '짜증'}, 
+    //     {"category": '5',"password": '밝음'}, 
+    //     {"category": '6',"password": '조용함'}, 
+    //     {"category": '7',"password": '모험'}, 
+    //     {"category": '8',"password": '열정'}, 
+    //     {"category": '9',"password": '패기'}, 
+    //     {"category": '10',"password": '패기'},
+    //     {"category": '11',"password": 'SUPEX'},
+    //     {"category": '12',"password": '패기'},
+    //     {"category": '13',"password": 'SUPEX'},
+    //     {"category": '14',"password": '밝음'},
+    //     {"category": '15',"password": '열정'}];
+
+    //     var margin = {top: 20, right: 20, bottom: 40, left: 20},
+		  //   width = 300 - margin.left - margin.right,
+		  //   height = 250 - margin.top - margin.bottom;
+
+		  // var categories = d3.keys(d3.nest().key(function(d) { 
+		  // 	return d.category; }).map(data));
+		  // var color = d3.scale.ordinal().range(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"]);
+		  // var fontSize = d3.scale.pow().exponent(5).domain([0,1]).range([10,80]);
+
+		  // var layout = d3.layout.cloud()
+		  //     .timeInterval(10)
+		  //     .size([width, height])
+		  //     .words(data)
+		  //     .rotate(function(d) { return 0; })
+		  //     .font('monospace')
+		  //     .fontSize(function(d,i) {return fontSize(Math.random()); })
+		  //     .text(function(d) {return d.password; })
+		  //     .spiral("archimedean")
+		  //     .on("end", draw)
+		  //     .start();
+
+		  // var svg = d3.select('#characterWordCloud')
+		  //     .attr("width", width + margin.left + margin.right)
+		  //     .attr("height", height + margin.top + margin.bottom)
+		  //     .append("g")
+		  //     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		  // var wordcloud = svg.append("g")
+		  //     .attr('class','wordcloud')
+		  //     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+
+		  // var x0 = d3.scale.ordinal()
+		  //     .rangeRoundBands([0, width], .1)
+		  //     .domain(categories);
+
+		  // var xAxis = d3.svg.axis()
+		  //     .scale(x0)
+		  //     .orient("bottom");
+
+		  // svg.append("g")
+		  //     .attr("class", "x axis")
+		  //     .attr("transform", "translate(0," + height + ")")
+		  //     .call(xAxis)
+		  //   .selectAll('text')
+		  //     .style('font-size','20px')
+		  //     .style('fill',function(d) { return color(d); })
+		  //     .style('font','sans-serif');
+
+		  // function draw(words) {
+		  //   wordcloud.selectAll("text")
+		  //       .data(words)
+		  //       .enter().append("text")
+		  //       .attr('class','word')
+		  //       .transition()
+    //             .duration(600)
+		  //       .style("font-size", function(d) { return (d.size+10) + "px"; })
+		  //       .style("font-family", function(d) { return d.font; })
+		  //       .style("fill", function(d) { 
+		  //       	d.rotate = Math.floor(Math.random() * 60);
+		  //           var paringObject = data.filter(function(obj) { return obj.password === d.text});
+		  //           return color(paringObject[0].category); 
+		  //       })
+		  //       .attr("text-anchor", "middle")
+		  //       .attr("transform", function(d) {return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
+		  //       .text(function(d) { return d.text; });
+		  // };
 	},
 
 	setModalContent: function(type) {
@@ -847,6 +960,142 @@ INDEX = {
             }).on("mouseout", function (d) {
                 tool.style("display", "none");
             });
+	},
+
+	makeCharacterDetail: function() {
+		var words = [{"cnt": '30',"text": 'SUPEX'},
+			{"cnt": '22',"text": 'SK'},
+			{"cnt": '21',"text": '패기'},
+			{"cnt": '18',"text": 'Smart'},
+			{"cnt": '15',"text": 'DT'},
+			{"cnt": '12',"text": 'IT'},
+			{"cnt": '11',"text": '컴퓨터'},
+			{"cnt": '11',"text": '성실'},
+			{"cnt": '9',"text": 'Digital'},
+			{"cnt": '9',"text": '끈기'},
+			{"cnt": '8',"text": 'AI'},
+			{"cnt": '7',"text": '부지런'},
+			{"cnt": '7',"text": '정의'},
+			{"cnt": '6',"text": '친화력'}, 
+			{"cnt": '6',"text": '알고리즘'},
+			{"cnt": '5',"text": '밝음'}, 
+			{"cnt": '5',"text": 'BigData'},
+		    {"cnt": '5',"text": 'Cloud'},
+		    {"cnt": '4',"text": '열정'},
+		    {"cnt": '4',"text": '노력'},
+		    {"cnt": '4',"text": '프로젝트'},
+		    {"cnt": '4',"text": '모험'},
+		    {"cnt": '3',"text": '강인함'},
+		    {"cnt": '2',"text": '조용함'}];
+
+	    var totalWordsCnt = 0;
+		for(var j = 0; j < words.length; j++) {
+			totalWordsCnt += parseInt(words[j].cnt, 10);
+		}
+
+		var characterDetailText = '';
+		for(var i = 0; i < 5; i++) {
+			characterDetailText += "<li>" + words[i].text + "<span class='characterCategorySublabel'>(" + ((words[i].cnt/totalWordsCnt)*100).toFixed(2) + "%)</span></li>"
+		}
+		$('#characterRankList').append(characterDetailText);
+
+
+		var wordCloud = function(selector) {
+
+			var fill = d3.scale.category20();
+
+			//Construct the word cloud's SVG element
+			var svg = d3.select("#characterWordCloudDetail")
+				.attr("width", 700)
+				.attr("height", 550)
+				.append("g")
+				.attr("transform", "translate(300,300)");
+
+
+			//Draw the word cloud
+			function draw(words) {
+				var cloud = svg.selectAll("g text")
+								.data(words, function(d) { return d.text; })
+
+				//Entering words
+				cloud.enter()
+					.append("text")
+					.style("font-family", "Impact")
+					.style("fill", function(d, i) { return fill(i); })
+					.attr("text-anchor", "middle")
+					.attr('font-size', 1)
+					.text(function(d) { return d.text; });
+
+				//Entering and existing words
+				cloud
+					.transition()
+						.duration(600)
+						.style("font-size", function(d) { return d.size + "px"; })
+						.attr("transform", function(d) {
+							return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+						})
+						.style("fill-opacity", 1);
+
+				//Exiting words
+				cloud.exit()
+					.transition()
+						.duration(200)
+						.style('fill-opacity', 1e-6)
+						.attr('font-size', 1)
+						.remove();
+			}
+
+			//Use the module pattern to encapsulate the visualisation code. We'll
+			// expose only the parts that need to be public.
+			return {
+
+				//Recompute the word cloud for a new set of words. This method will
+				// asycnhronously call draw when the layout has been computed.
+				//The outside world will need to call this function, so make it part
+				// of the wordCloud return value.
+				update: function(words) {
+					d3.layout.cloud().size([700, 550])
+						.words(words)
+						.padding(5)
+						.rotate(function() { return ~~(Math.random() * 2) * 90; })
+						.font("Impact")
+						.fontSize(function(d) { return d.size; })
+						.on("end", draw)
+						.start();
+				}
+			}
+
+		}
+
+		//Prepare one of the sample sentences by removing punctuation,
+		// creating an array of words and computing a random size attribute.
+		function getWords(i) {
+			var wordsCnt = words.length;
+
+			for(var j = 0; j < words.length; j++) {
+				words[j].size = 10 + (words[j].cnt/totalWordsCnt)*60*10;
+			}
+
+			return words;
+		}
+
+		//This method tells the word cloud to redraw with a new set of words.
+		//In reality the new words would probably come from a server request,
+		// user input or some other source.
+		function showNewWords(vis, i) {
+			i = i || 0;
+
+			vis.update(getWords(i ++ % words.length))
+			setTimeout(function() {
+				showNewWords(vis, i + 1)
+			}, 2000)
+		}
+
+		//Create a new instance of the word cloud visualisation.
+		var myWordCloud = wordCloud('body');
+
+		//Start cycling through the demo data
+		showNewWords(myWordCloud);
 	}
 };
 

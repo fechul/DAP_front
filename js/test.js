@@ -4,7 +4,7 @@ var TEST = {
 		this.makeGrade();
 		this.makeAbility();
 		this.makeCareer();
-		this.makeCharacter();
+		// this.makeCharacter();
 
 		this.makeGradeDetail();
 		this.makeCareerDetail();
