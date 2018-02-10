@@ -1,6 +1,6 @@
 INDEX = {
 	init: function() {
-		this.analystType = ['gender', 'age', 'major', 'area', 'grade', 'ability', 'character', 'career'];
+		this.analystType = ['gender', 'age', 'area', 'grade', 'major', 'ability', 'character', 'career'];
 		this.currentTypeIdx = null;
 		this.direction = 0;
 		this.detailBox = $('#detailModal');
@@ -293,7 +293,7 @@ INDEX = {
 
 		var tree = majorData;
 
-		var width = 290,
+		var width = 400,
 		    height = 220,
 		    color = d3.scale.category20c(),
 		    div = d3.select("#majorTree").append("div")
