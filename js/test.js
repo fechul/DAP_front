@@ -798,8 +798,8 @@ var TEST = {
 		originName: 'SK(주)C&C',
 		destinations: [
 			{'coord': [127.104456, 37.513931], 'name': '고성군'},
-			{'coord': [129.163984, 35.165740], 'name': '밀양시'},
-			{'coord': [126.964713, 37.546671], 'name': '여기'},
+			// {'coord': [129.163984, 35.165740], 'name': '밀양시'},
+			// {'coord': [126.964713, 37.546671], 'name': '여기'},
 			{'coord': [126.924436, 37.557687], 'name': '홍대'}
 		],
 		svg: null,
@@ -838,6 +838,8 @@ var TEST = {
 			var duration = this.calculateDuration(distance);
 			var arc = svg;
 			
+			
+
 			var drawCircle = function() {
 				svg.append('circle')
 					.datum(connection)
@@ -898,6 +900,9 @@ var TEST = {
 					.duration(300) //300
 					.attr('r', '8px')
 					.each('end', function(d) {
+						// SK (주) C&C에 대한 라벨 띄우기
+						
+
 						d3.select(this)
 							.transition()
 							.duration(2000) //2000
@@ -943,14 +948,25 @@ var TEST = {
 									svg.selectAll('.destCircleInnerDetail').remove();
 									svg.selectAll('.destCircleOuterDetail').remove();
 									svg.selectAll('.destCircleMouseDetail').remove();
-								for (i = 0; i < self.destinations.length; i++) { 
-									svg.selectAll('.arcDetail' + i).remove();
-								}
+									for (i = 0; i < self.destinations.length; i++) { 
+										svg.selectAll('.arcDetail' + i).remove();
+									}
 								}
 								var nextIndex = index + 1;
 								if (nextIndex < self.destinations.length) {
+									console.log('1'+nextIndex);
 									self.drawConnection(nextIndex);
 								} else {
+									console.log('2'+nextIndex);
+									// d3.selectAll('.tooltipOriginDetail').data([originGeo]).enter().select('#areaDetailChart').append('div')
+									// 	.html('<span style="color:white">' + this.originName + '</span>')
+									// 	.attr('class', 'tooltipOriginDetail')
+									// 	.style('left', projection(d)[0] + 50 + 'px')
+									// 	.style('top', projection(d)[1] - 0 + 'px')
+									// 	.transition()
+									// 	.duration(500) //700
+									// 	.style('opacity', 1)
+									// ;
 									self.drawConnection(0);
 								}
 							})
@@ -1018,6 +1034,8 @@ var TEST = {
 									.transition()
 									.duration(500) //700
 									.style('opacity', 1)
+							;
+							console.log( projection(d)[0]);
 						})
 						.on('mouseout', function (d) {
 							d3.selectAll('.tooltipOriginDetail').transition()
