@@ -626,10 +626,10 @@ INDEX = {
 
 		var	previousGenderData = [{
 			"label": "남자",
-			"value": 45
+			"value": 66
 		}, {
 			"label": "여자",
-			"value": 20
+			"value": 17
 		}];
 
 		var drawPie = function(target, genderData, w, h, fs, mr, wr) {
@@ -715,15 +715,16 @@ INDEX = {
 		$('.currentGenderImages').append(genderImgText);
 
 		var previousTotal = previousGenderData[0].value + previousGenderData[1].value;
-		var	previousManRate = previousGenderData[0].label == '남자' ? ((previousGenderData[0].value/total)*10).toFixed(1) : ((previousGenderData[1].value/total)*100).toFixed(1);
-		var	previousWomanRate = previousGenderData[0].label == '여자' ? ((previousGenderData[0].value/total)*10).toFixed(1) : ((previousGenderData[1].value/total)*100).toFixed(1);
+		var	previousManRate = previousGenderData[0].label == '남자' ? ((previousGenderData[0].value/previousTotal)*10).toFixed(1) : ((previousGenderData[1].value/previousTotal)*100).toFixed(1);
+		var	previousWomanRate = previousGenderData[0].label == '여자' ? ((previousGenderData[0].value/previousTotal)*10).toFixed(1) : ((previousGenderData[1].value/previousTotal)*100).toFixed(1);
+		console.log(previousManRate, previousWomanRate)
 		previousManRate = Math.round(previousManRate);
 		previousWomanRate = 10 - previousManRate;
 
 		$('#previousManCountText').text(previousGenderData[0].label == '남자' ? previousGenderData[0].value : previousGenderData[1].value);
 		$('#previousWomanCountText').text(previousGenderData[0].label == '남자' ? previousGenderData[1].value : previousGenderData[0].value);
-		$('#previousManPercentText').text(previousGenderData[0].label == '남자' ? (previousGenderData[0].value/total * 100).toFixed(1) : (previousGenderData[1].value/total * 100).toFixed(1));
-		$('#previousWomanPercentText').text(previousGenderData[0].label == '남자' ? (previousGenderData[1].value/total * 100).toFixed(1) : (previousGenderData[0].value/total * 100).toFixed(1));
+		$('#previousManPercentText').text(previousGenderData[0].label == '남자' ? (previousGenderData[0].value/previousTotal * 100).toFixed(1) : (previousGenderData[1].value/previousTotal * 100).toFixed(1));
+		$('#previousWomanPercentText').text(previousGenderData[0].label == '남자' ? (previousGenderData[1].value/previousTotal * 100).toFixed(1) : (previousGenderData[0].value/previousTotal * 100).toFixed(1));
 
 		drawPie('#genderDetailChart', genderData, 500, 500, '40', manRate, womanRate);
 		drawPie('#genderPreviousChart', previousGenderData, 200, 200, '24', previousManRate, previousWomanRate);
@@ -733,35 +734,8 @@ INDEX = {
 		var h = 500;
 		var w = 500;
 
-		 var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}]
-		// var ageData = [{
-		// 	"label": "23",
-		// 	"value": 2
-		// },{
-		// 	"label": "24",
-		// 	"value": 4
-		// },{
-		// 	"label": "25",
-		// 	"value": 9
-		// },{
-		// 	"label": "26",
-		// 	"value": 8
-		// },{
-		// 	"label": "27",
-		// 	"value": 17
-		// },{
-		// 	"label": "28",
-		// 	"value": 13
-		// },{
-		// 	"label": "29",
-		// 	"value": 3
-		// },{
-		// 	"label": "30",
-		// 	"value": 2
-		// },{
-		// 	"label": "31",
-		// 	"value": 1
-		// }];
+		var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}];
+
 
 		var maxAge = 0;
 		var minAge = 100;
@@ -1095,8 +1069,7 @@ INDEX = {
 		$('#characterRankList').append(characterDetailText);
 
 
-		var wordCloud = function(selector) {
-
+		var wordCloud = function() {
 			var fill = d3.scale.category20();
 
 			//Construct the word cloud's SVG element
@@ -1178,6 +1151,7 @@ INDEX = {
 		//In reality the new words would probably come from a server request,
 		// user input or some other source.
 		function showNewWords(vis, i) {
+
 			i = i || 0;
 
 			vis.update(getWords(i ++ % words.length))
@@ -1187,7 +1161,7 @@ INDEX = {
 		}
 
 		//Create a new instance of the word cloud visualisation.
-		var myWordCloud = wordCloud('body');
+		var myWordCloud = wordCloud();
 
 		//Start cycling through the demo data
 		showNewWords(myWordCloud);
