@@ -760,36 +760,7 @@ var TEST = {
 	makeCareer: function() {
 		var width = 340,
 			height = 220;
-			
-		// var careerData = {
-		// 	"nodes": [
-		// 		{ "name": "빅데이터", "group": 1, "value": 2 },
-		// 		{ "name": "처리", "group": 2, "value": 20 },
-		// 		{ "name": "분석", "group": 2, "value": 5 },
-		// 		{ "name": "데이터", "group": 2, "value": 10},
-		// 		{ "name": "AI", "group": 3, "value": 8 },
-		// 		{ "name": "IoT", "group": 3, "value": 2 },
-		// 		{ "name": "엔지니어", "group": 2, "value": 3 },
-		// 		{ "name": "제조", "group": 4, "value": 5 },
-		// 		{ "name": "인프라", "group": 4, "value": 9 },
-		// 		{ "name": "IoT 전문가", "group": 4, "value": 33 }
 
-
-		// 	],
-		// 	"links": [
-		// 		{ "source": 0, "target": 1, "value": 1 },
-		// 		{ "source": 0, "target": 2, "value": 1 },
-		// 		{ "source": 0, "target": 3, "value": 1 },
-		// 		{ "source": 0, "target": 6, "value": 1 },
-		// 		{ "source": 4, "target": 5, "value": 2 },
-		// 		{ "source": 4, "target": 0, "value": 3 },
-		// 		{ "source": 5, "target": 0, "value": 3 },
-		// 		{ "source": 5, "target": 7, "value": 4 },
-		// 		{ "source": 5, "target": 8, "value": 4 },
-		// 		{ "source": 5, "target": 9, "value": 4 },
-		// 		{ "source": 8, "target": 9, "value": 2 }
-		// 	]
-		// }
 		var careerData = {
 			"nodes": [
 				{ "name": "Data", "group": 1, "value": 9 }, //0
@@ -1916,7 +1887,7 @@ var TEST = {
 				// console.log(styleGroup);
 				// if(careerData.nodes.name == index_categorySecond[i].label) console.log(index_categorySecond[i].label);
 				var html = '<div class=subcategory_' + j + '><span style="color:' + colorNode(styleGroup) + '">';  
-				html += index_categorySecond[i].label + ' </span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>';
+				html += index_categorySecond[i].label + ' </span>' + '<span style="font-size:20px;color:#aaa;">(' + index_categorySecond[i].value + ')</span>' + '</div>';
 				$('#careerCategorySecond').append(html);
 				sum += index_categorySecond[i].value;
 			}

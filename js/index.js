@@ -1084,7 +1084,6 @@ INDEX = {
 		var previousTotal = previousGenderData[0].value + previousGenderData[1].value;
 		var	previousManRate = previousGenderData[0].label == '남자' ? ((previousGenderData[0].value/previousTotal)*10).toFixed(1) : ((previousGenderData[1].value/previousTotal)*100).toFixed(1);
 		var	previousWomanRate = previousGenderData[0].label == '여자' ? ((previousGenderData[0].value/previousTotal)*10).toFixed(1) : ((previousGenderData[1].value/previousTotal)*100).toFixed(1);
-		console.log(previousManRate, previousWomanRate)
 		previousManRate = Math.round(previousManRate);
 		previousWomanRate = 10 - previousManRate;
 
@@ -1135,7 +1134,7 @@ INDEX = {
 		$('#ageAverage').text(avgAge);
 		var compareHtml = '';
 		if(compareVal < 0) {
-			compareHtml = '<span style="color:#f72626; font-weight:bold; font-size:22px;">' + compareVal*(-1) + '</span><span class="glyphicon glyphicon-arrow-down" style="color:#f72626; font-size:18px;"></span>';
+			compareHtml = '<span style="color:#f72626; font-weight:bold; font-size:22px;">' + compareVal*(-1) + '%</span><span class="glyphicon glyphicon-arrow-down" style="color:#f72626; font-size:18px;"></span>';
 		} else {
 			compareHtml = '<span style="color:#1e9a27; font-weight:bold; font-size:22px;">' + compareVal + '</span><span class="glyphicon glyphicon-arrow-up" style="color:#1e9a27; font-size:18px;"></span>';
 		}
