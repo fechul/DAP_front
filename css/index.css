@@ -281,6 +281,16 @@ body {
     font-size: 16px;
 }
 
+.genderPercent {
+    font-size: 24px;
+    color: #aaa;
+}
+
+#manCountText,
+#womanCountText {
+    margin-right: 5px;
+}
+
 /* AGE DETAIL */
 .ageInfos {
     font-size: 48px;

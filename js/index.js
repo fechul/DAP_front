@@ -573,33 +573,37 @@ INDEX = {
 			"color": "#dc183c"
 		}];
 
+		var people = genderData[0].value + genderData[1].value;
+		$('#manPercentText').text((genderData[0].value/people * 100).toFixed(1));
+		$('#womanPercentText').text((genderData[1].value/people * 100).toFixed(1));
+
 		if(genderData[0].value == genderData[1].value) {
-			$('#genderDetailCntMan').css('font-size', '60px');
-			$('#genderDetailCntWoman').css('font-size', '60px');
+			$('#manCountText').css('font-size', '60px');
+			$('#womanCountText').css('font-size', '60px');
 		} else {
 			if(genderData[0].label == '남자') {
-				// $('#genderDetailCntMan').text(genderData[0].value + ' (' + );
-				$('#genderDetailCntWoman').text(genderData[1].value);
+				$('#manCountText').text(genderData[0].value);
+				$('#womanCountText').text(genderData[1].value);
 				$('#genderManRectText').text(genderData[0].label);
-				$('#genderDetailCntWomanText').text(genderData[1].label);
+				$('#womanCountTextText').text(genderData[1].label);
 				if(genderData[0].value > genderData[1].value) {
-					$('#genderDetailCntMan').css('font-size', '72px');
-					$('#genderDetailCntWoman').css('font-size', '48px');
+					$('#manCountText').css('font-size', '72px');
+					$('#womanCountText').css('font-size', '48px');
 				} else {
-					$('#genderDetailCntMan').css('font-size', '48px');
-					$('#genderDetailCntWoman').css('font-size', '72px');
+					$('#manCountText').css('font-size', '48px');
+					$('#womanCountText').css('font-size', '72px');
 				}
 			} else {
-				$('#genderDetailCntMan').text(genderData[1].value);
-				$('#genderDetailCntWoman').text(genderData[0].value);
+				$('#manCountText').text(genderData[1].value);
+				$('#womanCountText').text(genderData[0].value);
 				$('#genderManRectText').text(genderData[1].label);
-				$('#genderDetailCntWomanText').text(genderData[0].label);
+				$('#womanCountTextText').text(genderData[0].label);
 				if(genderData[0].value > genderData[1].value) {
-					$('#genderDetailCntMan').css('font-size', '48px');
-					$('#genderDetailCntWoman').css('font-size', '72px');
+					$('#manCountText').css('font-size', '48px');
+					$('#womanCountText').css('font-size', '72px');
 				} else {
-					$('#genderDetailCntMan').css('font-size', '72px');
-					$('#genderDetailCntWoman').css('font-size', '48px');
+					$('#manCountText').css('font-size', '72px');
+					$('#womanCountText').css('font-size', '48px');
 				}
 			}
 		}
