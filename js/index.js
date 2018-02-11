@@ -6,7 +6,8 @@ INDEX = {
 		this.detailBox = $('#detailModal');
 
 		this.initEvents();
-		this.makeGender('#genderChart', 220, 220, 100);
+		// this.makeGender('#genderChart', 220, 220, 100);
+		this.makeGender();
 		this.makeAge();
 		this.makeMajor();
 		this.makeCharacter();
@@ -87,17 +88,17 @@ INDEX = {
 	// },
 
 	// GENDER
-	makeGender: function(target, h, w, r, attrID) {
+	makeGender: function() {//function(target, h, w, r, attrID) {
 		// // BackEnd에서 이 형식으로 Data를 받아야함
-		var genderData = [{
-			"label": "남자",
-			"value": 37,
-			"color": "#1882dc"
-		}, {
-			"label": "여자",
-			"value": 22,
-			"color": "#dc183c"
-		}];
+		// var genderData = [{
+		// 	"label": "남자",
+		// 	"value": 37,
+		// 	"color": "#1882dc"
+		// }, {
+		// 	"label": "여자",
+		// 	"value": 22,
+		// 	"color": "#dc183c"
+		// }];
 
 	    // var vis = d3.select("#genderChart")
 	    //     		.data([genderData])
@@ -128,59 +129,126 @@ INDEX = {
 		// BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
 			"label": "남자",
-			"value": 37,
-			"color": "#1882dc"
+			"value": 37
 		}, {
 			"label": "여자",
-			"value": 22,
-			"color": "#dc183c"
+			"value": 22
 		}];
 
-		var svg = d3.select(target).attr("width", w).attr("height", h);
-		svg.append("g").attr("id", "genderpie").attr("stroke", "black").attr("stroke-width", "3");
+		// var svg = d3.select(target).attr("width", w).attr("height", h);
+		// svg.append("g").attr("id", "genderpie").attr("stroke", "black").attr("stroke-width", "3");
 
-		gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, r);
-		gradPie.transition("genderpie", genderData, 100);
+		// gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, r);
+		// gradPie.transition("genderpie", genderData, 100);
+
+		var width = 230,
+			height = 230,
+			radius = Math.min(width, height) / 2 - 20;
+			
+		// var color = d3.scale.category20();
+		// console.log(color.this);
+		var color = ['#1f77b4', '#dc5156'];
+
+		var arc = d3.svg.arc()
+						.outerRadius(radius)
+		;
+		var pie = d3.layout.pie();
+		pie.value(function(d) {
+			return d.value;
+		});
+		var svg = d3.select("#genderChart")
+					.datum(genderData, function(d) { return d.value; })
+					.attr("width", width)
+					.attr("height", height)
+					.append("g")
+						.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+		;
+		var arcs = svg.selectAll("g.arc")
+						.data(pie)
+						.enter()
+						.append("g")
+						.attr("class", "arc");
+
+		arcs.append("path")
+				.attr("fill", function(d, i) { return color[i]; })
+				.attr('stroke', 'black')
+				.attr('stroke-width', '3px')
+				.transition()
+					.ease("bounce")
+					.duration(1500)
+					.attrTween("d", tweenPie)
+				.transition()
+					.ease("elastic")
+					.delay(function(d, i) { return 1000 + i * 50; })
+					.duration(750)
+					.attrTween("d", tweenDonut)
+				.each('end', function() {
+					svg.append('text')
+						.style('font-size', '32px')
+						.style('font-weight', 'bold')
+						.attr('text-anchor', 'middle')
+						.attr("transform", "translate(0, 8)")
+						.text('4:6');
+				})
+		;
+		function tweenPie(b) {
+			b.innerRadius = 0;
+			var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
+			return function(t) { return arc(i(t)); };
+		}
+		function tweenDonut(b) {
+			b.innerRadius = radius * .6;
+			var i = d3.interpolate({innerRadius: 0}, b);
+			return function(t) { return arc(i(t)); };
+		}
 	},
 
 	//AGE
 	makeAge: function() {
-		var ageData = [{
-			"label": "23",
-			"value": 2
-		},{
-			"label": "24",
-			"value": 4
-		},{
-			"label": "25",
-			"value": 9
-		},{
-			"label": "26",
-			"value": 8
-		},{
-			"label": "27",
-			"value": 17
-		},{
-			"label": "28",
-			"value": 13
-		},{
-			"label": "29",
-			"value": 3
-		},{
-			"label": "30",
-			"value": 2
-		},{
-			"label": "31",
-			"value": 1
-		}];
+		// var ageData = [{
+		// 	"label": "23",
+		// 	"value": 2
+		// },{
+		// 	"label": "24",
+		// 	"value": 4
+		// },{
+		// 	"label": "25",
+		// 	"value": 9
+		// },{
+		// 	"label": "26",
+		// 	"value": 8
+		// },{
+		// 	"label": "27",
+		// 	"value": 17
+		// },{
+		// 	"label": "28",
+		// 	"value": 13
+		// },{
+		// 	"label": "29",
+		// 	"value": 3
+		// },{
+		// 	"label": "30",
+		// 	"value": 2
+		// },{
+		// 	"label": "31",
+		// 	"value": 1
+		// }];
+		var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}];
 
-		var width = 300,		// 차트 너비
+		var width = 340,		// 차트 너비
 			height = 200,		// 차트 높이
 			padding = 5,		// 바 사이 간격
 			division = 0.10,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
 			duration = 10;		// 바 생성할 때 transition delay 값
 
-		var svg = window.svg = d3.select('#ageChart').attr('width', width).attr('height', height);
+		var svg = d3.select('#ageChart')
+					.attr('width', width)
+					.attr('height', height)	
+					.style('margin-left', '30px')
+					.style('margin-top', '10px')
+		;
+
+		var color = d3.scale.category20b();
 							
 		// 바 만들기
 		svg.selectAll('rect')
@@ -189,58 +257,62 @@ INDEX = {
 			.append('rect')
 			.transition()
 			.delay(function (d, i) {
-				return i / ageData.length * 1000;
+				return i / ageData.length * 1500;
 			})
 			.attr('x', function (d, i) {
 				return i * ((width + padding) / ageData.length);
 			})
 			.attr('y', function (d) {
-				return height - parseInt(d.value / division, 10);
+				return height - parseInt(d.value / division, 10) + 9;
 			})
 			.attr('width', width / ageData.length - padding)
 			.attr('height', function (d) {
-				return parseInt(d.value / division, 10);
+				return parseInt(d.value / division, 10) - 12;
 			})
-			.attr('fill', function (d) {
-				return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
+			.attr('fill', function (d, i) {
+				//return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
+				return color(i);
 			})
 			.attr('stroke', 'black')
-			.attr('stroke-width', '3');
+			.attr('stroke-width', '3px')
+			;
 				
-		// 바 위에 수치 표시
-		svg.selectAll('g')
-			.data(ageData)
-			.enter()
-			.append('text')
-			.transition()
-			.delay(duration * 1.2)
-			.attr('x', function (d, i) {
-				return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
-			})
-			.attr('y', function (d) {
-				return height - parseInt(d.value /division, 10) - 5;
-			})
-			.attr('fill', 'blue')
-			.attr('text-anchor', 'middle');
+		// // 바 위에 수치 표시
+		// svg.selectAll('g')
+		// 	.data(ageData)
+		// 	.enter()
+		// 	.append('text')
+		// 	.transition()
+		// 	.delay(duration * 1.2)
+		// 	.attr('x', function (d, i) {
+		// 		return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
+		// 	})
+		// 	.attr('y', function (d) {
+		// 		return height - parseInt(d.value /division, 10) + 5;
+		// 	})
+		// 	.style('font-weight', 'bold')
+		// 	.attr('fill', 'blue')
+		// 	.attr('text-anchor', 'middle');
 				
 		// 바 아래에 라벨 표시
 		svg.selectAll('g')
 			.data(ageData)
 			.enter()
 			.append('text')
-			.transition()
-			.delay(duration * 1.2)
-			.text(function (d) {
-				return d.label;
-			})
-			.attr('x', function (d, i) {
-				return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
-			})
-			.attr('y', function (d) {
-				return height;
-			})
-			.attr('fill', '#fff')
-			.attr('text-anchor', 'middle');
+				.transition()
+				.delay(duration * 1.2)
+				.text(function (d) {
+					return d.label;
+				})
+				.attr('x', function (d, i) {
+					return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
+				})
+				.attr('y', function (d) {
+					return height - parseInt(d.value /division, 10);
+				})
+				.style('font-weight', 'bold')
+				.attr('fill', 'black')
+				.attr('text-anchor', 'middle');
 	},
 
 	makeMajor: function() {
@@ -258,14 +330,15 @@ INDEX = {
 			}]
 		*/
 
-		majorInfo = [{'name': '컴퓨터과학','size': 13},
-		{'name': '소프트웨어학과','size': 11},
-		{'name': '경영학과','size': 7},
-		{'name': 'IT공학과','size': 19},
-		{'name': '경제학과','size': 3},
-		{'name': '전기전자컴퓨터공학부','size': 5},
-		{'name': '국어국문학과','size': 2},
-		{'name': '산업공학과','size': 8}];
+		// majorInfo = [{'name': '컴퓨터과학','size': 13},
+		// {'name': '소프트웨어학과','size': 11},
+		// {'name': '경영학과','size': 7},
+		// {'name': 'IT공학과','size': 19},
+		// {'name': '경제학과','size': 3},
+		// {'name': '전기전자컴퓨터공학부','size': 5},
+		// {'name': '국어국문학과','size': 2},
+		// {'name': '산업공학과','size': 8}];
+		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
 
 
 		var majorData = {
@@ -618,32 +691,31 @@ INDEX = {
         var color = d3.scale.category20b();
 
         var svg = d3.select('#genderDetailChart')
-          .attr('width', width)
-          .attr('height', height)
-          .append('g')
-          .attr('transform', 'translate(' + (width / 2) + 
-            ',' + (height / 2) + ')');
+          				.attr('width', width)
+          				.attr('height', height)
+          				.append('g')
+          				.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
 
         var arc = d3.svg.arc()
-          .innerRadius(radius - donutWidth)
-          .outerRadius(radius);
+          				.innerRadius(radius - donutWidth)
+          				.outerRadius(radius);
 
         var pie = d3.layout.pie()
-          .value(function(d) { return d.value; })
-          .sort(null);
+          			.value(function(d) { return d.value; })
+          			.sort(null);
 
         var tooltip = d3.select('#genderDetailChart')                              
-          .append('div')                                               
-          .attr('class', 'tooltip');                                   
+          					.append('div')                                               
+          					.attr('class', 'tooltip');                                   
                       
         tooltip.append('div')                                          
-          .attr('class', 'label');                                     
+          		.attr('class', 'label');                                     
              
         tooltip.append('div')                                          
-          .attr('class', 'count');                                     
+          		.attr('class', 'count');                                     
 
         tooltip.append('div')                                          
-          .attr('class', 'percent');                                   
+          		.attr('class', 'percent');                                   
 
 	      genderData.forEach(function(d) {
 		      d.value = +d.value;
@@ -680,34 +752,35 @@ INDEX = {
 		var h = 500;
 		var w = 500;
 
-		var ageData = [{
-			"label": "23",
-			"value": 2
-		},{
-			"label": "24",
-			"value": 4
-		},{
-			"label": "25",
-			"value": 9
-		},{
-			"label": "26",
-			"value": 8
-		},{
-			"label": "27",
-			"value": 17
-		},{
-			"label": "28",
-			"value": 13
-		},{
-			"label": "29",
-			"value": 3
-		},{
-			"label": "30",
-			"value": 2
-		},{
-			"label": "31",
-			"value": 1
-		}];
+		 var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}]
+		// var ageData = [{
+		// 	"label": "23",
+		// 	"value": 2
+		// },{
+		// 	"label": "24",
+		// 	"value": 4
+		// },{
+		// 	"label": "25",
+		// 	"value": 9
+		// },{
+		// 	"label": "26",
+		// 	"value": 8
+		// },{
+		// 	"label": "27",
+		// 	"value": 17
+		// },{
+		// 	"label": "28",
+		// 	"value": 13
+		// },{
+		// 	"label": "29",
+		// 	"value": 3
+		// },{
+		// 	"label": "30",
+		// 	"value": 2
+		// },{
+		// 	"label": "31",
+		// 	"value": 1
+		// }];
 
 		var maxAge = 0;
 		var minAge = 100;
@@ -802,16 +875,18 @@ INDEX = {
 	},
 
 	makeMajorDetail: function() {
-		var majorInfo = [{'name': 'IT공학과','size': 19},
-		{'name': '컴퓨터과학','size': 13},
-		{'name': '소프트웨어학과','size': 11},
-		{'name': '산업공학과','size': 8},
-		{'name': '경영학과','size': 7},
-		{'name': '전기전자컴퓨터공학부','size': 5},
-		{'name': '경제학과','size': 3},
-		{'name': '국어국문학과','size': 2}];
+		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		// var majorInfo = [{'name': 'IT공학과','size': 19},
+		// {'name': '컴퓨터과학','size': 13},
+		// {'name': '소프트웨어학과','size': 11},
+		// {'name': '산업공학과','size': 8},
+		// {'name': '경영학과','size': 7},
+		// {'name': '전기전자컴퓨터공학부','size': 5},
+		// {'name': '경제학과','size': 3},
+		// {'name': '국어국문학과','size': 2}];
 
 		var color = ["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		//var color = d3.scale.category20();
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {
