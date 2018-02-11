@@ -1244,8 +1244,9 @@ INDEX = {
 		// {'name': '경제학과','size': 3},
 		// {'name': '국어국문학과','size': 2}];
 
-		var color = ["#71a5de","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
-		//var color = d3.scale.category20();
+		// var color = ["#71a5de","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		var color = d3.scale.category20();
+    // var color = ["#1f77b4","#ff7f0e","#ff7f0e","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {
@@ -1316,123 +1317,126 @@ INDEX = {
 			if(maj1.indexOf(target.name) > -1) {
 				majorData.children[0].children[0].children.push(target);
 				target.category = '공학계열';
-				target.color = color[0];
+				target.color = color(0);
 			} else if(maj2.indexOf(target.name) > -1){
 				majorData.children[0].children[1].children.push(target);
 				target.category = '자연계열';
-				target.color = color[1];
+				target.color = color(1);
 			} else if(maj3.indexOf(target.name) > -1) {
 				majorData.children[0].children[2].children.push(target);
 				target.category = '의약계열';
-				target.color = color[2];
+				target.color = color(2);
 			} else if(maj4.indexOf(target.name) > -1) {
 				majorData.children[1].children[0].children.push(target);
 				target.category = '인문계열';
-				target.color = color[3];
+				target.color = color(3);
 			} else if(maj5.indexOf(target.name) > -1) {
 				majorData.children[1].children[1].children.push(target);
 				target.category = '사회계열';
-				target.color = color[4];
+				target.color = color(4);
 			} else if(maj6.indexOf(target.name) > -1) {
 				majorData.children[1].children[2].children.push(target);
 				target.category = '교육계열';
-				target.color = color[5];
+				target.color = color(5);
 			} else if(maj7.indexOf(target.name) > -1) {
 				majorData.children[2].children.push(target);
 				target.category = '예체능계열';
-				target.color = color[6];
+				target.color = color(6);
 			} else {
 				majorData.children[3].children.push(target);
 				target.category = '기타';
-				target.color = color[7];
+				target.color = color(7);
 			}
 		}
-
+    
+    console.log(majorData);
 
 		var root = majorData;
 
 		var width = 650,
-            height = 500;
+        height = 500;
 
-        var color = d3.scale.ordinal()
-            .range(["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"])
-            
-        var treemap = d3.layout.treemap()
-            .size([width, height])
-            .padding(.25) //I like the thin interal lines, the group seporations are set in the CSS
-            .value(function (d) { return d.size; });
+    var color = d3.scale.ordinal()
+                        .range(["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"])
+        
+    var treemap = d3.layout.treemap()
+                          .size([width, height])
+                          .padding(.25) //I like the thin interal lines, the group seporations are set in the CSS
+                          .value(function (d) { return d.size; });
 
-        var div = d3.select("#majorList").append("div")
-            .attr("class","treemap")
-            .style("position", "relative")
-            .style("width", width + "px")
-            .style("height", height + "px");
+    var div = d3.select("#majorList").append("div")
+                .attr("class","treemap")
+                .style("position", "relative")
+                .style("width", width + "px")
+                .style("height", height + "px");
 
-        // var ledg = d3.select("body").append("div")
-        //     .style("position", "relative")
-        //     .style("width", width + "px")
-        //     .style("height", 300 + "px");
+    // var ledg = d3.select("body").append("div")
+    //     .style("position", "relative")
+    //     .style("width", width + "px")
+    //     .style("height", 300 + "px");
 
-        var tool = d3.select("body").append("div").attr("class", "toolTip");
+    var tool = d3.select("body").append("div").attr("class", "toolTip");
 
-        d3.select(self.frameElement).style("height", height + 300 + "px");
-        d3.select(self.frameElement).style("width", width+20 + "px");
+    d3.select(self.frameElement).style("height", height + 300 + "px");
+    d3.select(self.frameElement).style("width", width+20 + "px");
 
-        function formatMoney(num) {
-            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-        };
+    function formatMoney(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    };
 
-        function roundToTwo(num) {
-            return +(Math.round(num + "e+2") + "e-2");
-        };
+    function roundToTwo(num) {
+        return +(Math.round(num + "e+2") + "e-2");
+    };
 
-        var rectType = {};
+    var rectType = {};
 
-        div.selectAll(".node")
-            .data(treemap.nodes(root))
-          .enter().append("div")
-            .attr("class", "node")
-            .style("left", function (d) { return d.x + "px"; })
-            .style("top", function (d) { return d.y + "px"; })
-            .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
-            .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
-            .style("background", function (d) {
-            	// return d.children ? color(d.name) : null;
-            	if(d.category && !rectType[d.category]) {
-            		rectType[d.category] = d.color;
-            	}
-            	return d.color;
-            })
-            .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
-            .on("mousemove", function (d) {
-                tool.style("left", d3.event.pageX + 10 + "px")
-                tool.style("top", d3.event.pageY - 20 + "px")
-                tool.style("display", "inline-block");
-                tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / totalSize) * 100) + '%');
-            }).on("mouseout", function (d) {
-                tool.style("display", "none");
-            });
+    div.selectAll(".node")
+        .data(treemap.nodes(root))
+      .enter().append("div")
+        .attr("class", "node")
+        .style("padding", "10px")
+        .style("left", function (d) { return d.x + "px"; })
+        .style("top", function (d) { return d.y + 10 + "px"; })
+        .style("width", function (d) { return Math.max(0, d.dx - 1) + 10 + "px"; })
+        .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
+        .style("background", function (d) {
+          // return d.children ? color(d.name) : null;
+          if(d.category && !rectType[d.category]) {
+            rectType[d.category] = d.color;
+          }
+          return d.color;
+        })  
+        .attr('text-anchor', 'middle')
+        .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
+        .on("mousemove", function (d) {
+            tool.style("left", d3.event.pageX + 10 + "px")
+            tool.style("top", d3.event.pageY - 20 + "px")
+            tool.style("display", "inline-block");
+            tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / totalSize) * 100) + '%');
+        }).on("mouseout", function (d) {
+            tool.style("display", "none");
+        });
+        
+      var majorDetailText = '';
 
-        var majorDetailText = '';
+      majorInfo.sort(function (a, b) { 
+        return parseInt(a.size, 10) > parseInt(b.size, 10) ? -1 : parseInt(a.size, 10) < parseInt(b.size, 10) ? 1 : 0;  
+      });
 
-        majorInfo.sort(function (a, b) { 
-			return parseInt(a.size, 10) > parseInt(b.size, 10) ? -1 : parseInt(a.size, 10) < parseInt(b.size, 10) ? 1 : 0;  
-		});
+      for(var i = 0; i < 5; i++) {
+        majorDetailText += "<li style='color:" + majorInfo[i].color + "'>" + majorInfo[i].name + "<span class='majorCategorySublabel'>(" + majorInfo[i].size + ")</span></li>"
+      }
+      
+      $('#majorRankList').append(majorDetailText);
 
-		for(var i = 0; i < 5; i++) {
-			majorDetailText += "<li style='color:" + majorInfo[i].color + "'>" + majorInfo[i].name + "<span class='majorCategorySublabel'>(" + majorInfo[i].size + ")</span></li>"
-		}
-		
-		$('#majorRankList').append(majorDetailText);
-
-		// <div id="genderManRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">남자</span>
-  //       <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
+		  // <div id="genderManRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">남자</span>
+      // <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
 
   		var majorRectText = '';
   		for(var key in rectType) {
   			majorRectText += '<div class="majorRect" style="background-color: ' + rectType[key] + '"></div><span style="margin-right: 10px;">' + key + '</span>';
   		}
-		$('.majorRectPart').append(majorRectText);
+		  $('.majorRectPart').append(majorRectText);
 	},
 
 	makeCharacterDetail: function() {
