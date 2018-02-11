@@ -6,8 +6,8 @@ var TEST = {
 		this.makeCareer();
 		// this.makeCharacter();
 
-		this.makeGradeDetail();
-		this.makeCareerDetail();
+		// this.makeGradeDetail();
+		// this.makeCareerDetail();
 		this.makeAbilityDetail();
 		this.makeAreaDetail.start();
 	},
@@ -2037,7 +2037,5 @@ var TEST = {
 			nodelabels.attr("x", function(d) { return d.x; }) 
 					  .attr("y", function(d) { return d.y; });
 		});
-
-		$('#careerCategoryFirst').append();
 	}
 };

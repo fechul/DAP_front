@@ -12,7 +12,7 @@ INDEX = {
 		this.makeMajor();
 		this.makeCharacter();
 
-		this.makeGenderDetail();
+		// this.makeGenderDetail();
 		this.makeAgeDetail();
 		this.makeMajorDetail();
 		this.makeCharacterDetail();
@@ -88,43 +88,7 @@ INDEX = {
 	// },
 
 	// GENDER
-	makeGender: function() {//function(target, h, w, r, attrID) {
-		// // BackEnd에서 이 형식으로 Data를 받아야함
-		// var genderData = [{
-		// 	"label": "남자",
-		// 	"value": 37,
-		// 	"color": "#1882dc"
-		// }, {
-		// 	"label": "여자",
-		// 	"value": 22,
-		// 	"color": "#dc183c"
-		// }];
-
-	    // var vis = d3.select("#genderChart")
-	    //     		.data([genderData])
-	    //         	.attr("width", w)
-	    //         	.attr("height", h)
-	    //         	.append("svg:g")           
-	    //         	.attr("transform", "translate(" + r + "," + r + ")");
-	    // var arc = d3.svg.arc().outerRadius(r);
-	    // var pie = d3.layout.pie().value(function(d) { return d.value; });
-	    // var arcs = vis.selectAll("g.slice")
-	    //     		  .data(pie)
-	    //     		  .enter()                       
-	    //         	  .append("svg:g")
-	    //         	  .attr("id","genderpie") 
-	    //               .attr("class", "slice");
-	    //     arcs.append("svg:path")
-	    //             .attr("fill", function(d, i) {return d.data.color; } )
-	    //             .attr("d", arc)
-	    //             .attr('stroke', 'black')
-					// .attr('stroke-width', '3');                                   
-	    //     arcs.append("svg:text").attr("transform", function(d) {                   
-     //            d.innerRadius = 0;
-     //            d.outerRadius = r;
-     //            return "translate(" + arc.centroid(d) + ")";       
-     //        }).attr("text-anchor", "middle")                         
-	    //       .text(function(d, i) { return genderData[i].label; });
+	makeGender: function() {
 
 		// BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
@@ -135,18 +99,10 @@ INDEX = {
 			"value": 22
 		}];
 
-		// var svg = d3.select(target).attr("width", w).attr("height", h);
-		// svg.append("g").attr("id", "genderpie").attr("stroke", "black").attr("stroke-width", "3");
-
-		// gradPie.draw("genderpie", [{"label": "남자", "value":50, "color":"#1882dc"},{"label": "여자", "value":50, "color":"#dc183c"}], 100, 100, r);
-		// gradPie.transition("genderpie", genderData, 100);
-
 		var width = 230,
 			height = 230,
 			radius = Math.min(width, height) / 2 - 20;
 			
-		// var color = d3.scale.category20();
-		// console.log(color.this);
 		var color = ['#1f77b4', '#dc5156'];
 
 		var arc = d3.svg.arc()
@@ -366,7 +322,7 @@ INDEX = {
 
 		var tree = majorData;
 
-		var width = 400,
+		var width = 300,
 		    height = 220,
 		    color = d3.scale.category20c(),
 		    div = d3.select("#majorTree").append("div")
@@ -602,6 +558,12 @@ INDEX = {
 		$('.detailContainer').hide();
 		switch(type) {
 			case 'gender':
+				$('#genderDetailChart').empty();
+				$('#manCountText').empty();
+				$('#womanCountText').empty();
+				$('#manPercentText').empty();
+				$('#womanPercentText').empty();
+				self.makeGenderDetail();
 				$('.genderDetailContainer').show();
 				break;
 			case 'age':
@@ -614,6 +576,11 @@ INDEX = {
 				$('.areaDetailContainer').show();
 				break;
 			case 'grade':
+				$('#gradeDetailChart').empty();
+				$('#gradeLabelA').empty();
+				$('#gradeLabelB').empty();
+				$('#gradeLabelC').empty();
+				TEST.makeGradeDetail();
 				$('.gradeDetailContainer').show();
 				break;
 			case 'ability':
@@ -623,6 +590,10 @@ INDEX = {
 				$('.characterDetailContainer').show();
 				break;
 			case 'career':
+				$('#careerDetailChart').empty();
+				$('#careerCategoryFirst').empty();
+				$('#careerCategorySecond').empty();
+				TEST.makeCareerDetail();
 				$('.careerDetailContainer').show();
 				break;
 		}
@@ -635,16 +606,75 @@ INDEX = {
 	},
 
 	makeGenderDetail: function() {
-		// Left
+
+		// BackEnd에서 이 형식으로 Data를 받아야함
 		var genderData = [{
 			"label": "남자",
-			"value": 37,
-			"color": "#1882dc"
+			"value": 37
 		}, {
 			"label": "여자",
-			"value": 22,
-			"color": "#dc183c"
+			"value": 22
 		}];
+
+		var width = 500,
+			height = 500,
+			radius = Math.min(width, height) / 2 - 20;
+			
+		var color = ['#1f77b4', '#dc5156'];
+
+		var arc = d3.svg.arc()
+						.outerRadius(radius)
+		;
+		var pie = d3.layout.pie();
+		pie.value(function(d) {
+			return d.value;
+		});
+		var svg = d3.select("#genderDetailChart")
+					.datum(genderData, function(d) { return d.value; })
+					.attr("width", width)
+					.attr("height", height)
+					.append("g")
+						.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+		;
+		var arcs = svg.selectAll("g.arc")
+						.data(pie)
+						.enter()
+						.append("g")
+						.attr("class", "arc");
+
+		arcs.append("path")
+				.attr("fill", function(d, i) { return color[i]; })
+				.attr('stroke', 'black')
+				.attr('stroke-width', '3px')
+				.transition()
+					.ease("bounce")
+					.duration(1500)
+					.attrTween("d", tweenPie)
+				.transition()
+					.ease("elastic")
+					.delay(function(d, i) { return 1000 + i * 50; })
+					.duration(750)
+					.attrTween("d", tweenDonut)
+				.each('end', function() {
+					svg.append('text')
+						.style('font-size', '32px')
+						.style('font-weight', 'bold')
+						.attr('text-anchor', 'middle')
+						.attr("transform", "translate(0, 8)")
+						.text('4:6');
+				})
+		;
+		function tweenPie(b) {
+			b.innerRadius = 0;
+			var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
+			return function(t) { return arc(i(t)); };
+		}
+		function tweenDonut(b) {
+			b.innerRadius = radius * .6;
+			var i = d3.interpolate({innerRadius: 0}, b);
+			return function(t) { return arc(i(t)); };
+		}
+
 
 		var people = genderData[0].value + genderData[1].value;
 		$('#manPercentText').text((genderData[0].value/people * 100).toFixed(1));
@@ -681,71 +711,71 @@ INDEX = {
 			}
 		}
 
-        var width = 500;
-        var height = 500;
-        var radius = Math.min(width, height) / 2;
-        var donutWidth = 150;
-        var legendRectSize = 18;
-        var legendSpacing = 4;
+  //       var width = 500;
+  //       var height = 500;
+  //       var radius = Math.min(width, height) / 2;
+  //       var donutWidth = 150;
+  //       var legendRectSize = 18;
+  //       var legendSpacing = 4;
 
-        var color = d3.scale.category20b();
+  //       var color = d3.scale.category20b();
 
-        var svg = d3.select('#genderDetailChart')
-          				.attr('width', width)
-          				.attr('height', height)
-          				.append('g')
-          				.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+  //       var svg = d3.select('#genderDetailChart')
+  //         				.attr('width', width)
+  //         				.attr('height', height)
+  //         				.append('g')
+  //         				.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
 
-        var arc = d3.svg.arc()
-          				.innerRadius(radius - donutWidth)
-          				.outerRadius(radius);
+  //       var arc = d3.svg.arc()
+  //         				.innerRadius(radius - donutWidth)
+  //         				.outerRadius(radius);
 
-        var pie = d3.layout.pie()
-          			.value(function(d) { return d.value; })
-          			.sort(null);
+  //       var pie = d3.layout.pie()
+  //         			.value(function(d) { return d.value; })
+  //         			.sort(null);
 
-        var tooltip = d3.select('#genderDetailChart')                              
-          					.append('div')                                               
-          					.attr('class', 'tooltip');                                   
+  //       var tooltip = d3.select('#genderDetailChart')                              
+  //         					.append('div')                                               
+  //         					.attr('class', 'tooltip');                                   
                       
-        tooltip.append('div')                                          
-          		.attr('class', 'label');                                     
+  //       tooltip.append('div')                                          
+  //         		.attr('class', 'label');                                     
              
-        tooltip.append('div')                                          
-          		.attr('class', 'count');                                     
+  //       tooltip.append('div')                                          
+  //         		.attr('class', 'count');                                     
 
-        tooltip.append('div')                                          
-          		.attr('class', 'percent');                                   
+  //       tooltip.append('div')                                          
+  //         		.attr('class', 'percent');                                   
 
-	      genderData.forEach(function(d) {
-		      d.value = +d.value;
+	 //      genderData.forEach(function(d) {
+		//       d.value = +d.value;
 
-	      var path = svg.selectAll('path')
-	        .data(pie(genderData))
-	        .enter()
-	        .append('path')
-	        .attr('d', arc)
-	        .attr('fill', function(d, i) { 
-	          // return color(d.data.label);
-	          return d.data.color;
-	        });
+	 //      var path = svg.selectAll('path')
+	 //        .data(pie(genderData))
+	 //        .enter()
+	 //        .append('path')
+	 //        .attr('d', arc)
+	 //        .attr('fill', function(d, i) { 
+	 //          // return color(d.data.label);
+	 //          return d.data.color;
+	 //        });
 
-	      path.on('mouseover', function(d) {
-	        var total = d3.sum(genderData.map(function(d) {            
-	          return d.value;
-	        }));                                          
+	 //      path.on('mouseover', function(d) {
+	 //        var total = d3.sum(genderData.map(function(d) {            
+	 //          return d.value;
+	 //        }));                                          
 
-	        var percent = Math.round(1000 * d.data.value / total) / 10;
-	        tooltip.select('.label').html(d.data.label);               
-	        tooltip.select('.count').html(d.data.value);               
-	        tooltip.select('.percent').html(percent + '%');
-	        tooltip.style('display', 'block');                  
-	      });                                                          
+	 //        var percent = Math.round(1000 * d.data.value / total) / 10;
+	 //        tooltip.select('.label').html(d.data.label);               
+	 //        tooltip.select('.count').html(d.data.value);               
+	 //        tooltip.select('.percent').html(percent + '%');
+	 //        tooltip.style('display', 'block');                  
+	 //      });                                                          
 	      
-	      path.on('mouseout', function() {                             
-	        tooltip.style('display', 'none');                          
-	      });                                                          
-	    });
+	 //      path.on('mouseout', function() {                             
+	 //        tooltip.style('display', 'none');                          
+	 //      });                                                          
+	 //    });
 	},
 
 	makeAgeDetail: function() {
@@ -885,7 +915,7 @@ INDEX = {
 		// {'name': '경제학과','size': 3},
 		// {'name': '국어국문학과','size': 2}];
 
-		var color = ["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		var color = ["#71a5de","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
 		//var color = d3.scale.category20();
 
 		var totalSize = 0;
