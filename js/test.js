@@ -595,7 +595,7 @@ var TEST = {
 				if(k === 'value') sum += v;
 			})
 		})
-		// console.log(sum);
+		sum = 59;
 
 		var precisionRound = function(number, precision) {
   			var factor = Math.pow(10, precision);
@@ -623,7 +623,7 @@ var TEST = {
 		var mycfg = {
 			w: w,
 			h: h,
-			maxValue: 0.6,
+			maxValue: 0.8,
 			levels: 6,
 			ExtraWidthX: 200
 		}
@@ -1485,29 +1485,8 @@ var TEST = {
 		//Legend titles
 		var LegendOptions = ['Ability'];
 
-		//Data
-		// var d = [
-		// 	[
-		// 		{axis:"Java", value:0.59},
-		// 		{axis:"Python", value:0.56},
-		// 		{axis:"C", value:0.42},
-		// 		{axis:"Javascript", value:0.34},
-		// 		{axis:"C++", value:0.48},
-		// 		{axis:"Go", value:0.14}
-		// 	]
-		// ];
-
-		// var d = [
-		// 	[
-		// 		{axis:"Java", value:10},
-		// 		{axis:"Python", value:5},
-		// 		{axis:"C", value:7},
-		// 		{axis:"Javascript", value:20},
-		// 		{axis:"C++", value:9},
-		// 		{axis:"Go", value:12}
-		// 	]
-		// ];
 		var d = [[{"axis":"C","value":35},{"axis":" JAVA","value":31},{"axis":" C++","value":29},{"axis":" MySQL","value":27},{"axis":" Python","value":24},{"axis":" Javascript","value":21}]];
+		// var d = [[{"axis":"C","value":51},{"axis":" JAVA","value":48},{"axis":" C++","value":41},{"axis":" MySQL","value":39},{"axis":" Python","value":37},{"axis":" Javascript","value":35}]];
 
 		var sum = 0;
 		$.each(d[0], function(index, value) {
@@ -1517,6 +1496,7 @@ var TEST = {
 				if(k === 'value') sum += v;
 			})
 		})
+		sum = 59;
 		// console.log(sum);
 
 		var precisionRound = function(number, precision) {
@@ -1542,10 +1522,6 @@ var TEST = {
 				v.value = precisionRound(v.value / sum, 4);
 			})
 		})
-
-		// console.log(abilityDetailChartData);
-		// console.log(d);
-		// console.log(abilityDetailChartData);
 		
 
 		// 그래프 그리기
@@ -1553,7 +1529,7 @@ var TEST = {
 		var mycfg = {
 			w: w,
 			h: h,
-			maxValue: 0.3,
+			maxValue: 0.8,
 			levels: 6,
 			ExtraWidthX: 200
 		}

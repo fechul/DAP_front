@@ -13,7 +13,7 @@ INDEX = {
 		this.makeCharacter();
 
 		// this.makeGenderDetail();
-		this.makeAgeDetail();
+		// this.makeAgeDetail();
 		this.makeMajorDetail();
 		this.makeCharacterDetail();
 	},
@@ -167,34 +167,6 @@ INDEX = {
 
 	//AGE
 	makeAge: function() {
-		// var ageData = [{
-		// 	"label": "23",
-		// 	"value": 2
-		// },{
-		// 	"label": "24",
-		// 	"value": 4
-		// },{
-		// 	"label": "25",
-		// 	"value": 9
-		// },{
-		// 	"label": "26",
-		// 	"value": 8
-		// },{
-		// 	"label": "27",
-		// 	"value": 17
-		// },{
-		// 	"label": "28",
-		// 	"value": 13
-		// },{
-		// 	"label": "29",
-		// 	"value": 3
-		// },{
-		// 	"label": "30",
-		// 	"value": 2
-		// },{
-		// 	"label": "31",
-		// 	"value": 1
-		// }];
 		var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}];
 
 		var width = 340,		// 차트 너비
@@ -238,23 +210,6 @@ INDEX = {
 			.attr('stroke', 'black')
 			.attr('stroke-width', '3px')
 			;
-				
-		// // 바 위에 수치 표시
-		// svg.selectAll('g')
-		// 	.data(ageData)
-		// 	.enter()
-		// 	.append('text')
-		// 	.transition()
-		// 	.delay(duration * 1.2)
-		// 	.attr('x', function (d, i) {
-		// 		return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
-		// 	})
-		// 	.attr('y', function (d) {
-		// 		return height - parseInt(d.value /division, 10) + 5;
-		// 	})
-		// 	.style('font-weight', 'bold')
-		// 	.attr('fill', 'blue')
-		// 	.attr('text-anchor', 'middle');
 				
 		// 바 아래에 라벨 표시
 		svg.selectAll('g')
@@ -979,6 +934,14 @@ INDEX = {
 				$('.genderDetailContainer').show();
 				break;
 			case 'age':
+				$('#ageDetailChart').empty();
+				$('#ageAverage').empty();
+				$('#compareVal').empty();
+				$('#manAvgAge').empty();
+				$('#womanAvgAge').empty();
+				$('#ageOldest').empty();
+				$('#ageYoung').empty();
+				self.makeAgeDetail();
 				$('.ageDetailContainer').show();
 				break;
 			case 'major':
@@ -1140,15 +1103,19 @@ INDEX = {
 
 		var ageData = [{"label":"23","value":"2"},{"label":"24","value":"6"},{"label":"25","value":"9"},{"label":"26","value":"19"},{"label":"27","value":"9"},{"label":"28","value":"10"},{"label":"29","value":"2"},{"label":"30","value":"2"}];
 
-
 		var maxAge = 0;
 		var minAge = 100;
 		var sumAge = 0;
 		var pNum = 0;
 		var avgAge = 0;
 
+		var manAvg = 26.8;
+		var womanAvg = 25.3;
+
+		var previousAvgAge = 26.7;
+
 		for(var i = 0; i < ageData.length; i++) {
-			var ageVal = parseInt(ageData[i].label);
+			var ageVal = parseInt(ageData[i].label, 10);
 			if(ageVal > maxAge) {
 				maxAge = ageData[i].label;
 			}
@@ -1157,80 +1124,89 @@ INDEX = {
 				minAge = ageData[i].label;
 			}
 
-			sumAge += ageVal*ageData[i].value;
-			pNum += ageData[i].value;
+			sumAge += ageVal*parseInt(ageData[i].value, 10);
+			pNum += parseInt(ageData[i].value, 10);
 		}
 
 		avgAge = (sumAge/pNum).toFixed(1);
 
+		var compareVal = (((avgAge - previousAvgAge)/previousAvgAge)*100).toFixed(2);
+
 		$('#ageAverage').text(avgAge);
+		var compareHtml = '';
+		if(compareVal < 0) {
+			compareHtml = '<span style="color:#f72626; font-weight:bold; font-size:22px;">' + compareVal*(-1) + '</span><span class="glyphicon glyphicon-arrow-down" style="color:#f72626; font-size:18px;"></span>';
+		} else {
+			compareHtml = '<span style="color:#1e9a27; font-weight:bold; font-size:22px;">' + compareVal + '</span><span class="glyphicon glyphicon-arrow-up" style="color:#1e9a27; font-size:18px;"></span>';
+		}
+
+		$('#compareVal').html(compareHtml);
+		$('#manAvgAge').text(manAvg);
+		$('#womanAvgAge').text(womanAvg);
 		$('#ageOldest').text(maxAge);
 		$('#ageYoung').text(minAge);
 
-		var margin = {top: 20, right: 20, bottom: 70, left: 40},
-		    width = w - margin.left - margin.right,
-		    height = h - margin.top - margin.bottom;
+		var width = 500,		// 차트 너비
+			height = 450,		// 차트 높이
+			padding = 5,		// 바 사이 간격
+			division = 0.05,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
+			duration = 10;		// 바 생성할 때 transition delay 값
 
-		var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+		var svg = d3.select('#ageDetailChart')
+					.attr('width', width)
+					.attr('height', height)	
+					.style('margin-left', '30px')
+					.style('margin-top', '10px')
+		;
 
-		var y = d3.scale.linear().range([height, 0]);
-
-		var xAxis = d3.svg.axis()
-		    .scale(x)
-		    .orient("bottom");
-
-		var yAxis = d3.svg.axis()
-		    .scale(y)
-		    .orient("left")
-		    .ticks(10);
-
-		var svg = d3.select("#ageDetailChart")
-		    .attr("width", width + margin.left + margin.right)
-		    .attr("height", height + margin.top + margin.bottom)
-		 	.append("g")
-		    .attr("transform", 
-		          "translate(" + margin.left + "," + margin.top + ")");
-
-		// d3.csv("bar-data.csv", function(error, data) {
-
-		    ageData.forEach(function(d) {
-		        d.label = d.label;
-		        d.value = +d.value;
-		    });
-			
-		  x.domain(ageData.map(function(d) { return d.label; }));
-		  y.domain([0, d3.max(ageData, function(d) { return d.value; })]);
-
-		  svg.append("g")
-		      .attr("class", "x axis")
-		      .attr("transform", "translate(0," + height + ")")
-		      .call(xAxis)
-		    .selectAll("text")
-		      .style("text-anchor", "end")
-		      .attr("dx", "-.8em")
-		      .attr("dy", "-.55em")
-		      .attr("transform", "rotate(-90)" );
-
-		  svg.append("g")
-		      .attr("class", "y axis")
-		      .call(yAxis)
-		    .append("text")
-		      .attr("transform", "rotate(-90)")
-		      .attr("y", 6)
-		      .attr("dy", ".71em")
-		      .style("text-anchor", "end")
-		      .text("Count (명)");
-
-		  svg.selectAll("bar")
-		      .data(ageData)
-		    .enter().append("rect")
-		      .style("fill", "steelblue")
-		      .attr("x", function(d) { return x(d.label); })
-		      .attr("width", x.rangeBand())
-		      .attr("y", function(d) { return y(d.value); })
-		      .attr("height", function(d) { return height - y(d.value); });
-
-		// });
+		var color = d3.scale.category20b();
+							
+		// 바 만들기
+		svg.selectAll('rect')
+			.data(ageData)
+			.enter()
+			.append('rect')
+			.transition()
+			.delay(function (d, i) {
+				return i / ageData.length * 1500;
+			})
+			.attr('x', function (d, i) {
+				return i * ((width + padding) / ageData.length);
+			})
+			.attr('y', function (d) {
+				return height - parseInt(d.value / division, 10) + 9;
+			})
+			.attr('width', width / ageData.length - padding)
+			.attr('height', function (d) {
+				return parseInt(d.value / division, 10) - 12;
+			})
+			.attr('fill', function (d, i) {
+				//return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
+				return color(i);
+			})
+			.attr('stroke', 'black')
+			.attr('stroke-width', '3px')
+			;
+				
+		// 바 아래에 라벨 표시
+		svg.selectAll('g')
+			.data(ageData)
+			.enter()
+			.append('text')
+				.transition()
+				.delay(duration * 1.2)
+				.text(function (d) {
+					return d.label;
+				})
+				.attr('x', function (d, i) {
+					return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
+				})
+				.attr('y', function (d) {
+					return height - parseInt(d.value /division, 10);
+				})
+				.style('font-weight', 'bold')
+				.attr('fill', 'black')
+				.attr('text-anchor', 'middle');
 	},
 
 	makeMajorDetail: function() {

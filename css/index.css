@@ -347,6 +347,47 @@ body {
     margin-left: 15px;
 }
 
+.ageDetailEach {
+    display: inline-block;
+    width: 45%;
+}
+
+.ageDetailCurrentBox {
+    display: inline-block;
+    width: 45%;
+}
+
+.ageDetailImg {
+    width: 100px;
+    height: auto;
+    margin-top: -25px;
+}
+
+.ageDetailFirstTitle {
+    font-size: 28px !important;
+}
+
+.ageDetailSecondTitle {
+    font-size: 22px !important;
+}
+
+.ageDetailRow {
+    margin-top: 80px;
+}
+
+.ageDetailRow:last-child {
+    margin-top: 30px;
+}
+
+.ageDetailTextBox {
+    display: inline-block;
+}
+
+.ageDetailValue {
+    font-weight: bold;
+    font-size: 22px;
+}
+
 
 /* MAJOR DETAIL */
 
