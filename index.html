@@ -312,14 +312,49 @@
             <!--AGE DETAIL-->
             <div class="ageDetailContainer detailContainer">
               <div class="ageDetailPart detailPart">
-                <label>평균 나이</label>
-                <div id="ageAverage" class="ageInfos">-</div>
-                <br><br><br>
-                <label>최고 나이</label>
-                <div id="ageOldest" class="ageInfos">-</div>
-                <br><br><br>
-                <label>최소 나이</label>
-                <div id="ageYoung" class="ageInfos">-</div>
+                <div class="ageDetailRow">
+                  <div class="ageDetailEach ageDetailCurrentBox">
+                    <label class="ageDetailFirstTitle">평균 연령</label>
+                    <div id="ageAverage" style="font-size:32px; font-weight: bold;"></div>
+                  </div>
+                  <div class="ageDetailEach ageDetailCurrentBox">
+                    <label class="ageDetailSecondTitle">작년 대비</label>
+                    <div id="compareVal"></div>
+                  </div>
+                </div>
+                <div class="ageDetailRow">
+                  <div class="ageDetailEach">
+                    <img class="ageDetailImg" src="img/gender_man.png"></img>
+                    <div class="ageDetailTextBox">
+                      <label style="color:#2f6da4;">남자</label>
+                      <div id="manAvgAge" class="ageDetailValue"></div>
+                    </div>
+                  </div>
+                  <div class="ageDetailEach">
+                    <img class="ageDetailImg" src="img/gender_woman.png"></img>
+                    <div class="ageDetailTextBox">
+                      <label style="color:#be520a;">여자</label>
+                      <div id="womanAvgAge" class="ageDetailValue"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ageDetailRow">
+                  <div class="ageDetailEach">
+                    <img class="ageDetailImg" src="img/age_oldest.png"></img>
+                    <div class="ageDetailTextBox">
+                      <label>최고</label>
+                      <div id="ageOldest" class="ageDetailValue"></div>
+                    </div>
+                  </div>
+                  <div class="ageDetailEach">
+                    <img class="ageDetailImg" src="img/age_young.png"></img>
+                    <div class="ageDetailTextBox">
+                      <label>최저</label>
+                      <div id="ageYoung" class="ageDetailValue"></div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
             <!-- right, makeAreaDetail -->
