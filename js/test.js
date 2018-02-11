@@ -286,7 +286,7 @@ var TEST = {
 					.each('end', function(d) {
 						d3.select(this)
 							.transition()
-							.duration(2000) //2000
+							.duration(0) //2000
 							.attr('r', 20)
 							.style('fill-opacity', '0')
 						;
@@ -322,7 +322,7 @@ var TEST = {
 						;
 						d3.select('.arc' + index)
 							.transition()
-							.duration(2000) //2000
+							.duration(0) //2000
 							.style('stroke-opacity', '1') // style('stroke-opacity', '0') 
 							.style('stroke-width', '2')
 							.each('end', function (d) {
@@ -330,9 +330,9 @@ var TEST = {
 									svg.selectAll('.destCircleInner').remove();
 									svg.selectAll('.destCircleOuter').remove();
 									svg.selectAll('.destCircleMouse').remove();
-								for (i = 0; i < self.destinations.length; i++) { 
-									svg.selectAll('.arc' + i).remove();
-								}
+									for (i = 0; i < self.destinations.length; i++) { 
+										svg.selectAll('.arc' + i).remove();
+									}
 								}
 								var nextIndex = index + 1;
 								if (nextIndex < self.destinations.length) {
@@ -1200,7 +1200,7 @@ var TEST = {
 
 						d3.select(this)
 							.transition()
-							.duration(2000) //2000
+							.duration(0) //2000
 							.attr('r', 14)
 							.style('fill-opacity', '0')
 						;
@@ -1235,18 +1235,18 @@ var TEST = {
 						;
 						d3.select('.arcDetail' + index)
 							.transition()
-							.duration(2000) //2000
+							.duration(0) //2000
 							.style('stroke-opacity', '1') // style('stroke-opacity', '0') 
 							.style('stroke-width', '2')
 							.each('end', function (d) {
-								if (index === self.destinations.length - 1) {
-									svg.selectAll('.destCircleInnerDetail').remove();
-									svg.selectAll('.destCircleOuterDetail').remove();
-									svg.selectAll('.destCircleMouseDetail').remove();
-									for (i = 0; i < self.destinations.length; i++) { 
-										svg.selectAll('.arcDetail' + i).remove();
-									}
-								}
+								// if (index === self.destinations.length - 1) {
+								// 	svg.selectAll('.destCircleInnerDetail').remove();
+								// 	svg.selectAll('.destCircleOuterDetail').remove();
+								// 	svg.selectAll('.destCircleMouseDetail').remove();
+								// 	for (i = 0; i < self.destinations.length; i++) { 
+								// 		svg.selectAll('.arcDetail' + i).remove();
+								// 	}
+								// }
 								var nextIndex = index + 1;
 								if (nextIndex < self.destinations.length) {
 									// console.log('1'+nextIndex);
@@ -1262,7 +1262,7 @@ var TEST = {
 									// 	.duration(500) //700
 									// 	.style('opacity', 1)
 									// ;
-									self.drawConnection(0);
+									// self.drawConnection(0);
 								}
 							})
 						;
@@ -1373,6 +1373,16 @@ var TEST = {
 		// 	"gradeC": 3
 		// };
 		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+		var previousData = {"avgGrade": '3.5'};
+
+		$('#gradeAvg').text(previousData.avgGrade);
+		var growRateColor = GradeData.avgGrade >= previousData.avgGrade ? '#2e6ba4' : '#ff2b2b';
+		var growRate = '<span style="color:' + growRateColor + ';">';
+		growRate += (GradeData.avgGrade >= previousData.avgGrade ? '+' : '-');
+		growRate += (((parseFloat(GradeData.avgGrade)-parseFloat(previousData.avgGrade))/parseFloat(previousData.avgGrade))*100).toFixed(2);
+		growRate += '%';
+		growRate += '</span>';
+		$('#gradePerChange').html(growRate);
 
 		// A, B, C 학점 수
 		$('#gradeLabelA').html(GradeData.gradea);
@@ -1543,7 +1553,7 @@ var TEST = {
 		var mycfg = {
 			w: w,
 			h: h,
-			maxValue: 0.6,
+			maxValue: 0.3,
 			levels: 6,
 			ExtraWidthX: 200
 		}
@@ -1607,10 +1617,10 @@ var TEST = {
 			//console.log(d[0]);
 			//console.log(d[0].sort(function(a, b) {  return d3.descending(a.value, b.value); }));
 			var sortedData = d[0].sort(function(a, b) {  return d3.descending(a.value, b.value); });
-			var rankData = sortedData.slice(0, 5);
-			for(var i = 0; i<rankData.length; i++) {
+			// var rankData = sortedData.slice(0, 5);
+			for(var i = 0; i<sortedData.length; i++) {
 				// console.log(i);
-				$('#abilityRankList').append("<li>" + rankData[i].axis + "<span class='abilityCategorySublabel'>(" + rankData[i].value + ")</span></li>");
+				$('#abilityRankList').append("<li>" + sortedData[i].axis + "<span class='abilityCategorySublabel'>(" + sortedData[i].value + ")</span></li>");
 			}
 		}
 

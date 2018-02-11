@@ -83,7 +83,7 @@ body {
     margin-top: 9px;
     margin-right: 8px;
     border: 1.2px solid #ccc;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 
 .fullscreen_icon {
@@ -450,7 +450,11 @@ body {
 }
 
 #detailGrade {
-    font-size: 16px;
+    font-size: 18px;
+}
+
+#detailGrade > table {
+    text-align: center;
 }
 
 .gradeInfos {
