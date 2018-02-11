@@ -10,6 +10,7 @@ var TEST = {
 		this.makeCareerDetail();
 		this.makeAbilityDetail();
 		this.makeAreaDetail.start();
+		this.makeAreaDetailRight();
 	},
 
 	makeCharacter: function() {
@@ -147,7 +148,7 @@ var TEST = {
 			{'coord': [129.114292, 37.524719], 'name': '강원도 동해시'},
 			{'coord': [126.945021, 37.507494], 'name': '서울특별시 동작구'},
 			{'coord': [127.03014, 37.249787], 'name': '경기도 수원시'},
-			{'coord': [36.333589, 36.333589], 'name': '대전광역시 중구'},
+			{'coord': [127.3945, 36.333589], 'name': '대전광역시 중구'},
 			{'coord': [129.424018, 35.486247], 'name': '울산광역시 동구'},
 			{'coord': [127.949535, 37.321936], 'name': '강원도 원주시'},
 			{'coord': [128.113843, 35.203828], 'name': '경상남도 진주시'},
@@ -1059,7 +1060,7 @@ var TEST = {
 			{'coord': [129.114292, 37.524719], 'name': '강원도 동해시'},
 			{'coord': [126.945021, 37.507494], 'name': '서울특별시 동작구'},
 			{'coord': [127.03014, 37.249787], 'name': '경기도 수원시'},
-			{'coord': [36.333589, 36.333589], 'name': '대전광역시 중구'},
+			{'coord': [127.3945, 36.333589], 'name': '대전광역시 중구'},
 			{'coord': [129.424018, 35.486247], 'name': '울산광역시 동구'},
 			{'coord': [127.949535, 37.321936], 'name': '강원도 원주시'},
 			{'coord': [128.113843, 35.203828], 'name': '경상남도 진주시'},
@@ -2039,5 +2040,104 @@ var TEST = {
 		});
 
 		$('#careerCategoryFirst').append();
+	},
+
+	makeAreaDetailRight: function() { //areaDetailChartRight
+		var width = 320,
+			height = 300,
+			initialScale = 5500,
+			initialX = -11900,
+			initialY = 4030,
+			centered,
+			labels;
+
+		var projection = d3.geo.mercator()
+								.scale(initialScale/2)
+								.translate([initialX/2, initialY/2]);
+
+		var path = d3.geo.path()
+						 .projection(projection);
+
+		var svg = d3.select("#areaDetailChartRight")
+						.append("svg")
+    					.attr("width", width)
+   						.attr("height", height)
+    					.attr('id', 'areaDetailChartMap');
+
+		var states = svg.append("g")
+    					.attr("id", "areaDetailChartRightStates");
+    					// .call(zoom);
+
+		states.append("rect")
+    			.attr("class", "areaDetailChartBackground")
+    			.attr("width", width)
+    			.attr("height", height);
+
+		d3.json("korea.json", function(json) {
+  			states.selectAll("path")
+      				.data(json.features)
+					.enter()
+					.append("path")
+      					.attr("d", path)
+      					.attr("id", function(d) { return 'areaDetailChartRightPath-'+d.id; })
+      					.attr("class", function(d) { return d.properties.Name });
+      				//.on("click", click);
+
+  			labels = states.selectAll("text")
+    						.data(json.features)
+    						.enter().append("text")
+      						.attr("transform", labelsTransform)
+      						.attr("id", function(d) { return 'areaDetailChartRightLabel-'+d.id; })
+    						.attr('text-anchor', 'middle')
+      						.attr("dy", ".35em")
+     						//.on("click", click)
+      						.text(function(d) { return d.properties.Name; });
+		});
+
+		function click(d) {
+			var x, y, k;
+			if (d && centered !== d) {
+				var centroid = path.centroid(d);
+				x = centroid[0];
+				y = centroid[1];
+				k = 4;
+				centered = d;
+			} else {
+				x = width / 2;
+				y = height / 2;
+				k = 1;
+				centered = null;
+			}
+
+			states.selectAll("path")
+					.classed("active", centered && function(d) { return d === centered; });
+
+			states.transition()
+					.duration(1000)
+					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+					.style("stroke-width", 1.5 / k + "px");
+		}
+
+		function zoom() {
+			projection.translate(d3.event.translate).scale(d3.event.scale);
+			states.selectAll("path").attr("d", path);
+	
+			labels.attr("transform", labelsTransform);  
+		}
+
+		function labelsTransform(d) {
+		// 경기도가 서울특별시와 겹쳐서 예외 처리
+			if (d.id == 8) {
+				var arr = path.centroid(d);
+				arr[1] += (d3.event && d3.event.scale) ? (d3.event.scale / height + 10) : (initialScale / height + 0);
+				return "translate(" + arr + ")";
+			} else if (d.id == 12) {
+				var arr = path.centroid(d);
+				arr[1] += (d3.event && d3.event.scale) ? (d3.event.scale / height + 15) : (initialScale / height - 35);
+				return "translate(" + arr + ")";
+			} else {
+				return "translate(" + path.centroid(d) + ")";
+			}
+		}	
 	}
 };

@@ -1,0 +1,23 @@
+#areaDetailChartRightStates path {
+  fill: white;
+  stroke: #ccc;
+  stroke-width: 1.2px;
+}
+/* 
+#states path:hover {
+  stroke: white;
+} */
+
+#areaDetailChartRightStates .active {
+  fill: orange;
+}
+
+#areaDetailChartRightStates text {
+    /* color: gray; */
+    font-size: 12px;
+    display: block;
+} 
+
+.areaDetailChartBackground {
+    fill: none;
+}
