@@ -282,6 +282,16 @@ body {
     font-size: 16px;
 }
 
+.genderPercent {
+    font-size: 24px;
+    color: #aaa;
+}
+
+#manCountText,
+#womanCountText {
+    margin-right: 5px;
+}
+
 /* AGE DETAIL */
 .ageInfos {
     font-size: 48px;
@@ -401,6 +411,28 @@ body {
 .gradeInfos {
     font-size: 48px;
     font-weight: bold;
+}
+
+.majorRect {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: -4px;
+}
+
+#genderManRect {
+    background-color: #1882dc;
+}
+
+#genderWomanRect {
+    background-color: #dc183c;
+}
+
+.genderRectText {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 
