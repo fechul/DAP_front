@@ -201,6 +201,7 @@
           <div class="modalContentArea left">
             <!--GENDER DETAIL-->
             <div class="genderDetailContainer detailContainer">
+              <label style="position:absolute; font-size: 24px; left:45px;">Current Data</label>
               <svg id="genderDetailChart"></svg>
               <div class="genderRectPart">
                 <div id="genderManRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">남자</span>
@@ -276,11 +277,36 @@
             <!--GENDER DETAIL-->
             <div class="genderDetailContainer detailContainer">
               <div class="genderDetailPart detailPart">
-                <label>남자</label>
-                <div id="genderDetailCntMan"><span id="manCountText">-</span> <span class="genderPercent">(<span id="manPercentText"></span>%)</span></div>
-                <br><br><br>
-                <label>여자</label>
-                <div id="genderDetailCntWoman"><span id="womanCountText">-</span> <span class="genderPercent">(<span id="womanPercentText"></span>%)</span></div>
+                <div class="currentGenderInfo">
+
+                  <div class="currentGenderBlock man">
+                    <label style="color:#1f77b4;">남자</label>
+                    <div id="genderDetailCntMan"><span id="manCountText">-</span> <div class="genderPercent" style="color: #1f77b4;">(<span id="manPercentText"></span>%)</div></div>
+                  </div>
+
+                  <div class="currentGenderBlock woman">
+                    <label style="color:#dc5156;">여자</label>
+                    <div id="genderDetailCntWoman"><span id="womanCountText">-</span> <div class="genderPercent" style="color: #dc5156;">(<span id="womanPercentText"></span>%)</div></div>
+                  </div>
+
+                  <div class="currentGenderImages pic"></div>
+
+                  <div class="previousDataContainer">
+                    <label style="width: 100%; text-align:left; margin-left:20px;">Previous Data</label>
+                    <svg id="genderPreviousChart"></svg>
+                    <div class="previousGenderCnt">
+                      <label style="color:#1f77b4; margin-top: 15px;">남자</label>
+                      <div id="previousGenderCntMan"><span id="previousManCountText" style="font-size:20px; color:#1f77b4; font-weight:bold;">-</span> <span class="genderPercent" style="color: #1f77b4; font-size: 16px; font-weight: bold;"">(<span id="previousManPercentText"></span>%)</span></div>
+                      <label style="color:#dc5156; margin-top: 15px;">여자</label>
+                      <div id="previousGenderCntWoman"><span id="previousWomanCountText" style="font-size:20px; color:#dc5156; font-weight:bold;">-</span> <span class="genderPercent" style="color: #dc5156; font-size: 16px; font-weight: bold;">(<span id="previousWomanPercentText"></span>%)</span></div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="previousGenderInfo">
+                  
+                </div>
+
               </div>
             </div>
             <!--AGE DETAIL-->

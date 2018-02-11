@@ -111,6 +111,7 @@ body {
     margin-top: 9px;
     margin-right: 8px;
     border: 1.2px solid #ccc;
+    padding-top: 10px;
 }
 
 .fullscreen_icon {
@@ -284,11 +285,11 @@ body {
 }
 
 .genderDetailPart {
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 .detailPart label {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 #genderDetailCntMan {
@@ -324,13 +325,22 @@ body {
 }
 
 .genderPercent {
-    font-size: 24px;
-    color: #aaa;
+    font-size: 18px;
+    /*color: #aaa;*/
 }
 
 #manCountText,
 #womanCountText {
-    margin-right: 5px;
+    font-size: 36px;
+}
+
+.currentGenderBlock {
+    display: inline-block;
+    width: 35%;
+}
+
+.currentGenderBlock.pic {
+    width: 55%;
 }
 
 /* AGE DETAIL */
@@ -341,6 +351,28 @@ body {
 
 .ageDetailContainer, .ageDetailPart {
     margin-top: 30px;
+}
+
+.genderPic {
+    width: auto;
+    height: 65px;
+}
+
+.currentGenderImages {
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+#genderPreviousChart {
+    float: left;
+}
+
+.previousDataContainer {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 15px;
 }
 
 
