@@ -1910,15 +1910,27 @@ var TEST = {
 			// $('#careerCategoryFirst').append('<div id=category_' + i + '>' +  + '<span></span></div>');
 		}
 
-		
+		var colorNode = d3.scale.category20(),
+			colorLink = d3.scale.category10();
 		for(var j = 0; j<categoryFirst.length; j++) {
 			var index_categorySecond = findSecondCategory(categoryFirst[j]);
 			// $('#careerCategorySecond').append('<div id=category_' + i + '>' + index_categorySecond + '</div>');
 			// console.log(index_categorySecond);
 			var sum = 0;
 			for(i in index_categorySecond) {
-				var html = '<div class=subcategory_' + j + '><span>' 
-				html += index_categorySecond[i].label + '</span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>'
+				// console.log(index_categorySecond[i].label);
+				// console.log(index_categorySecond[i].label);
+				// console.log(careerData.nodes);
+				var styleGroup;
+				$.each(careerData.nodes, function(index, value){
+					// console.log(value.name);
+					if(value.name === index_categorySecond[i].label) styleGroup = value.group;//console.log(index_categorySecond[i].label);
+				})
+
+				// console.log(styleGroup);
+				// if(careerData.nodes.name == index_categorySecond[i].label) console.log(index_categorySecond[i].label);
+				var html = '<div class=subcategory_' + j + '><span style="color:' + colorNode(styleGroup) + '">';  
+				html += index_categorySecond[i].label + ' </span>' + '<span>(' + index_categorySecond[i].value + ')</span>' + '</div>';
 				$('#careerCategorySecond').append(html);
 				sum += index_categorySecond[i].value;
 			}
@@ -1972,8 +1984,6 @@ var TEST = {
 
 
 		// 그래프 그리기			
-        var colorNode = d3.scale.category20(),
-			colorLink = d3.scale.category10();
 			
 		var rScale = d3.scale.linear().domain([0, 100]).range([10, 100]);
 
