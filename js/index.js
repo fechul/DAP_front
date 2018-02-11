@@ -361,18 +361,60 @@ INDEX = {
 	},
 
 	makeCharacter: function() {
-		var words = [{"cnt": '12',"text": '패기'}, 
-		    {"cnt": '4',"text": '열정'},
-		    {"cnt": '6',"text": '친화력'}, 
-		    {"cnt": '1',"text": '짜증'}, 
-		    {"cnt": '5',"text": '밝음'}, 
-		    {"cnt": '2',"text": '조용함'}, 
-		    {"cnt": '4',"text": '모험'},
-		    {"cnt": '17',"text": 'SUPEX'},
-		    {"cnt": '3',"text": '강인함'},
-		    {"cnt": '4',"text": '노력'},
-		    {"cnt": '7',"text": '부지런'},
-		    {"cnt": '9',"text": '끈기'}];
+		// var words = [{"cnt": '12',"text": '패기'}, 
+		//     {"cnt": '4',"text": '열정'},
+		//     {"cnt": '6',"text": '친화력'}, 
+		//     {"cnt": '1',"text": '짜증'}, 
+		//     {"cnt": '5',"text": '밝음'}, 
+		//     {"cnt": '2',"text": '조용함'}, 
+		//     {"cnt": '4',"text": '모험'},
+		//     {"cnt": '17',"text": 'SUPEX'},
+		//     {"cnt": '3',"text": '강인함'},
+		//     {"cnt": '4',"text": '노력'},
+		//     {"cnt": '7',"text": '부지런'},
+		//     {"cnt": '9',"text": '끈기'}];
+		var words = [
+			{"cnt": '22.808',"text": '프로젝트'},
+			{"cnt": '16.959',"text": '개발'},
+			{"cnt": '11.687999999999999',"text": '팀원'},
+			{"cnt": '10.441',"text": '사람'},
+			{"cnt": '10.341000000000001',"text": '기능'},
+			{"cnt": '9.96',"text": '기술'},
+			{"cnt": '9.659999999999998',"text": '관심'},
+			{"cnt": '8.341',"text": 'SK C&C'},
+			{"cnt": '8.337',"text": '의견'},
+			{"cnt": '7.558',"text": '아이디어'},
+			{"cnt": '7.550999999999999',"text": '연구'},
+			{"cnt": '7.034999999999999',"text": '알고리즘'},
+			{"cnt": '6.605',"text": '친구'},
+			{"cnt": '6.561',"text": '학생'},
+			{"cnt": '6.341000000000001',"text": '수업'},
+			{"cnt": '6.163',"text": '시스템'},
+			{"cnt": '6.0280000000000005',"text": '업무'},
+			{"cnt": '5.998',"text": '지식'},
+			{"cnt": '5.889',"text": '역할'},
+			{"cnt": '5.788',"text": '바탕'},
+			{"cnt": '5.112',"text": '코드'},
+			{"cnt": '5.013999999999999',"text": '데이터'},
+			{"cnt": '4.987',"text": '완성'},
+			{"cnt": '4.9430000000000005',"text": '기획'},
+			{"cnt": '4.853',"text": '프로그램'},
+			{"cnt": '4.818',"text": '자신감'},
+			{"cnt": '4.4479999999999995',"text": '사용자'},
+			{"cnt": '4.390000000000001',"text": '서버'},
+			{"cnt": '4.325',"text": '동기'},
+			{"cnt": '4.322',"text": '역량'},
+			{"cnt": '4.257',"text": '전공'},
+			{"cnt": '4.2490000000000006',"text": '성과'},
+			{"cnt": '4.227',"text": '서비스'},
+			{"cnt": '4.198',"text": '대화'},
+			{"cnt": '4.146',"text": '언어'},
+			{"cnt": '4.083',"text": '대회'},
+			{"cnt": '4.057',"text": '공부'},
+			{"cnt": '4.049',"text": '어려움'},
+			{"cnt": '3.9879999999999995',"text": '능력'},
+			{"cnt": '3.975',"text": '인턴'}
+		];
 
 		var wordCloud = function(selector) {
 
@@ -405,6 +447,7 @@ INDEX = {
 					.transition()
 						.duration(600)
 						.style("font-size", function(d) { return d.size + "px"; })
+						.style('font-weight', 'bold')
 						.attr("transform", function(d) {
 							return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
 						})
@@ -428,7 +471,7 @@ INDEX = {
 				//The outside world will need to call this function, so make it part
 				// of the wordCloud return value.
 				update: function(words) {
-					d3.layout.cloud().size([320, 220])
+					d3.layout.cloud().size([240, 210])
 						.words(words)
 						.padding(5)
 						.rotate(function() { return ~~(Math.random() * 2) * 90; })
@@ -1032,30 +1075,72 @@ INDEX = {
 	},
 
 	makeCharacterDetail: function() {
-		var words = [{"cnt": '30',"text": 'SUPEX'},
-			{"cnt": '22',"text": 'SK'},
-			{"cnt": '21',"text": '패기'},
-			{"cnt": '18',"text": 'Smart'},
-			{"cnt": '15',"text": 'DT'},
-			{"cnt": '12',"text": 'IT'},
-			{"cnt": '11',"text": '컴퓨터'},
-			{"cnt": '11',"text": '성실'},
-			{"cnt": '9',"text": 'Digital'},
-			{"cnt": '9',"text": '끈기'},
-			{"cnt": '8',"text": 'AI'},
-			{"cnt": '7',"text": '부지런'},
-			{"cnt": '7',"text": '정의'},
-			{"cnt": '6',"text": '친화력'}, 
-			{"cnt": '6',"text": '알고리즘'},
-			{"cnt": '5',"text": '밝음'}, 
-			{"cnt": '5',"text": 'BigData'},
-		    {"cnt": '5',"text": 'Cloud'},
-		    {"cnt": '4',"text": '열정'},
-		    {"cnt": '4',"text": '노력'},
-		    {"cnt": '4',"text": '프로젝트'},
-		    {"cnt": '4',"text": '모험'},
-		    {"cnt": '3',"text": '강인함'},
-		    {"cnt": '2',"text": '조용함'}];
+		// var words = [{"cnt": '30',"text": 'SUPEX'},
+		// 	{"cnt": '22',"text": 'SK'},
+		// 	{"cnt": '21',"text": '패기'},
+		// 	{"cnt": '18',"text": 'Smart'},
+		// 	{"cnt": '15',"text": 'DT'},
+		// 	{"cnt": '12',"text": 'IT'},
+		// 	{"cnt": '11',"text": '컴퓨터'},
+		// 	{"cnt": '11',"text": '성실'},
+		// 	{"cnt": '9',"text": 'Digital'},
+		// 	{"cnt": '9',"text": '끈기'},
+		// 	{"cnt": '8',"text": 'AI'},
+		// 	{"cnt": '7',"text": '부지런'},
+		// 	{"cnt": '7',"text": '정의'},
+		// 	{"cnt": '6',"text": '친화력'}, 
+		// 	{"cnt": '6',"text": '알고리즘'},
+		// 	{"cnt": '5',"text": '밝음'}, 
+		// 	{"cnt": '5',"text": 'BigData'},
+		//     {"cnt": '5',"text": 'Cloud'},
+		//     {"cnt": '4',"text": '열정'},
+		//     {"cnt": '4',"text": '노력'},
+		//     {"cnt": '4',"text": '프로젝트'},
+		//     {"cnt": '4',"text": '모험'},
+		//     {"cnt": '3',"text": '강인함'},
+		//     {"cnt": '2',"text": '조용함'}];
+		var words = [
+			{"cnt": '22.808',"text": '프로젝트'},
+			{"cnt": '16.959',"text": '개발'},
+			{"cnt": '11.687999999999999',"text": '팀원'},
+			{"cnt": '10.441',"text": '사람'},
+			{"cnt": '10.341000000000001',"text": '기능'},
+			{"cnt": '9.96',"text": '기술'},
+			{"cnt": '9.659999999999998',"text": '관심'},
+			{"cnt": '8.341',"text": 'SK C&C'},
+			{"cnt": '8.337',"text": '의견'},
+			{"cnt": '7.558',"text": '아이디어'},
+			{"cnt": '7.550999999999999',"text": '연구'},
+			{"cnt": '7.034999999999999',"text": '알고리즘'},
+			{"cnt": '6.605',"text": '친구'},
+			{"cnt": '6.561',"text": '학생'},
+			{"cnt": '6.341000000000001',"text": '수업'},
+			{"cnt": '6.163',"text": '시스템'},
+			{"cnt": '6.0280000000000005',"text": '업무'},
+			{"cnt": '5.998',"text": '지식'},
+			{"cnt": '5.889',"text": '역할'},
+			{"cnt": '5.788',"text": '바탕'},
+			{"cnt": '5.112',"text": '코드'},
+			{"cnt": '5.013999999999999',"text": '데이터'},
+			{"cnt": '4.987',"text": '완성'},
+			{"cnt": '4.9430000000000005',"text": '기획'},
+			{"cnt": '4.853',"text": '프로그램'},
+			{"cnt": '4.818',"text": '자신감'},
+			{"cnt": '4.4479999999999995',"text": '사용자'},
+			{"cnt": '4.390000000000001',"text": '서버'},
+			{"cnt": '4.325',"text": '동기'},
+			{"cnt": '4.322',"text": '역량'},
+			{"cnt": '4.257',"text": '전공'},
+			{"cnt": '4.2490000000000006',"text": '성과'},
+			{"cnt": '4.227',"text": '서비스'},
+			{"cnt": '4.198',"text": '대화'},
+			{"cnt": '4.146',"text": '언어'},
+			{"cnt": '4.083',"text": '대회'},
+			{"cnt": '4.057',"text": '공부'},
+			{"cnt": '4.049',"text": '어려움'},
+			{"cnt": '3.9879999999999995',"text": '능력'},
+			{"cnt": '3.975',"text": '인턴'}
+		];
 
 	    var totalWordsCnt = 0;
 		for(var j = 0; j < words.length; j++) {
@@ -1099,6 +1184,7 @@ INDEX = {
 					.transition()
 						.duration(600)
 						.style("font-size", function(d) { return d.size + "px"; })
+						.style('font-weight', 'bold')
 						.attr("transform", function(d) {
 							return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
 						})
