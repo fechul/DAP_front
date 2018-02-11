@@ -1005,10 +1005,10 @@ INDEX = {
             .style("width", width + "px")
             .style("height", height + "px");
 
-        var ledg = d3.select("body").append("div")
-            .style("position", "relative")
-            .style("width", width + "px")
-            .style("height", 300 + "px");
+        // var ledg = d3.select("body").append("div")
+        //     .style("position", "relative")
+        //     .style("width", width + "px")
+        //     .style("height", 300 + "px");
 
         var tool = d3.select("body").append("div").attr("class", "toolTip");
 
