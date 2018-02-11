@@ -1209,7 +1209,7 @@ INDEX = {
 	},
 
 	makeMajorDetail: function() {
-		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"2","name":"경영학"},{"size":"2","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"4","name":"통계학"},{"size":"1","name":"항공전자정보"}]
 		// var majorInfo = [{'name': 'IT공학과','size': 19},
 		// {'name': '컴퓨터과학','size': 13},
 		// {'name': '소프트웨어학과','size': 11},
@@ -1219,8 +1219,9 @@ INDEX = {
 		// {'name': '경제학과','size': 3},
 		// {'name': '국어국문학과','size': 2}];
 
-		var color = ["#71a5de","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
-		//var color = d3.scale.category20();
+		//var color = ["red","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		// var color = d3.scale.category20();
+    var color = ["#1f77b4","#aec7e8","#ff7f0e","#C6D445","#ff7f0e","D1A7CC","#70D3C5","#DD9692"];
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {
@@ -1322,92 +1323,97 @@ INDEX = {
 				target.color = color[7];
 			}
 		}
-
+    
+    console.log(majorData);
 
 		var root = majorData;
 
 		var width = 650,
-            height = 500;
+        height = 530;
 
-        var color = d3.scale.ordinal()
-            .range(["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"])
-            
-        var treemap = d3.layout.treemap()
-            .size([width, height])
-            .padding(.25) //I like the thin interal lines, the group seporations are set in the CSS
-            .value(function (d) { return d.size; });
+    var color = d3.scale.ordinal()
+                        .range(["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"])
+        
+    var treemap = d3.layout.treemap()
+                          .size([width, height])
+                          .padding(.25) //I like the thin interal lines, the group seporations are set in the CSS
+                          .value(function (d) { return d.size; });
 
-        var div = d3.select("#majorList").append("div")
-            .attr("class","treemap")
-            .style("position", "relative")
-            .style("width", width + "px")
-            .style("height", height + "px");
+    var div = d3.select("#majorList").append("div")
+                .attr("class","treemap")
+                .style("position", "relative")
+                .style("width", width + "px")
+                .style("height", height + "px");
 
-        // var ledg = d3.select("body").append("div")
-        //     .style("position", "relative")
-        //     .style("width", width + "px")
-        //     .style("height", 300 + "px");
+    // var ledg = d3.select("body").append("div")
+    //     .style("position", "relative")
+    //     .style("width", width + "px")
+    //     .style("height", 300 + "px");
 
-        var tool = d3.select("body").append("div").attr("class", "toolTip");
+    var tool = d3.select("body").append("div").attr("class", "toolTip");
 
-        d3.select(self.frameElement).style("height", height + 300 + "px");
-        d3.select(self.frameElement).style("width", width+20 + "px");
+    d3.select(self.frameElement).style("height", height + 300 + "px");
+    d3.select(self.frameElement).style("width", width + 20 + "px");
 
-        function formatMoney(num) {
-            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-        };
+    function formatMoney(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    };
 
-        function roundToTwo(num) {
-            return +(Math.round(num + "e+2") + "e-2");
-        };
+    function roundToTwo(num) {
+        return +(Math.round(num + "e+2") + "e-2");
+    };
 
-        var rectType = {};
+    var rectType = {};
 
-        div.selectAll(".node")
-            .data(treemap.nodes(root))
-          .enter().append("div")
-            .attr("class", "node")
-            .style("left", function (d) { return d.x + "px"; })
-            .style("top", function (d) { return d.y + "px"; })
-            .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
-            .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
-            .style("background", function (d) {
-            	// return d.children ? color(d.name) : null;
-            	if(d.category && !rectType[d.category]) {
-            		rectType[d.category] = d.color;
-            	}
-            	return d.color;
-            })
-            .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
-            .on("mousemove", function (d) {
-                tool.style("left", d3.event.pageX + 10 + "px")
-                tool.style("top", d3.event.pageY - 20 + "px")
-                tool.style("display", "inline-block");
-                tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / totalSize) * 100) + '%');
-            }).on("mouseout", function (d) {
-                tool.style("display", "none");
-            });
+    div.selectAll(".node")
+        .data(treemap.nodes(root))
+      .enter().append("div")
+        .attr("class", "node")
+        // .style("padding", "10px")
+        .style("left", function (d) { return d.x + "px"; })
+        .style("top", function (d) { return d.y + "px"; })
+        .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
+        .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
+        .style("background", function (d) {
+          // return d.children ? color(d.name) : null;
+          if(d.category && !rectType[d.category]) {
+            rectType[d.category] = d.color;
+          }
+          return d.color;
+        })
+        .append('text')
+        .style('position', 'relative')
+        .style('top', '6px')
+        .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
+        .on("mousemove", function (d) {
+            tool.style("left", d3.event.pageX + 10 + "px")
+            tool.style("top", d3.event.pageY - 20 + "px")
+            tool.style("display", "inline-block");
+            tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / totalSize) * 100) + '%');
+        }).on("mouseout", function (d) {
+            tool.style("display", "none");
+        });
+        
+      var majorDetailText = '';
 
-        var majorDetailText = '';
+      majorInfo.sort(function (a, b) { 
+        return parseInt(a.size, 10) > parseInt(b.size, 10) ? -1 : parseInt(a.size, 10) < parseInt(b.size, 10) ? 1 : 0;  
+      });
 
-        majorInfo.sort(function (a, b) { 
-			return parseInt(a.size, 10) > parseInt(b.size, 10) ? -1 : parseInt(a.size, 10) < parseInt(b.size, 10) ? 1 : 0;  
-		});
+      for(var i = 0; i < 5; i++) {
+        majorDetailText += "<li style='color:" + majorInfo[i].color + "'>" + majorInfo[i].name + "<span class='majorCategorySublabel'>(" + majorInfo[i].size + ")</span></li>"
+      }
+      
+      $('#majorRankList').append(majorDetailText);
 
-		for(var i = 0; i < 5; i++) {
-			majorDetailText += "<li style='color:" + majorInfo[i].color + "'>" + majorInfo[i].name + "<span class='majorCategorySublabel'>(" + majorInfo[i].size + ")</span></li>"
-		}
-		
-		$('#majorRankList').append(majorDetailText);
-
-		// <div id="genderManRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">남자</span>
-  //       <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
+		  // <div id="genderManRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">남자</span>
+      // <div id="genderWomanRect" class="genderRect"></div><span id="genderManRectText" class="genderRectText">여자</span>
 
   		var majorRectText = '';
   		for(var key in rectType) {
   			majorRectText += '<div class="majorRect" style="background-color: ' + rectType[key] + '"></div><span style="margin-right: 10px;">' + key + '</span>';
   		}
-		$('.majorRectPart').append(majorRectText);
+		  $('.majorRectPart').append(majorRectText);
 	},
 
 	makeCharacterDetail: function() {

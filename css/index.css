@@ -132,18 +132,18 @@ body {
     overflow: hidden;
     position: absolute;
     border: 3px solid #333;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     /*background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:      -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:         linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0)); */
-    text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
+    /* text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
         -1px -1px 2px hsla(0,0%,100%,0.25),
         -1px 1px 2px hsla(0,0%,100%,0.25),
         1px -1px 2px hsla(0,0%,100%,0.25),
         -1px 0px 2px hsla(0,0%,100%,0.25),
-        1px 0px 2px hsla(0,0%,100%,0.25);
+        1px 0px 2px hsla(0,0%,100%,0.25); */
 }
 
 .node div {
@@ -413,7 +413,7 @@ body {
 }
 
 #majorList {
-    margin: 20px;
+    margin: 12px;
 }
 
 #majorList .treemap {
@@ -423,14 +423,16 @@ body {
 #majorList .node {
     border: solid 1px white;
     font: 0.625em sans-serif;
-    line-height: 12px;
+    /* line-height: 12px; */
     overflow: hidden;
     position: absolute;
     text-indent: 2px;
     cursor: default;
-    font-size: 20px;
-    /*padding: 15px;*/
+    font-size: 14px;
+    /*padding: 15px;*/  
     line-height: 1em;
+    color: white;
+    font-weight: bold;
 }
 
 .majorDetailPart {
