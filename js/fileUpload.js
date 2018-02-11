@@ -27,4 +27,8 @@ $(document).ready(function() {
             processData: false
         });
     });
+
+    $('.button_submit').click(function() {
+        location.href='./index.html';
+    })
 });
