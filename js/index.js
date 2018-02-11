@@ -1210,7 +1210,7 @@ INDEX = {
 	},
 
 	makeMajorDetail: function() {
-		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"2","name":"경영학"},{"size":"2","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"4","name":"통계학"},{"size":"1","name":"항공전자정보"}]
 		// var majorInfo = [{'name': 'IT공학과','size': 19},
 		// {'name': '컴퓨터과학','size': 13},
 		// {'name': '소프트웨어학과','size': 11},
@@ -1220,9 +1220,9 @@ INDEX = {
 		// {'name': '경제학과','size': 3},
 		// {'name': '국어국문학과','size': 2}];
 
-		// var color = ["#71a5de","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
-		var color = d3.scale.category20();
-    // var color = ["#1f77b4","#ff7f0e","#ff7f0e","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		//var color = ["red","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
+		// var color = d3.scale.category20();
+    var color = ["#1f77b4","#aec7e8","#ff7f0e","#C6D445","#ff7f0e","D1A7CC","#70D3C5","#DD9692"];
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {
@@ -1293,35 +1293,35 @@ INDEX = {
 			if(maj1.indexOf(target.name) > -1) {
 				majorData.children[0].children[0].children.push(target);
 				target.category = '공학계열';
-				target.color = color(0);
+				target.color = color[0];
 			} else if(maj2.indexOf(target.name) > -1){
 				majorData.children[0].children[1].children.push(target);
 				target.category = '자연계열';
-				target.color = color(1);
+				target.color = color[1];
 			} else if(maj3.indexOf(target.name) > -1) {
 				majorData.children[0].children[2].children.push(target);
 				target.category = '의약계열';
-				target.color = color(2);
+				target.color = color[2];
 			} else if(maj4.indexOf(target.name) > -1) {
 				majorData.children[1].children[0].children.push(target);
 				target.category = '인문계열';
-				target.color = color(3);
+				target.color = color[3];
 			} else if(maj5.indexOf(target.name) > -1) {
 				majorData.children[1].children[1].children.push(target);
 				target.category = '사회계열';
-				target.color = color(4);
+				target.color = color[4];
 			} else if(maj6.indexOf(target.name) > -1) {
 				majorData.children[1].children[2].children.push(target);
 				target.category = '교육계열';
-				target.color = color(5);
+				target.color = color[5];
 			} else if(maj7.indexOf(target.name) > -1) {
 				majorData.children[2].children.push(target);
 				target.category = '예체능계열';
-				target.color = color(6);
+				target.color = color[6];
 			} else {
 				majorData.children[3].children.push(target);
 				target.category = '기타';
-				target.color = color(7);
+				target.color = color[7];
 			}
 		}
     
@@ -1330,7 +1330,7 @@ INDEX = {
 		var root = majorData;
 
 		var width = 650,
-        height = 500;
+        height = 530;
 
     var color = d3.scale.ordinal()
                         .range(["#D981D5","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"])
@@ -1354,7 +1354,7 @@ INDEX = {
     var tool = d3.select("body").append("div").attr("class", "toolTip");
 
     d3.select(self.frameElement).style("height", height + 300 + "px");
-    d3.select(self.frameElement).style("width", width+20 + "px");
+    d3.select(self.frameElement).style("width", width + 20 + "px");
 
     function formatMoney(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
@@ -1370,10 +1370,10 @@ INDEX = {
         .data(treemap.nodes(root))
       .enter().append("div")
         .attr("class", "node")
-        .style("padding", "10px")
+        // .style("padding", "10px")
         .style("left", function (d) { return d.x + "px"; })
-        .style("top", function (d) { return d.y + 10 + "px"; })
-        .style("width", function (d) { return Math.max(0, d.dx - 1) + 10 + "px"; })
+        .style("top", function (d) { return d.y + "px"; })
+        .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
         .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; })
         .style("background", function (d) {
           // return d.children ? color(d.name) : null;
@@ -1381,8 +1381,10 @@ INDEX = {
             rectType[d.category] = d.color;
           }
           return d.color;
-        })  
-        .attr('text-anchor', 'middle')
+        })
+        .append('text')
+        .style('position', 'relative')
+        .style('top', '6px')
         .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
         .on("mousemove", function (d) {
             tool.style("left", d3.event.pageX + 10 + "px")

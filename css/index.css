@@ -413,7 +413,7 @@ body {
 }
 
 #majorList {
-    margin: 20px;
+    margin: 12px;
 }
 
 #majorList .treemap {
@@ -428,7 +428,7 @@ body {
     position: absolute;
     text-indent: 2px;
     cursor: default;
-    font-size: 16px;
+    font-size: 14px;
     /*padding: 15px;*/  
     line-height: 1em;
     color: white;
