@@ -4,6 +4,7 @@ INDEX = {
 		this.currentTypeIdx = null;
 		this.direction = 0;
 		this.detailBox = $('#detailModal');
+		this.comment = '하하하하하하하하하하하하하ㅑ';
 
 		this.initEvents();
 		// this.makeGender('#genderChart', 220, 220, 100);
@@ -16,6 +17,7 @@ INDEX = {
 		// this.makeAgeDetail();
 		this.makeMajorDetail();
 		this.makeCharacterDetail();
+		this.setComment();
 	},
 
 	initEvents: function() {
@@ -1323,8 +1325,6 @@ INDEX = {
 				target.color = color[7];
 			}
 		}
-    
-    console.log(majorData);
 
 		var root = majorData;
 
@@ -2027,6 +2027,17 @@ INDEX = {
 			characterDetailText += "<li style=color:" + fill(i) + ";>" + words[i].text + "<span class='characterCategorySublabel'>(" + ((words[i].cnt/totalWordsCnt)*100).toFixed(2) + "%)</span></li>"
 		}
 		$('#characterRankList').append(characterDetailText);
+	},
+
+	setComment: function() {
+		var self = this;
+		for(var i = 0; i < self.comment; i++) {
+			console.log(self.comment[i])
+			$('#personComment').append(self.comment[i]);
+			setTimeout(function() {
+
+			}, 500);
+		}
 	}
 };
 
