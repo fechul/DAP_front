@@ -1940,16 +1940,8 @@ INDEX = {
 		for(var j = 0; j < words.length; j++) {
 			totalWordsCnt += parseInt(words[j].cnt, 10);
 		}
-
-		var characterDetailText = '';
-		for(var i = 0; i < 5; i++) {
-			characterDetailText += "<li>" + words[i].text + "<span class='characterCategorySublabel'>(" + ((words[i].cnt/totalWordsCnt)*100).toFixed(2) + "%)</span></li>"
-		}
-		$('#characterRankList').append(characterDetailText);
-
-
+		var fill = d3.scale.category20();
 		var wordCloud = function() {
-			var fill = d3.scale.category20();
 
 			//Construct the word cloud's SVG element
 			var svg = d3.select("#characterWordCloudDetail")
@@ -1968,7 +1960,9 @@ INDEX = {
 				cloud.enter()
 					.append("text")
 					.style("font-family", "Impact")
-					.style("fill", function(d, i) { return fill(i); })
+					.style("fill", function(d, i) {
+						return fill(i); 
+					})
 					.attr("text-anchor", "middle")
 					.attr('font-size', 1)
 					.text(function(d) { return d.text; });
@@ -2045,6 +2039,13 @@ INDEX = {
 
 		//Start cycling through the demo data
 		showNewWords(myWordCloud);
+
+		var characterDetailText = '';
+		for(var i = 0; i < 5; i++) {
+			console.log()
+			characterDetailText += "<li style=color:" + fill(i) + ";>" + words[i].text + "<span class='characterCategorySublabel'>(" + ((words[i].cnt/totalWordsCnt)*100).toFixed(2) + "%)</span></li>"
+		}
+		$('#characterRankList').append(characterDetailText);
 	}
 };
 
