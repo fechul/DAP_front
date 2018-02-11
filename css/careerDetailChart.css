@@ -4,8 +4,9 @@
 }
 
 #careerCategorySecond {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .careerCategoryLabel {    

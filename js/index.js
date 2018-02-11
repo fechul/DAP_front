@@ -99,6 +99,12 @@ INDEX = {
 			"value": 22
 		}];
 
+		var total = genderData[0].value + genderData[1].value;
+		var	manRate = genderData[0].label == '남자' ? ((genderData[0].value/total)*10).toFixed(1) : ((genderData[1].value/total)*100).toFixed(1);
+		var	womanRate = genderData[0].label == '여자' ? ((genderData[0].value/total)*10).toFixed(1) : ((genderData[1].value/total)*100).toFixed(1);
+		manRate = Math.round(manRate);
+		womanRate = 10 - manRate;
+
 		var width = 230,
 			height = 230,
 			radius = Math.min(width, height) / 2 - 20;
@@ -144,7 +150,7 @@ INDEX = {
 						.style('font-weight', 'bold')
 						.attr('text-anchor', 'middle')
 						.attr("transform", "translate(0, 8)")
-						.text('4:6');
+						.text(womanRate + ' : ' + manRate);
 				})
 		;
 		function tweenPie(b) {
@@ -563,6 +569,8 @@ INDEX = {
 				$('#womanCountText').empty();
 				$('#manPercentText').empty();
 				$('#womanPercentText').empty();
+				$('.currentGenderImages').empty();
+				$('#genderPreviousChart').empty();
 				self.makeGenderDetail();
 				$('.genderDetailContainer').show();
 				break;
@@ -616,166 +624,109 @@ INDEX = {
 			"value": 22
 		}];
 
-		var width = 500,
-			height = 500,
-			radius = Math.min(width, height) / 2 - 20;
-			
-		var color = ['#1f77b4', '#dc5156'];
+		var	previousGenderData = [{
+			"label": "남자",
+			"value": 45
+		}, {
+			"label": "여자",
+			"value": 20
+		}];
 
-		var arc = d3.svg.arc()
-						.outerRadius(radius)
-		;
-		var pie = d3.layout.pie();
-		pie.value(function(d) {
-			return d.value;
-		});
-		var svg = d3.select("#genderDetailChart")
-					.datum(genderData, function(d) { return d.value; })
-					.attr("width", width)
-					.attr("height", height)
-					.append("g")
-						.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-		;
-		var arcs = svg.selectAll("g.arc")
-						.data(pie)
-						.enter()
+		var drawPie = function(target, genderData, w, h, fs, mr, wr) {
+			var width = w,
+				height = h,
+				radius = Math.min(width, height) / 2 - 20;
+				
+			var color = ['#1f77b4', '#dc5156'];
+
+			var arc = d3.svg.arc()
+							.outerRadius(radius)
+			;
+			var pie = d3.layout.pie();
+			pie.value(function(d) {
+				return d.value;
+			});
+			var svg = d3.select(target)
+						.datum(genderData, function(d) { return d.value; })
+						.attr("width", width)
+						.attr("height", height)
 						.append("g")
-						.attr("class", "arc");
+							.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+			;
+			var arcs = svg.selectAll("g.arc")
+							.data(pie)
+							.enter()
+							.append("g")
+							.attr("class", "arc");
 
-		arcs.append("path")
-				.attr("fill", function(d, i) { return color[i]; })
-				.attr('stroke', 'black')
-				.attr('stroke-width', '3px')
-				.transition()
-					.ease("bounce")
-					.duration(1500)
-					.attrTween("d", tweenPie)
-				.transition()
-					.ease("elastic")
-					.delay(function(d, i) { return 1000 + i * 50; })
-					.duration(750)
-					.attrTween("d", tweenDonut)
-				.each('end', function() {
-					svg.append('text')
-						.style('font-size', '32px')
-						.style('font-weight', 'bold')
-						.attr('text-anchor', 'middle')
-						.attr("transform", "translate(0, 8)")
-						.text('4:6');
-				})
-		;
-		function tweenPie(b) {
-			b.innerRadius = 0;
-			var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
-			return function(t) { return arc(i(t)); };
-		}
-		function tweenDonut(b) {
-			b.innerRadius = radius * .6;
-			var i = d3.interpolate({innerRadius: 0}, b);
-			return function(t) { return arc(i(t)); };
-		}
-
-
-		var people = genderData[0].value + genderData[1].value;
-		$('#manPercentText').text((genderData[0].value/people * 100).toFixed(1));
-		$('#womanPercentText').text((genderData[1].value/people * 100).toFixed(1));
-
-		if(genderData[0].value == genderData[1].value) {
-			$('#manCountText').css('font-size', '60px');
-			$('#womanCountText').css('font-size', '60px');
-		} else {
-			if(genderData[0].label == '남자') {
-				$('#manCountText').text(genderData[0].value);
-				$('#womanCountText').text(genderData[1].value);
-				$('#genderManRectText').text(genderData[0].label);
-				$('#womanCountTextText').text(genderData[1].label);
-				if(genderData[0].value > genderData[1].value) {
-					$('#manCountText').css('font-size', '72px');
-					$('#womanCountText').css('font-size', '48px');
-				} else {
-					$('#manCountText').css('font-size', '48px');
-					$('#womanCountText').css('font-size', '72px');
-				}
-			} else {
-				$('#manCountText').text(genderData[1].value);
-				$('#womanCountText').text(genderData[0].value);
-				$('#genderManRectText').text(genderData[1].label);
-				$('#womanCountTextText').text(genderData[0].label);
-				if(genderData[0].value > genderData[1].value) {
-					$('#manCountText').css('font-size', '48px');
-					$('#womanCountText').css('font-size', '72px');
-				} else {
-					$('#manCountText').css('font-size', '72px');
-					$('#womanCountText').css('font-size', '48px');
-				}
+			arcs.append("path")
+					.attr("fill", function(d, i) { return color[i]; })
+					.attr('stroke', 'black')
+					.attr('stroke-width', '3px')
+					.transition()
+						.ease("bounce")
+						.duration(1500)
+						.attrTween("d", tweenPie)
+					.transition()
+						.ease("elastic")
+						.delay(function(d, i) { return 1000 + i * 50; })
+						.duration(750)
+						.attrTween("d", tweenDonut)
+					.each('end', function() {
+						svg.append('text')
+							.style('font-size', fs + 'px')
+							.style('font-weight', 'bold')
+							.attr('text-anchor', 'middle')
+							.attr("transform", "translate(0, 8)")
+							.text(wr + ' : ' + mr);
+					})
+			;
+			function tweenPie(b) {
+				b.innerRadius = 0;
+				var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
+				return function(t) { return arc(i(t)); };
 			}
+			function tweenDonut(b) {
+				b.innerRadius = radius * .6;
+				var i = d3.interpolate({innerRadius: 0}, b);
+				return function(t) { return arc(i(t)); };
+			}
+		};
+
+		var total = genderData[0].value + genderData[1].value;
+		var	manRate = genderData[0].label == '남자' ? ((genderData[0].value/total)*10).toFixed(1) : ((genderData[1].value/total)*100).toFixed(1);
+		var	womanRate = genderData[0].label == '여자' ? ((genderData[0].value/total)*10).toFixed(1) : ((genderData[1].value/total)*100).toFixed(1);
+		manRate = Math.round(manRate);
+		womanRate = 10 - manRate;
+
+		$('#manPercentText').text(genderData[0].label == '남자' ? (genderData[0].value/total * 100).toFixed(1) : (genderData[1].value/total * 100).toFixed(1));
+		$('#womanPercentText').text(genderData[0].label == '남자' ? (genderData[1].value/total * 100).toFixed(1) : (genderData[0].value/total * 100).toFixed(1));
+		$('#manCountText').text(genderData[0].label == '남자' ? genderData[0].value : genderData[1].value);
+		$('#womanCountText').text(genderData[0].label == '남자' ? genderData[1].value : genderData[0].value);
+
+		var genderImgText = '';
+		for(var i = 0; i < manRate; i++) {
+			genderImgText += '<img class="genderPic" src="img/gender_man.png"></img>';
+		}
+		for(var i = 0; i < womanRate; i++) {
+			genderImgText += '<img class="genderPic" src="img/gender_woman.png"></img>';	
 		}
 
-  //       var width = 500;
-  //       var height = 500;
-  //       var radius = Math.min(width, height) / 2;
-  //       var donutWidth = 150;
-  //       var legendRectSize = 18;
-  //       var legendSpacing = 4;
+		$('.currentGenderImages').append(genderImgText);
 
-  //       var color = d3.scale.category20b();
+		var previousTotal = previousGenderData[0].value + previousGenderData[1].value;
+		var	previousManRate = previousGenderData[0].label == '남자' ? ((previousGenderData[0].value/total)*10).toFixed(1) : ((previousGenderData[1].value/total)*100).toFixed(1);
+		var	previousWomanRate = previousGenderData[0].label == '여자' ? ((previousGenderData[0].value/total)*10).toFixed(1) : ((previousGenderData[1].value/total)*100).toFixed(1);
+		previousManRate = Math.round(previousManRate);
+		previousWomanRate = 10 - previousManRate;
 
-  //       var svg = d3.select('#genderDetailChart')
-  //         				.attr('width', width)
-  //         				.attr('height', height)
-  //         				.append('g')
-  //         				.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+		$('#previousManCountText').text(previousGenderData[0].label == '남자' ? previousGenderData[0].value : previousGenderData[1].value);
+		$('#previousWomanCountText').text(previousGenderData[0].label == '남자' ? previousGenderData[1].value : previousGenderData[0].value);
+		$('#previousManPercentText').text(previousGenderData[0].label == '남자' ? (previousGenderData[0].value/total * 100).toFixed(1) : (previousGenderData[1].value/total * 100).toFixed(1));
+		$('#previousWomanPercentText').text(previousGenderData[0].label == '남자' ? (previousGenderData[1].value/total * 100).toFixed(1) : (previousGenderData[0].value/total * 100).toFixed(1));
 
-  //       var arc = d3.svg.arc()
-  //         				.innerRadius(radius - donutWidth)
-  //         				.outerRadius(radius);
-
-  //       var pie = d3.layout.pie()
-  //         			.value(function(d) { return d.value; })
-  //         			.sort(null);
-
-  //       var tooltip = d3.select('#genderDetailChart')                              
-  //         					.append('div')                                               
-  //         					.attr('class', 'tooltip');                                   
-                      
-  //       tooltip.append('div')                                          
-  //         		.attr('class', 'label');                                     
-             
-  //       tooltip.append('div')                                          
-  //         		.attr('class', 'count');                                     
-
-  //       tooltip.append('div')                                          
-  //         		.attr('class', 'percent');                                   
-
-	 //      genderData.forEach(function(d) {
-		//       d.value = +d.value;
-
-	 //      var path = svg.selectAll('path')
-	 //        .data(pie(genderData))
-	 //        .enter()
-	 //        .append('path')
-	 //        .attr('d', arc)
-	 //        .attr('fill', function(d, i) { 
-	 //          // return color(d.data.label);
-	 //          return d.data.color;
-	 //        });
-
-	 //      path.on('mouseover', function(d) {
-	 //        var total = d3.sum(genderData.map(function(d) {            
-	 //          return d.value;
-	 //        }));                                          
-
-	 //        var percent = Math.round(1000 * d.data.value / total) / 10;
-	 //        tooltip.select('.label').html(d.data.label);               
-	 //        tooltip.select('.count').html(d.data.value);               
-	 //        tooltip.select('.percent').html(percent + '%');
-	 //        tooltip.style('display', 'block');                  
-	 //      });                                                          
-	      
-	 //      path.on('mouseout', function() {                             
-	 //        tooltip.style('display', 'none');                          
-	 //      });                                                          
-	 //    });
+		drawPie('#genderDetailChart', genderData, 500, 500, '40', manRate, womanRate);
+		drawPie('#genderPreviousChart', previousGenderData, 200, 200, '24', previousManRate, previousWomanRate);
 	},
 
 	makeAgeDetail: function() {
