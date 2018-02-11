@@ -478,3 +478,15 @@ body {
     margin-top: 12px;
     margin-bottom: 10px;
 }
+
+
+.btn_area {
+    padding: 5px; 
+    margin: 7px 3px; 
+    font-size: 18px;
+    font-weight: bold!important;
+    /* margin-left: 3px;
+    margin-right: 3px; */
+    border: 2px solid #ccc!important;
+    cursor: default;
+}

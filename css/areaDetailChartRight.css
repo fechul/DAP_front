@@ -1,7 +1,7 @@
 #areaDetailChartRightStates path {
   fill: white;
   stroke: #ccc;
-  stroke-width: 1.2px;
+  stroke-width: 1.8px;
 }
 /* 
 #states path:hover {
@@ -20,4 +20,42 @@
 
 .areaDetailChartBackground {
     fill: none;
+}
+
+/* 1. #D6EAF8
+ * 2. #AED6F1
+ * 3. #85C1E9
+ * 4. #5DADE2
+ * 5. #3498DB
+ * 6. #2874A6  
+ */
+
+#areaDetailChartRightPath-8 {
+    fill: #2874A6!important;
+}
+
+#areaDetailChartRightPath-15 {
+    fill: #3498DB!important;
+}
+
+#areaDetailChartRightPath-12, 
+#areaDetailChartRightPath-13, 
+#areaDetailChartRightPath-2 {
+    fill: #5DADE2!important;
+}
+
+#areaDetailChartRightPath-10,
+#areaDetailChartRightPath-14 {
+    fill: #85C1E9!important;
+}
+
+#areaDetailChartRightPath-7 {
+    fill: #AED6F1!important;
+}
+
+#areaDetailChartRightPath-6, 
+#areaDetailChartRightPath-4, 
+#areaDetailChartRightPath-1, 
+#areaDetailChartRightPath-9 {
+    fill: #D6EAF8!important;
 }
