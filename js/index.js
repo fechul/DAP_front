@@ -1131,12 +1131,13 @@ INDEX = {
 
 		avgAge = (sumAge/pNum).toFixed(1);
 
-		var compareVal = (((avgAge - previousAvgAge)/previousAvgAge)*100).toFixed(2);
+		// var compareVal = (((avgAge - previousAvgAge)/previousAvgAge)*100).toFixed(2);
+		var compareVal = (avgAge - previousAvgAge).toFixed(1);
 
 		$('#ageAverage').text(avgAge);
 		var compareHtml = '';
 		if(compareVal < 0) {
-			compareHtml = '<span style="color:#f72626; font-weight:bold; font-size:22px;">' + compareVal*(-1) + '%</span><span class="glyphicon glyphicon-arrow-down" style="color:#f72626; font-size:18px;"></span>';
+			compareHtml = '<span style="color:#f72626; font-weight:bold; font-size:22px;">' + compareVal*(-1) + '</span><span class="glyphicon glyphicon-arrow-down" style="color:#f72626; font-size:18px;"></span>';
 		} else {
 			compareHtml = '<span style="color:#1e9a27; font-weight:bold; font-size:22px;">' + compareVal + '</span><span class="glyphicon glyphicon-arrow-up" style="color:#1e9a27; font-size:18px;"></span>';
 		}
