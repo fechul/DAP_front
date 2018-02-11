@@ -413,6 +413,28 @@ body {
     font-weight: bold;
 }
 
+.majorRect {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: -4px;
+}
+
+#genderManRect {
+    background-color: #1882dc;
+}
+
+#genderWomanRect {
+    background-color: #dc183c;
+}
+
+.genderRectText {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 
 /* abilityDetailChart */
 .abilityDetailContainer {
