@@ -1491,7 +1491,7 @@ var TEST = {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
 			.style('margin-top', '40px')
-			.style('padding', '8px')
+			.style('padding', '24px')
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
