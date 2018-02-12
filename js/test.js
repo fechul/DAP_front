@@ -1490,7 +1490,8 @@ var TEST = {
         var svg = d3.select("#gradeHorizontalChart")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
-            .style('margin-top', '40px')
+			.style('margin-top', '40px')
+			.style('padding', '8px')
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
