@@ -442,7 +442,7 @@ var TEST = {
 		// var GradeData = {
 		// 	"avgGrade": "3.2"
 		// };
-		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"47","gradea":"9"};
+		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"43","gradea":"13"};
 		
 
 		// 차트 그리기
@@ -1232,7 +1232,7 @@ var TEST = {
 										.html(self.originName)
 										// .attr('class', 'tooltipOriginDetail')
 										.style('position',  'absolute')
-										.style('left',  280 + 'px')
+										.style('left',  324 + 'px')
 										.style('top',  180 + 'px')
 										.transition()
 										.duration(500) //700
@@ -1359,7 +1359,7 @@ var TEST = {
 		// 	"gradeB": 3,
 		// 	"gradeC": 3
 		// };
-		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"47","gradea":"9"};
+		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"43","gradea":"13"};
 		var previousData = {"avgGrade": '3.5'};
 
 		$('#currentAvgGrade').text(GradeData.avgGrade);
@@ -1465,10 +1465,10 @@ var TEST = {
                 "value": 12,
         }, {
                 "name": "3.5 ~ 4.0",
-                "value": 38,
+                "value": 34,
         }, {
                 "name": "4.0 ~ 4.5",
-                "value": 9,
+                "value": 13,
         }];
 
 		//sort bars based on value
