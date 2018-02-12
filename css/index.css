@@ -19,7 +19,9 @@ body {
 }
 
 #resultPerson {
-    height: 270px;
+    /* height: 270px; */
+    height: 240px;
+    margin-top: 15px;
     width: auto;
     margin-left: 60px;
     margin-right: 15px;
@@ -33,7 +35,8 @@ body {
 #personComment {
     word-break: keep-all;
     display: inline-block;
-    position: absolute;
+    /* position: absolute; */
+    position: initial!important;  
     background: #eee;
     border: 4px solid #ccc;
     width: 46%;
@@ -47,7 +50,8 @@ body {
     font-weight: bold;
 }
 #personComment:after, #personComment:before {
-	right: 100%;
+    /* right: 100%; */
+    right: 239px;
 	top: 50%;
 	border: solid transparent;
 	content: " ";
