@@ -255,7 +255,8 @@ INDEX = {
 		// {'name': '전기전자컴퓨터공학부','size': 5},
 		// {'name': '국어국문학과','size': 2},
 		// {'name': '산업공학과','size': 8}];
-		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		// var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"1","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"2","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		var majorInfo = [/*{"size":"2","name":"Computer Science"},*/{"size":"2","name":"IT공학"}/*,{"size":"2","name":"경영학"},{"size":"1","name":"경제학"}*/,{"size":"2","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"8","name":"멀티미디어공학"},/*{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},*//*{"size":"1","name":"산업경영공학"},*/{"size":"1","name":"산업공학"},/*{"size":"1","name":"소프트웨어"},*/{"size":"6","name":"소프트웨어공학"},/*{"size":"1학","name":"소프트웨어학"},*//*{"size":"1","name":"전기전자공학"},*/{"size":"4","name":"전자공학"},/*{"size":"1","name":"전자컴퓨터공학"},*//*{"size":"1","name":"정보미디어학"},*//*{"size":"3","name":"정보컴퓨터공학"},*/{"size":"2","name":"정보통신공학"},/*{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},*/{"size":"32","name":"컴퓨터공학"},/*{"size":"5","name":"컴퓨터과학"},{"size":"2","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"3","name":"통계학"}*/{"size":"1","name":"항공전자정보"}]
 
 
 		var majorData = {
@@ -289,6 +290,8 @@ INDEX = {
 		    div = d3.select("#majorTree").append("div")
 		       .style("position", "relative")
 		       .style("margin-left", "25px");
+
+		// var color = function(i) { var color = ['#26299a', '#ff7f0e', '#2d9f2c', '#d72828', '#9366bd', '#8c564a', '#e376c2', '#bcbe23', '#18bed0', '#393b78', '#ad494a', '#d6616a', '#31a353', '#7b4173', '#a55094', '#3365cc', '#0199c6', '#dd4476', '#66aa01', '#b82f2f']; return color[i%20];}
 
 		var treemap = d3.layout.treemap()
 		    .size([width, height])
