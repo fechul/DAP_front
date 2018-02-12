@@ -1457,26 +1457,23 @@ var TEST = {
 
 
 		var data = [{
-                "name": "4.5",
-                "value": 9,
-        },
-            {
-                "name": "4",
-                "value": 37,
-        },
-            {
-                "name": "3.5",
-                "value": 10,
-        },
-            {
                 "name": "3",
                 "value": 3,
+        }, {
+                "name": "3.5",
+                "value": 10,
+        }, {
+                "name": "4",
+                "value": 37,
+        }, {
+                "name": "4.5",
+                "value": 9,
         }];
 
 		//sort bars based on value
-        data = data.sort(function (a, b) {
-            return d3.ascending(a.value, b.value);
-        })
+        // data = data.sort(function (a, b) {
+        //     return d3.ascending(a.value, b.value);
+        // })
 
         //set up svg using margin conventions - we'll need plenty of room on the left for labels
         var margin = {
