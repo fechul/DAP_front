@@ -9,7 +9,7 @@ var TEST = {
 		// this.makeGradeDetail();
 		// this.makeCareerDetail();
 		this.makeAbilityDetail();
-		this.makeAreaDetail.start();
+		// this.makeAreaDetail.start();
 		this.makeAreaDetailRight();
 	},
 
@@ -1223,6 +1223,18 @@ var TEST = {
 									// console.log('1'+nextIndex);
 									self.drawConnection(nextIndex);
 								} else {
+									d3.select('#areaDetailChart').append('div')	
+										.attr('class', 'tooltipOriginDetail')			
+										.style('opacity', 0)
+										.html('<span style="color:white">' + self.originName + '</span>')
+										.attr('class', 'tooltipOriginDetail')
+										.style('left',  250 + 'px')
+										.style('top',  185 + 'px')
+										.transition()
+										.duration(500) //700
+										.style('opacity', 1)
+								;
+
 									// console.log('2'+nextIndex);
 									// d3.selectAll('.tooltipOriginDetail').data([originGeo]).enter().select('#areaDetailChart').append('div')
 									// 	.html('<span style="color:white">' + this.originName + '</span>')

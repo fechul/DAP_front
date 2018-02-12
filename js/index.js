@@ -950,6 +950,8 @@ INDEX = {
 				$('.majorDetailContainer').show();
 				break;
 			case 'area':
+				$('#areaDetailChart').empty();
+				TEST.makeAreaDetail.start();
 				$('.areaDetailContainer').show();
 				break;
 			case 'grade':
@@ -2085,7 +2087,6 @@ INDEX = {
 		  },
 		  // finished callback
 		  fin:function(elm){
-		  	console.log(tryCnt)
 		  	if(tryCnt >= 1) {
 		  		$(elm).empty();
 		  		$(elm).html(commentText);
