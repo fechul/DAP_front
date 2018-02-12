@@ -1001,7 +1001,8 @@ var TEST = {
 
 	makeAreaDetail: {
 		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
-		originName: 'SK(주)C&C',
+		// originName: 'SK(주)C&C',
+		originName: '<img id="sklogo" style="width:65px; height:auto;" src="img/sklogo.png"></img>',
 		destinations: [
 			{'coord': [126.782, 37.505], 'name': '경기도 부천시'},
 			{'coord': [127.113, 37.37], 'name': '경기도 성남시'},
@@ -1225,12 +1226,14 @@ var TEST = {
 									self.drawConnection(nextIndex);
 								} else {
 									d3.select('#areaDetailChart').append('div')	
-										.attr('class', 'tooltipOriginDetail')			
+										// .attr('class', 'tooltipOriginDetail')			
 										.style('opacity', 0)
-										.html('<span style="color:white">' + self.originName + '</span>')
-										.attr('class', 'tooltipOriginDetail')
-										.style('left',  250 + 'px')
-										.style('top',  185 + 'px')
+										// .html('<span style="color:white">' + self.originName + '</span>')
+										.html(self.originName)
+										// .attr('class', 'tooltipOriginDetail')
+										.style('position',  'absolute')
+										.style('left',  280 + 'px')
+										.style('top',  180 + 'px')
 										.transition()
 										.duration(500) //700
 										.style('opacity', 1)
