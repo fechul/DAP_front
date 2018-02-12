@@ -442,7 +442,7 @@ var TEST = {
 		// var GradeData = {
 		// 	"avgGrade": "3.2"
 		// };
-		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"47","gradea":"9"};
 		
 
 		// 차트 그리기
@@ -1001,7 +1001,8 @@ var TEST = {
 
 	makeAreaDetail: {
 		originGeo: [127.106678, 37.366402], //[16.8286, 52.4200],//[37.366402, 127.106678], //[16.8286, 52.4200],
-		originName: 'SK(주)C&C',
+		// originName: 'SK(주)C&C',
+		originName: '<img id="sklogo" style="width:65px; height:auto;" src="img/sklogo.png"></img>',
 		destinations: [
 			{'coord': [126.782, 37.505], 'name': '경기도 부천시'},
 			{'coord': [127.113, 37.37], 'name': '경기도 성남시'},
@@ -1225,12 +1226,14 @@ var TEST = {
 									self.drawConnection(nextIndex);
 								} else {
 									d3.select('#areaDetailChart').append('div')	
-										.attr('class', 'tooltipOriginDetail')			
+										// .attr('class', 'tooltipOriginDetail')			
 										.style('opacity', 0)
-										.html('<span style="color:white">' + self.originName + '</span>')
-										.attr('class', 'tooltipOriginDetail')
-										.style('left',  250 + 'px')
-										.style('top',  185 + 'px')
+										// .html('<span style="color:white">' + self.originName + '</span>')
+										.html(self.originName)
+										// .attr('class', 'tooltipOriginDetail')
+										.style('position',  'absolute')
+										.style('left',  280 + 'px')
+										.style('top',  180 + 'px')
 										.transition()
 										.duration(500) //700
 										.style('opacity', 1)
@@ -1356,7 +1359,7 @@ var TEST = {
 		// 	"gradeB": 3,
 		// 	"gradeC": 3
 		// };
-		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"47","gradea":"9"};
 		var previousData = {"avgGrade": '3.5'};
 
 		$('#currentAvgGrade').text(GradeData.avgGrade);
@@ -1458,14 +1461,11 @@ var TEST = {
 
 
 		var data = [{
-                "name": "2.5 ~ 3.0",
-                "value": 3,
-        }, {
                 "name": "3.0 ~ 3.5",
-                "value": 10,
+                "value": 12,
         }, {
                 "name": "3.5 ~ 4.0",
-                "value": 37,
+                "value": 38,
         }, {
                 "name": "4.0 ~ 4.5",
                 "value": 9,
