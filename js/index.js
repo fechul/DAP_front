@@ -1181,7 +1181,8 @@ INDEX = {
 					.attr('width', width + 50)
 					.attr('height', height + 50)	
 					.style('padding-left', '30px')
-					.style('margin-top', '10px')
+          .style('margin-top', '10px')
+          .style('margin-left', '30px')
     ;
     
 
