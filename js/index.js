@@ -1151,14 +1151,43 @@ INDEX = {
 			height = 450,		// 차트 높이
 			padding = 5,		// 바 사이 간격
 			division = 0.05,	// 바 높이를 알맞게 표현하기 위해 나눠주는 적당한 수
-			duration = 10;		// 바 생성할 때 transition delay 값
+      duration = 10;		// 바 생성할 때 transition delay 값
+      
+
+    // Scales
+  var x = d3.scale.ordinal()
+      .domain(ageData.map(function(d) { return d['label']; }))
+      .rangeRoundBands([0, width], .1);
+
+  var y = d3.scale.linear()
+      .domain([0, d3.max(ageData, function(d) { return d['value']; }) * 1.1])
+      .range([height, 0]);
+
+       // Axis
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
 
 		var svg = d3.select('#ageDetailChart')
-					.attr('width', width)
-					.attr('height', height)	
+					.attr('width', width + 50)
+					.attr('height', height + 50)	
 					.style('margin-left', '30px')
 					.style('margin-top', '10px')
-		;
+    ;
+    
+
+            svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
 
 		var color = d3.scale.category20b();
 							
@@ -1172,10 +1201,10 @@ INDEX = {
 				return i / ageData.length * 1500;
 			})
 			.attr('x', function (d, i) {
-				return i * ((width + padding) / ageData.length);
+				return i * ((width + padding) / ageData.length) + 1;
 			})
 			.attr('y', function (d) {
-				return height - parseInt(d.value / division, 10) + 9;
+				return height - parseInt(d.value / division, 10) + 12;
 			})
 			.attr('width', width / ageData.length - padding)
 			.attr('height', function (d) {
@@ -1187,27 +1216,30 @@ INDEX = {
 			})
 			.attr('stroke', 'black')
 			.attr('stroke-width', '3px')
-			;
+      ;
+
+
+
 				
 		// 바 아래에 라벨 표시
-		svg.selectAll('g')
-			.data(ageData)
-			.enter()
-			.append('text')
-				.transition()
-				.delay(duration * 1.2)
-				.text(function (d) {
-					return d.label;
-				})
-				.attr('x', function (d, i) {
-					return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
-				})
-				.attr('y', function (d) {
-					return height - parseInt(d.value /division, 10);
-				})
-				.style('font-weight', 'bold')
-				.attr('fill', 'black')
-				.attr('text-anchor', 'middle');
+		// svg.selectAll('g')
+		// 	.data(ageData)
+		// 	.enter()
+		// 	.append('text')
+		// 		.transition()
+		// 		.delay(duration * 1.2)
+		// 		.text(function (d) {
+		// 			return d.label;
+		// 		})
+		// 		.attr('x', function (d, i) {
+		// 			return i * ((width + padding) / ageData.length) + (width / ageData.length - padding) / 2;
+		// 		})
+		// 		.attr('y', function (d) {
+		// 			return height - parseInt(d.value /division, 10);
+		// 		})
+		// 		.style('font-weight', 'bold')
+		// 		.attr('fill', 'black')
+		// 		.attr('text-anchor', 'middle');
 	},
 
 	makeMajorDetail: function() {
