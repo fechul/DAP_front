@@ -1161,8 +1161,10 @@ INDEX = {
       .rangeRoundBands([0, width], .1);
 
   var y = d3.scale.linear()
-      .domain([0, d3.max(ageData, function(d) { return d['value']; }) * 1.1])
+      .domain([0, d3.max(ageData, function(d) { return +d['value']; }) * 1.1])
       .range([height, 0]);
+
+  console.log(d3.max(ageData, function(d) { return +d['value']; }));
 
        // Axis
   var xAxis = d3.svg.axis()
@@ -1176,7 +1178,7 @@ INDEX = {
 		var svg = d3.select('#ageDetailChart')
 					.attr('width', width + 50)
 					.attr('height', height + 50)	
-					.style('margin-left', '30px')
+					.style('padding-left', '30px')
 					.style('margin-top', '10px')
     ;
     
@@ -1205,11 +1207,13 @@ INDEX = {
 				return i * ((width + padding) / ageData.length) + 1;
 			})
 			.attr('y', function (d) {
-				return height - parseInt(d.value / division, 10) + 12;
+        // return height - parseInt(d.value / division, 10) + 12;//
+        return y(d['value']);
 			})
 			.attr('width', width / ageData.length - padding)
 			.attr('height', function (d) {
-				return parseInt(d.value / division, 10) - 12;
+        // return parseInt(d.value / division, 10) - 12;
+        return height - y(d['value']);
 			})
 			.attr('fill', function (d, i) {
 				//return 'rgb( ' + parseInt(d.value / division, 10) + ',0,0)';
