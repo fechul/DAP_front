@@ -1533,7 +1533,7 @@ var TEST = {
             .attr("height", y.rangeBand()-30)
             .attr("x", 0)
             .attr("width", function (d) {
-                return x(d.value);
+                return x((d.value)*0.9);
             })
             .attr('fill', '#5f9dde');
 
@@ -1546,7 +1546,7 @@ var TEST = {
             })
             //x position is 3 pixels to the right of the bar
             .attr("x", function (d) {
-                return x(d.value) + 3;
+                return x(d.value*0.9) + 3;
             })
             .text(function (d) {
                 return d.value;
