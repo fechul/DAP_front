@@ -1249,7 +1249,7 @@ INDEX = {
 	},
 
 	makeMajorDetail: function() {
-		var majorInfo = [{"size":"1","name":"Computer Science"},{"size":"2","name":"IT공학"},{"size":"2","name":"경영학"},{"size":"1","name":"경제학"},{"size":"1","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"1","name":"멀티미디어공학"},{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},{"size":"1","name":"산업경영공학"},{"size":"1","name":"산업공학"},{"size":"1","name":"소프트웨어"},{"size":"2","name":"소프트웨어공학"},{"size":"1","name":"소프트웨어학"},{"size":"1","name":"전기전자공학"},{"size":"2","name":"전자공학"},{"size":"1","name":"전자컴퓨터공학"},{"size":"1","name":"정보미디어학"},{"size":"3","name":"정보컴퓨터공학"},{"size":"2","name":"정보통신공학"},{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},{"size":"20","name":"컴퓨터공학"},{"size":"3","name":"컴퓨터과학"},{"size":"1","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"3","name":"통계학"},{"size":"1","name":"항공전자정보"}]
+		var majorInfo = [/*{"size":"2","name":"Computer Science"},*/{"size":"2","name":"IT공학"}/*,{"size":"2","name":"경영학"},{"size":"1","name":"경제학"}*/,{"size":"2","name":"디지털컨텐츠학"},{"size":"1","name":"로봇공학"},{"size":"8","name":"멀티미디어공학"},/*{"size":"1","name":"미디어콘텐츠학"},{"size":"4","name":"미디어학"},*//*{"size":"1","name":"산업경영공학"},*/{"size":"1","name":"산업공학"},/*{"size":"1","name":"소프트웨어"},*/{"size":"6","name":"소프트웨어공학"},/*{"size":"1학","name":"소프트웨어학"},*//*{"size":"1","name":"전기전자공학"},*/{"size":"4","name":"전자공학"},/*{"size":"1","name":"전자컴퓨터공학"},*//*{"size":"1","name":"정보미디어학"},*//*{"size":"3","name":"정보컴퓨터공학"},*/{"size":"2","name":"정보통신공학"},/*{"size":"1","name":"정보통신전자공학"},{"size":"1","name":"컴퓨터SW학"},*/{"size":"32","name":"컴퓨터공학"},/*{"size":"5","name":"컴퓨터과학"},{"size":"2","name":"컴퓨터소프트웨어학"},{"size":"1","name":"컴퓨터정보공학"},{"size":"3","name":"통계학"}*/{"size":"1","name":"항공전자정보"}]
 		// var majorInfo = [{'name': 'IT공학과','size': 19},
 		// {'name': '컴퓨터과학','size': 13},
 		// {'name': '소프트웨어학과','size': 11},
@@ -1261,49 +1261,55 @@ INDEX = {
 
 		//var color = ["red","#82CE8C","#839BE6","#C6D445","#C3B66B","D1A7CC","#70D3C5","#DD9692"];
 		// var color = d3.scale.category20();
-    var color = ["#1f77b4","#aec7e8","#ff7f0e","#C6D445","#ff7f0e","D1A7CC","#70D3C5","#DD9692"];
+    	// var color = ["#1f77b4","#aec7e8","#ff7f0e","#C6D445","#ff7f0e","D1A7CC","#70D3C5","#DD9692"];
+    	// var color = d3.scale.category20();
+    	var color = function(i) { var color = ['#26299a', '#ff7f0e', '#2d9f2c', '#d72828', '#9366bd', '#8c564a', '#e376c2', '#bcbe23', '#18bed0', '#393b78', '#ad494a', '#d6616a', '#31a353', '#7b4173', '#a55094', '#3365cc', '#0199c6', '#dd4476', '#66aa01', '#b82f2f']; return color[i%20];}
 
 		var totalSize = 0;
 		for(var i = 0; i < majorInfo.length; i++) {
 			// majorInfo[i].color = color[i%color.length];
-			
 			totalSize += parseInt(majorInfo[i].size, 10);
 		}
 
 		var majorData = {
-			"name":"major",
-			"children": [{
-				"name":"이과",
-				"children":[{
-					"name": "공학계열",
-					"children": []
-				},{
-					"name": "자연계열",
-					"children": []
-				},{
-					"name": "의약계열",
-					"children": []
-				}]
-			}, {
-				"name":"문과",
-				"children":[{
-					"name": "인문계열",
-					"children": []
-				},{
-					"name": "사회계열",
-					"children": []
-				},{
-					"name": "교육계열",
-					"children": []
-				}]
-			}, {
-				"name": "예체능계열",
-				"children": []
-			}, {
-				"name": "기타",
-				"children": []
-			}]
-		};
+			"name": "major",
+			"children": majorInfo
+		}
+
+		// var majorData = {
+		// 	"name":"major",
+		// 	"children": [{
+		// 		"name":"이과",
+		// 		"children":[{
+		// 			"name": "공학계열",
+		// 			"children": []
+		// 		},{
+		// 			"name": "자연계열",
+		// 			"children": []
+		// 		},{
+		// 			"name": "의약계열",
+		// 			"children": []
+		// 		}]
+		// 	}, {
+		// 		"name":"문과",
+		// 		"children":[{
+		// 			"name": "인문계열",
+		// 			"children": []
+		// 		},{
+		// 			"name": "사회계열",
+		// 			"children": []
+		// 		},{
+		// 			"name": "교육계열",
+		// 			"children": []
+		// 		}]
+		// 	}, {
+		// 		"name": "예체능계열",
+		// 		"children": []
+		// 	}, {
+		// 		"name": "기타",
+		// 		"children": []
+		// 	}]
+		// };
 
 		// var maj1 = ['국어국문학과', '중어중문학과', '영어영문학과', '독어독문학과', '사학과', '철학과', '정치외교학과', '행정학과', '사회학과', '관광학부', '법학과', '동양학과', '서양학과', '산업디자인학과', '산업디자인', '공예학과', '조소과', '성악과', '작곡과', '피아노학과', '관현악과', '국악과', '경영학과', '경제금융학과', '정책학과', '정치학과', '경제학과'];
 		// var maj2 = ['수학과', '화학과', '물리학과', '생명과학과', '생명공학과', '생명과학부', '생명공학부', '의류학과', '사회복지학과', '스포츠레저학과', '생활문화학과', '식품영양학과', '디자인학과', '건충공학부', '건축공학과', '건설공학부', '건설공학과', '도시공학부', '도시공학과', '컴퓨터공학부', '컴퓨터공학', '컴퓨터공학과', '컴퓨터과학부', '컴퓨터과학', '컴퓨터과학과', '화학공학과', '화학공학부', '생명공학과', '생명공학부', '기계공학과', '기계공학부', '응용시스템공학부', '응용시스템공학과', '미래자동차공학과', '융합전자공학과', '융합전자공학부', 'IT공학', '소프트웨어학과', '소프트웨어응용학과', '전기전자컴퓨터공학부', '전기전자컴퓨터공학과'];
@@ -1327,41 +1333,45 @@ INDEX = {
 			return a.size > b.size ? -1 : a.size < b.size ? 1 : 0;  
 		});
 
+		// for(var i = 0; i < majorInfo.length; i++) {
+		// 	var target = majorInfo[i];
+		// 	if(maj1.indexOf(target.name) > -1) {
+		// 		majorData.children[0].children[0].children.push(target);
+		// 		target.category = '공학계열';
+		// 		target.color = color[0];
+		// 	} else if(maj2.indexOf(target.name) > -1){
+		// 		majorData.children[0].children[1].children.push(target);
+		// 		target.category = '자연계열';
+		// 		target.color = color[1];
+		// 	} else if(maj3.indexOf(target.name) > -1) {
+		// 		majorData.children[0].children[2].children.push(target);
+		// 		target.category = '의약계열';
+		// 		target.color = color[2];
+		// 	} else if(maj4.indexOf(target.name) > -1) {
+		// 		majorData.children[1].children[0].children.push(target);
+		// 		target.category = '인문계열';
+		// 		target.color = color[3];
+		// 	} else if(maj5.indexOf(target.name) > -1) {
+		// 		majorData.children[1].children[1].children.push(target);
+		// 		target.category = '사회계열';
+		// 		target.color = color[4];
+		// 	} else if(maj6.indexOf(target.name) > -1) {
+		// 		majorData.children[1].children[2].children.push(target);
+		// 		target.category = '교육계열';
+		// 		target.color = color[5];
+		// 	} else if(maj7.indexOf(target.name) > -1) {
+		// 		majorData.children[2].children.push(target);
+		// 		target.category = '예체능계열';
+		// 		target.color = color[6];
+		// 	} else {
+		// 		majorData.children[3].children.push(target);
+		// 		target.category = '기타';
+		// 		target.color = color[7];
+		// 	}
+		// }
+
 		for(var i = 0; i < majorInfo.length; i++) {
-			var target = majorInfo[i];
-			if(maj1.indexOf(target.name) > -1) {
-				majorData.children[0].children[0].children.push(target);
-				target.category = '공학계열';
-				target.color = color[0];
-			} else if(maj2.indexOf(target.name) > -1){
-				majorData.children[0].children[1].children.push(target);
-				target.category = '자연계열';
-				target.color = color[1];
-			} else if(maj3.indexOf(target.name) > -1) {
-				majorData.children[0].children[2].children.push(target);
-				target.category = '의약계열';
-				target.color = color[2];
-			} else if(maj4.indexOf(target.name) > -1) {
-				majorData.children[1].children[0].children.push(target);
-				target.category = '인문계열';
-				target.color = color[3];
-			} else if(maj5.indexOf(target.name) > -1) {
-				majorData.children[1].children[1].children.push(target);
-				target.category = '사회계열';
-				target.color = color[4];
-			} else if(maj6.indexOf(target.name) > -1) {
-				majorData.children[1].children[2].children.push(target);
-				target.category = '교육계열';
-				target.color = color[5];
-			} else if(maj7.indexOf(target.name) > -1) {
-				majorData.children[2].children.push(target);
-				target.category = '예체능계열';
-				target.color = color[6];
-			} else {
-				majorData.children[3].children.push(target);
-				target.category = '기타';
-				target.color = color[7];
-			}
+			majorInfo[i].color = color(i%20);
 		}
 
 		var root = majorData;
@@ -1422,6 +1432,7 @@ INDEX = {
         .append('text')
         .style('position', 'relative')
         .style('top', '6px')
+        .style('font-size', '15.5px')
         .text(function (d) { return d.children ? null : (d.dy < 10) ? null : (d.dx < 10) ? null : (d.name).length < (d.dx / 4) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : (d.dy < 25) ? null : ((d.name).length < (d.dx / 2.5)) ? d.name + ' ' + roundToTwo((d.value / totalSize) * 100) + '%' : null })
         .on("mousemove", function (d) {
             tool.style("left", d3.event.pageX + 10 + "px")
