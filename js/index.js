@@ -1,10 +1,9 @@
 INDEX = {
 	init: function() {
-		this.analystType = ['gender', 'age', 'area', 'grade', 'major', 'ability', 'character', 'career'];
+		this.analystType = ['gender', 'age', 'area', 'grade', 'major', 'it ability', 'character', 'career'];
 		this.currentTypeIdx = null;
 		this.direction = 0;
 		this.detailBox = $('#detailModal');
-		this.comment = '하하하하하하하하하하하하하ㅑ';
 
 		this.initEvents();
 		// this.makeGender('#genderChart', 220, 220, 100);
@@ -32,7 +31,6 @@ INDEX = {
 			// left: 1, right: 2
 			var direction = $(this).hasClass('left') ? 1 : 2;
 			self.direction = direction;
-
 			// self.detailBox.modal('hide');
 
 			var type = '';
@@ -819,7 +817,8 @@ INDEX = {
 
 		var wordCloud = function(selector) {
 
-			var fill = d3.scale.category20();
+			// var fill = d3.scale.category20();
+			var fill = function(i) { var color = ['#26299a', '#ff7f0e', '#2d9f2c', '#d72828', '#9366bd', '#8c564a', '#e376c2', '#bcbe23', '#18bed0', '#393b78', '#ad494a', '#d6616a', '#31a353', '#7b4173', '#a55094', '#3365cc', '#0199c6', '#dd4476', '#66aa01', '#b82f2f']; return color[i%20];}
 
 			//Construct the word cloud's SVG element
 			var svg = d3.select("#characterWordCloud")
@@ -963,7 +962,7 @@ INDEX = {
 				TEST.makeGradeDetail();
 				$('.gradeDetailContainer').show();
 				break;
-			case 'ability':
+			case 'it ability':
 				$('.abilityDetailContainer').show();
 				break;
 			case 'character':
@@ -1166,8 +1165,6 @@ INDEX = {
   var y = d3.scale.linear()
       .domain([0, d3.max(ageData, function(d) { return +d['value']; }) * 1.1])
       .range([height, 0]);
-
-  console.log(d3.max(ageData, function(d) { return +d['value']; }));
 
        // Axis
   var xAxis = d3.svg.axis()
@@ -1962,7 +1959,8 @@ INDEX = {
 		for(var j = 0; j < words.length; j++) {
 			totalWordsCnt += parseInt(words[j].cnt, 10);
 		}
-		var fill = d3.scale.category20();
+		// var fill = d3.scale.category20();
+		var fill = function(i) { var color = ['#26299a', '#ff7f0e', '#2d9f2c', '#d72828', '#9366bd', '#8c564a', '#e376c2', '#bcbe23', '#18bed0', '#393b78', '#ad494a', '#d6616a', '#31a353', '#7b4173', '#a55094', '#3365cc', '#0199c6', '#dd4476', '#66aa01', '#b82f2f']; return color[i%20];}
 		var wordCloud = function() {
 
 			//Construct the word cloud's SVG element

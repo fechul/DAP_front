@@ -931,7 +931,8 @@ var TEST = {
 			}]
 		}		
 
-        var colorNode = d3.scale.category20(),
+        // var colorNode = d3.scale.category20(),
+        var colorNode = function(i) { var color = ['#1f77b4', '#c33e69', '#ff7f0e', '#8e44bd', '#2ca02c', '#8c564a', '#e376c2', '#bcbe23', '#18bed0', '#393b78', '#ad494a', '#d6616a', '#31a353', '#7b4173', '#a55094', '#3365cc', '#0199c6', '#dd4476', '#66aa01', '#b82f2f']; return color[i%20];}
 			colorLink = d3.scale.category10();
 			
 		var rScale = d3.scale.linear().domain([0, 100]).range([10, 35]);
@@ -1457,16 +1458,16 @@ var TEST = {
 
 
 		var data = [{
-                "name": "3",
+                "name": "2.5 ~ 3",
                 "value": 3,
         }, {
-                "name": "3.5",
+                "name": "3 ~ 3.5",
                 "value": 10,
         }, {
-                "name": "4",
+                "name": "3.5 ~ 4",
                 "value": 37,
         }, {
-                "name": "4.5",
+                "name": "4 ~ 4.5",
                 "value": 9,
         }];
 
@@ -1972,7 +1973,8 @@ var TEST = {
 			// $('#careerCategoryFirst').append('<div id=category_' + i + '>' +  + '<span></span></div>');
 		}
 
-		var colorNode = d3.scale.category20(),
+		// var colorNode = d3.scale.category20(),
+		var colorNode = function(i) { var color = ['#1f77b4', '#c33e69', '#ff7f0e', '#8e44bd', '#2ca02c', '#8c564a', '#e376c2', '#bcbe23', '#18bed0', '#393b78', '#ad494a', '#d6616a', '#31a353', '#7b4173', '#a55094', '#3365cc', '#0199c6', '#dd4476', '#66aa01', '#b82f2f']; return color[i%20];}
 			colorLink = d3.scale.category10();
 		for(var j = 0; j<categoryFirst.length; j++) {
 			var index_categorySecond = findSecondCategory(categoryFirst[j]);
@@ -1992,7 +1994,7 @@ var TEST = {
 				// console.log(styleGroup);
 				// if(careerData.nodes.name == index_categorySecond[i].label) console.log(index_categorySecond[i].label);
 				var html = '<div class=subcategory_' + j + '><span style="color:' + colorNode(styleGroup) + '">';  
-				html += index_categorySecond[i].label + ' </span>' + '<span style="font-size:20px;color:#aaa;">(' + index_categorySecond[i].value + ')</span>' + '</div>';
+				html += index_categorySecond[i].label + ' </span>' + '<span style="float:right;font-size:20px;color:#aaa;">(' + index_categorySecond[i].value + ')</span>' + '</div>';
 				$('#careerCategorySecond').append(html);
 				sum += index_categorySecond[i].value;
 			}
