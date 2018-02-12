@@ -442,7 +442,7 @@ var TEST = {
 		// var GradeData = {
 		// 	"avgGrade": "3.2"
 		// };
-		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"47","gradea":"9"};
 		
 
 		// 차트 그리기
@@ -1359,7 +1359,7 @@ var TEST = {
 		// 	"gradeB": 3,
 		// 	"gradeC": 3
 		// };
-		var GradeData = {"avgGrade":"3.67","gradec":"3","gradeb":"47","gradea":"9"};
+		var GradeData = {"avgGrade":"3.81","gradec":"3","gradeb":"47","gradea":"9"};
 		var previousData = {"avgGrade": '3.5'};
 
 		$('#currentAvgGrade').text(GradeData.avgGrade);
@@ -1461,14 +1461,11 @@ var TEST = {
 
 
 		var data = [{
-                "name": "2.5 ~ 3.0",
-                "value": 3,
-        }, {
                 "name": "3.0 ~ 3.5",
-                "value": 10,
+                "value": 12,
         }, {
                 "name": "3.5 ~ 4.0",
-                "value": 37,
+                "value": 38,
         }, {
                 "name": "4.0 ~ 4.5",
                 "value": 9,
