@@ -959,6 +959,7 @@ INDEX = {
 				$('#gradeLabelA').empty();
 				$('#gradeLabelB').empty();
 				$('#gradeLabelC').empty();
+				$('#gradeHorizontalChart').empty();
 				TEST.makeGradeDetail();
 				$('.gradeDetailContainer').show();
 				break;

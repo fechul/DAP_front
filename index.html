@@ -220,7 +220,15 @@
             <div class="gradeDetailContainer detailContainer">
               <svg id = "gradeDetailChart"></svg>
               <div id = "detailGrade" class = "row" style = "margin-left: 0px; margin-right:0px;text-align: -webkit-center;">
-                <table class = "table table-bordered block_row" style = "width: 576px;">
+                <div class="gradeLeftBottom">
+                  <label>작년 평균</label>
+                  <div id="gradeAvg" class="gradeInfos">3.5</div>  
+                </div>
+                <div class="gradeLeftBottom">
+                  <label>작년 대비 증감률</label>
+                  <div id="gradePerChange" class="gradeInfos"></div>
+                </div>
+                <!-- <table class = "table table-bordered block_row" style = "width: 576px;">
                   <thead>
                     <tr>
                       <th class="text-center" style="font-weight: 900;">학점 범위</th>
@@ -240,12 +248,8 @@
                       <td class="hscore">C 학점</td>
                       <td id="gradeLabelC"></td>
                     </tr>
-                    <!-- <tr>
-                      <td class="hscore">D 학점</td>
-                      <td>20</td>
-                    </tr> -->
                   </tbody>
-                </table>
+                </table> -->
               </div>
             </div>
             <!--MAJOR DETAIL-->
@@ -378,12 +382,10 @@
             <!-- right, makeGradeDetail -->
             <div class="gradeDetailContainer detailContainer">
               <div class="gradeDetailPart detailPart">
-                <br><br><br><br><br><br><br>
-                <label>작년 평균</label>
-                <div id="gradeAvg" class="gradeInfos">3.5</div>
-                <br><br><br><br><br>
-                <label>작년 대비 증감률</label>
-                <div id="gradePerChange" class="gradeInfos"></div>
+                <label style="font-size:40px; margin-top:60px;">평균 학점</label>
+                <div id="currentAvgGrade" style="font-size: 48px;font-weight:bold;"></div>
+                <svg id="gradeHorizontalChart"></svg>
+
               </div>
             </div>
             <!-- right, makeAbilityDetail -->
