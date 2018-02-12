@@ -2031,14 +2031,38 @@ INDEX = {
 	},
 
 	setComment: function() {
-		var self = this;
-		for(var i = 0; i < self.comment; i++) {
-			console.log(self.comment[i])
-			$('#personComment').append(self.comment[i]);
-			setTimeout(function() {
+		var tryCnt = 0;
+		var commentText = ' 안녕하세요? 저는 <span style="color:#1f77b4;">남자</span>입니다. 나이는 <span style="color:#9c9dde;">26.3</span>세이고, 주로 <span style="color:#905151;">경기도</span> 지역에 있었습니다. 대학교 때 학점은 <span style="color:#007f00;">3.67</span>이고, <span style="color:#2076b4;">컴퓨터 공학</span> 전공입니다. <span style="color:#8f2ec1;">C</span>와 <span style="color:#8f2ec1;">Java</span>에 능숙하고, <span style="color:#e00707;">인공지능 전문가</span>가 되는 것이 꿈입니다.';
+		$('#personComment').t({
+		  delay:false,                // start-delay: 2s (default:false)
+		  speed:75,               // 35ms (default:75)
+		  speed_vary:false,       // adds lil' human-like speed variation (default:false)
+		  caret:'\u2589',         // can be html too (default:\u258e)
+		  blink:400,              // 400ms (default:false)
+		  blink_perm:false,       // if FALSE, caret only blinks if paused/delayed/finished, if TRUE, permanent (default:false)
+		  mistype:4,              // 1:4 per char; if set and <kbd> tag(s) detected, only there, else complete content (default:false)
+		  locale:'en',            // 'de' for german keyboard layouts is also supported (default:'en')
+		  pause_on_click:false,    // toggles typing-pause on elem click/tap (default:false)
+		  repeat:0,               // if TRUE, infinite or N times (default:0)
+		  
+		  // init callback (ready-to-type)
+		  init:function(elm) {},        
+		  // typing callback
+		  typing:function(elm,chr,chrs_total,chrs_left) {
 
-			}, 500);
-		}
+		  },
+		  // finished callback
+		  fin:function(elm){
+		  	console.log(tryCnt)
+		  	if(tryCnt >= 1) {
+		  		$(elm).empty();
+		  		$(elm).html(commentText);
+		  	} else {
+		  		tryCnt++;
+		  		$(elm).t('add', commentText);
+		  	}
+		  }          
+		});
 	}
 };
 
