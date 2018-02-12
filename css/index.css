@@ -44,14 +44,14 @@ body {
     /* margin: 0 auto 25px; */
     float: right;
     border-radius: 18px;
-    margin: 30px 30px 0px 0px;
+    margin: 30px 20px 0px 0px;
     padding: 10px;
     font-size: 14px;
     font-weight: bold;
 }
 #personComment:after, #personComment:before {
     /* right: 100%; */
-    right: 239px;
+    right: 212px;
 	top: 50%;
 	border: solid transparent;
 	content: " ";

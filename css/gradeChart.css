@@ -9,3 +9,10 @@
     font-size: 20px;
     stroke: black;
 }
+
+.gradeLeftBottom {
+	display: inline-block;
+	width: 300px;
+	margin-top: 25px;
+}
+
