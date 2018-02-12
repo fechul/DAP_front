@@ -2032,7 +2032,7 @@ INDEX = {
 
 	setComment: function() {
 		var tryCnt = 0;
-		var commentText = ' 안녕하세요? 저는 <span style="color:#1f77b4;">남자</span>입니다. 나이는 <span style="color:#9c9dde;">26.3</span>세이고, 주로 <span style="color:#905151;">경기도</span> 지역에 있었습니다. 대학교 때 학점은 <span style="color:#007f00;">3.67</span>이고, <span style="color:#2076b4;">컴퓨터 공학</span> 전공입니다. <span style="color:#8f2ec1;">C</span>와 <span style="color:#8f2ec1;">Java</span>에 능숙하고, <span style="color:#e00707;">인공지능 전문가</span>가 되는 것이 꿈입니다.';
+		var commentText = ' 안녕하세요?<br>저는 <span style="color:#9c9dde;">26.3</span>살 <span style="color:#1f77b4;">남자</span>입니다.<br> 주로 <span style="color:#905151;">경기도</span> 지역에 있었고, <span style="color:#2076b4;">컴퓨터 공학</span>을 전공 했습니다. 학점은 <span style="color:#007f00;">3.67</span>이고, <span style="color:#8f2ec1;">C</span>와 <span style="color:#8f2ec1;">Java</span>에 능숙합니다. <br>미래에는 <span style="color:#e00707;">인공지능 전문가</span>가 되는 것이 꿈입니다.';
 		$('#personComment').t({
 		  delay:false,                // start-delay: 2s (default:false)
 		  speed:75,               // 35ms (default:75)
