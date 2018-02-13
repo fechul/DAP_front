@@ -1115,8 +1115,8 @@ INDEX = {
 		var pNum = 0;
 		var avgAge = 0;
 
-		var manAvg = 26.8;
-		var womanAvg = 25.3;
+		var manAvg = 26.8 - 1;
+		var womanAvg = 25.3 - 1;
 
 		var previousAvgAge = 26.7;
 
@@ -1134,7 +1134,7 @@ INDEX = {
 			pNum += parseInt(ageData[i].value, 10);
 		}
 
-		avgAge = (sumAge/pNum).toFixed(1);
+		avgAge = (sumAge/pNum).toFixed(1) - 1;
 
 		// var compareVal = (((avgAge - previousAvgAge)/previousAvgAge)*100).toFixed(2);
 		var compareVal = (avgAge - previousAvgAge).toFixed(1);
